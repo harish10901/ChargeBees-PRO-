@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Center - Chargebees</title>
+    <link rel="icon" type="image/png" href="images\favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfbf7;
+            scroll-behavior: smooth;
+        }
+        .bg-texture {
+            position: fixed;
+            inset: 0;
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/gray-floral.png');
+            background-repeat: repeat;
+        }
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                linear-gradient(to right, rgba(16, 185, 129, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .blog-card {
+            transition: all 0.3s ease;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .video-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .video-card:hover .video-overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-900">
+    <div class="bg-texture"></div>
+    <div class="bg-grid"></div>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <img src="images\logo.png" alt="Bhramara Logo" height="45" class="img-fluid"> 
+                    <span class="text-2xl font-bold tracking-tighter text-gray-900">
+                        CHARGE<span class="text-emerald-600">BEES</span>
+                    </span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="about.html" class="text-sm font-medium text-emerald-600 transition-colors">About</a>
+                    <a href="stationfinder.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Station Finder</a>
+                    
+                    <!-- Products Dropdown -->
+                    <div class="relative group">
+                        <button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
+                            Products <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                        </button>
+                        
+                        <!-- Mega Menu -->
+                        <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-white rounded-3xl shadow-2xl border border-gray-100 p-8 grid grid-cols-3 gap-8 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                            <!-- Hardware -->
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <i data-lucide="zap" class="w-5 h-5 text-emerald-600"></i> Hardware
+                                </h3>
+                                <a href="products.html#hardware" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                        <i data-lucide="battery-charging" class="w-6 h-6 text-emerald-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-900">All chargers</p>
+                                        <p class="text-xs text-gray-500">AC & DC Solutions</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- Software -->
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <i data-lucide="layout" class="w-5 h-5 text-emerald-600"></i> Software
+                                </h3>
+                                <div class="space-y-2">
+                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="cloud" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <p class="font-bold text-gray-900">ChargeCloud</p>
+                                                <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500">CMS Platform</p>
+                                        </div>
+                                    </a>
+                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="smartphone" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">Chargebees App</p>
+                                            <p class="text-xs text-gray-500">User Experience</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Services -->
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <i data-lucide="settings" class="w-5 h-5 text-emerald-600"></i> Services
+                                </h3>
+                                <div class="space-y-2">
+                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="activity" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">Energy As A Service</p>
+                                            <p class="text-xs text-gray-500">Renewable Energy</p>
+                                        </div>
+                                    </a>
+                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="battery-full" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <p class="font-bold text-gray-900">Battery As A Service</p>
+                                                <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500">Swapping Solutions</p>
+                                        </div>
+                                    </a>
+                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="credit-card" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">RFID Card</p>
+                                            <p class="text-xs text-gray-500">Seamless Payments</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="franchise.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Franchise</a>
+                    <a href="partners.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Partners</a>
+                    <a href="chargeclub.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">ChargeClub</a>
+                    <a href="media-center.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Media Center</a>
+                    <a href="careers.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Careers</a>
+                </div>
+
+                <div class="flex items-center">
+                    <a href="contact.html" class="bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20 active:scale-95">
+                        Contact Us
+                    </a>
+                </div>
+
+                
+            </div>
+        </div>
+    </nav>
+
+
+    <main class="relative z-10 pt-32">
+        <!-- Hero Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+            <div class="text-center animate-fade-in">
+                <h1 class="text-5xl md:text-7xl font-black text-gray-900 mb-6 tracking-tight uppercase">
+                    Media <span class="text-emerald-600">Center</span>
+                </h1>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                    Stay updated with the latest news, insights, and stories from the heart of India's EV revolution.
+                </p>
+            </div>
+        </section>
+
+        <!-- Featured Videos Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32">
+            <div class="flex items-center justify-between mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 flex items-center gap-3">
+                    <i data-lucide="play-circle" class="w-8 h-8 text-emerald-600"></i> Featured Videos
+                </h2>
+                <div class="h-px flex-grow bg-gray-200 mx-8"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Video 1 -->
+                <div class="video-card group cursor-pointer aspect-video bg-gray-200">
+                    <img src="https://picsum.photos/seed/video1/800/450" alt="Video Thumbnail" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i data-lucide="play" class="w-8 h-8 text-white fill-white"></i>
+                        </div>
+                    </div>
+                    <div class="video-overlay">
+                        <h4 class="text-white font-bold text-lg">The Future of EV Charging in India</h4>
+                        <p class="text-gray-300 text-sm">Chargebees Vision 2025</p>
+                    </div>
+                </div>
+                <!-- Video 2 -->
+                <div class="video-card group cursor-pointer aspect-video bg-gray-200">
+                    <img src="https://picsum.photos/seed/video2/800/450" alt="Video Thumbnail" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i data-lucide="play" class="w-5 h-5 text-white fill-white"></i>
+                        </div>
+                    </div>
+                    <div class="video-overlay">
+                        <h4 class="text-white font-bold text-lg">How to use Chargebees App</h4>
+                        <p class="text-gray-300 text-sm">Tutorial Guide</p>
+                    </div>
+                </div>
+                <!-- Video 3 -->
+                <div class="video-card group cursor-pointer aspect-video bg-gray-200">
+                    <img src="https://picsum.photos/seed/video3/800/450" alt="Video Thumbnail" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i data-lucide="play" class="w-5 h-5 text-white fill-white"></i>
+                        </div>
+                    </div>
+                    <div class="video-overlay">
+                        <h4 class="text-white font-bold text-lg">Customer Success Story</h4>
+                        <p class="text-gray-300 text-sm">Fleet Management</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blogs Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
+            <div class="flex items-center justify-between mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 flex items-center gap-3">
+                    <i data-lucide="book-open" class="w-8 h-8 text-emerald-600"></i> Latest Blogs
+                </h2>
+                <div class="h-px flex-grow bg-gray-200 mx-8"></div>
+            </div>
+
+            <div id="blog-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Blog cards will be injected here via script for cleaner code -->
+            </div>
+
+            <div class="mt-16 text-center">
+                <button class="bg-white border border-gray-200 text-gray-900 px-8 py-3 rounded-full font-bold hover:bg-gray-50 transition-all shadow-sm">
+                    Load More Articles
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 pt-24 pb-12 border-t border-gray-200 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-4 gap-12 mb-20">
+                <div class="lg:col-span-1">
+                    <div class="mb-8">
+                        <span class="text-2xl font-bold tracking-tighter text-gray-900">
+                            CHARGE<span class="text-emerald-600">BEES</span>
+                        </span>
+                    </div>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Leading the charge towards a sustainable electric future with India's largest EV charging network.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="https://twitter.com/chargebees" target="_blank" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all">
+                            <img src="images/twitter.png" alt="Twitter" class="w-5 h-5">
+                        </a>
+                        <a href="https://www.linkedin.com/company/chargebees" target="_blank" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all">
+                            <img src="images/linkedin.png" alt="LinkedIn" class="w-5 h-5">
+                        </a>
+                        <a href="https://www.instagram.com/chargebees" target="_blank" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all">
+                            <img src="images/instagram.png" alt="Instagram" class="w-5 h-5">
+                        </a>
+                        <a href="https://www.facebook.com/chargebees" target="_blank" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all">
+                            <img src="images/facebook.png" alt="Facebook" class="w-5 h-5">
+                        </a>
+                        <a href="https://www.youtube.com/@chargebees" target="_blank" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all">
+                            <img src="images/youtube.png" alt="YouTube" class="w-5 h-5">
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-6">Company</h4>
+                    <ul class="space-y-4 text-gray-600">
+                        <li><a href="about.html" class="hover:text-emerald-600 transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Our Journey</a></li>
+                        <li><a href="media-center.html" class="hover:text-emerald-600 transition-colors">Media Center</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-6">Solutions</h4>
+                    <ul class="space-y-4 text-gray-600">
+                        <li><a href="stationfinder.html" class="hover:text-emerald-600 transition-colors">Station Finder</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Fleet Charging</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Retail Charging</a></li>
+                        <li><a href="franchise.html" class="hover:text-emerald-600 transition-colors">Franchise</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-6">Contact</h4>
+                    <ul class="space-y-4 text-gray-600">
+                        <li class="flex items-center gap-2 group cursor-pointer">
+                            <span>info@chargebees.com</span>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </li>
+                        <li>+91 72270 25948</li>
+                        <li class="pt-4">
+                            <p class="font-semibold text-gray-900">Visakhapatnam HQ</p>
+                            <p class="text-sm">8th Floor, chargebees LTD,  IT Park, Visakhapatnam, Andhra Pradesh 530001</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+                <p>© 2024 Chargebees. All rights reserved.</p>
+                <div class="flex gap-8">
+                    <a href="#" class="hover:text-gray-900 transition-colors">Terms & Services</a>
+                    <a href="#" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-gray-900 transition-colors">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Blog Data Generation
+        const blogs = [
+            { title: "Top 10 EV Charging Tips for Long Road Trips", category: "Guides", date: "May 15, 2024", image: "https://picsum.photos/seed/blog1/600/400" },
+            { title: "The Rise of Electric Two-Wheelers in Urban India", category: "Trends", date: "May 12, 2024", image: "https://picsum.photos/seed/blog2/600/400" },
+            { title: "Understanding Battery Management Systems (BMS)", category: "Technology", date: "May 10, 2024", image: "https://picsum.photos/seed/blog3/600/400" },
+            { title: "How Chargebees is Expanding its Network in Tier 2 Cities", category: "Company", date: "May 08, 2024", image: "https://picsum.photos/seed/blog4/600/400" },
+            { title: "Government Incentives for EV Adoption in 2024", category: "Policy", date: "May 05, 2024", image: "https://picsum.photos/seed/blog5/600/400" },
+            { title: "Comparing AC vs DC Charging: Which is Better?", category: "Guides", date: "May 02, 2024", image: "https://picsum.photos/seed/blog6/600/400" },
+            { title: "The Environmental Impact of Switching to Electric", category: "Sustainability", date: "April 28, 2024", image: "https://picsum.photos/seed/blog7/600/400" },
+            { title: "Future of Wireless EV Charging Technology", category: "Technology", date: "April 25, 2024", image: "https://picsum.photos/seed/blog8/600/400" },
+            { title: "Chargebees Partnership with Major Retail Chains", category: "Partnerships", date: "April 22, 2024", image: "https://picsum.photos/seed/blog9/600/400" },
+            { title: "Maintaining Your EV Battery for Longevity", category: "Maintenance", date: "April 18, 2024", image: "https://picsum.photos/seed/blog10/600/400" },
+            { title: "Smart Grid Integration: The Next Frontier", category: "Technology", date: "April 15, 2024", image: "https://picsum.photos/seed/blog11/600/400" },
+            { title: "ChargeClub: Rewarding Our Loyal EV Drivers", category: "Community", date: "April 12, 2024", image: "https://picsum.photos/seed/blog12/600/400" },
+            { title: "Safety Standards in EV Charging Stations", category: "Safety", date: "April 08, 2024", image: "https://picsum.photos/seed/blog13/600/400" },
+            { title: "The Role of AI in Optimizing Charging Networks", category: "Technology", date: "April 05, 2024", image: "https://picsum.photos/seed/blog14/600/400" },
+            { title: "EV Charging Solutions for Residential Complexes", category: "Solutions", date: "April 02, 2024", image: "https://picsum.photos/seed/blog15/600/400" },
+            { title: "Global Trends in Electric Vehicle Infrastructure", category: "Trends", date: "March 28, 2024", image: "https://picsum.photos/seed/blog16/600/400" },
+            { title: "Chargebees Reaches 15,000 Charging Points Milestone", category: "Company", date: "March 25, 2024", image: "https://picsum.photos/seed/blog17/600/400" },
+            { title: "Why Fleet Owners are Rapidly Electrifying", category: "Business", date: "March 22, 2024", image: "https://picsum.photos/seed/blog18/600/400" }
+        ];
+
+        const blogGrid = document.getElementById('blog-grid');
+        blogs.forEach(blog => {
+            const card = document.createElement('div');
+            card.className = 'blog-card bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm flex flex-col';
+            card.innerHTML = `
+                <div class="h-56 overflow-hidden">
+                    <img src="${blog.image}" alt="${blog.title}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-8 flex-grow flex flex-col">
+                    <div class="flex items-center gap-4 mb-4">
+                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">${blog.category}</span>
+                        <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
+                        <span class="text-xs text-gray-500">${blog.date}</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-6 leading-tight flex-grow">
+                        ${blog.title}
+                    </h3>
+                    <a href="#" class="text-sm font-bold text-gray-900 flex items-center gap-2 group">
+                        Read More <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            `;
+            blogGrid.appendChild(card);
+        });
+
+        // Re-initialize icons for dynamic content
+        lucide.createIcons();
+    </script>
+</body>
+</html>

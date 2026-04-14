@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franchise - Chargebees</title>
+    <link rel="icon" type="image/png" href="images\favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfbf7;
+            scroll-behavior: smooth;
+        }
+        .bg-texture {
+            position: fixed;
+            inset: 0;
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/gray-floral.png');
+            background-repeat: repeat;
+        }
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                linear-gradient(to right, rgba(16, 185, 129, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .step-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: repeating-linear-gradient(to right, #10b981 0, #10b981 10px, transparent 10px, transparent 20px);
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-900">
+    <div class="bg-texture"></div>
+    <div class="bg-grid"></div>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <img src="images\logo.png" alt="Bhramara Logo" height="45" class="img-fluid"> 
+                    <a href="about.html" class="text-2xl font-bold tracking-tighter text-gray-900">
+                        CHARGE<span class="text-emerald-600">BEES</span>
+                    </a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="about.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">About</a>
+                    <a href="stationfinder.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Station Finder</a>
+                    
+                    <!-- Products Dropdown -->
+                    <div class="relative group">
+                        <button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
+                            Products <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                        </button>
+                        
+                        <!-- Mega Menu -->
+                        <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-white rounded-3xl shadow-2xl border border-gray-100 p-8 grid grid-cols-3 gap-8 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                            <!-- Hardware -->
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <i data-lucide="zap" class="w-5 h-5 text-emerald-600"></i> Hardware
+                                </h3>
+                                <a href="products.html#hardware" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                        <i data-lucide="battery-charging" class="w-6 h-6 text-emerald-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-900">All chargers</p>
+                                        <p class="text-xs text-gray-500">AC & DC Solutions</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- Software -->
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <i data-lucide="layout" class="w-5 h-5 text-emerald-600"></i> Software
+                                </h3>
+                                <div class="space-y-2">
+                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="cloud" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <p class="font-bold text-gray-900">ChargeCloud</p>
+                                                <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500">CMS Platform</p>
+                                        </div>
+                                    </a>
+                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="smartphone" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">Chargebees App</p>
+                                            <p class="text-xs text-gray-500">User Experience</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Services -->
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <i data-lucide="settings" class="w-5 h-5 text-emerald-600"></i> Services
+                                </h3>
+                                <div class="space-y-2">
+                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="activity" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">Energy As A Service</p>
+                                            <p class="text-xs text-gray-500">Renewable Energy</p>
+                                        </div>
+                                    </a>
+                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="battery-full" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <p class="font-bold text-gray-900">Battery As A Service</p>
+                                                <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500">Swapping Solutions</p>
+                                        </div>
+                                    </a>
+                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="credit-card" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">RFID Card</p>
+                                            <p class="text-xs text-gray-500">Seamless Payments</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="franchise.html" class="text-sm font-medium text-emerald-600 transition-colors">Franchise</a>
+                    <a href="partners.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Partners</a>
+                    <a href="chargeclub.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">ChargeClub</a>
+                    <a href="media-center.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Media Center</a>
+                    <a href="careers.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Careers</a>
+                </div>
+                <div class="flex items-center">
+                    <a href="contact.html" class="bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20 active:scale-95">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative z-10 pt-32">
+        <!-- Hero Section -->
+        <section class="relative py-20 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-4xl mx-auto animate-fade-in">
+                    <span class="inline-block px-4 py-1.5 bg-emerald-100 text-emerald-700 rounded-full text-xs font-bold uppercase tracking-wider mb-6">Business Opportunity</span>
+                    <h1 class="text-5xl md:text-7xl font-bold text-gray-900 leading-tight mb-8">
+                        Partner with India's <span class="text-emerald-600">Fastest Growing</span> EV Network
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-12 leading-relaxed">
+                        Join the green revolution. Become a Chargebees franchise partner and build a sustainable, future-proof business in the booming electric vehicle industry.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="#inquiry" class="w-full sm:w-auto px-10 py-4 bg-emerald-600 text-white rounded-2xl font-bold hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-600/20">
+                            Apply for Franchise
+                        </a>
+                        <a href="#models" class="w-full sm:w-auto px-10 py-4 bg-white text-gray-900 border border-gray-200 rounded-2xl font-bold hover:bg-gray-50 transition-all">
+                            Explore Models
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <p class="text-4xl font-bold text-gray-900 mb-2">13,500+</p>
+                        <p class="text-sm text-gray-500 uppercase tracking-widest">Charging Points</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-4xl font-bold text-gray-900 mb-2">25+</p>
+                        <p class="text-sm text-gray-500 uppercase tracking-widest">States Covered</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-4xl font-bold text-gray-900 mb-2">500+</p>
+                        <p class="text-sm text-gray-500 uppercase tracking-widest">Franchise Partners</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-4xl font-bold text-gray-900 mb-2">24/7</p>
+                        <p class="text-sm text-gray-500 uppercase tracking-widest">Support System</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Franchise Section -->
+        <section class="py-24 bg-white/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="animate-fade-in">
+                        <h2 class="text-4xl font-bold text-gray-900 mb-8">Why Franchise with Chargebees?</h2>
+                        <div class="space-y-8">
+                            <div class="flex gap-6">
+                                <div class="w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="trending-up" class="text-emerald-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">High ROI Potential</h3>
+                                    <p class="text-gray-600">Capitalize on the exponential growth of EVs in India with a proven business model and recurring revenue streams.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-6">
+                                <div class="w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="shield-check" class="text-emerald-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">End-to-End Support</h3>
+                                    <p class="text-gray-600">From site selection and installation to technical maintenance and marketing, we handle the heavy lifting.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-6">
+                                <div class="w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="cpu" class="text-emerald-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">Advanced Technology</h3>
+                                    <p class="text-gray-600">Access our proprietary CMS and user app, providing real-time analytics and seamless payment integration.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative animate-fade-in" style="animation-delay: 0.2s;">
+                        <div class="rounded-[3rem] overflow-hidden shadow-2xl">
+                            <img src="https://picsum.photos/seed/franchise-biz/800/1000" alt="Franchise Business" class="w-full h-auto">
+                        </div>
+                        <div class="absolute -bottom-8 -left-8 glass-card p-8 rounded-3xl shadow-xl max-w-xs">
+                            <p class="text-emerald-600 font-bold text-3xl mb-1">100%</p>
+                            <p class="text-gray-900 font-bold mb-2">Technical Assistance</p>
+                            <p class="text-sm text-gray-500">We ensure your stations are always up and running with our 24/7 NOC monitoring.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Franchise Models Section -->
+        <section id="models" class="py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Flexible Business Models</h2>
+                    <p class="text-gray-600">Choose the model that best fits your investment and operational goals.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Model 1 -->
+                    <div class="bg-gray-900 rounded-[3rem] p-12 text-white relative overflow-hidden group hover:scale-[1.02] transition-all duration-500">
+                        <div class="relative z-10">
+                            <h3 class="text-3xl font-bold mb-6">FOFO Model</h3>
+                            <p class="text-emerald-500 font-bold mb-4 uppercase tracking-widest text-sm">Franchise Owned Franchise Operated</p>
+                            <p class="text-gray-400 mb-8 leading-relaxed">
+                                Ideal for entrepreneurs who want full control. You own the land/lease and manage the daily operations while using our brand and technology.
+                            </p>
+                            <ul class="space-y-4 mb-10">
+                                <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-emerald-500 w-5 h-5"></i> Full Revenue Ownership</li>
+                                <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-emerald-500 w-5 h-5"></i> Direct Operational Control</li>
+                                <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-emerald-500 w-5 h-5"></i> Branding & Tech Support</li>
+                            </ul>
+                            <button class="w-full py-4 bg-emerald-600 rounded-2xl font-bold hover:bg-emerald-700 transition-all">Select FOFO Model</button>
+                        </div>
+                        <i data-lucide="briefcase" class="absolute -bottom-10 -right-10 w-64 h-64 text-white/5 -rotate-12 group-hover:scale-110 transition-transform duration-700"></i>
+                    </div>
+
+                    <!-- Model 2 -->
+                    <div class="bg-emerald-600 rounded-[3rem] p-12 text-white relative overflow-hidden group hover:scale-[1.02] transition-all duration-500">
+                        <div class="relative z-10">
+                            <h3 class="text-3xl font-bold mb-6">FOGO Model</h3>
+                            <p class="text-white/80 font-bold mb-4 uppercase tracking-widest text-sm">Franchise Owned Government Operated</p>
+                            <p class="text-emerald-50 mb-8 leading-relaxed">
+                                A unique partnership model where you invest in the infrastructure on government-allocated land, and we facilitate the operations.
+                            </p>
+                            <ul class="space-y-4 mb-10">
+                                <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-white w-5 h-5"></i> Strategic Locations</li>
+                                <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-white w-5 h-5"></i> Long-term Stability</li>
+                                <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-white w-5 h-5"></i> Hassle-free Management</li>
+                            </ul>
+                            <button class="w-full py-4 bg-gray-900 rounded-2xl font-bold hover:bg-black transition-all">Select FOGO Model</button>
+                        </div>
+                        <i data-lucide="landmark" class="absolute -bottom-10 -right-10 w-64 h-64 text-white/10 rotate-12 group-hover:scale-110 transition-transform duration-700"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Steps Section -->
+        <section class="py-24 bg-gray-50/50 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Onboarding Process</h2>
+                    <p class="text-gray-600">Four simple steps to start your EV charging business.</p>
+                </div>
+                <div class="relative">
+                    <div class="hidden lg:block step-line"></div>
+                    <div class="grid lg:grid-cols-4 gap-12">
+                        <div class="text-center relative">
+                            <div class="w-16 h-16 bg-white border-4 border-emerald-600 rounded-full flex items-center justify-center text-2xl font-bold text-emerald-600 mx-auto mb-6 relative z-10 shadow-lg">1</div>
+                            <h3 class="text-xl font-bold mb-2">Application</h3>
+                            <p class="text-sm text-gray-500">Submit your inquiry and site details for initial screening.</p>
+                        </div>
+                        <div class="text-center relative">
+                            <div class="w-16 h-16 bg-white border-4 border-emerald-600 rounded-full flex items-center justify-center text-2xl font-bold text-emerald-600 mx-auto mb-6 relative z-10 shadow-lg">2</div>
+                            <h3 class="text-xl font-bold mb-2">Feasibility</h3>
+                            <p class="text-sm text-gray-500">Our experts conduct a site visit and technical audit.</p>
+                        </div>
+                        <div class="text-center relative">
+                            <div class="w-16 h-16 bg-white border-4 border-emerald-600 rounded-full flex items-center justify-center text-2xl font-bold text-emerald-600 mx-auto mb-6 relative z-10 shadow-lg">3</div>
+                            <h3 class="text-xl font-bold mb-2">Installation</h3>
+                            <p class="text-sm text-gray-500">Hardware setup, grid connection, and branding.</p>
+                        </div>
+                        <div class="text-center relative">
+                            <div class="w-16 h-16 bg-white border-4 border-emerald-600 rounded-full flex items-center justify-center text-2xl font-bold text-emerald-600 mx-auto mb-6 relative z-10 shadow-lg">4</div>
+                            <h3 class="text-xl font-bold mb-2">Go Live</h3>
+                            <p class="text-sm text-gray-500">Start charging and generating revenue instantly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Inquiry Form Section -->
+        <section id="inquiry" class="py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-gray-100">
+                    <div class="grid lg:grid-cols-5">
+                        <div class="lg:col-span-2 bg-emerald-600 p-12 lg:p-16 text-white relative overflow-hidden">
+                            <div class="relative z-10">
+                                <h2 class="text-4xl font-bold mb-8">Start your journey today</h2>
+                                <p class="text-emerald-50 mb-12 text-lg">
+                                    Fill out the form and our franchise development team will get back to you within 24 hours.
+                                </p>
+                                <div class="space-y-6">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
+                                            <i data-lucide="mail" class="w-5 h-5"></i>
+                                        </div>
+                                        <p>franchise@chargebees.com</p>
+                                    </div>
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
+                                            <i data-lucide="phone" class="w-5 h-5"></i>
+                                        </div>
+                                        <p>+91 72270 25948</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <i data-lucide="zap" class="absolute -bottom-20 -right-20 w-80 h-80 text-white/5 rotate-12"></i>
+                        </div>
+                        <div class="lg:col-span-3 p-12 lg:p-16">
+                            <form class="grid md:grid-cols-2 gap-6">
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wider">Full Name</label>
+                                    <input type="text" placeholder="Enter your name" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-emerald-600 transition-all">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wider">Email Address</label>
+                                    <input type="email" placeholder="email@example.com" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-emerald-600 transition-all">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wider">Phone Number</label>
+                                    <input type="tel" placeholder="+91 00000 00000" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-emerald-600 transition-all">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wider">City</label>
+                                    <input type="text" placeholder="Your city" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-emerald-600 transition-all">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wider">Investment Range</label>
+                                    <select class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-emerald-600 transition-all appearance-none">
+                                        <option>Select Range</option>
+                                        <option>10L - 25L</option>
+                                        <option>25L - 50L</option>
+                                        <option>50L - 1Cr</option>
+                                        <option>1Cr+</option>
+                                    </select>
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wider">Message / Site Details</label>
+                                    <textarea rows="4" placeholder="Tell us about your proposed site or background" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-emerald-600 transition-all"></textarea>
+                                </div>
+                                <div class="md:col-span-2">
+                                    <button type="submit" class="w-full py-5 bg-gray-900 text-white font-bold rounded-2xl hover:bg-emerald-600 transition-all shadow-xl active:scale-[0.98]">
+                                        Submit Franchise Inquiry
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 pt-24 pb-12 border-t border-gray-200 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-4 gap-12 mb-20">
+                <div class="lg:col-span-1">
+                    <div class="mb-8">
+                        <span class="text-2xl font-bold tracking-tighter text-gray-900">
+                            CHARGE<span class="text-emerald-600">BEES</span>
+                        </span>
+                    </div>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Leading the charge towards a sustainable electric future with India's largest EV charging network.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all"><i data-lucide="youtube" class="w-5 h-5"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-6">Company</h4>
+                    <ul class="space-y-4 text-gray-600">
+                        <li><a href="about.html" class="hover:text-emerald-600 transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Our Journey</a></li>
+                        <li><a href="media-center.html" class="hover:text-emerald-600 transition-colors">Media Center</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-6">Solutions</h4>
+                    <ul class="space-y-4 text-gray-600">
+                        <li><a href="stationfinder.html" class="hover:text-emerald-600 transition-colors">Station Finder</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Fleet Charging</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Retail Charging</a></li>
+                        <li><a href="franchise.html" class="hover:text-emerald-600 transition-colors">Franchise</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-6">Contact</h4>
+                    <ul class="space-y-4 text-gray-600">
+                        <li class="flex items-center gap-2 group cursor-pointer">
+                            <span>info@chargebees.com</span>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </li>
+                        <li>+91 72270 25948</li>
+                        <li class="pt-4">
+                            <p class="font-semibold text-gray-900">Visakhapatnam HQ</p>
+                            <p class="text-sm">8th Floor, chargebees LTD,  IT Park, Visakhapatnam, Andhra Pradesh 530001</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+                <p>© 2024 Chargebees. All rights reserved.</p>
+                <div class="flex gap-8">
+                    <a href="#" class="hover:text-gray-900 transition-colors">Terms & Services</a>
+                    <a href="#" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-gray-900 transition-colors">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>

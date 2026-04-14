@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChargeClub - Chargebees</title>
+    <link rel="icon" type="image/png" href="images\favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            scroll-behavior: smooth;
+        }
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                linear-gradient(to right, rgba(16, 185, 129, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        /* Coin Animation */
+        .coin {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            background: #fbbf24;
+            border-radius: 50%;
+            border: 3px solid #d97706;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: #d97706;
+            font-size: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.2), 0 5px 15px rgba(0,0,0,0.3);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .coin::after {
+            content: 'C';
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .tier-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .tier-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(16, 185, 129, 0.5);
+            background: rgba(16, 185, 129, 0.05);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+        }
+
+        .prestige-table th, .prestige-table td {
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .prestige-table tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .faq-item.active .faq-content {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease-out;
+            opacity: 0;
+        }
+        
+        .gold-text {
+            background: linear-gradient(to right, #fcd34d, #fbbf24, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tier-icon {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="bg-grid"></div>
+    <div id="coin-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <img src="images\logo.png" alt="Bhramara Logo" height="45" class="img-fluid"> 
+                    <a href="index.html" class="text-2xl font-bold tracking-tighter text-white">
+                        CHARGE<span class="text-emerald-500">BEES</span>
+                    </a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="about.html" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">About</a>
+                    <a href="stationfinder.html" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Station Finder</a>
+                    
+                    <!-- Products Dropdown -->
+                    <div class="relative group">
+                        <button class="flex items-center gap-1 text-sm font-medium text-gray-400 hover:text-white cursor-pointer py-8">
+                            Products <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                        </button>
+                        
+                        <!-- Mega Menu -->
+                        <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-zinc-900 rounded-3xl shadow-2xl border border-white/10 p-8 grid grid-cols-3 gap-8 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                            <!-- Hardware -->
+                            <div>
+                                <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                                    <i data-lucide="zap" class="w-5 h-5 text-emerald-500"></i> Hardware
+                                </h3>
+                                <a href="products.html#hardware" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 transition-all group/item">
+                                    <div class="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center group-hover/item:bg-zinc-700 transition-colors">
+                                        <i data-lucide="battery-charging" class="w-6 h-6 text-emerald-500"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-white">All chargers</p>
+                                        <p class="text-xs text-gray-500">AC & DC Solutions</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- Software -->
+                            <div>
+                                <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                                    <i data-lucide="layout" class="w-5 h-5 text-emerald-500"></i> Software
+                                </h3>
+                                <div class="space-y-2">
+                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 transition-all group/item">
+                                        <div class="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center group-hover/item:bg-zinc-700 transition-colors">
+                                            <i data-lucide="cloud" class="w-6 h-6 text-emerald-500"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <p class="font-bold text-white">ChargeCloud</p>
+                                                <span class="text-[10px] bg-zinc-800 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500">CMS Platform</p>
+                                        </div>
+                                    </a>
+                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 transition-all group/item">
+                                        <div class="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center group-hover/item:bg-zinc-700 transition-colors">
+                                            <i data-lucide="smartphone" class="w-6 h-6 text-emerald-500"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-white">Chargebees App</p>
+                                            <p class="text-xs text-gray-500">User Experience</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Services -->
+                            <div>
+                                <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                                    <i data-lucide="settings" class="w-5 h-5 text-emerald-500"></i> Services
+                                </h3>
+                                <div class="space-y-2">
+                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 transition-all group/item">
+                                        <div class="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center group-hover/item:bg-zinc-700 transition-colors">
+                                            <i data-lucide="activity" class="w-6 h-6 text-emerald-500"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-white">Energy As A Service</p>
+                                            <p class="text-xs text-gray-500">Renewable Energy</p>
+                                        </div>
+                                    </a>
+                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 transition-all group/item">
+                                        <div class="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center group-hover/item:bg-zinc-700 transition-colors">
+                                            <i data-lucide="battery-full" class="w-6 h-6 text-emerald-500"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <p class="font-bold text-white">Battery As A Service</p>
+                                                <span class="text-[10px] bg-zinc-800 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500">Swapping Solutions</p>
+                                        </div>
+                                    </a>
+                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 transition-all group/item">
+                                        <div class="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center group-hover/item:bg-zinc-700 transition-colors">
+                                            <i data-lucide="credit-card" class="w-6 h-6 text-emerald-500"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-white">RFID Card</p>
+                                            <p class="text-xs text-gray-500">Seamless Payments</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="franchise.html" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Franchise</a>
+                    <a href="partners.html" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Partners</a>
+                    <a href="chargeclub.html" class="text-sm font-medium text-emerald-500 transition-colors">ChargeClub</a>
+                    <a href="media-center.html" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Media Center</a>
+                    <a href="careers.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Careers</a>
+                </div>
+
+                <div class="flex items-center">
+                    <a href="contact.html" class="bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20 active:scale-95">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative z-10">
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex flex-col items-center justify-center pt-20 px-4 overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-emerald-600/10 rounded-full blur-[120px] -z-10"></div>
+            
+            <div class="text-center animate-fade-in">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 italic text-white/80">CHARGE MORE.</h2>
+                <h2 class="text-3xl md:text-5xl font-bold mb-8 italic text-white/80">LIVE ELECTRIFIED.</h2>
+                
+                <h1 class="text-7xl md:text-9xl font-black tracking-tighter mb-4">
+                    CHARGE <span class="text-emerald-500">CLUB</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
+                    India's most exclusive EV community, offering premium rewards and exclusive benefits for every mile you drive.
+                </p>
+                <div class="bg-emerald-600/10 border border-emerald-500/20 px-8 py-4 rounded-2xl inline-block mb-12">
+                    <p class="text-emerald-400 font-bold">Sign up today and earn <span class="text-2xl gold-text">2000 ChargeCoins</span> as your welcome bonus!</p>
+                </div>
+                <div>
+                    <button class="bg-emerald-600 text-white px-12 py-5 rounded-2xl font-bold text-lg hover:bg-emerald-700 transition-all shadow-2xl shadow-emerald-600/40 hover:-translate-y-1 active:scale-95">
+                        Become a ChargeClub Member
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="py-32 bg-zinc-950/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">HOW IT WORKS</h2>
+                    <div class="w-24 h-1 bg-emerald-500 mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="tier-card p-10 rounded-[2.5rem]">
+                        <div class="w-16 h-16 bg-emerald-600/20 rounded-2xl flex items-center justify-center mb-8">
+                            <i data-lucide="battery-charging" class="w-8 h-8 text-emerald-500"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">CHARGE AND EARN</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Earn 5 ChargeCoins per unit charged. Boost earnings with bonus activities and tier upgrades. Track your growing balance in real time in the app.
+                        </p>
+                    </div>
+
+                    <div class="tier-card p-10 rounded-[2.5rem]">
+                        <div class="w-16 h-16 bg-amber-600/20 rounded-2xl flex items-center justify-center mb-8">
+                            <i data-lucide="trending-up" class="w-8 h-8 text-amber-500"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">UNLOCK TIERS</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Level up from Bronze to the elite Red tier and earn up to 3500 ChargeCoins. Each tier boosts your discounts, milestone rewards, and perks.
+                        </p>
+                    </div>
+
+                    <div class="tier-card p-10 rounded-[2.5rem]">
+                        <div class="w-16 h-16 bg-blue-600/20 rounded-2xl flex items-center justify-center mb-8">
+                            <i data-lucide="gift" class="w-8 h-8 text-blue-500"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">REDEEM REWARDS</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Use your ChargeCoins for instant charging discounts worth up to 15%, or redeem them for exclusive partner coupons.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prestige Path Table -->
+        <section class="py-32">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 uppercase">ChargeClub Prestige Path</h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto">From your very first Bronze spark to the coveted Red pinnacle, each charge fuels your climb toward unmatched rewards and benefits.</p>
+                </div>
+
+                <div class="overflow-x-auto rounded-[2.5rem] border border-white/10 bg-zinc-900/30 backdrop-blur-sm">
+                    <table class="w-full prestige-table">
+                        <thead>
+                            <tr class="bg-white/5">
+                                <th class="text-left font-bold text-gray-400">Benefits & Requirements</th>
+                                <th>
+                                    <div class="tier-icon bg-amber-900/40 text-amber-700 border border-amber-700/30">
+                                        <i data-lucide="award" class="w-5 h-5"></i>
+                                    </div>
+                                    <div class="text-amber-700 font-bold">BRONZE</div>
+                                </th>
+                                <th>
+                                    <div class="tier-icon bg-gray-400/20 text-gray-400 border border-gray-400/30">
+                                        <i data-lucide="award" class="w-5 h-5"></i>
+                                    </div>
+                                    <div class="text-gray-400 font-bold">SILVER</div>
+                                </th>
+                                <th>
+                                    <div class="tier-icon bg-amber-400/20 text-amber-400 border border-amber-400/30">
+                                        <i data-lucide="award" class="w-5 h-5"></i>
+                                    </div>
+                                    <div class="text-amber-400 font-bold">GOLD</div>
+                                </th>
+                                <th>
+                                    <div class="tier-icon bg-gray-200/20 text-gray-200 border border-gray-200/30">
+                                        <i data-lucide="award" class="w-5 h-5"></i>
+                                    </div>
+                                    <div class="text-gray-200 font-bold">PLATINUM</div>
+                                </th>
+                                <th>
+                                    <div class="tier-icon bg-red-600/20 text-red-600 border border-red-600/30">
+                                        <i data-lucide="award" class="w-5 h-5"></i>
+                                    </div>
+                                    <div class="text-red-600 font-bold">RED</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-400">
+                            <tr>
+                                <td class="text-left font-semibold text-white">Energy Units Needed Annually</td>
+                                <td>Onboarding completed</td>
+                                <td>50 Units</td>
+                                <td>200 Units</td>
+                                <td>500 Units</td>
+                                <td>1000 Units</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left font-semibold text-white">Charging Session Discount</td>
+                                <td>5%</td>
+                                <td>7%</td>
+                                <td>10%</td>
+                                <td>12%</td>
+                                <td>15%</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left font-semibold text-white">Redeem Chargecoins for Partner Offers</td>
+                                <td><i data-lucide="check" class="w-5 h-5 mx-auto text-emerald-500"></i></td>
+                                <td><i data-lucide="check" class="w-5 h-5 mx-auto text-emerald-500"></i></td>
+                                <td><i data-lucide="check" class="w-5 h-5 mx-auto text-emerald-500"></i></td>
+                                <td><i data-lucide="check" class="w-5 h-5 mx-auto text-emerald-500"></i></td>
+                                <td><i data-lucide="check" class="w-5 h-5 mx-auto text-emerald-500"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left font-semibold text-white">Tier Upgrade Reward</td>
+                                <td>—</td>
+                                <td>500 ChargeCoins</td>
+                                <td>1000 ChargeCoins</td>
+                                <td>2500 ChargeCoins</td>
+                                <td>3500 ChargeCoins</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left font-semibold text-white">Invite-only Perks</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td class="text-emerald-500 font-bold">Exclusive</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left font-semibold text-white">Priority Support</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td><i data-lucide="check" class="w-5 h-5 mx-auto text-emerald-500"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rewards Section -->
+        <section class="py-32 bg-zinc-950/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">REWARDS TO POWER YOUR START</h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-12">
+                    <div class="text-center group">
+                        <div class="w-24 h-24 bg-emerald-600/10 rounded-full flex items-center justify-center mx-auto mb-8 border border-emerald-500/20 group-hover:scale-110 transition-transform">
+                            <i data-lucide="gift" class="w-10 h-10 text-emerald-500"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4">ENROLLMENT BONUS</h4>
+                        <p class="text-gray-400">Earn 2000 ChargeCoins just by signing up.</p>
+                    </div>
+                    <div class="text-center group">
+                        <div class="w-24 h-24 bg-amber-600/10 rounded-full flex items-center justify-center mx-auto mb-8 border border-amber-500/20 group-hover:scale-110 transition-transform">
+                            <i data-lucide="arrow-up-circle" class="w-10 h-10 text-amber-500"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4">TIER UPGRADE REWARDS</h4>
+                        <p class="text-gray-400">Earn up to 3500 ChargeCoins when you move up the tiers.</p>
+                    </div>
+                    <div class="text-center group">
+                        <div class="w-24 h-24 bg-blue-600/10 rounded-full flex items-center justify-center mx-auto mb-8 border border-blue-500/20 group-hover:scale-110 transition-transform">
+                            <i data-lucide="calendar" class="w-10 h-10 text-blue-500"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4">MONTHLY MILESTONES</h4>
+                        <p class="text-gray-400">Maintain a Charging Streak and earn up to 100 ChargeCoins every month.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Getting Started -->
+        <section class="py-32">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-20 items-center">
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-bold mb-12">GETTING STARTED WITH CHARGECLUB</h2>
+                        
+                        <div class="space-y-12">
+                            <div class="flex gap-8">
+                                <span class="text-6xl font-black text-white/10">1</span>
+                                <div>
+                                    <h4 class="text-2xl font-bold mb-4 uppercase">Install the Chargebees App</h4>
+                                    <p class="text-gray-400 leading-relaxed">
+                                        Membership is completely free. Download the Chargebees App & start earning from your very first session.
+                                    </p>
+                                    <button class="mt-6 text-emerald-500 font-bold flex items-center gap-2 hover:gap-4 transition-all">
+                                        Click Here <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-8">
+                                <span class="text-6xl font-black text-white/10">2</span>
+                                <div>
+                                    <h4 class="text-2xl font-bold mb-4 uppercase">Complete Profile & Vehicle Info</h4>
+                                    <p class="text-gray-400 leading-relaxed">
+                                        Add your EV details to get personalized charging recommendations and tier progress tracking.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-8">
+                                <span class="text-6xl font-black text-white/10">3</span>
+                                <div>
+                                    <h4 class="text-2xl font-bold mb-4 uppercase">Top Up Your Wallet</h4>
+                                    <p class="text-gray-400 leading-relaxed">
+                                        Add funds to your wallet for seamless, one-tap charging at any of our 13,500+ stations.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-8">
+                                <span class="text-6xl font-black text-white/10">4</span>
+                                <div>
+                                    <h4 class="text-2xl font-bold mb-4 uppercase">Become an EV Charging Elite</h4>
+                                    <p class="text-gray-400 leading-relaxed">
+                                        Start charging, earn coins, and unlock premium benefits as you climb the prestige path.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-emerald-600/20 blur-[100px] -z-10"></div>
+                        <div class="bg-zinc-900 rounded-[3rem] p-8 border border-white/10 shadow-2xl">
+                            <img src="https://picsum.photos/seed/ev-app/600/1200" alt="Chargebees App" class="w-full h-auto rounded-[2rem] shadow-2xl">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQs -->
+        <section class="py-32 bg-zinc-950/50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">FAQs</h2>
+                    <div class="w-24 h-1 bg-emerald-500 mx-auto rounded-full"></div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="faq-item bg-zinc-900/50 border border-white/5 rounded-2xl p-6 cursor-pointer" onclick="toggleFaq(this)">
+                        <div class="flex justify-between items-center">
+                            <h4 class="text-lg font-bold">How do I enroll in ChargeClub?</h4>
+                            <i data-lucide="plus" class="w-5 h-5 text-emerald-500 transition-transform"></i>
+                        </div>
+                        <div class="faq-content text-gray-400">
+                            Enrollment is automatic when you sign up on the Chargebees App. You start at the Bronze tier immediately.
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-zinc-900/50 border border-white/5 rounded-2xl p-6 cursor-pointer" onclick="toggleFaq(this)">
+                        <div class="flex justify-between items-center">
+                            <h4 class="text-lg font-bold">What are the ChargeClub membership tiers?</h4>
+                            <i data-lucide="plus" class="w-5 h-5 text-emerald-500 transition-transform"></i>
+                        </div>
+                        <div class="faq-content text-gray-400">
+                            There are five tiers: Bronze, Silver, Gold, Platinum, and Red. Each tier offers increasing benefits based on your annual charging activity.
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-zinc-900/50 border border-white/5 rounded-2xl p-6 cursor-pointer" onclick="toggleFaq(this)">
+                        <div class="flex justify-between items-center">
+                            <h4 class="text-lg font-bold">How can I earn ChargeCoins?</h4>
+                            <i data-lucide="plus" class="w-5 h-5 text-emerald-500 transition-transform"></i>
+                        </div>
+                        <div class="faq-content text-gray-400">
+                            You earn coins for every unit charged, completing your profile, reaching monthly milestones, and upgrading your membership tier.
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-zinc-900/50 border border-white/5 rounded-2xl p-6 cursor-pointer" onclick="toggleFaq(this)">
+                        <div class="flex justify-between items-center">
+                            <h4 class="text-lg font-bold">Do my ChargeCoins expire?</h4>
+                            <i data-lucide="plus" class="w-5 h-5 text-emerald-500 transition-transform"></i>
+                        </div>
+                        <div class="faq-content text-gray-400">
+                            ChargeCoins are valid for 12 months from the date of earning. We'll notify you before any coins are set to expire.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="py-32 text-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl md:text-6xl font-black mb-12 uppercase italic">CHARGE SMARTER. DRIVE FURTHER. EARN MORE.</h2>
+                <div class="flex flex-wrap justify-center gap-8">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" class="h-16 cursor-pointer">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" class="h-16 cursor-pointer">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-zinc-950 pt-24 pb-12 border-t border-white/10 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-4 gap-12 mb-20">
+                <div class="lg:col-span-1">
+                    <div class="mb-8">
+                        <span class="text-2xl font-bold tracking-tighter text-white">
+                            CHARGE<span class="text-emerald-600">BEES</span>
+                        </span>
+                    </div>
+                    <p class="text-gray-500 mb-8 leading-relaxed">
+                        Leading the charge towards a sustainable electric future with India's largest EV charging network.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 bg-zinc-900 rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 transition-all"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 bg-zinc-900 rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 transition-all"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 bg-zinc-900 rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 transition-all"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 bg-zinc-900 rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 transition-all"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white mb-6">Company</h4>
+                    <ul class="space-y-4 text-gray-500">
+                        <li><a href="about.html" class="hover:text-emerald-600 transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Our Journey</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Media Center</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white mb-6">Solutions</h4>
+                    <ul class="space-y-4 text-gray-500">
+                        <li><a href="stationfinder.html" class="hover:text-emerald-600 transition-colors">Station Finder</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Fleet Charging</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Retail Charging</a></li>
+                        <li><a href="franchise.html" class="hover:text-emerald-600 transition-colors">Franchise</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white mb-6">Contact</h4>
+                    <ul class="space-y-4 text-gray-500">
+                        <li class="flex items-center gap-2 group cursor-pointer">
+                            <span>info@chargebees.com</span>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </li>
+                        <li>+91 72270 25948</li>
+                        <li class="pt-4">
+                            <p class="font-semibold text-white">Visakhapatnam HQ</p>
+                            <p class="text-sm">8th Floor, chargebees LTD,  IT Park, Visakhapatnam, Andhra Pradesh 530001</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+                <p>© 2024 Chargebees. All rights reserved.</p>
+                <div class="flex gap-8">
+                    <a href="#" class="hover:text-white transition-colors">Terms & Services</a>
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Falling Coins Logic
+        const coinContainer = document.getElementById('coin-container');
+        function createCoin() {
+            const coin = document.createElement('div');
+            coin.classList.add('coin');
+            coin.style.left = Math.random() * 100 + 'vw';
+            coin.style.animation = `fall ${Math.random() * 3 + 4}s linear forwards`;
+            coinContainer.appendChild(coin);
+            
+            setTimeout(() => {
+                coin.remove();
+            }, 7000);
+        }
+        setInterval(createCoin, 500);
+
+        // FAQ Toggle
+        function toggleFaq(element) {
+            const isActive = element.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+                item.querySelector('i').setAttribute('data-lucide', 'plus');
+            });
+            
+            if (!isActive) {
+                element.classList.add('active');
+                element.querySelector('i').setAttribute('data-lucide', 'minus');
+            }
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>

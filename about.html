@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Chargebees</title>
+    <link rel="icon" type="image/png" href="images\favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfbf7;
+            scroll-behavior: smooth;
+        }
+        .bg-texture {
+            position: fixed;
+            inset: 0;
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/gray-floral.png');
+            background-repeat: repeat;
+        }
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                linear-gradient(to right, rgba(16, 185, 129, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            opacity: 0;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 200px;
+            opacity: 1;
+        }
+        .accordion-item.active .plus-icon {
+            display: none;
+        }
+        .accordion-item.active .minus-icon {
+            display: block;
+        }
+        .minus-icon {
+            display: none;
+        }
+        .team-member {
+            transition: transform 0.3s ease;
+        }
+        .team-member:hover {
+            transform: scale(1.02);
+        }
+        .grayscale-hover {
+            filter: grayscale(100%);
+            transition: filter 0.5s ease;
+        }
+        .grayscale-hover:hover {
+            filter: grayscale(0%);
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        /* Marquee Animation */
+        .marquee {
+            display: flex;
+            overflow: hidden;
+            user-select: none;
+            gap: 3rem;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+        .marquee-content {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-around;
+            gap: 3rem;
+            min-width: 100%;
+            animation: scroll 40s linear infinite;
+        }
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(-100% - 3rem)); }
+        }
+        .marquee:hover .marquee-content {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-900">
+    <div class="bg-texture"></div>
+    <div class="bg-grid"></div>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <img src="images\logo.png" alt="Bhramara Logo" height="45" class="img-fluid"> 
+                    <span class="text-2xl font-bold tracking-tighter text-gray-900">
+                        CHARGE<span class="text-emerald-600">BEES</span>
+                    </span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="about.html" class="text-sm font-medium text-emerald-600 transition-colors">About</a>
+                    <a href="stationfinder.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Station Finder</a>
+                    
+                    <!-- Products Dropdown -->
+                    <div class="relative group">
+                        <button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
+                            Products <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                        </button>
+                        
+                        <!-- Mega Menu -->
+                        <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-white rounded-3xl shadow-2xl border border-gray-100 p-8 grid grid-cols-3 gap-8 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                            <!-- Hardware -->
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <i data-lucide="zap" class="w-5 h-5 text-emerald-600"></i> Hardware
+                                </h3>
+                                <a href="product.html#hardware" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                        <i data-lucide="battery-charging" class="w-6 h-6 text-emerald-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-900">All chargers</p>
+                                        <p class="text-xs text-gray-500">AC & DC Solutions</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- Software -->
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <i data-lucide="layout" class="w-5 h-5 text-emerald-600"></i> Software
+                                </h3>
+                                <div class="space-y-2">
+                                    <a href="product.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="cloud" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <p class="font-bold text-gray-900">ChargeCloud</p>
+                                                <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500">CMS Platform</p>
+                                        </div>
+                                    </a>
+                                    <a href="product.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="smartphone" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">Chargebees App</p>
+                                            <p class="text-xs text-gray-500">User Experience</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Services -->
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <i data-lucide="settings" class="w-5 h-5 text-emerald-600"></i> Services
+                                </h3>
+                                <div class="space-y-2">
+                                    <a href="product.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="activity" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">Energy As A Service</p>
+                                            <p class="text-xs text-gray-500">Renewable Energy</p>
+                                        </div>
+                                    </a>
+                                    <a href="product.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="battery-full" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <p class="font-bold text-gray-900">Battery As A Service</p>
+                                                <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500">Swapping Solutions</p>
+                                        </div>
+                                    </a>
+                                    <a href="product.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="credit-card" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">RFID Card</p>
+                                            <p class="text-xs text-gray-500">Seamless Payments</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="franchise.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Franchise</a>
+                    <a href="partners.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Partners</a>
+                    <a href="chargeclub.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">ChargeClub</a>
+                    <a href="media-center.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Media Center</a>
+                    <a href="careers.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Careers</a>
+                </div>
+
+                <div class="flex items-center">
+                    <a href="contact.html" class="bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20 active:scale-95">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative z-10">
+        <!-- Video Intro Section -->
+        <section class="relative h-screen min-h-[700px] flex items-end justify-center overflow-hidden pb-32">
+            <!-- Background Video -->
+            <div class="absolute inset-0 z-0">
+                <video autoplay muted loop playsinline class="w-full h-full object-cover scale-110">
+                    <source src="videos/bg video.mp4" type="video/mp4">
+                </video>
+                <!-- Ultra-light overlay to let video shine -->
+                <div class="absolute inset-0 bg-black/10"></div>
+            </div>
+
+            <div class="relative z-10 text-center px-4 animate-fade-in opacity-60 hover:opacity-100 transition-opacity duration-500 mb-10">
+                <h2 class="text-6xl md:text-9xl font-black tracking-[0.2em] text-white mb-6 drop-shadow-2xl">
+                    CHARGE<span class="text-emerald-500">BEES</span>
+                </h2>
+                <div class="w-32 h-1.5 bg-emerald-500 mx-auto mb-8 rounded-full"></div>
+                <p class="text-xl md:text-3xl text-white font-medium max-w-3xl mx-auto leading-relaxed italic drop-shadow-lg px-6">
+                    "Leading the charge towards a greener tomorrow. <br class="hidden md:block">
+                    Innovation in every spark, sustainability in every mile."
+                </p>
+            </div>
+            
+        </section>
+
+        <!-- Hero Section -->
+        <section class="relative py-24 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="animate-fade-in">
+                        <h1 class="text-5xl md:text-7xl font-bold text-gray-900 leading-[1.1] mb-8">
+                            Helping you prepare for an electric future.
+                        </h1>
+                        <div class="space-y-6 text-lg text-gray-600 max-w-xl">
+                            <p>
+                                Chargebees® is India's fastest growing company to have a fully integrated technology, powered by software systems with hardware and renewable energy capabilities.
+                            </p>
+                            <p>
+                                We have made a leap in our ecosystem and thereby created a playbook of Fleet Electrification (B2B) and Inter-City Retail EV Charging (B2C).
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="relative animate-fade-in" style="animation-delay: 0.2s;">
+                        <div class="relative z-10 rounded-[2rem] overflow-hidden shadow-2xl">
+                            <img
+                                src="images\about image 1.png"
+                                alt="Electric Future Illustration"
+                                class="w-full h-auto"
+                                referrerPolicy="no-referrer"
+                            />
+                        </div>
+                        <div class="absolute -top-10 -right-10 w-40 h-40 bg-emerald-100 rounded-full blur-3xl opacity-50 -z-10"></div>
+                        <div class="absolute -bottom-10 -left-10 w-60 h-60 bg-blue-100 rounded-full blur-3xl opacity-50 -z-10"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vision Section -->
+        <section class="py-24 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="order-2 lg:order-1 animate-fade-in">
+                        <div class="rounded-[2rem] overflow-hidden shadow-xl">
+                            <img
+                                src="https://picsum.photos/seed/vision/800/600"
+                                alt="Our Vision"
+                                class="w-full h-auto"
+                                referrerPolicy="no-referrer"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="order-1 lg:order-2 animate-fade-in" style="animation-delay: 0.2s;">
+                        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+                            Our Vision: Energizing tomorrow, Today.
+                        </h2>
+                        <div class="space-y-6 text-lg text-gray-600">
+                            <p>
+                                At Chargebees®, we envision a future where sustainable mobility is seamless and available to all. Our mission is to lead the way in cutting-edge charging solutions, spearheading innovation in electric vehicle infrastructure.
+                            </p>
+                            <p>
+                                Through a focus on accessibility, community empowerment, and sustainable practices, we dedicate ourselves to creating a cleaner, greener future for everyone. Join us on the expedition to redefine electric mobility and fuel a sustainable tomorrow.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-16">
+                    <div>
+                        <h2 class="text-4xl font-bold text-gray-900 mb-6">Our values</h2>
+                        <p class="text-lg text-gray-600 mb-8 max-w-md">
+                            Empowering sustainable mobility, our values drive innovation, reliability, and accessibility in electric vehicle charging, fostering a cleaner, connected future.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Accordion Item 1 -->
+                        <div class="accordion-item border-b border-gray-200 pb-4 active" onclick="toggleAccordion(this)">
+                            <button class="w-full flex justify-between items-center py-4 text-left group">
+                                <span class="text-xl font-semibold text-gray-900 group-hover:text-emerald-600 transition-colors">
+                                    Safety First
+                                </span>
+                                <i data-lucide="plus" class="plus-icon text-gray-400 group-hover:text-emerald-600 transition-colors"></i>
+                                <i data-lucide="minus" class="minus-icon text-emerald-600"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="text-gray-600 pb-4 leading-relaxed">
+                                    We prioritize the safety of our users and infrastructure above all else. Our charging stations are built with multiple layers of protection to ensure a secure charging experience.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Accordion Item 2 -->
+                        <div class="accordion-item border-b border-gray-200 pb-4" onclick="toggleAccordion(this)">
+                            <button class="w-full flex justify-between items-center py-4 text-left group">
+                                <span class="text-xl font-semibold text-gray-900 group-hover:text-emerald-600 transition-colors">
+                                    For the future
+                                </span>
+                                <i data-lucide="plus" class="plus-icon text-gray-400 group-hover:text-emerald-600 transition-colors"></i>
+                                <i data-lucide="minus" class="minus-icon text-emerald-600"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="text-gray-600 pb-4 leading-relaxed">
+                                    We are committed to building a sustainable future. Our solutions are designed to scale with the growing needs of the electric vehicle ecosystem.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Accordion Item 3 -->
+                        <div class="accordion-item border-b border-gray-200 pb-4" onclick="toggleAccordion(this)">
+                            <button class="w-full flex justify-between items-center py-4 text-left group">
+                                <span class="text-xl font-semibold text-gray-900 group-hover:text-emerald-600 transition-colors">
+                                    Do the right thing
+                                </span>
+                                <i data-lucide="plus" class="plus-icon text-gray-400 group-hover:text-emerald-600 transition-colors"></i>
+                                <i data-lucide="minus" class="minus-icon text-emerald-600"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="text-gray-600 pb-4 leading-relaxed">
+                                    Integrity is at the heart of everything we do. We believe in transparent business practices and delivering on our promises to our partners and customers.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Journey Section -->
+        <section class="py-24 bg-gray-50 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-bold text-gray-900 mb-16">Our journey</h2>
+                
+                <div class="flex overflow-x-auto pb-8 gap-6 snap-x no-scrollbar lg:grid lg:grid-cols-3 lg:overflow-visible">
+                    <!-- Milestone 1 -->
+                    <div class="min-w-[300px] bg-white p-8 rounded-2xl shadow-sm border border-gray-100 snap-start hover:shadow-md transition-all">
+                        <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-6">
+                            <i data-lucide="zap" class="text-emerald-600"></i>
+                        </div>
+                        <span class="text-3xl font-bold text-emerald-600 mb-2 block">2018</span>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">The Spark of Innovation</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            Chargebees was founded with a vision to revolutionize the electric vehicle charging landscape.
+                        </p>
+                    </div>
+                    <!-- Milestone 2 -->
+                    <div class="min-w-[300px] bg-white p-8 rounded-2xl shadow-sm border border-gray-100 snap-start hover:shadow-md transition-all">
+                        <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-6">
+                            <i data-lucide="users" class="text-emerald-600"></i>
+                        </div>
+                        <span class="text-3xl font-bold text-emerald-600 mb-2 block">2019</span>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Powering Communities</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            Launched its first generation of charging stations, emphasizing accessibility in urban and suburban areas.
+                        </p>
+                    </div>
+                    <!-- Milestone 3 -->
+                    <div class="min-w-[300px] bg-white p-8 rounded-2xl shadow-sm border border-gray-100 snap-start hover:shadow-md transition-all">
+                        <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-6">
+                            <i data-lucide="battery" class="text-emerald-600"></i>
+                        </div>
+                        <span class="text-3xl font-bold text-emerald-600 mb-2 block">2020</span>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Charging into the Future</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            A significant milestone as Chargebees introduces fast-charging technology, reducing charging times for EVs.
+                        </p>
+                    </div>
+                    <!-- Milestone 4 -->
+                    <div class="min-w-[300px] bg-white p-8 rounded-2xl shadow-sm border border-gray-100 snap-start hover:shadow-md transition-all">
+                        <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-6">
+                            <i data-lucide="globe" class="text-emerald-600"></i>
+                        </div>
+                        <span class="text-3xl font-bold text-emerald-600 mb-2 block">2021</span>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">National Network Expansion</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            Undergoes a nationwide expansion, increasing the density of charging stations along highways and key travel routes.
+                        </p>
+                    </div>
+                    <!-- Milestone 5 -->
+                    <div class="min-w-[300px] bg-white p-8 rounded-2xl shadow-sm border border-gray-100 snap-start hover:shadow-md transition-all">
+                        <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-6">
+                            <i data-lucide="cpu" class="text-emerald-600"></i>
+                        </div>
+                        <span class="text-3xl font-bold text-emerald-600 mb-2 block">2022</span>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Advancements in Technology</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            Introduces smart charging capabilities, allowing users to schedule and monitor charging remotely.
+                        </p>
+                    </div>
+                    <!-- Milestone 6 -->
+                    <div class="min-w-[300px] bg-white p-8 rounded-2xl shadow-sm border border-gray-100 snap-start hover:shadow-md transition-all">
+                        <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-6">
+                            <i data-lucide="award" class="text-emerald-600"></i>
+                        </div>
+                        <span class="text-3xl font-bold text-emerald-600 mb-2 block">2023</span>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">India's largest EV network</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            We touched our milestone of becoming India's largest EV charging network with 13,500+ charging points.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-12">The minds who keep us charged</h2>
+                    
+                    <div class="inline-flex bg-gray-100 p-1 rounded-full">
+                        <button onclick="switchTab('Board')" id="tab-Board" class="tab-btn px-8 py-2.5 rounded-full text-sm font-semibold transition-all bg-emerald-600 text-white shadow-lg">Board</button>
+                        <button onclick="switchTab('Advisors')" id="tab-Advisors" class="tab-btn px-8 py-2.5 rounded-full text-sm font-semibold transition-all text-gray-600 hover:text-gray-900">Advisors</button>
+                        <button onclick="switchTab('Core Team')" id="tab-Core" class="tab-btn px-8 py-2.5 rounded-full text-sm font-semibold transition-all text-gray-600 hover:text-gray-900">Core Team</button>
+                    </div>
+                </div>
+
+                <div id="team-grid" class="grid md:grid-cols-3 gap-8">
+                    <!-- Team Member 1 -->
+                    <div class="group relative team-member">
+                        <div class="aspect-square rounded-[2rem] overflow-hidden mb-6 bg-gray-100">
+                            <img src="https://picsum.photos/seed/ceo/400/400" alt="CEO" class="w-full h-full object-cover grayscale-hover" referrerPolicy="no-referrer">
+                            <div class="absolute top-4 right-4">
+                                <a href="#" class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-blue-600 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <i data-lucide="linkedin" class="w-5 h-5"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Mr. Kartikey Hariyani</h3>
+                            <p class="text-gray-600 text-sm font-medium uppercase tracking-wider">Founder & CEO</p>
+                        </div>
+                    </div>
+                    <!-- Team Member 2 -->
+                    <div class="group relative team-member">
+                        <div class="aspect-square rounded-[2rem] overflow-hidden mb-6 bg-gray-100">
+                            <img src="https://picsum.photos/seed/director1/400/400" alt="Director" class="w-full h-full object-cover grayscale-hover" referrerPolicy="no-referrer">
+                            <div class="absolute top-4 right-4">
+                                <a href="#" class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-blue-600 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <i data-lucide="linkedin" class="w-5 h-5"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Mr. Ravindra Mohan</h3>
+                            <p class="text-gray-600 text-sm font-medium uppercase tracking-wider">Director - Business & Strategy</p>
+                        </div>
+                    </div>
+                    <!-- Team Member 3 -->
+                    <div class="group relative team-member">
+                        <div class="aspect-square rounded-[2rem] overflow-hidden mb-6 bg-gray-100">
+                            <img src="https://picsum.photos/seed/director2/400/400" alt="Director" class="w-full h-full object-cover grayscale-hover" referrerPolicy="no-referrer">
+                            <div class="absolute top-4 right-4">
+                                <a href="#" class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-blue-600 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <i data-lucide="linkedin" class="w-5 h-5"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Mr. Pavan Bakeri</h3>
+                            <p class="text-gray-600 text-sm font-medium uppercase tracking-wider">Director</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Partners Section -->
+        <section class="py-24 bg-gray-50/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Our EV Partners</h2>
+                    <p class="text-gray-600">Collaborating with leading EV manufacturers to build a seamless charging ecosystem.</p>
+                </div>
+
+                <div class="marquee py-4">
+                    <div class="marquee-content">
+                        <!-- EV Logos Set 1 -->
+                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
+                            <img src="https://picsum.photos/seed/tesla-logo/200/80" alt="Tesla" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                        </div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
+                            <img src="https://picsum.photos/seed/tata-ev/200/80" alt="Tata EV" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                        </div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
+                            <img src="https://picsum.photos/seed/hyundai-ev/200/80" alt="Hyundai" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                        </div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
+                            <img src="https://picsum.photos/seed/mg-ev/200/80" alt="MG" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                        </div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
+                            <img src="https://picsum.photos/seed/mahindra-ev/200/80" alt="Mahindra" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                        </div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
+                            <img src="https://picsum.photos/seed/kia-ev/200/80" alt="Kia" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                        </div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
+                            <img src="https://picsum.photos/seed/byd-logo/200/80" alt="BYD" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                        </div>
+                    </div>
+                    <!-- Duplicate for seamless scroll -->
+                    <div class="marquee-content" aria-hidden="true">
+                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
+                            <img src="https://picsum.photos/seed/tesla-logo/200/80" alt="Tesla" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                        </div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
+                            <img src="https://picsum.photos/seed/tata-ev/200/80" alt="Tata EV" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                        </div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
+                            <img src="https://picsum.photos/seed/hyundai-ev/200/80" alt="Hyundai" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                        </div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
+                            <img src="https://picsum.photos/seed/mg-ev/200/80" alt="MG" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                        </div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
+                            <img src="https://picsum.photos/seed/mahindra-ev/200/80" alt="Mahindra" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                        </div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
+                            <img src="https://picsum.photos/seed/kia-ev/200/80" alt="Kia" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                        </div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
+                            <img src="https://picsum.photos/seed/byd-logo/200/80" alt="BYD" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-gray-900 rounded-[3rem] overflow-hidden shadow-2xl">
+                    <div class="grid lg:grid-cols-2">
+                        <div class="p-12 lg:p-20 text-white">
+                            <h2 class="text-4xl font-bold mb-6">Let's talk to an expert</h2>
+                            <p class="text-gray-400 text-lg mb-12">
+                                Have questions about EV charging infrastructure? Our team of experts is here to help you navigate the electric future.
+                            </p>
+                            
+                            <div class="space-y-8">
+                                <div>
+                                    <h4 class="text-emerald-500 font-bold uppercase tracking-wider text-sm mb-2">Email Us</h4>
+                                    <p class="text-xl">info@chargebees.com</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-emerald-500 font-bold uppercase tracking-wider text-sm mb-2">Call Us</h4>
+                                    <p class="text-xl">+91 72270 25948</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-12 lg:p-20">
+                            <form class="space-y-6">
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">First Name</label>
+                                        <input type="text" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition-all" placeholder="John">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">Last Name</label>
+                                        <input type="text" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition-all" placeholder="Doe">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                                    <input type="email" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition-all" placeholder="john@example.com">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Message</label>
+                                    <textarea rows="4" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition-all" placeholder="How can we help you?"></textarea>
+                                </div>
+                                <button type="button" class="w-full bg-emerald-600 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20 active:scale-[0.98]">
+                                    Send Message
+                                    <i data-lucide="send" class="w-5 h-5"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 pt-24 pb-12 border-t border-gray-200 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-4 gap-12 mb-20">
+                <div class="lg:col-span-1">
+                    <div class="mb-8">
+                        <span class="text-2xl font-bold tracking-tighter text-gray-900">
+                            CHARGE<span class="text-emerald-600">BEES</span>
+                        </span>
+                    </div>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Leading the charge towards a sustainable electric future with India's largest EV charging network.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all"><i data-lucide="youtube" class="w-5 h-5"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-6">Company</h4>
+                    <ul class="space-y-4 text-gray-600">
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Our Journey</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Media Center</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-6">Solutions</h4>
+                    <ul class="space-y-4 text-gray-600">
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Station Finder</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Fleet Charging</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Retail Charging</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition-colors">Franchise</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-6">Contact</h4>
+                    <ul class="space-y-4 text-gray-600">
+                        <li class="flex items-center gap-2 group cursor-pointer">
+                            <span>info@chargebees.com</span>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </li>
+                        <li>+91 72270 25948</li>
+                        <li class="pt-4">
+                            <p class="font-semibold text-gray-900">Visakhapatnam HQ</p>
+                            <p class="text-sm">8th Floor, chargebees LTD,  IT Park, Visakhapatnam, Andhra Pradesh 530001</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+                <p>© 2024 Chargebees. All rights reserved.</p>
+                <div class="flex gap-8">
+                    <a href="#" class="hover:text-gray-900 transition-colors">Terms & Services</a>
+                    <a href="#" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-gray-900 transition-colors">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Accordion Logic
+        function toggleAccordion(element) {
+            const items = document.querySelectorAll('.accordion-item');
+            const isActive = element.classList.contains('active');
+            
+            items.forEach(item => item.classList.remove('active'));
+            
+            if (!isActive) {
+                element.classList.add('active');
+            }
+        }
+
+        // Team Tab Logic
+        function switchTab(category) {
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-red-600', 'text-white', 'shadow-lg');
+                btn.classList.add('text-gray-600', 'hover:text-gray-900');
+            });
+
+            const activeBtn = document.querySelector(`#tab-${category.split(' ')[0]}`);
+            activeBtn.classList.add('bg-emerald-600', 'text-white', 'shadow-lg');
+            activeBtn.classList.remove('text-gray-600', 'hover:text-gray-900');
+
+            // In a real app, you'd filter the grid here. 
+            // For this demo, we'll just show a fade effect.
+            const grid = document.querySelector('#team-grid');
+            grid.style.opacity = '0';
+            setTimeout(() => {
+                grid.style.opacity = '1';
+            }, 300);
+        }
+    </script>
+</body>
+</html>
