@@ -254,14 +254,17 @@
             <section class="relative min-h-screen flex items-center justify-center overflow-hidden">            <!-- Background Video -->
             <div class="absolute inset-0 z-0">
                 <!-- Desktop Video -->
-                <video autoplay muted loop playsinline class="hidden md:block w-full h-full object-cover scale-110">
-                    <source src="videos\bg 1 video.mp4" type="video/mp4">
-                </video>
+<!-- Desktop Video -->
+<video autoplay muted loop playsinline preload="auto"
+class="hidden md:block w-full h-full object-cover">
+    <source src="videos/bg1video.mp4" type="video/mp4">
+</video>
 
-                    <!-- Mobile Video -->
-                    <video autoplay muted loop playsinline class="block md:hidden w-full h-full object-cover">
-                        <source src="videos\bg 1 video.mp4" type="video/mp4">
-                    </video>
+<!-- Mobile Video -->
+<video autoplay muted loop playsinline preload="auto"
+class="block md:hidden w-full h-full object-cover">
+    <source src="videos/bg1video.mp4" type="video/mp4">
+</video>
                 <!-- Ultra-light overlay to let video shine -->
                 <div class="absolute inset-0 bg-black/10"></div>
             </div>
