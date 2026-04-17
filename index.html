@@ -251,12 +251,17 @@
 
     <main class="relative z-10">
         <!-- Video Intro Section -->
-        <section class="relative h-[80vh] md:h-screen flex items-end justify-center overflow-hidden pb-32">
-            <!-- Background Video -->
+            <section class="relative min-h-screen flex items-center justify-center overflow-hidden">            <!-- Background Video -->
             <div class="absolute inset-0 z-0">
-                <video autoplay muted loop playsinline class="w-full h-full object-cover scale-110">
+                <!-- Desktop Video -->
+                <video autoplay muted loop playsinline class="hidden md:block w-full h-full object-cover scale-110">
                     <source src="videos\bg 1 video.mp4" type="video/mp4">
                 </video>
+
+                    <!-- Mobile Video -->
+                    <video autoplay muted loop playsinline class="block md:hidden w-full h-full object-cover">
+                        <source src="videos\bg 2 video.mp4" type="video/mp4">
+                    </video>
                 <!-- Ultra-light overlay to let video shine -->
                 <div class="absolute inset-0 bg-black/10"></div>
             </div>
@@ -770,6 +775,22 @@ menuBtn.addEventListener("click", () => {
     window.scrollTo({
         top: 0,
         behavior: "smooth"
+    });
+});
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const videos = document.querySelectorAll("video");
+
+    videos.forEach(video => {
+        video.muted = true;
+        video.play().catch(() => {
+            console.log("Autoplay blocked");
+        });
     });
 });
     </script>
