@@ -33,6 +33,7 @@
         .filter-panel {
             z-index: 10;
         }
+        
         .mega-menu {
             z-index: 2000;
         }
@@ -198,49 +199,73 @@
         <div id="map"></div>
 
         <!-- Filter Panel (Top Right Overlay) -->
-        <div class="filter-panel absolute top-24 right-4 md:right-8 w-full max-w-sm md:max-w-3xl px-4 md:px-0">
-            <div class="bg-white/95 backdrop-blur-sm p-4 md:p-6 rounded-3xl shadow-2xl border border-gray-100">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-                    <!-- Reset Button (Left) -->
-                    <div class="md:col-span-1">
-                        <button id="resetBtn" class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-100 text-gray-600 border border-gray-200 rounded-xl text-sm font-bold hover:bg-gray-200 transition-all active:scale-95">
-                            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
-                            Reset
-                        </button>
-                    </div>
+        <div class="filter-panel absolute top-24 right-4 md:right-8 w-auto z-40">
+            <div class="relative inline-flex">
+    
+    <!-- Filter Button -->
+    <button id="filterToggle"
+    class="w-auto ml-auto bg-emerald-600 text-white px-4 py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 shadow-lg">
+    <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
+    Filters
+    </button>
 
-                    <!-- State Dropdown -->
-                    <div class="md:col-span-1">
-                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5">State</label>
-                        <select id="stateSelect" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 outline-none appearance-none cursor-pointer">
-                            <option value="">Select State</option>
-                        </select>
-                    </div>
 
-                    <!-- City Dropdown -->
-                    <div class="md:col-span-1">
-                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5">City</label>
-                        <select id="citySelect" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 outline-none appearance-none cursor-pointer" disabled>
-                            <option value="">Select City</option>
-                        </select>
-                    </div>
 
-                                        <!-- Pincode Search + Search Button -->
-                    <div class="md:col-span-1">
-                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5">Pincode Search</label>
-                        <div class="flex gap-2">
-                            <div class="relative flex-1">
-                                <input type="text" id="pincodeInput" placeholder="530001" class="w-full pl-9 pr-2 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all">
-                                <i data-lucide="map-pin" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
-                            </div>
-                            <button id="searchBtn" class="bg-emerald-600 text-white p-2.5 rounded-xl hover:bg-emerald-700 transition-all active:scale-95 shadow-lg shadow-emerald-600/20" title="Search">
-                                <i data-lucide="search" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
+    <!-- Dropdown Content -->
+    <div id="filterDropdown"
+        class="hidden absolute right-0 mt-3 w-full md:w-[700px] bg-white p-4 md:p-6 rounded-3xl shadow-2xl border border-gray-100 z-50">
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+
+            <!-- Reset -->
+            <div>
+                <button id="resetBtn"
+                    class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-100 text-gray-600 border border-gray-200 rounded-xl text-sm font-bold">
+                    Reset
+                </button>
+            </div>
+
+            <!-- State -->
+            <div>
+                <label class="text-xs font-bold text-gray-500">State</label>
+                <select id="stateSelect"
+                    class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+                    <option value="">Select State</option>
+                </select>
+            </div>
+
+            <!-- City -->
+            <div>
+                <label class="text-xs font-bold text-gray-500">City</label>
+                <select id="citySelect"
+                    class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm"
+                    disabled>
+                    <option value="">Select City</option>
+                </select>
+            </div>
+
+            <!-- Search (NO PINCODE label change only search) -->
+            <div>
+                <label class="text-xs font-bold text-gray-500">Search</label>
+                <div class="flex gap-2">
+                    <input type="text" id="pincodeInput"
+                        placeholder="Enter pincode"
+                        class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+                    
+                    <button id="searchBtn"
+                    class="bg-emerald-600 text-white px-4 py-2.5 rounded-xl flex items-center justify-center">
+                    <i data-lucide="search" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
                 </div>
             </div>
         </div>
+        <div id="stationCards" class="max-w-7xl mx-auto px-4 py-8 grid md:grid-cols-3 gap-6"></div>
     </main>
 
     <!-- Leaflet JS -->
@@ -249,25 +274,12 @@
         // Initialize Lucide
         lucide.createIcons();
 
-        // Mock Data for EV Stations
-        const stations = [
-            { id: 1, name: "Chargebees HQ Station", state: "Andhra Pradesh", city: "Visakhapatnam", pincode: "530001", lat: 22.3072, lng: 73.1812, type: "Fast" },
-            { id: 2, name: "Andhra Pradesh station", state: "Andhra Pradesh", city: "Visakhapatnam", pincode: "530001", lat: 22.3072, lng: 73.1812, type: "Fast" },
-            { id: 3, name: "Ahmedabad Central Hub", state: "Andhra Pradesh", city: "Ahmedabad", pincode: "380001", lat: 23.0225, lng: 72.5714, type: "Ultra Fast" },
-            { id: 4, name: "Mumbai Gateway Station", state: "Maharashtra", city: "Mumbai", pincode: "400001", lat: 18.9220, lng: 72.8347, type: "Fast" },
-            { id: 5, name: "Pune Tech Park Charger", state: "Maharashtra", city: "Pune", pincode: "411001", lat: 18.5204, lng: 73.8567, type: "Standard" },
-            { id: 6, name: "Delhi Metro Plaza", state: "Delhi", city: "New Delhi", pincode: "110001", lat: 28.6139, lng: 77.2090, type: "Ultra Fast" },
-            { id: 7, name: "Bangalore IT Corridor", state: "Karnataka", city: "Bangalore", pincode: "560001", lat: 12.9716, lng: 77.5946, type: "Fast" },
-            { id: 8, name: "Hyderabad Cyber Hub", state: "Telangana", city: "Hyderabad", pincode: "500001", lat: 17.3850, lng: 78.4867, type: "Fast" },
-            { id: 9, name: "Chennai Port Station", state: "Tamil Nadu", city: "Chennai", pincode: "600001", lat: 13.0827, lng: 80.2707, type: "Standard" },
-            { id: 10, name: "Kolkata Eco Park", state: "West Bengal", city: "Kolkata", pincode: "700001", lat: 22.5726, lng: 88.3639, type: "Fast" },
-            { id: 11, name: "Surat Diamond Bourse", state: "Andhra Pradesh", city: "Surat", pincode: "395003", lat: 21.1702, lng: 72.8311, type: "Fast" }
-        ];
+
 
         // State and City Mapping
         const locationData = {
             "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur"],
-            "Andhra Pradesh": ["Visakhapatnam", "Ahmedabad", "Surat", "Rajkot"],
+           
             "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Thane"],
             "Delhi": ["New Delhi", "Noida", "Gurgaon"],
             "Karnataka": ["Bangalore", "Mysore", "Hubli"],
@@ -284,41 +296,27 @@
         }).addTo(map);
 
         // Custom Icon
-        const createCustomIcon = () => {
-            return L.divIcon({
-                className: 'custom-marker',
-                html: '<i data-lucide="zap" style="width: 16px; height: 16px;"></i>',
-                iconSize: [32, 32],
-                iconAnchor: [16, 16]
-            });
-        };
+const createCustomIcon = () => {
+    return L.divIcon({
+        className: 'custom-marker',
+        html: `
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
+                 viewBox="0 0 24 24" fill="none" stroke="white" 
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+        `,
+        iconSize: [32, 32],
+        iconAnchor: [16, 16]
+    });
+};
 
         let markers = [];
 
         // Function to add markers
-        function displayMarkers(filteredStations) {
-            // Clear existing markers
-            markers.forEach(m => map.removeLayer(m));
-            markers = [];
 
-            filteredStations.forEach(station => {
-                const marker = L.marker([station.lat, station.lng], { icon: createCustomIcon() })
-                    .bindPopup(`
-                        <div class="p-2">
-                            <h3 class="font-bold text-gray-900">${station.name}</h3>
-                            <p class="text-xs text-gray-500 mb-2">${station.city}, ${station.state} - ${station.pincode}</p>
-                            <span class="px-2 py-1 bg-emerald-100 text-emerald-700 text-[10px] font-bold rounded-full uppercase">${station.type} Charging</span>
-                        </div>
-                    `)
-                    .addTo(map);
-                markers.push(marker);
-            });
 
-            // Re-initialize Lucide for markers
-            lucide.createIcons();
-        }
-
-        displayMarkers(stations);
+   
 
         // Populate States
         const stateSelect = document.getElementById('stateSelect');
@@ -346,37 +344,75 @@
                     citySelect.appendChild(option);
                 });
 
-                // Filter Map
-                const filtered = stations.filter(s => s.state === state);
-                displayMarkers(filtered);
+                const filtered = customLocations;
+                showFilteredLocations(filtered);
+                renderCards(filtered);
+               
+               
                 if (filtered.length > 0) {
                     const group = new L.featureGroup(markers);
                     map.fitBounds(group.getBounds().pad(0.2));
                 }
             } else {
                 citySelect.disabled = true;
-                displayMarkers(stations);
+            
                 map.setView([20.5937, 78.9629], 5);
             }
         });
 
         // Handle City Change
-        citySelect.addEventListener('change', (e) => {
-            const city = e.target.value;
-            const state = stateSelect.value;
-            
-            if (city) {
-                const filtered = stations.filter(s => s.city === city);
-                displayMarkers(filtered);
-                if (filtered.length > 0) {
-                    const group = new L.featureGroup(markers);
-                    map.fitBounds(group.getBounds().pad(0.5));
-                }
-            } else if (state) {
-                const filtered = stations.filter(s => s.state === state);
-                displayMarkers(filtered);
-            }
-        });
+citySelect.addEventListener('change', (e) => {
+    const city = e.target.value;
+
+    if (city) {
+
+        const filtered = customLocations.filter(loc => loc.city === city);
+
+        showFilteredLocations(filtered);
+        renderCards(filtered);   // 👈 IMPORTANT (you missed this)
+
+        if (filtered.length > 0) {
+            map.setView([filtered[0].lat, filtered[0].lng], 12);
+        }
+
+    } else {
+        // if no city selected → show all
+        showFilteredLocations(customLocations);
+        renderCards(customLocations);
+    }
+});
+
+
+function showFilteredLocations(locations) {
+
+    // ❌ wrong remove method remove chesi
+    // clear markers properly
+    markers.forEach(m => map.removeLayer(m));
+    markers = [];
+
+    locations.forEach(loc => {
+        const marker = L.marker([loc.lat, loc.lng], {
+            icon: createCustomIcon()
+        })
+        .addTo(map)
+        .bindPopup(`
+            <div class="p-2 text-center">
+                <h3 class="font-bold">${loc.name}</h3>
+                <button onclick="openDirections(${loc.lat}, ${loc.lng})"
+                    class="mt-2 px-3 py-1 bg-emerald-600 text-white text-xs rounded">
+                    Get Directions
+                </button>
+            </div>
+        `);
+
+        markers.push(marker); // ✅ IMPORTANT
+    });
+
+    if (locations.length > 0) {
+        map.setView([locations[0].lat, locations[0].lng], 10);
+    }
+}
+
 
         // Handle Pincode Search
         const searchBtn = document.getElementById('searchBtn');
@@ -384,9 +420,11 @@
         function performSearch() {
             const pin = pincodeInput.value.trim();
             if (pin.length === 6) {
-                const filtered = stations.filter(s => s.pincode === pin);
+                const filtered = customLocations; // since we don't have pincodes
+
+                showFilteredLocations(filtered);
                 if (filtered.length > 0) {
-                    displayMarkers(filtered);
+                   
                     const group = new L.featureGroup(markers);
                     map.fitBounds(group.getBounds().pad(1));
                 } else {
@@ -401,6 +439,7 @@
         
         pincodeInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') performSearch();
+            
         });
 
         // Reset Functionality
@@ -409,7 +448,7 @@
             citySelect.innerHTML = '<option value="">Select City</option>';
             citySelect.disabled = true;
             pincodeInput.value = "";
-            displayMarkers(stations);
+            
             map.setView([20.5937, 78.9629], 5);
         });
                 const menuBtn = document.getElementById("menu-btn");
@@ -424,6 +463,196 @@ menuBtn.addEventListener("click", () => {
         behavior: "smooth"
     });
 });
+
+
+
+const filterToggle = document.getElementById("filterToggle");
+const filterDropdown = document.getElementById("filterDropdown");
+
+// Toggle dropdown
+filterToggle.addEventListener("click", (e) => {
+    e.stopPropagation(); // prevent immediate close
+    filterDropdown.classList.toggle("hidden");
+});
+
+// Close when clicking outside
+document.addEventListener("click", (e) => {
+    if (!filterDropdown.contains(e.target) && !filterToggle.contains(e.target)) {
+        filterDropdown.classList.add("hidden");
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 📍 Location button - left side (below zoom)
+const locateControl = L.control({ position: 'topleft' });
+
+locateControl.onAdd = function () {
+    const div = L.DomUtil.create('div', 'leaflet-bar');
+
+    div.innerHTML = `
+        <a href="#" id="locateBtn"
+           style="
+             display:flex;
+             align-items:center;
+             justify-content:center;
+             width:34px;
+             height:34px;
+             background:white;
+             font-size:16px;
+           ">
+           📍
+        </a>
+    `;
+
+    L.DomEvent.disableClickPropagation(div);
+    return div;
+};
+
+locateControl.addTo(map);
+
+document.addEventListener("click", function(e) {
+    if (e.target.id === "locateBtn") {
+        e.preventDefault();
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+
+                map.setView([lat, lng], 14);
+
+                L.marker([lat, lng]).addTo(map)
+                    .bindPopup("You are here")
+                    .openPopup();
+            });
+        } else {
+            alert("Geolocation not supported");
+        }
+    }
+});
+
+// station locations 
+
+const customLocations = [
+    {
+        name: "Chargebees EV Station - Simhachalam",
+        city: "Visakhapatnam",
+        address: "Simhachalam, Visakhapatnam",
+        code: "EVCS-370001",
+        contact: "00000 00001",
+        lat: 17.7669,
+        lng: 83.2517
+    },
+    {
+        name: "Chargebees EV Station - Srisailam",
+        city: "Srisailam",
+        address: "Srisailam Temple Road",
+        code: "EVCS-370002",
+        contact: "00000 00002",
+        lat: 16.0728,
+        lng: 78.8687
+    },
+    {
+        name: "Chargebees EV Station - Kanaka Durga",
+        city: "Vijayawada",
+        address: "Indhrakeeladhri, Vijayawada",
+        code: "EVCS-370003",
+        contact: "00000 00003",
+        lat: 16.5089,
+        lng: 80.6480
+    },
+    {
+        name: "Chargebees EV Station - Krishna Lanka",
+        city: "Vijayawada",
+        address: "Krishna Lanka, Vijayawada",
+        code: "EVCS-370004",
+        contact: "00000 00004",
+        lat: 16.5062,
+        lng: 80.6485
+    },
+    {
+        name: "Chargebees EV Station - Chirala",
+        city: "Chirala",
+        address: "Pearl Shores, Chirala",
+        code: "EVCS-370005",
+        contact: "00000 00005",
+        lat: 15.8230,
+        lng: 80.3520
+    }
+];
+// charge symbole marks add 
+
+function showCustomLocations() {
+    customLocations.forEach(loc => {
+
+        const marker = L.marker([loc.lat, loc.lng], {
+            icon: createCustomIcon()
+        })
+        .addTo(map)
+        .bindPopup(`
+            <div class="p-2 text-center">
+                <h3 class="font-bold">${loc.name}</h3>
+                <button onclick="openDirections(${loc.lat}, ${loc.lng})"
+                    class="mt-2 px-3 py-1 bg-emerald-600 text-white text-xs rounded">
+                    Get Directions
+                </button>
+            </div>
+        `);
+    });
+}
+
+//direction function 
+
+function openDirections(lat, lng) {
+    const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+    window.open(url, "_blank");
+}
+
+showCustomLocations();
+
+
+
+//card function
+
+function renderCards(locations) {
+    const container = document.getElementById("stationCards");
+    container.innerHTML = "";
+
+    locations.forEach(loc => {
+        container.innerHTML += `
+        <div class="bg-white rounded-2xl shadow p-5 border">
+            <h3 class="font-bold text-lg mb-2">${loc.name}</h3>
+            <p class="text-sm text-gray-600">Address: ${loc.address}</p>
+            <p class="text-sm text-gray-600">Station Code: ${loc.code}</p>
+            <p class="text-sm text-gray-600">Contact: ${loc.contact}</p>
+            <p class="text-sm text-gray-600">Operational Hours: 24*7</p>
+
+            <button onclick="openDirections(${loc.lat}, ${loc.lng})"
+                class="mt-3 w-full bg-emerald-600 text-white py-2 rounded-lg">
+                Get Directions
+            </button>
+        </div>
+        `;
+    });
+}
+
+
+
+showCustomLocations();
+renderCards(customLocations);
+
     </script>
 </body>
 </html>
