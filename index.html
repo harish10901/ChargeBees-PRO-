@@ -166,7 +166,8 @@ font-size:1rem;
 /* ===== OUR PARTNERSHIPS EXACT SAME ===== */
 
 #partnerships{
-padding:110px 0 100px;
+padding:35px 0 100px;
+
 background:linear-gradient(180deg,#f5fbf9 0%, #edf5f3 100%);
 }
 
@@ -402,6 +403,7 @@ margin:auto;
 display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:22px;
+margin-top:35px;
 }
 
 /* cards same as 2nd screenshot */
@@ -439,10 +441,11 @@ background:linear-gradient(135deg,#11caa4,#19dfb5);
 box-shadow:0 6px 14px rgba(17,202,164,.22);
 }
 
-.offering-icon i{
-color:#000 !important;
-font-size:18px;
-font-weight:700;
+.offering-icon svg{
+width:20px;
+height:20px;
+stroke:#fff;
+stroke-width:2.5;
 }
 
 .offering-header h3{
@@ -513,7 +516,7 @@ margin:0 auto 45px;
 font-size:58px;
 font-weight:700;
 line-height:1.1;
-margin-bottom:15px;
+margin-bottom:0px;
 color:#17232d;
 display:block;
 text-align:center;
@@ -716,6 +719,74 @@ font-size:42px;
         .marquee:hover .marquee-content {
             animation-play-state: paused;
         }
+
+
+
+
+
+
+
+
+
+.heading-road-animation{
+position:relative;
+width:420px;
+height:24px;
+margin:-8px auto -22px auto;
+}
+
+.road-line{
+position:absolute;
+top:20px;
+left:30px;
+right:30px;
+height:2px;
+background:linear-gradient(to right,#10b981,#34d399);
+opacity:0.4;
+}
+
+.road-car{
+position:absolute;
+left:0;
+top:9px;
+width:18px;
+height:18px;
+stroke:#10b981;
+stroke-width:2.5;
+animation:carDrive 5s ease-in-out infinite;
+}
+
+.road-station{
+position:absolute;
+right:0;
+top:6px;
+}
+
+.road-station svg{
+width:20px;
+height:20px;
+stroke:#10b981;
+stroke-width:2.5;
+}
+
+@keyframes carDrive{
+
+0%{
+left:0;
+}
+
+80%{
+left:385px;
+}
+
+100%{
+left:385px;
+}
+
+}
+
+
+
     </style>
 </head>
 <body class="antialiased text-gray-900">
@@ -937,8 +1008,22 @@ class="block md:hidden w-full h-full object-cover">
     <section id="about" class="section">
         <div class="container">
             <div class="section-header">
+                <!--<h2 class="section-title">About ChargeBees</h2> -->
                 <h2 class="section-title">About ChargeBees</h2>
-                <div class="divider"></div>
+
+<div class="heading-road-animation">
+
+    <i data-lucide="car" class="road-car"></i>
+
+    <div class="road-line"></div>
+
+    <div class="road-station">
+        <i data-lucide="fuel"></i>
+    </div>
+
+</div>
+  
+                
             </div>
             <div class="about-content">
                 <p>
@@ -1190,7 +1275,7 @@ class="block md:hidden w-full h-full object-cover">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Our Team</h2>
-                <div class="divider"></div>
+              
             </div>
             <div class="team-content">
                 <div class="team-intro">
@@ -1245,8 +1330,22 @@ class="block md:hidden w-full h-full object-cover">
     <section id="partnerships" class="section">
         <div class="container">
             <div class="section-header">
+                <!--<h2 class="section-title">Our Partnerships</h2> -->
                 <h2 class="section-title">Our Partnerships</h2>
-                <div class="divider"></div>
+
+<div class="heading-road-animation">
+
+    <i data-lucide="car" class="road-car"></i>
+
+    <div class="road-line"></div>
+
+    <div class="road-station">
+        <i data-lucide="fuel"></i>
+    </div>
+
+</div>
+
+                
             </div>
             <div class="partnerships-content">
                 <div class="partnership-intro">
@@ -1297,7 +1396,7 @@ class="block md:hidden w-full h-full object-cover">
 
 
         <!-- Partners Section -->
-        <section class="py-24 bg-gray-50/50">
+        <section class="py-14 bg-gray-50/50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl font-bold text-gray-900 mb-4">Our EV Partners</h2>
@@ -1363,14 +1462,25 @@ class="block md:hidden w-full h-full object-cover">
     <section id="offerings" class="section section-dark">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Our Offerings</h2>
-                <div class="divider"></div>
+                <!-- <h2 class="section-title">Our Offerings</h2> -->
+                 <h2 class="section-title">Our Partnerships</h2>
+
+<div class="heading-road-animation">
+
+    <i data-lucide="car" class="road-car"></i>
+
+    <div class="road-line"></div>
+
+    <div class="road-station">
+        <i data-lucide="fuel"></i>
+    </div>
+                
             </div>
             <div class="offerings-content">
                 <div class="offering-category">
                     <div class="offering-header">
                         <div class="offering-icon">
-                            <i class="fas fa-bolt"></i>
+                            <i data-lucide="zap" class="w-5 h-5"></i>
                         </div>
                         <h3>Public Fast Charging</h3>
                     </div>
@@ -1382,7 +1492,7 @@ class="block md:hidden w-full h-full object-cover">
                 <div class="offering-category">
                     <div class="offering-header">
                         <div class="offering-icon">
-                            <i class="fas fa-home"></i>
+                            <i data-lucide="home" class="w-5 h-5"></i>
                         </div>
                         <h3>Home & Workplace</h3>
                     </div>
@@ -1393,7 +1503,7 @@ class="block md:hidden w-full h-full object-cover">
                 <div class="offering-category">
                     <div class="offering-header">
                         <div class="offering-icon">
-                            <i class="fas fa-truck"></i>
+                            <i data-lucide="truck" class="w-5 h-5"></i>
                         </div>
                         <h3>Fleet Services</h3>
                     </div>
@@ -1404,7 +1514,7 @@ class="block md:hidden w-full h-full object-cover">
                 <div class="offering-category">
                     <div class="offering-header">
                         <div class="offering-icon">
-                            <i class="fas fa-chart-line"></i>
+                            <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
                         </div>
                         <h3>Energy Platform</h3>
                     </div>
@@ -1418,6 +1528,7 @@ class="block md:hidden w-full h-full object-cover">
 
 
         <!-- Contact Form Section -->
+         
         <section class="py-24 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="bg-gray-900 rounded-[3rem] overflow-hidden shadow-2xl">
@@ -1606,6 +1717,90 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const statsSection = document.querySelector(".about-stats");
+    const counters = document.querySelectorAll(".stat-number");
+
+    let started = false;
+
+    const startCounter = () => {
+
+        if (started) return;
+        started = true;
+
+        counters.forEach(counter => {
+
+            const targetText = counter.innerText;
+
+            let target;
+
+            if (targetText.includes("K")) {
+                target = parseInt(targetText) * 1000;
+            } else {
+                target = parseInt(targetText);
+            }
+
+            let current = 0;
+
+            const speed = target / 120;
+
+            const updateCounter = () => {
+
+                current += speed;
+
+                if (current < target) {
+
+                    if (targetText.includes("K")) {
+                        counter.innerText = Math.floor(current / 1000) + "K+";
+                    } else {
+                        counter.innerText = Math.floor(current) + "+";
+                    }
+
+                    requestAnimationFrame(updateCounter);
+
+                } else {
+
+                    counter.innerText = targetText;
+                }
+            };
+
+            updateCounter();
+        });
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+                startCounter();
+            }
+
+        });
+
+    }, {
+        threshold: 0.5
+    });
+
+    observer.observe(statsSection);
+
+});
+
+
+
+lucide.createIcons();
     </script>
 </body>
 </html>
