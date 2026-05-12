@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Privacy Policy | Chargebees</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            color: #111827;
+
+            background:
+                radial-gradient(circle at top left,
+                    rgba(0, 0, 0, 0.015),
+                    transparent 35%),
+
+                radial-gradient(circle at bottom right,
+                    rgba(0, 0, 0, 0.02),
+                    transparent 35%),
+
+                linear-gradient(to bottom,
+                    #fafaf9,
+                    #f5f5f4);
+        }
+
+        .hero-gradient {
+            background:
+                radial-gradient(circle at top left,
+                    rgba(16, 185, 129, 0.18),
+                    transparent 35%),
+
+                radial-gradient(circle at top right,
+                    rgba(6, 182, 212, 0.16),
+                    transparent 35%),
+
+                linear-gradient(to bottom right,
+                    #020617,
+                    #0f172a,
+                    #082f49);
+        }
+
+.content-wrapper {
+    background: rgba(255, 255, 255, 0.96);
+
+    border: 1px solid rgba(255, 255, 255, 0.7);
+
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.04);
+
+    position: relative;
+
+    z-index: 20;
+}
+
+        .section-card {
+            padding-bottom: 50px;
+            margin-bottom: 50px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .section-card:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 34px;
+            font-weight: 900;
+            color: #111827;
+            margin-bottom: 28px;
+            line-height: 1.3;
+        }
+
+        .content-text {
+            font-size: 17px;
+            line-height: 2.1;
+            color: #4b5563;
+            margin-bottom: 20px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(to right,
+                    rgba(16, 185, 129, 0.08),
+                    rgba(6, 182, 212, 0.06));
+
+            border: 1px solid rgba(16, 185, 129, 0.15);
+
+            border-left: 5px solid #10b981;
+
+            border-radius: 24px;
+
+            padding: 32px;
+
+            margin-top: 28px;
+        }
+
+        .highlight-box p {
+            color: #374151;
+            line-height: 2;
+            font-size: 17px;
+        }
+
+        @media(max-width:768px) {
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .content-text {
+                font-size: 16px;
+                line-height: 1.95;
+            }
+
+            .highlight-box {
+                padding: 24px;
+            }
+
+        }
+
+
+        .hero-gradient::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:-1px;
+    height:140px;
+
+    background:linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        #f5f5f4 85%
+    );
+
+    pointer-events:none;
+}
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav
+        class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="flex justify-between items-center h-20">
+
+                <div class="flex-shrink-0 flex items-center gap-3">
+
+                    <img src="images/logo.png"
+                        alt="Chargebees Logo"
+                        class="h-10 w-auto object-contain">
+
+                    <span class="text-2xl font-bold tracking-tighter text-gray-900">
+                        CHARGE<span class="text-emerald-600">BEES</span>
+                    </span>
+
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+
+                    <a href="index.html"
+                        class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                        About
+                    </a>
+
+                    <a href="stationfinder.html"
+                        class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                        Station Finder
+                    </a>
+
+                    <a href="products.html"
+                        class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                        Products
+                    </a>
+
+                    <a href="partners.html"
+                        class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                        Partners
+                    </a>
+
+                    <a href="media-center.html"
+                        class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                        Media Center
+                    </a>
+
+                    <a href="careers.html"
+                        class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                        Careers
+                    </a>
+
+                </div>
+
+                <div class="hidden md:flex items-center gap-4">
+
+                    <a href="#"
+                        class="bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700 transition-all">
+                        Download App
+                    </a>
+
+                    <a href="contact.html"
+                        class="bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700 transition-all">
+                        Contact Us
+                    </a>
+
+                </div>
+
+                <!-- Mobile Button -->
+
+                <button id="menu-btn" class="md:hidden">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- MOBILE MENU -->
+
+    <div id="mobile-menu"
+        class="hidden md:hidden bg-white border-t p-4 space-y-4">
+
+        <a href="index.html" class="block">About</a>
+
+        <a href="stationfinder.html" class="block">
+            Station Finder
+        </a>
+
+        <a href="products.html" class="block">
+            Products
+        </a>
+
+        <a href="partners.html" class="block">
+            Partners
+        </a>
+
+        <a href="media-center.html" class="block">
+            Media Center
+        </a>
+
+        <a href="careers.html" class="block">
+            Careers
+        </a>
+
+        <a href="contact.html" class="block">
+            Contact Us
+        </a>
+
+    </div>
+
+    <!-- HERO -->
+
+    <section class="hero-gradient pt-44 pb-40 relative overflow-hidden">
+
+        <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+
+            <div
+                class="inline-flex items-center gap-3 bg-white/10 border border-white/20 backdrop-blur-xl px-6 py-3 rounded-full text-white text-sm font-bold tracking-[3px] uppercase mb-8">
+
+                Legal Information
+
+            </div>
+
+            <h1
+                class="text-5xl md:text-7xl font-black text-white leading-tight mb-10">
+
+                Privacy Policy
+
+            </h1>
+
+            <p
+                class="text-xl md:text-2xl text-gray-300 leading-[2] max-w-4xl mx-auto">
+
+                This Privacy Policy explains how Chargebees collects,
+                uses, protects, stores, and manages your personal
+                information while using the Chargebees website,
+                EV charging platform, mobile applications,
+                payment systems, and digital services available
+                at chargebees.com.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- CONTENT -->
+
+    <section class="relative -mt-28 md:-mt-32 pb-24 z-10">
+
+        <div class="max-w-5xl mx-auto px-6">
+
+            <div
+                class="content-wrapper rounded-[36px] p-8 md:p-16">
+
+                <!-- INTRO -->
+
+                <div class="section-card">
+
+                    <h2 class="section-title">
+                        Introduction
+                    </h2>
+
+                    <p class="content-text">
+                        Your privacy is important to Chargebees.
+                        This Privacy Policy explains how Chargebees
+                        may collect, use, share, process,
+                        and protect information obtained through
+                        our EV charging services, charging
+                        infrastructure, mobile applications,
+                        website, EV driver portals, fleet
+                        management systems, and related
+                        digital platforms.
+                    </p>
+
+                    <p class="content-text">
+                        Your use of Chargebees charging services,
+                        website, mobile applications,
+                        EV driver portals, payment systems,
+                        and all associated services is subject
+                        to this Privacy Policy.
+                    </p>
+
+                    <div class="highlight-box">
+
+                        <p>
+                            By accessing or using Chargebees services,
+                            you consent to the collection and use
+                            of your information in accordance
+                            with this Privacy Policy and applicable laws.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- CHANGES -->
+
+                <div class="section-card">
+
+                    <h2 class="section-title">
+                        Changes To Privacy Policy
+                    </h2>
+
+                    <p class="content-text">
+                        Chargebees may update this Privacy Policy
+                        periodically to improve data protection,
+                        enhance security measures,
+                        comply with regulatory changes,
+                        or improve service transparency.
+                    </p>
+
+                    <p class="content-text">
+                        Updated privacy policy versions
+                        will always be published on
+                        chargebees.com.
+                    </p>
+
+                    <p class="content-text">
+                        Continued use of Chargebees services
+                        after updates shall be considered
+                        acceptance of the revised policy.
+                    </p>
+
+                </div>
+
+                <!-- COLLECTION -->
+
+                <div class="section-card">
+
+                    <h2 class="section-title">
+                        Information Collection & Usage
+                    </h2>
+
+                    <p class="content-text">
+                        Chargebees may automatically collect
+                        information related to devices,
+                        charging sessions, payment activity,
+                        browser information, IP addresses,
+                        app activity, operating systems,
+                        and charging infrastructure usage.
+                    </p>
+
+                    <p class="content-text">
+                        Information regarding charging station usage,
+                        charging duration, charging power consumption,
+                        booking history, battery status,
+                        vehicle details, and charging session activity
+                        may also be collected.
+                    </p>
+
+                    <p class="content-text">
+                        Cookies, analytics systems,
+                        tracking technologies,
+                        and performance monitoring tools
+                        may be used to optimize
+                        customer experience and platform functionality.
+                    </p>
+
+                </div>
+
+                <!-- USER INFO -->
+
+                <div class="section-card">
+
+                    <h2 class="section-title">
+                        User Information
+                    </h2>
+
+                    <p class="content-text">
+                        User Information may include
+                        account details, contact information,
+                        booking records, payment details,
+                        EV charging activity,
+                        and customer communication records.
+                    </p>
+
+                    <p class="content-text">
+                        Chargebees retains User Information
+                        to process bookings,
+                        improve customer experience,
+                        enhance infrastructure operations,
+                        maintain security,
+                        and provide customer support.
+                    </p>
+
+                </div>
+
+                <!-- SHARING -->
+
+                <div class="section-card">
+
+                    <h2 class="section-title">
+                        How We Share Information
+                    </h2>
+
+                    <p class="content-text">
+                        Chargebees may share limited information
+                        with payment processors,
+                        infrastructure partners,
+                        technology providers,
+                        legal authorities,
+                        and trusted service providers
+                        whenever necessary to provide services
+                        or comply with applicable laws.
+                    </p>
+
+                    <p class="content-text">
+                        Aggregated or anonymized information
+                        may also be used for analytics,
+                        research, operational improvement,
+                        and infrastructure optimization.
+                    </p>
+
+                </div>
+
+                <!-- SECURITY -->
+
+                <div class="section-card">
+
+                    <h2 class="section-title">
+                        Data Security
+                    </h2>
+
+                    <p class="content-text">
+                        Chargebees implements security controls,
+                        encryption systems,
+                        secure payment technologies,
+                        monitoring systems,
+                        and access restrictions
+                        to protect customer information.
+                    </p>
+
+                    <p class="content-text">
+                        Chargebees does not sell personal information
+                        to third parties without customer consent.
+                    </p>
+
+                </div>
+
+                <!-- RETENTION -->
+
+                <div class="section-card">
+
+                    <h2 class="section-title">
+                        Data Retention
+                    </h2>
+
+                    <p class="content-text">
+                        Customer information may be retained
+                        for operational, legal,
+                        taxation, security,
+                        and business purposes
+                        for as long as required
+                        under applicable regulations.
+                    </p>
+
+                </div>
+
+                <!-- ACCESS -->
+
+                <div class="section-card">
+
+                    <h2 class="section-title">
+                        Accessing User Information
+                    </h2>
+
+                    <p class="content-text">
+                        Users may update or modify
+                        account information
+                        through the Chargebees application
+                        or by contacting official support channels.
+                    </p>
+
+                </div>
+
+                <!-- ACCEPTANCE -->
+
+                <div class="section-card">
+
+                    <h2 class="section-title">
+                        Acceptance Of Privacy Policy
+                    </h2>
+
+                    <p class="content-text">
+                        By using Chargebees services,
+                        applications,
+                        charging infrastructure,
+                        website,
+                        or related digital platforms,
+                        you acknowledge and accept
+                        this Privacy Policy.
+                    </p>
+
+                </div>
+
+                <!-- CONTACT -->
+
+                <div class="section-card">
+
+                    <h2 class="section-title">
+                        Contact Information
+                    </h2>
+
+                    <div class="highlight-box">
+
+                        <p>
+
+                            Website:
+                            https://www.chargebees.com
+
+                            <br><br>
+
+                            Support Email:
+                            db@chargebees.com
+
+                            <br><br>
+
+                            Official Domain:
+                            chargebees.com
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer
+        class="bg-gray-50 pt-24 pb-12 border-t border-gray-200 relative z-10">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="grid lg:grid-cols-4 gap-12 mb-20">
+
+                <div class="lg:col-span-1">
+
+                    <div class="mb-8">
+
+                        <span
+                            class="text-2xl font-bold tracking-tighter text-gray-900">
+
+                            CHARGE<span class="text-emerald-600">BEES</span>
+
+                        </span>
+
+                    </div>
+
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Leading the charge towards
+                        a sustainable electric future
+                        with India's largest EV charging network.
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <h4 class="font-bold text-gray-900 mb-6">
+                        Company
+                    </h4>
+
+                    <ul class="space-y-4 text-gray-600">
+
+                        <li>
+                            <a href="index.html"
+                                class="hover:text-emerald-600 transition-colors">
+                                About Us
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="partners.html"
+                                class="hover:text-emerald-600 transition-colors">
+                                Partnerships
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="media-center.html"
+                                class="hover:text-emerald-600 transition-colors">
+                                Media Center
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="careers.html"
+                                class="hover:text-emerald-600 transition-colors">
+                                Careers
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div>
+
+                    <h4 class="font-bold text-gray-900 mb-6">
+                        Solutions
+                    </h4>
+
+                    <ul class="space-y-4 text-gray-600">
+
+                        <li>
+                            <a href="stationfinder.html"
+                                class="hover:text-emerald-600 transition-colors">
+                                Station Finder
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="products.html"
+                                class="hover:text-emerald-600 transition-colors">
+                                Services
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="products.html"
+                                class="hover:text-emerald-600 transition-colors">
+                                Mobile App
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div>
+
+                    <h4 class="font-bold text-gray-900 mb-6">
+                        Contact
+                    </h4>
+
+                    <ul class="space-y-4 text-gray-600">
+
+                        <li>
+                            db@chargebees.com
+                        </li>
+
+                        <li>
+                            +91 90000 40477
+                        </li>
+
+                        <li class="pt-4">
+
+                            <p class="font-semibold text-gray-900">
+                                Visakhapatnam HQ
+                            </p>
+
+                            <p class="text-sm">
+                                8th Floor, Chargebees LTD,
+                                IT Park, Visakhapatnam,
+                                Andhra Pradesh 530001
+                            </p>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div
+                class="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+
+                <p>
+                    © 2026 Chargebees.
+                    All rights reserved.
+                </p>
+
+                <div class="flex gap-8">
+
+                    <a href="terms.html"
+                        class="hover:text-gray-900 transition-colors">
+
+                        Terms & Conditions
+
+                    </a>
+
+                    <a href="privacy.html"
+                        class="hover:text-gray-900 transition-colors">
+
+                        Privacy Policy
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- JS -->
+
+    <script>
+
+        const menuBtn = document.getElementById("menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        menuBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
+
+        lucide.createIcons();
+
+    </script>
+
+</body>
+
+</html>

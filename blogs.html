@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chargebees Blog</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Inter',sans-serif;
+            background:#f8fafc;
+            overflow-x:hidden;
+        }
+
+        .hero-overlay{
+            background:
+            linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.3),
+            rgba(0,0,0,0.85)
+            );
+        }
+
+        .glass-card{
+            backdrop-filter: blur(20px);
+            background: rgba(255,255,255,0.75);
+            border:1px solid rgba(255,255,255,0.4);
+        }
+
+        .fade-up{
+            animation:fadeUp 1s ease;
+        }
+
+        @keyframes fadeUp{
+            from{
+                opacity:0;
+                transform:translateY(40px);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        .blog-content p{
+    font-size:18px;
+    line-height:1.5;
+    color:#374151;
+    margin-bottom:12px;
+}
+
+        .blog-content p:first-child{
+            font-size:22px;
+            font-weight:600;
+            color:#111827;
+        }
+
+        .floating-circle{
+            position:absolute;
+            border-radius:999px;
+            filter:blur(80px);
+            opacity:0.2;
+        }
+
+        .circle1{
+            width:300px;
+            height:300px;
+            background:#10b981;
+            top:-100px;
+            left:-100px;
+        }
+
+        .circle2{
+            width:250px;
+            height:250px;
+            background:#06b6d4;
+            right:-80px;
+            bottom:100px;
+        }
+
+        @media(max-width:768px){
+
+            .blog-content p{
+                font-size:16px;
+                line-height:1.9;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- BACKGROUND EFFECTS -->
+
+    <div class="floating-circle circle1"></div>
+    <div class="floating-circle circle2"></div>
+
+    <!-- HERO SECTION -->
+
+    <section class="relative h-[650px] overflow-hidden">
+
+        <img
+        id="blogImage"
+        class="absolute inset-0 w-full h-full object-cover">
+
+        <div class="hero-overlay absolute inset-0"></div>
+
+        <!-- NAVBAR -->
+
+        <nav class="absolute top-0 left-0 w-full z-50">
+
+            <div class="max-w-7xl mx-auto px-6 py-8 flex items-center justify-between">
+
+                <a href="media-center.html"
+                class="text-white text-3xl font-black tracking-tight">
+                    CHARGE<span class="text-emerald-400">BEES</span>
+                </a>
+
+                <a href="media-center.html"
+                class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-black transition-all duration-300">
+                    ← Back To Blogs
+                </a>
+
+            </div>
+
+        </nav>
+
+        <!-- HERO CONTENT -->
+
+        <div class="relative z-20 h-full flex items-end">
+
+            <div class="max-w-6xl mx-auto px-6 pb-20 w-full fade-up">
+
+                <div
+                id="blogCategory"
+                class="inline-flex items-center gap-3 bg-emerald-500 text-white px-6 py-3 rounded-full text-sm font-bold uppercase tracking-[3px] mb-8 shadow-2xl">
+                </div>
+
+                <h1
+                id="blogTitle"
+                class="text-4xl md:text-7xl font-black text-white leading-tight max-w-5xl mb-8">
+                </h1>
+
+                <div class="flex flex-wrap items-center gap-6 text-white/80">
+
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 bg-emerald-400 rounded-full"></span>
+                        <span id="blogDate"></span>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+                        <span>Chargebees Editorial Team</span>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 bg-yellow-400 rounded-full"></span>
+                        <span>8 min read</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- BLOG CONTENT -->
+
+    <section class="relative z-10 -mt-20 pb-24">
+
+        <div class="max-w-5xl mx-auto px-6">
+
+            <div class="glass-card rounded-[40px] shadow-2xl p-8 md:p-16 fade-up">
+
+                <!-- INTRO CARD -->
+
+<div class="border-l-4 border-emerald-500 bg-white rounded-3xl p-8 md:p-10 mb-16 shadow-sm">
+
+    <div class="flex items-center gap-3 mb-5">
+
+        <div class="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center text-2xl">
+            ⚡
+        </div>
+
+        <span class="text-sm font-bold uppercase tracking-[3px] text-emerald-600">
+            Road Trip Essentials
+        </span>
+
+    </div>
+
+    <h2 class="text-3xl md:text-4xl font-black text-gray-900 leading-tight mb-6 max-w-4xl">
+        Essential EV Charging Strategies for Long-Distance Travel
+    </h2>
+
+    <p class="text-lg text-gray-600 leading-9 max-w-4xl">
+        Learn how to optimize charging stops, improve battery efficiency,
+        reduce range anxiety, and plan smarter EV journeys with practical
+        long-distance travel strategies designed for modern electric vehicles.
+    </p>
+
+</div>
+
+                <!-- CONTENT -->
+
+                <div
+                id="blogContent"
+                class="blog-content">
+                </div>
+
+                <!-- FOOTER -->
+
+                <div class="mt-20 pt-10 border-t border-gray-200">
+
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+
+                        <div>
+
+                            <h3 class="text-2xl font-black text-gray-900 mb-3">
+                                Share this article
+                            </h3>
+
+                            <p class="text-gray-500">
+                                Help spread awareness about EV technology.
+                            </p>
+
+                        </div>
+
+                        <div class="flex items-center gap-4">
+
+                            <button class="w-14 h-14 rounded-full bg-gray-100 hover:bg-emerald-500 hover:text-white transition-all duration-300 text-xl">
+                                f
+                            </button>
+
+                            <button class="w-14 h-14 rounded-full bg-gray-100 hover:bg-emerald-500 hover:text-white transition-all duration-300 text-xl">
+                                x
+                            </button>
+
+                            <button class="w-14 h-14 rounded-full bg-gray-100 hover:bg-emerald-500 hover:text-white transition-all duration-300 text-xl">
+                                in
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer class="bg-gray-950 text-white py-20">
+
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="grid md:grid-cols-3 gap-12">
+
+                <div>
+
+                    <h2 class="text-3xl font-black mb-6">
+                        CHARGE<span class="text-emerald-400">BEES</span>
+                    </h2>
+
+                    <p class="text-gray-400 leading-8">
+                        Powering India's electric mobility revolution with
+                        smarter charging infrastructure and sustainable energy solutions.
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <h3 class="text-xl font-bold mb-6">
+                        Quick Links
+                    </h3>
+
+                    <div class="space-y-4 text-gray-400">
+
+                        <a href="index.html" class="block hover:text-white transition">
+                            Home
+                        </a>
+
+                        <a href="stationfinder.html" class="block hover:text-white transition">
+                            Station Finder
+                        </a>
+
+                        <a href="products.html" class="block hover:text-white transition">
+                            Products
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <h3 class="text-xl font-bold mb-6">
+                        Contact
+                    </h3>
+
+                    <div class="space-y-4 text-gray-400">
+
+                        <p>db@chargebees.com</p>
+
+                        <p>+91 90000 40477</p>
+
+                        <p>Visakhapatnam, Andhra Pradesh</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="border-t border-white/10 mt-16 pt-8 text-center text-gray-500">
+
+                © 2026 Chargebees. All rights reserved.
+
+            </div>
+
+        </div>
+
+    </footer>
+
+<script>
+
+const defaultBlog = {
+
+title: "Top 10 EV Charging Tips for Long Road Trips",
+
+category: "Guides",
+
+date: "May 15, 2026",
+
+image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1400&auto=format&fit=crop",
+
+content: `
+
+Electric vehicles are transforming the future of mobility.
+Long-distance EV travel is now more convenient than ever.
+Modern charging infrastructure supports highway travel efficiently.
+Planning charging stops before your journey is essential.
+Always maintain enough battery reserve during trips.
+Fast charging stations reduce overall travel time significantly.
+Efficient route planning improves driving experience greatly.
+Battery health should always remain a top priority.
+Chargebees stations provide reliable charging performance.
+Drivers should monitor tire pressure regularly.
+Regenerative braking improves energy efficiency effectively.
+Avoid sudden acceleration for better range optimization.
+Eco driving mode helps conserve battery power.
+Charging overnight can reduce waiting times considerably.
+Always carry charging adapters for emergencies.
+Use mobile apps to locate nearby stations instantly.
+India’s EV ecosystem is expanding rapidly.
+Technology advancements are improving charging speed daily.
+Modern EV batteries now support longer driving ranges.
+Public awareness about electric mobility is increasing.
+Charging networks are reaching smaller cities quickly.
+Fleet operators are shifting towards electric transportation.
+Government incentives encourage EV adoption nationwide.
+Sustainable transportation reduces carbon emissions significantly.
+Smart charging systems improve overall efficiency.
+Connected EV technologies enhance driving convenience.
+Battery recycling initiatives are becoming more important.
+Charging infrastructure investments continue growing rapidly.
+Urban commuters increasingly prefer electric vehicles.
+Fast chargers support intercity travel effectively.
+EV maintenance costs remain lower than fuel vehicles.
+Wireless charging technologies are under development.
+Artificial intelligence improves charging optimization systems.
+Renewable energy integration supports sustainability goals.
+EV startups are innovating transportation rapidly.
+Charging station accessibility improves user confidence.
+Electric mobility reduces dependency on fossil fuels.
+Modern EVs offer impressive driving performance.
+The future of transportation is undoubtedly electric.
+Chargebees continues supporting India's EV revolution.
+
+`
+
+};
+
+const blog = JSON.parse(localStorage.getItem("selectedBlog")) || defaultBlog;
+
+document.getElementById("blogImage").src = blog.image;
+
+document.getElementById("blogTitle").innerText = blog.title;
+
+document.getElementById("blogCategory").innerHTML = `
+⚡ ${blog.category}
+`;
+
+document.getElementById("blogDate").innerText = blog.date;
+
+const contentContainer = document.getElementById("blogContent");
+
+const lines = blog.content.trim().split("\n");
+
+lines.forEach(line => {
+
+    if(line.trim() !== ""){
+
+        const p = document.createElement("p");
+
+        p.innerText = line;
+
+        contentContainer.appendChild(p);
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
