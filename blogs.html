@@ -342,9 +342,7 @@ video{
 
 @media(max-width:768px){
 
-    *{
-        max-width:100vw !important;
-    }
+
 
     html,
     body{
@@ -393,6 +391,83 @@ video{
 
 }
 
+/* PRODUCTS DROPDOWN FIX */
+
+.mega-menu{
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(10px);
+    transition:all 0.3s ease;
+    pointer-events:none;
+    z-index:9999;
+}
+
+
+/* EXACT INDEX.HTML DROPDOWN FIX */
+
+nav .group{
+    position:relative;
+}
+
+nav .mega-menu{
+    width:800px !important;
+    max-width:none !important;
+
+    display:grid !important;
+    grid-template-columns:repeat(3,1fr) !important;
+
+    left:50% !important;
+    transform:translateX(-50%) translateY(10px) !important;
+
+    position:absolute !important;
+    top:100% !important;
+
+    background:#fff;
+    border-radius:32px;
+
+    padding:32px;
+    gap:32px;
+
+    z-index:99999 !important;
+}
+
+nav .group:hover .mega-menu{
+    transform:translateX(-50%) translateY(0) !important;
+}
+
+/* VERY IMPORTANT */
+
+nav .mega-menu *{
+    max-width:none !important;
+}
+
+.group:hover .mega-menu{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+    pointer-events:auto;
+}
+
+/* smooth dropdown hover */
+
+.group{
+    position:relative;
+}
+
+/* mobile lo dropdown hide */
+
+@media(max-width:768px){
+
+    .mega-menu{
+        display:none !important;
+    }
+
+}
+
+.mega-menu{
+    z-index:99999;
+}
+
     </style>
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -415,9 +490,9 @@ video{
         <div class="hero-overlay absolute inset-0"></div>
 
         <!-- NAVBAR -->
-    <nav class="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 overflow-hidden">
-        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
-            <div class="flex justify-between items-center h-20 w-full overflow-hidden">
+    <nav class="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20 w-full">
                 <div class="flex items-center min-w-0 overflow-hidden">
                     <img src="images/logo.png" alt="Logo" class="h-10 w-auto object-contain"> 
                     <span class="text-[18px] sm:text-2xl font-bold tracking-tighter text-gray-900 truncate">
@@ -429,6 +504,7 @@ video{
                     <a href="index.html" class="text-sm font-medium text-emerald-600 transition-colors">About</a>
                     <a href="stationfinder.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Station Finder</a>
                     
+                    <!-- Products Dropdown -->
                     <!-- Products Dropdown -->
                     <div class="relative group">
                         <button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
@@ -860,6 +936,9 @@ menuBtn.addEventListener("click", () => {
 
 lucide.createIcons();
 
+
+
+lucide.createIcons();
 
 </script>
 
