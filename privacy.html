@@ -161,123 +161,156 @@
     pointer-events:none;
 }
     </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
 
     <!-- NAVBAR -->
 
-    <nav
-        class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
             <div class="flex justify-between items-center h-20">
-
-                <div class="flex-shrink-0 flex items-center gap-3">
-
-                    <img src="images/logo.png"
-                        alt="Chargebees Logo"
-                        class="h-10 w-auto object-contain">
-
+                <div class="flex-shrink-0 flex items-center">
+                    <img src="images/logo.png" alt="Logo" class="h-10 w-auto object-contain"> 
                     <span class="text-2xl font-bold tracking-tighter text-gray-900">
                         CHARGE<span class="text-emerald-600">BEES</span>
                     </span>
-
                 </div>
-
+                
                 <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-sm font-medium text-emerald-600 transition-colors">About</a>
+                    <a href="stationfinder.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Station Finder</a>
+                    
+                    <!-- Products Dropdown -->
+                    <div class="relative group">
+                        <button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
+                            Products <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                        </button>
+                        
+                        <!-- Mega Menu -->
+                        <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-white rounded-3xl shadow-2xl border border-gray-100 p-8 grid grid-cols-3 gap-8 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                            <!-- Hardware -->
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <i data-lucide="zap" class="w-5 h-5 text-emerald-600"></i> Hardware
+                                </h3>
+                                <a href="products.html#hardware" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                        <i data-lucide="battery-charging" class="w-6 h-6 text-emerald-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-900">All chargers</p>
+                                        <p class="text-xs text-gray-500">AC & DC Solutions</p>
+                                    </div>
+                                </a>
+                            </div>
 
-                    <a href="index.html"
-                        class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                        About
-                    </a>
+                            <!-- Software -->
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <i data-lucide="layout" class="w-5 h-5 text-emerald-600"></i> Software
+                                </h3>
+                                <div class="space-y-2">
+                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="cloud" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <p class="font-bold text-gray-900">ChargeCloud</p>
+                                                <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500">CMS Platform</p>
+                                        </div>
+                                    </a>
+                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="smartphone" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">Chargebees App</p>
+                                            <p class="text-xs text-gray-500">User Experience</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
 
-                    <a href="stationfinder.html"
-                        class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                        Station Finder
-                    </a>
+                            <!-- Services -->
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <i data-lucide="settings" class="w-5 h-5 text-emerald-600"></i> Services
+                                </h3>
+                                <div class="space-y-2">
+                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="activity" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">Energy As A Service</p>
+                                            <p class="text-xs text-gray-500">Renewable Energy</p>
+                                        </div>
+                                    </a>
+                                    <a href="product.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="battery-full" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <p class="font-bold text-gray-900">Battery As A Service</p>
+                                                <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500">Swapping Solutions</p>
+                                        </div>
+                                    </a>
+                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                            <i data-lucide="credit-card" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">RFID Card</p>
+                                            <p class="text-xs text-gray-500">Seamless Payments</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <a href="products.html"
-                        class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                        Products
-                    </a>
-
-                    <a href="partners.html"
-                        class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                        Partners
-                    </a>
-
-                    <a href="media-center.html"
-                        class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                        Media Center
-                    </a>
-
-                    <a href="careers.html"
-                        class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                        Careers
-                    </a>
-
+                    <a href="partners.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Partners</a>
+                    <a href="media-center.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Media Center</a>
+                    <a href="careers.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Careers</a>
                 </div>
-
-                <div class="hidden md:flex items-center gap-4">
-
-                    <a href="#"
-                        class="bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700 transition-all">
+                <div class="flex items-center gap-4">
+                     <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://play.google.com/store/games%3Fhl%3Den_IN&ved=2ahUKEwjP48zKm5WUAxVrTGwGHTWhBIAQFnoECB8QAQ&sqi=2&usg=AOvVaw1xFWwUV1XhFXXR_Z_npZ2_" class="hidden md:block bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700">
                         Download App
                     </a>
-
-                    <a href="contact.html"
-                        class="bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700 transition-all">
+                </div>
+                <div class="flex items-center gap-4">
+                     <a href="contact.html" class="hidden md:block bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700">
                         Contact Us
                     </a>
-
                 </div>
-
-                <!-- Mobile Button -->
-
+                    <!-- Mobile Menu Button -->
                 <button id="menu-btn" class="md:hidden">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
-
             </div>
-
         </div>
-
     </nav>
 
-    <!-- MOBILE MENU -->
-
-    <div id="mobile-menu"
-        class="hidden md:hidden bg-white border-t p-4 space-y-4">
-
-        <a href="index.html" class="block">About</a>
-
-        <a href="stationfinder.html" class="block">
-            Station Finder
-        </a>
-
-        <a href="products.html" class="block">
-            Products
-        </a>
-
-        <a href="partners.html" class="block">
-            Partners
-        </a>
-
-        <a href="media-center.html" class="block">
-            Media Center
-        </a>
-
-        <a href="careers.html" class="block">
-            Careers
-        </a>
-
-        <a href="contact.html" class="block">
-            Contact Us
-        </a>
-
-    </div>
+    <!-- Mobile Menu -->
+<div id="mobile-menu" class="hidden md:hidden bg-white border-t p-4 space-y-4">
+    <a href="index.html" class="block">About</a>    
+    <a href="index.html" class="block">About</a>
+    <a href="index.html" class="block">About</a>
+    <a href="stationfinder.html" class="block">Station Finder</a>
+    <a href="products.html" class="block">Products</a>
+    <a href="partners.html" class="block">Partners</a>
+    <a href="media-center.html" class="block">Media Center</a>
+    <a href="careers.html" class="block">Careers</a>
+    <a href="contact.html" class="block">Contact Us</a>
+</div>
 
     <!-- HERO -->
 
@@ -604,173 +637,71 @@
 
     <!-- FOOTER -->
 
-    <footer
-        class="bg-gray-50 pt-24 pb-12 border-t border-gray-200 relative z-10">
-
+    <footer class="bg-gray-50 pt-24 pb-12 border-t border-gray-200 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
             <div class="grid lg:grid-cols-4 gap-12 mb-20">
-
                 <div class="lg:col-span-1">
-
                     <div class="mb-8">
-
-                        <span
-                            class="text-2xl font-bold tracking-tighter text-gray-900">
-
+                        <span class="text-2xl font-bold tracking-tighter text-gray-900">
                             CHARGE<span class="text-emerald-600">BEES</span>
-
                         </span>
-
                     </div>
-
                     <p class="text-gray-600 mb-8 leading-relaxed">
-                        Leading the charge towards
-                        a sustainable electric future
-                        with India's largest EV charging network.
+                        Leading the charge towards a sustainable electric future with India's largest EV charging network.
                     </p>
-
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:shadow-md transition-all"><i data-lucide="youtube" class="w-5 h-5"></i></a>
+                    </div>
                 </div>
 
                 <div>
-
-                    <h4 class="font-bold text-gray-900 mb-6">
-                        Company
-                    </h4>
-
+                    <h4 class="font-bold text-gray-900 mb-6">Company</h4>
                     <ul class="space-y-4 text-gray-600">
-
-                        <li>
-                            <a href="index.html"
-                                class="hover:text-emerald-600 transition-colors">
-                                About Us
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="partners.html"
-                                class="hover:text-emerald-600 transition-colors">
-                                Partnerships
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="media-center.html"
-                                class="hover:text-emerald-600 transition-colors">
-                                Media Center
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="careers.html"
-                                class="hover:text-emerald-600 transition-colors">
-                                Careers
-                            </a>
-                        </li>
-
+                        <li><a href="index.html#about" class="hover:text-emerald-600 transition-colors">About Us</a></li>
+                        <li><a href="partners.html#Partnerships" class="hover:text-emerald-600 transition-colors">Partnerships</a></li>
+                        <li><a href="media-center.html#media" class="hover:text-emerald-600 transition-colors">Media Center</a></li>
+                        <li><a href="careers.html#careers" class="hover:text-emerald-600 transition-colors">Careers</a></li>
                     </ul>
-
                 </div>
 
                 <div>
-
-                    <h4 class="font-bold text-gray-900 mb-6">
-                        Solutions
-                    </h4>
-
+                    <h4 class="font-bold text-gray-900 mb-6">Solutions</h4>
                     <ul class="space-y-4 text-gray-600">
-
-                        <li>
-                            <a href="stationfinder.html"
-                                class="hover:text-emerald-600 transition-colors">
-                                Station Finder
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="products.html"
-                                class="hover:text-emerald-600 transition-colors">
-                                Services
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="products.html"
-                                class="hover:text-emerald-600 transition-colors">
-                                Mobile App
-                            </a>
-                        </li>
-
+                        <li><a href="stationfinder.html" class="hover:text-emerald-600 transition-colors">Station Finder</a></li>
+                        <li><a href="products.html#services" class="hover:text-emerald-600 transition-colors">Services</a></li>
+                        <li><a href="products.html#software" class="hover:text-emerald-600 transition-colors">Mobile App</a></li>
                     </ul>
-
                 </div>
 
                 <div>
-
-                    <h4 class="font-bold text-gray-900 mb-6">
-                        Contact
-                    </h4>
-
+                    <h4 class="font-bold text-gray-900 mb-6">Contact</h4>
                     <ul class="space-y-4 text-gray-600">
-
-                        <li>
-                            db@chargebees.com
+                        <li class="flex items-center gap-2 group cursor-pointer">
+                            <span>db@chargebees.com</span>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
                         </li>
-
-                        <li>
-                            +91 90000 40477
-                        </li>
-
+                        <li>+91 90000 40477</li>
                         <li class="pt-4">
-
-                            <p class="font-semibold text-gray-900">
-                                Visakhapatnam HQ
-                            </p>
-
-                            <p class="text-sm">
-                                8th Floor, Chargebees LTD,
-                                IT Park, Visakhapatnam,
-                                Andhra Pradesh 530001
-                            </p>
-
+                            <p class="font-semibold text-gray-900">Visakhapatnam HQ</p>
+                            <p class="text-sm">8th Floor, chargebees LTD,  IT Park, Visakhapatnam, Andhra Pradesh 530001</p>
                         </li>
-
                     </ul>
-
                 </div>
-
             </div>
 
-            <div
-                class="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-
-                <p>
-                    © 2026 Chargebees.
-                    All rights reserved.
-                </p>
-
+            <div class="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+                <p>© 2026 Chargebees. All rights reserved.</p>
                 <div class="flex gap-8">
-
-                    <a href="terms.html"
-                        class="hover:text-gray-900 transition-colors">
-
-                        Terms & Conditions
-
-                    </a>
-
-                    <a href="privacy.html"
-                        class="hover:text-gray-900 transition-colors">
-
-                        Privacy Policy
-
-                    </a>
-
+                    <a href="terms.html#terms" class="hover:text-gray-900 transition-colors">Terms & Services</a>
+                    <a href="privacy.html" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
+                    
                 </div>
-
             </div>
-
         </div>
-
     </footer>
 
     <!-- JS -->
