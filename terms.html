@@ -196,6 +196,31 @@ footer{
     pointer-events:none;
 }
 
+
+@media(max-width:768px){
+
+    .highlight-box{
+        padding:22px !important;
+        border-radius:20px !important;
+        overflow:hidden;
+    }
+
+    .highlight-box p{
+        font-size:15px !important;
+        line-height:1.9 !important;
+        word-break:break-word;
+        overflow-wrap:anywhere;
+    }
+
+    .section-card{
+        padding:22px !important;
+    }
+
+    .glass-card{
+        border-radius:28px !important;
+    }
+
+}
 </style>
 
 <script src="https://unpkg.com/lucide@latest"></script>
@@ -705,7 +730,7 @@ footer{
                 </p>
 
                 <div class="highlight-box">
-                    <p>
+                    <p class="break-all">
                         Website: https://www.chargebees.com
                         <br><br>
                         Support Email: db@chargebees.com
