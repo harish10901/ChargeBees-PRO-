@@ -3,64 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Station Finder - Chargebees</title>
-    <link rel="icon" type="image/png" href="images\favicon.png">
+    <title>Station Finder | Chargebees</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Leaflet CSS -->
+    <!-- Leaflet Map CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #fdfbf7;
-        }
-        #map {
-            height: calc(100vh - 80px);
-            width: 100%;
-            z-index: 1;
-        }
-        .custom-marker {
-            background: #10b981;
-            border-radius: 50%;
-            border: 2px solid white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-        }
-        .filter-panel {
-            z-index: 10;
-        }
+        body { font-family: 'Inter', sans-serif; overflow: hidden; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        #map { height: 100%; width: 100%; z-index: 10; }
+        .leaflet-popup-content-wrapper { border-radius: 1rem; padding: 0.5rem; }
+        .leaflet-popup-content { margin: 0.5rem; }
         
+        /* Navbar specific styles from index.html */
         .mega-menu {
-            z-index: 2000;
-        }
-        /* Custom Scrollbar */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+            transition: all 0.3s ease;
         }
     </style>
 </head>
-<body class="antialiased text-gray-900">
-    <!-- Navbar -->
-    <nav class="fixed top-0 left-0 right-0 z-[9999] bg-white/80 backdrop-blur-md border-b border-gray-100">
+<body class="antialiased text-gray-900 bg-gray-50">
+
+    <!-- Navbar (Copy from index.html) -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <a href="index.html" class="flex-shrink-0 flex items-center gap-2">
-    <img src="images/logo.png" alt="Logo" class="h-10 w-auto object-contain"> 
-    <span class="text-2xl font-bold tracking-tighter text-gray-900">
-        CHARGE<span class="text-emerald-600">BEES</span>
-    </span>
-</a>        
+                <div class="flex-shrink-0 flex items-center">
+                    <img src="images/logo.png" alt="Logo" class="h-10 w-auto object-contain"> 
+                    <span class="text-2xl font-bold tracking-tighter text-gray-900">
+                        CHARGE<span class="text-emerald-600">BEES</span>
+                    </span>
+                </div>
                 
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">About</a>
+                    <a href="index.html" class="text-sm font-medium text-gray-600 hover:text-emerald-600 transition-colors">About</a>
                     <a href="stationfinder.html" class="text-sm font-medium text-emerald-600 transition-colors">Station Finder</a>
                     
                     <!-- Products Dropdown -->
@@ -162,497 +142,240 @@
                     <a href="media-center.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Media Center</a>
                     <a href="careers.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Careers</a>
                 </div>
-
                 <div class="flex items-center gap-4">
                      <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://play.google.com/store/games%3Fhl%3Den_IN&ved=2ahUKEwjP48zKm5WUAxVrTGwGHTWhBIAQFnoECB8QAQ&sqi=2&usg=AOvVaw1xFWwUV1XhFXXR_Z_npZ2_" class="hidden md:block bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700">
                         Download App
                     </a>
                 </div>
-
-
                 <div class="flex items-center gap-4">
                      <a href="contact.html" class="hidden md:block bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700">
                         Contact Us
                     </a>
                 </div>
-                    <!-- Mobile Menu Button -->
+                <!-- Mobile Menu Button -->
                 <button id="menu-btn" class="md:hidden">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
+                    <i data-lucide="menu" class="w-6 h-6 text-gray-600"></i>
                 </button>
             </div>
         </div>
     </nav>
+
     <!-- Mobile Menu -->
-<div id="mobile-menu" class="hidden md:hidden bg-white border-t p-4 space-y-4">
-    <a href="index.html" class="block">About</a>    
-    <a href="index.html" class="block">About</a>
-    <a href="index.html" class="block">About</a>
-    <a href="stationfinder.html" class="block">Station Finder</a>
-    <a href="products.html" class="block">Products</a>
-    <a href="partners.html" class="block">Partners</a>
-    <a href="media-center.html" class="block">Media Center</a>
-    <a href="careers.html" class="block">Careers</a>
-    <a href="contact.html" class="block">Contact Us</a>
-</div>
-    <main class="pt-20 relative">
-        <!-- Map Container -->
-        <div id="map"></div>
+    <div id="mobile-menu" class="hidden fixed inset-0 z-[60] bg-white p-6 space-y-6 pt-24">
+        <button id="menu-close" class="absolute top-8 right-8"><i data-lucide="x" class="w-8 h-8"></i></button>
+        <a href="index.html" class="block text-2xl font-black">About</a>
+        <a href="stationfinder.html" class="block text-2xl font-black text-emerald-600">Station Finder</a>
+        <a href="products.html" class="block text-2xl font-black">Products</a>
+        <a href="partners.html" class="block text-2xl font-black">Partners</a>
+        <a href="media-center.html" class="block text-2xl font-black">Media Center</a>
+        <a href="careers.html" class="block text-2xl font-black">Careers</a>
+        <a href="contact.html" class="block text-2xl font-black">Contact Us</a>
+    </div>
 
-        <!-- Filter Panel (Top Right Overlay) -->
-        <div class="filter-panel absolute top-24 right-4 md:right-8 w-auto z-40">
-            <div class="relative inline-flex">
-    
-    <!-- Filter Button -->
-    <button id="filterToggle"
-    class="w-auto ml-auto bg-emerald-600 text-white px-4 py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 shadow-lg">
-    <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
-    Filters
-    </button>
-
-
-
-    <!-- Dropdown Content -->
-    <div id="filterDropdown"
-        class="hidden absolute right-0 mt-3 w-full md:w-[700px] bg-white p-4 md:p-6 rounded-3xl shadow-2xl border border-gray-100 z-50">
-
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-
-            <!-- Reset -->
-            <div>
-                <button id="resetBtn"
-                    class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-100 text-gray-600 border border-gray-200 rounded-xl text-sm font-bold">
-                    Reset
-                </button>
-            </div>
-
-            <!-- State -->
-            <div>
-                <label class="text-xs font-bold text-gray-500">State</label>
-                <select id="stateSelect"
-                    class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm">
-                    <option value="">Select State</option>
-                </select>
-            </div>
-
-            <!-- City -->
-            <div>
-                <label class="text-xs font-bold text-gray-500">City</label>
-                <select id="citySelect"
-                    class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm"
-                    disabled>
-                    <option value="">Select City</option>
-                </select>
-            </div>
-
-            <!-- Search (NO PINCODE label change only search) -->
-            <div>
-                <label class="text-xs font-bold text-gray-500">Search</label>
-                <div class="flex gap-2">
-                    <input type="text" id="pincodeInput"
-                        placeholder="Enter pincode"
-                        class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+    <!-- Main Content Wrapper -->
+    <div class="flex flex-col h-screen pt-20">
+        <div class="flex-1 flex flex-col md:flex-row overflow-hidden">
+            <!-- Sidebar -->
+            <aside class="w-full md:w-[400px] bg-white border-r border-gray-100 flex flex-col shadow-2xl z-20 relative overflow-hidden">
+                <div class="p-6 border-b border-gray-100 shrink-0">
+                    <h1 class="text-3xl font-black text-gray-900 mb-2 tracking-tighter">Find Power</h1>
+                    <p class="text-[10px] font-black text-gray-400 mb-6 uppercase tracking-widest">India's Largest Green Network</p>
                     
-                    <button id="searchBtn"
-                    class="bg-emerald-600 text-white px-4 py-2.5 rounded-xl flex items-center justify-center">
-                    <i data-lucide="search" class="w-4 h-4"></i>
-                    </button>
-                </div>
-            </div>
+                    <div class="relative mb-6">
+                        <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5"></i>
+                        <input 
+                            type="text" 
+                            id="stationSearch"
+                            placeholder="Search city or station..."
+                            class="w-full pl-12 pr-4 py-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none font-semibold transition-all text-sm"
+                        />
+                    </div>
 
+                    <div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar" id="filterContainer">
+                        <button onclick="filterStations('All')" class="category-btn active px-6 py-2 rounded-full text-[10px] font-black whitespace-nowrap transition-all border bg-emerald-600 border-emerald-600 text-white shadow-lg shadow-emerald-600/20 uppercase tracking-wider">All</button>
+                        <button onclick="filterStations('AC')" class="category-btn px-6 py-2 rounded-full text-[10px] font-black whitespace-nowrap transition-all border bg-white border-gray-100 text-gray-600 hover:border-gray-300 uppercase tracking-wider">Regular AC</button>
+                        <button onclick="filterStations('DC Fast')" class="category-btn px-6 py-2 rounded-full text-[10px] font-black whitespace-nowrap transition-all border bg-white border-gray-100 text-gray-600 hover:border-gray-300 uppercase tracking-wider">DC Fast</button>
+                        <button onclick="filterStations('Ultra Fast')" class="category-btn px-6 py-2 rounded-full text-[10px] font-black whitespace-nowrap transition-all border bg-white border-gray-100 text-gray-600 hover:border-gray-300 uppercase tracking-wider">Ultra Fast</button>
+                    </div>
+                </div>
+
+                <!-- Scrollable Sidebar Area -->
+                <div class="flex-1 overflow-y-auto no-scrollbar">
+                    <div class="p-4 space-y-4 min-h-[500px]" id="stationList">
+                        <!-- Stations will be injected here -->
+                    </div>
+
+                    <!-- Footer (Appended at the end of sidebar list) -->
+                    <footer class="bg-gray-50 pt-16 pb-12 border-t border-gray-200 px-6">
+                        <div class="space-y-12">
+                            <div>
+                                <div class="mb-6">
+                                    <span class="text-xl font-bold tracking-tighter text-gray-900">
+                                        CHARGE<span class="text-emerald-600">BEES</span>
+                                    </span>
+                                </div>
+                                <p class="text-gray-500 text-sm mb-6 leading-relaxed">
+                                    Leading the charge towards a sustainable electric future with India's largest EV charging network.
+                                </p>
+                                <div class="flex gap-3">
+                                    <a href="#" class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 transition-all shadow-sm"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                                    <a href="#" class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 transition-all shadow-sm"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+                                    <a href="https://www.instagram.com/chargebees" class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 transition-all shadow-sm"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Contact</h4>
+                                <ul class="space-y-3 text-sm text-gray-600">
+                                    <li>db@chargebees.com</li>
+                                    <li>+91 90000 40477</li>
+                                    <li class="pt-2">
+                                        <p class="font-bold text-gray-900">Visakhapatnam HQ</p>
+                                        <p class="text-xs">8th Floor, chargebees LTD, IT Park, Visakhapatnam</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="pt-8 border-t border-gray-200 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
+                                © 2026 Chargebees. All rights reserved.
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </aside>
+
+            <!-- Map View -->
+            <main class="flex-1 relative bg-gray-200 z-10">
+                <div id="map"></div>
+                
+                <!-- Floating Info Card -->
+                <div class="absolute top-6 right-6 hidden md:block scale-90 origin-top-right z-[1000]">
+                    <div class="bg-white/90 backdrop-blur-xl p-6 rounded-[2rem] shadow-2xl border border-white/50">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600">
+                                <i data-lucide="activity" class="w-6 h-6 animate-pulse"></i>
+                            </div>
+                            <div>
+                                <p class="text-2xl font-black text-gray-900 tracking-tighter">2,541</p>
+                                <p class="text-[10px] font-black text-gray-400 uppercase tracking-tight">Live Connections</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-cyan-50 rounded-2xl flex items-center justify-center text-cyan-600">
+                                <i data-lucide="map-pin" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <p class="text-2xl font-black text-gray-900 tracking-tighter">482</p>
+                                <p class="text-[10px] font-black text-gray-400 uppercase tracking-tight">Total Hubs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
     </div>
-</div>
-                </div>
-            </div>
-        </div>
-        <div id="stationCards" class="max-w-7xl mx-auto px-4 py-8 grid md:grid-cols-3 gap-6"></div>
-    </main>
 
-    <!-- Leaflet JS -->
+    <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // Initialize Lucide
+        // Init Lucide
         lucide.createIcons();
 
+        const STATIONS = [
+            { id: 1, name: 'Chargebees Hub - GMR Airport', lat: 17.2403, lng: 78.4294, type: 'Fast DC', status: 'Available', rating: 4.8 },
+            { id: 2, name: 'Cyber Towers Charging Point', lat: 17.4504, lng: 78.3808, type: 'Regular AC', status: 'In Use', rating: 4.5 },
+            { id: 3, name: 'Visakhapatnam IT Park Hub', lat: 17.7231, lng: 83.3013, type: 'Ultra Fast', status: 'Available', rating: 4.9 },
+            { id: 4, name: 'Vijayawada Highway Point', lat: 16.5062, lng: 80.6480, type: 'DC Fast', status: 'Maintenance', rating: 4.2 },
+        ];
 
+        let map, markers = [];
+        let currentFilter = 'All';
 
-        // State and City Mapping
-        const locationData = {
-            "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur"],
-           
-            "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Thane"],
-            "Delhi": ["New Delhi", "Noida", "Gurgaon"],
-            "Karnataka": ["Bangalore", "Mysore", "Hubli"],
-            "Telangana": ["Hyderabad", "Warangal"],
-            "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai"],
-            "West Bengal": ["Kolkata", "Howrah"]
-        };
-
-        // Initialize Map
-        const map = L.map('map').setView([20.5937, 78.9629], 5); // Centered on India
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
-
-        // Custom Icon
-const createCustomIcon = () => {
-    return L.divIcon({
-        className: 'custom-marker',
-        html: `
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
-                 viewBox="0 0 24 24" fill="none" stroke="white" 
-                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-            </svg>
-        `,
-        iconSize: [32, 32],
-        iconAnchor: [16, 16]
-    });
-};
-
-        let markers = [];
-
-        // Function to add markers
-
-
-   
-
-        // Populate States
-        const stateSelect = document.getElementById('stateSelect');
-        const citySelect = document.getElementById('citySelect');
-        const pincodeInput = document.getElementById('pincodeInput');
-
-        Object.keys(locationData).sort().forEach(state => {
-            const option = document.createElement('option');
-            option.value = state;
-            option.textContent = state;
-            stateSelect.appendChild(option);
-        });
-
-        // Handle State Change
-        stateSelect.addEventListener('change', (e) => {
-            const state = e.target.value;
-            citySelect.innerHTML = '<option value="">Select City</option>';
-            
-            if (state) {
-                citySelect.disabled = false;
-                locationData[state].sort().forEach(city => {
-                    const option = document.createElement('option');
-                    option.value = city;
-                    option.textContent = city;
-                    citySelect.appendChild(option);
-                });
-
-                const filtered = customLocations;
-                showFilteredLocations(filtered);
-                renderCards(filtered);
-               
-               
-                if (filtered.length > 0) {
-                    const group = new L.featureGroup(markers);
-                    map.fitBounds(group.getBounds().pad(0.2));
-                }
-            } else {
-                citySelect.disabled = true;
-            
-                map.setView([20.5937, 78.9629], 5);
-            }
-        });
-
-        // Handle City Change
-citySelect.addEventListener('change', (e) => {
-    const city = e.target.value;
-
-    if (city) {
-
-        const filtered = customLocations.filter(loc => loc.city === city);
-
-        showFilteredLocations(filtered);
-        renderCards(filtered);   // 👈 IMPORTANT (you missed this)
-
-        if (filtered.length > 0) {
-            map.setView([filtered[0].lat, filtered[0].lng], 12);
-        }
-
-    } else {
-        // if no city selected → show all
-        showFilteredLocations(customLocations);
-        renderCards(customLocations);
-    }
-});
-
-
-function showFilteredLocations(locations) {
-
-    // ❌ wrong remove method remove chesi
-    // clear markers properly
-    markers.forEach(m => map.removeLayer(m));
-    markers = [];
-
-    locations.forEach(loc => {
-        const marker = L.marker([loc.lat, loc.lng], {
-            icon: createCustomIcon()
-        })
-        .addTo(map)
-        .bindPopup(`
-            <div class="p-2 text-center">
-                <h3 class="font-bold">${loc.name}</h3>
-                <button onclick="openDirections(${loc.lat}, ${loc.lng})"
-                    class="mt-2 px-3 py-1 bg-emerald-600 text-white text-xs rounded">
-                    Get Directions
-                </button>
-            </div>
-        `);
-
-        markers.push(marker); // ✅ IMPORTANT
-    });
-
-    if (locations.length > 0) {
-        map.setView([locations[0].lat, locations[0].lng], 10);
-    }
-}
-
-
-        // Handle Pincode Search
-        const searchBtn = document.getElementById('searchBtn');
-
-        function performSearch() {
-            const pin = pincodeInput.value.trim();
-            if (pin.length === 6) {
-                const filtered = customLocations; // since we don't have pincodes
-
-                showFilteredLocations(filtered);
-                if (filtered.length > 0) {
-                   
-                    const group = new L.featureGroup(markers);
-                    map.fitBounds(group.getBounds().pad(1));
-                } else {
-                    // For demo: if no station at exact pin
-                    console.log("No station found at this pincode in our mock data.");
-                    // In a real app, you might show a toast or message
-                }
-            }
-        }
-
-        searchBtn.addEventListener('click', performSearch);
-        
-        pincodeInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') performSearch();
-            
-        });
-
-        // Reset Functionality
-        document.getElementById('resetBtn').addEventListener('click', () => {
-            stateSelect.value = "";
-            citySelect.innerHTML = '<option value="">Select City</option>';
-            citySelect.disabled = true;
-            pincodeInput.value = "";
-            
-            map.setView([20.5937, 78.9629], 5);
-        });
-                const menuBtn = document.getElementById("menu-btn");
-const mobileMenu = document.getElementById("mobile-menu");
-
-menuBtn.addEventListener("click", () => {
-    mobileMenu.classList.toggle("hidden");
-
-    // Scroll to top
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-});
-
-
-
-const filterToggle = document.getElementById("filterToggle");
-const filterDropdown = document.getElementById("filterDropdown");
-
-// Toggle dropdown
-filterToggle.addEventListener("click", (e) => {
-    e.stopPropagation(); // prevent immediate close
-    filterDropdown.classList.toggle("hidden");
-});
-
-// Close when clicking outside
-document.addEventListener("click", (e) => {
-    if (!filterDropdown.contains(e.target) && !filterToggle.contains(e.target)) {
-        filterDropdown.classList.add("hidden");
-    }
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 📍 Location button - left side (below zoom)
-const locateControl = L.control({ position: 'topleft' });
-
-locateControl.onAdd = function () {
-    const div = L.DomUtil.create('div', 'leaflet-bar');
-
-    div.innerHTML = `
-        <a href="#" id="locateBtn"
-           style="
-             display:flex;
-             align-items:center;
-             justify-content:center;
-             width:34px;
-             height:34px;
-             background:white;
-             font-size:16px;
-           ">
-           📍
-        </a>
-    `;
-
-    L.DomEvent.disableClickPropagation(div);
-    return div;
-};
-
-locateControl.addTo(map);
-
-document.addEventListener("click", function(e) {
-    if (e.target.id === "locateBtn") {
-        e.preventDefault();
-
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => {
-                const lat = position.coords.latitude;
-                const lng = position.coords.longitude;
-
-                map.setView([lat, lng], 14);
-
-                L.marker([lat, lng]).addTo(map)
-                    .bindPopup("You are here")
-                    .openPopup();
+        function initMap() {
+            map = L.map('map', {
+                zoomControl: false,
+                center: [17.3850, 78.4867],
+                zoom: 12
             });
-        } else {
-            alert("Geolocation not supported");
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            renderStations();
         }
-    }
-});
 
-// station locations 
+        function renderStations() {
+            const list = document.getElementById('stationList');
+            const query = document.getElementById('stationSearch').value.toLowerCase();
+            list.innerHTML = '';
+            
+            markers.forEach(m => m.remove());
+            markers = [];
 
-const customLocations = [
-    {
-        name: "Chargebees EV Station - Simhachalam",
-        city: "Visakhapatnam",
-        address: "Simhachalam, Visakhapatnam",
-        code: "EVCS-370001",
-        contact: "00000 00001",
-        lat: 17.7669,
-        lng: 83.2517
-    },
-    {
-        name: "Chargebees EV Station - Srisailam",
-        city: "Srisailam",
-        address: "Srisailam Temple Road",
-        code: "EVCS-370002",
-        contact: "00000 00002",
-        lat: 16.0728,
-        lng: 78.8687
-    },
-    {
-        name: "Chargebees EV Station - Kanaka Durga",
-        city: "Vijayawada",
-        address: "Indhrakeeladhri, Vijayawada",
-        code: "EVCS-370003",
-        contact: "00000 00003",
-        lat: 16.5089,
-        lng: 80.6480
-    },
-    {
-        name: "Chargebees EV Station - Krishna Lanka",
-        city: "Vijayawada",
-        address: "Krishna Lanka, Vijayawada",
-        code: "EVCS-370004",
-        contact: "00000 00004",
-        lat: 16.5062,
-        lng: 80.6485
-    },
-    {
-        name: "Chargebees EV Station - Chirala",
-        city: "Chirala",
-        address: "Pearl Shores, Chirala",
-        code: "EVCS-370005",
-        contact: "00000 00005",
-        lat: 15.8230,
-        lng: 80.3520
-    }
-];
-// charge symbole marks add 
+            const filtered = STATIONS.filter(s => {
+                const matchesSearch = s.name.toLowerCase().includes(query);
+                const matchesFilter = currentFilter === 'All' || s.type.includes(currentFilter);
+                return matchesSearch && matchesFilter;
+            });
 
-function showCustomLocations() {
-    customLocations.forEach(loc => {
+            filtered.forEach((station) => {
+                const card = document.createElement('div');
+                card.className = 'group p-5 bg-white rounded-[2rem] border border-gray-100 hover:border-emerald-600 transition-all cursor-pointer shadow-sm hover:shadow-xl duration-300';
+                card.onclick = () => map.flyTo([station.lat, station.lng], 15);
+                
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="font-black text-gray-900 group-hover:text-emerald-600 transition-colors uppercase tracking-tight text-sm">${station.name}</h3>
+                            <div class="flex items-center gap-2 mt-2">
+                                <span class="text-[9px] font-black uppercase text-gray-400 tracking-widest">${station.type}</span>
+                                <div class="flex items-center gap-1 text-amber-500 font-black text-[10px]">
+                                    <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                    ${station.rating}
+                                </div>
+                            </div>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest ${
+                            station.status === 'Available' ? 'bg-emerald-100 text-emerald-700' : 
+                            station.status === 'In Use' ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700'
+                        }">${station.status}</span>
+                    </div>
+                `;
+                list.appendChild(card);
 
-        const marker = L.marker([loc.lat, loc.lng], {
-            icon: createCustomIcon()
-        })
-        .addTo(map)
-        .bindPopup(`
-            <div class="p-2 text-center">
-                <h3 class="font-bold">${loc.name}</h3>
-                <button onclick="openDirections(${loc.lat}, ${loc.lng})"
-                    class="mt-2 px-3 py-1 bg-emerald-600 text-white text-xs rounded">
-                    Get Directions
-                </button>
-            </div>
-        `);
-    });
-}
+                const marker = L.marker([station.lat, station.lng]).addTo(map);
+                marker.bindPopup(`
+                    <div style="min-width: 150px">
+                        <p class="font-black text-gray-900 mb-1 text-sm uppercase">${station.name}</p>
+                        <p class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider">${station.type} • ${station.status}</p>
+                    </div>
+                `);
+                markers.push(marker);
+            });
+            lucide.createIcons();
+        }
 
-//direction function 
+        function filterStations(type) {
+            currentFilter = type;
+            const btns = document.querySelectorAll('.category-btn');
+            btns.forEach(btn => {
+                const isActive = btn.innerText.includes(type) || (type === 'All' && btn.innerText === 'ALL');
+                btn.className = isActive ? 'category-btn active px-6 py-2 rounded-full text-[10px] font-black whitespace-nowrap transition-all border bg-emerald-600 border-emerald-600 text-white' : 'category-btn px-6 py-2 rounded-full text-[10px] font-black whitespace-nowrap transition-all border bg-white border-gray-100 text-gray-600';
+            });
+            renderStations();
+        }
 
-function openDirections(lat, lng) {
-    const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
-    window.open(url, "_blank");
-}
+        // Mobile Menu Logic
+        const menuBtn = document.getElementById('menu-btn');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-showCustomLocations();
+        menuBtn.addEventListener('click', () => mobileMenu.classList.remove('hidden'));
+        menuClose.addEventListener('click', () => mobileMenu.classList.add('hidden'));
 
-
-
-//card function
-
-function renderCards(locations) {
-    const container = document.getElementById("stationCards");
-    container.innerHTML = "";
-
-    locations.forEach(loc => {
-        container.innerHTML += `
-        <div class="bg-white rounded-2xl shadow p-5 border">
-            <h3 class="font-bold text-lg mb-2">${loc.name}</h3>
-            <p class="text-sm text-gray-600">Address: ${loc.address}</p>
-            <p class="text-sm text-gray-600">Station Code: ${loc.code}</p>
-            <p class="text-sm text-gray-600">Contact: ${loc.contact}</p>
-            <p class="text-sm text-gray-600">Operational Hours: 24*7</p>
-
-            <button onclick="openDirections(${loc.lat}, ${loc.lng})"
-                class="mt-3 w-full bg-emerald-600 text-white py-2 rounded-lg">
-                Get Directions
-            </button>
-        </div>
-        `;
-    });
-}
-
-
-
-showCustomLocations();
-renderCards(customLocations);
-
+        document.getElementById('stationSearch').oninput = renderStations;
+        window.onload = initMap;
     </script>
 </body>
 </html>
