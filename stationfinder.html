@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Leaflet Map CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Google Fonts: Inter -->
@@ -24,6 +25,30 @@
         .mega-menu {
             transition: all 0.3s ease;
         }
+        .live-location-marker {
+    width: 20px;
+    height: 20px;
+    background: #2563eb;
+    border: 4px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 0 8px rgba(37, 99, 235, 0.25);
+    animation: pulseLocation 1.5s infinite;
+}
+
+@keyframes pulseLocation {
+
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.5);
+    }
+
+    70% {
+        box-shadow: 0 0 0 16px rgba(37, 99, 235, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+    }
+}
     </style>
 </head>
 <body class="antialiased text-gray-900 bg-gray-50">
@@ -32,12 +57,19 @@
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <div class="flex-shrink-0 flex items-center">
-                    <img src="images/logo.png" alt="Logo" class="h-10 w-auto object-contain"> 
-                    <span class="text-2xl font-bold tracking-tighter text-gray-900">
-                        CHARGE<span class="text-emerald-600">BEES</span>
-                    </span>
-                </div>
+<div class="flex-shrink-0 flex items-center gap-2">
+
+    <a href="index.html" class="flex items-center gap-2">
+
+        <img src="images/logo.png" alt="Logo" class="h-10 w-auto object-contain">
+
+        <span class="text-2xl font-bold tracking-tighter text-gray-900">
+            CHARGE<span class="text-emerald-600">BEES</span>
+        </span>
+
+    </a>
+
+</div>
                 
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="index.html" class="text-sm font-medium text-gray-600 hover:text-emerald-600 transition-colors">About</a>
@@ -247,7 +279,13 @@
             <!-- Map View -->
             <main class="flex-1 relative bg-gray-200 z-10">
                 <div id="map"></div>
-                
+                <!-- Current Location Button -->
+<button
+    id="locateBtn"
+    class="absolute bottom-6 right-6 z-[1000] w-14 h-14 rounded-full bg-white shadow-2xl flex items-center justify-center hover:scale-110 transition-all border border-gray-200"
+>
+    <i data-lucide="locate-fixed" class="w-6 h-6 text-emerald-600"></i>
+</button>
                 <!-- Floating Info Card -->
                 <div class="absolute top-6 right-6 hidden md:block scale-90 origin-top-right z-[1000]">
                     <div class="bg-white/90 backdrop-blur-xl p-6 rounded-[2rem] shadow-2xl border border-white/50">
@@ -277,8 +315,10 @@
 
     <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
     <script>
         // Init Lucide
+        // add location icon to lucide library
         lucide.createIcons();
 
         const STATIONS = [
@@ -286,10 +326,22 @@
             { id: 2, name: 'Cyber Towers Charging Point', lat: 17.4504, lng: 78.3808, type: 'Regular AC', status: 'In Use', rating: 4.5 },
             { id: 3, name: 'Visakhapatnam IT Park Hub', lat: 17.7231, lng: 83.3013, type: 'Ultra Fast', status: 'Available', rating: 4.9 },
             { id: 4, name: 'Vijayawada Highway Point', lat: 16.5062, lng: 80.6480, type: 'DC Fast', status: 'Maintenance', rating: 4.2 },
+                {
+        id: 4,
+        name: 'Kukatpally EV Point',
+        lat: 17.4948,
+        lng: 78.3996,
+        type: 'DC Fast',
+        status: 'Maintenance',
+        rating: 4.2
+    },
         ];
 
         let map, markers = [];
+        let currentLocation = null;
+        let routingControl = null;
         let currentFilter = 'All';
+        let currentMarker = null;
 
         function initMap() {
             map = L.map('map', {
@@ -303,6 +355,51 @@
             }).addTo(map);
 
             renderStations();
+            // Get Current Location
+if (navigator.geolocation) {
+
+    navigator.geolocation.watchPosition(
+
+        (position) => {
+
+            currentLocation = [
+                position.coords.latitude,
+                position.coords.longitude
+            ];
+
+            // first time marker create
+            if (!currentMarker) {
+
+currentMarker = L.marker(currentLocation, {
+
+    icon: L.divIcon({
+        className: '',
+        html: `<div class="live-location-marker"></div>`,
+        iconSize: [20, 20]
+    })
+
+}).addTo(map);
+
+                map.flyTo(currentLocation, 15);
+
+            } else {
+
+                // update marker position live
+                currentMarker.setLatLng(currentLocation);
+            }
+        },
+
+        (error) => {
+            console.log(error);
+        },
+
+        {
+            enableHighAccuracy: true,
+            maximumAge: 0,
+            timeout: 5000
+        }
+    );
+}
         }
 
         function renderStations() {
@@ -345,12 +442,41 @@
                 list.appendChild(card);
 
                 const marker = L.marker([station.lat, station.lng]).addTo(map);
-                marker.bindPopup(`
-                    <div style="min-width: 150px">
-                        <p class="font-black text-gray-900 mb-1 text-sm uppercase">${station.name}</p>
-                        <p class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider">${station.type} • ${station.status}</p>
-                    </div>
-                `);
+marker.bindPopup(`
+    <div class="p-2" style="min-width:220px;">
+        <h3 style="font-weight:800; font-size:14px; margin-bottom:8px;">
+            ${station.name}
+        </h3>
+
+        <p style="font-size:11px; color:#059669; font-weight:700; margin-bottom:12px;">
+            ${station.type}
+        </p>
+
+        <div style="display:flex; align-items:center; gap:6px; margin-bottom:14px;">
+            <span style="color:#f59e0b;">★</span>
+            <span style="font-weight:700; font-size:12px;">
+                ${station.rating}
+            </span>
+        </div>
+
+        <button
+            onclick="showDirection(${station.lat}, ${station.lng})"
+            style="
+                width:100%;
+                background:#059669;
+                color:white;
+                border:none;
+                padding:10px;
+                border-radius:12px;
+                font-size:12px;
+                font-weight:700;
+                cursor:pointer;
+            "
+        >
+            Directions
+        </button>
+    </div>
+`);
                 markers.push(marker);
             });
             lucide.createIcons();
@@ -375,6 +501,55 @@
         menuClose.addEventListener('click', () => mobileMenu.classList.add('hidden'));
 
         document.getElementById('stationSearch').oninput = renderStations;
+        document.getElementById('locateBtn').addEventListener('click', () => {
+
+    if (!currentLocation) {
+        alert("Current location not found");
+        return;
+    }
+
+    map.flyTo(currentLocation, 15);
+});
+        function showDirection(lat, lng) {
+
+    if (!currentLocation) {
+        alert("Current location not found");
+        return;
+    }
+
+    // remove previous route
+    if (routingControl) {
+        map.removeControl(routingControl);
+    }
+
+    routingControl = L.Routing.control({
+        show: false,
+
+        waypoints: [
+            L.latLng(currentLocation[0], currentLocation[1]),
+            L.latLng(lat, lng)
+        ],
+
+        routeWhileDragging: false,
+
+        draggableWaypoints: false,
+
+        addWaypoints: false,
+
+        createMarker: function () {
+            return null;
+        },
+
+        lineOptions: {
+            styles: [{
+                color: '#059669',
+                opacity: 0.9,
+                weight: 6
+            }]
+        }
+
+    }).addTo(map);
+}
         window.onload = initMap;
     </script>
 </body>

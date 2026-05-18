@@ -831,6 +831,176 @@ width:220px;
 }
 
 
+/* ===== FUTURE ROADMAP SECTION ===== */
+
+.future-roadmap-section{
+    padding:120px 0;
+    background:#f7f8fa;
+    overflow:hidden;
+}
+
+.future-roadmap-container{
+    max-width:1300px;
+    margin:auto;
+    padding:0 24px;
+}
+
+.future-roadmap-header{
+    text-align:center;
+    margin-bottom:90px;
+}
+
+.future-roadmap-tag{
+    display:inline-block;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:3px;
+    color:#0891b2;
+    margin-bottom:20px;
+}
+
+.future-roadmap-title{
+    font-size:72px;
+    font-weight:800;
+    line-height:1;
+    color:#0f172a;
+    margin-bottom:24px;
+    letter-spacing:-3px;
+}
+
+.future-roadmap-subtitle{
+    font-size:32px;
+    color:#64748b;
+    font-style:italic;
+    font-weight:400;
+}
+
+.future-roadmap-wrapper{
+    position:relative;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:34px;
+    align-items:center;
+}
+
+.future-road-line{
+    position:absolute;
+    top:50%;
+    left:5%;
+    right:5%;
+    height:4px;
+    background:#dfe5ea;
+    transform:translateY(-50%);
+    z-index:0;
+    border-radius:999px;
+}
+
+.future-road-card{
+    position:relative;
+    z-index:2;
+    background:white;
+    border-radius:40px;
+    padding:42px 42px 48px;
+    min-height:260px;
+    box-shadow:0 10px 35px rgba(15,23,42,.06);
+transition:
+    transform .22s cubic-bezier(.22,1,.36,1),
+    background .18s ease,
+    color .18s ease,
+    box-shadow .22s ease;
+    border:1px solid #edf1f4;
+}
+
+.future-road-card:hover{
+
+    background:#0f9d69;
+    color:white;
+
+    transform:
+        translateY(-12px)
+        scale(1.06);
+
+    box-shadow:
+        0 30px 60px rgba(15,23,42,.18),
+        0 0 35px rgba(15,157,105,.35);
+
+}
+
+
+.future-road-year{
+    display:block;
+    font-size:15px;
+    font-weight:800;
+    color:#0f9d69;
+    margin-bottom:24px;
+    letter-spacing:1px;
+}
+
+.future-road-card h3{
+    font-size:28px;
+    line-height:1.3;
+    font-weight:800;
+    margin-bottom:22px;
+    color:inherit;
+}
+
+.future-road-card p{
+    font-size:18px;
+    line-height:1.7;
+    color:#64748b;
+}
+
+.future-road-card:hover p,
+.future-road-card:hover .future-road-year{
+    color:white;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media(max-width:1100px){
+
+    .future-roadmap-wrapper{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .future-road-line{
+        display:none;
+    }
+}
+
+@media(max-width:768px){
+
+    .future-roadmap-section{
+        padding:90px 0;
+    }
+
+    .future-roadmap-title{
+        font-size:48px;
+    }
+
+    .future-roadmap-subtitle{
+        font-size:22px;
+    }
+
+    .future-roadmap-wrapper{
+        grid-template-columns:1fr;
+        gap:24px;
+    }
+
+    .future-road-card{
+        min-height:auto;
+        padding:34px 30px;
+        border-radius:30px;
+    }
+
+    .future-road-card h3{
+        font-size:24px;
+    }
+
+    .future-road-card p{
+        font-size:16px;
+    }
+}
 
 
 
@@ -844,12 +1014,19 @@ width:220px;
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <div class="flex-shrink-0 flex items-center">
-                    <img src="images/logo.png" alt="Logo" class="h-10 w-auto object-contain"> 
-                    <span class="text-2xl font-bold tracking-tighter text-gray-900">
-                        CHARGE<span class="text-emerald-600">BEES</span>
-                    </span>
-                </div>
+<div class="flex-shrink-0 flex items-center gap-2">
+
+    <a href="index.html" class="flex items-center gap-2">
+
+        <img src="images/logo.png" alt="Logo" class="h-10 w-auto object-contain">
+
+        <span class="text-2xl font-bold tracking-tighter text-gray-900">
+            CHARGE<span class="text-emerald-600">BEES</span>
+        </span>
+
+    </a>
+
+</div>
                 
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="index.html" class="text-sm font-medium text-emerald-600 transition-colors">About</a>
@@ -1161,6 +1338,84 @@ class="block md:hidden w-full h-full object-cover">
                 </div>
             </div>
         </section>
+
+
+<!-- Future Roadmap Section -->
+<section id="future-roadmap" class="future-roadmap-section">
+
+    <div class="future-roadmap-container">
+
+        <div class="future-roadmap-header">
+
+            <span class="future-roadmap-tag">
+                INNOVATING FOR 2027
+            </span>
+
+            <h2 class="future-roadmap-title">
+                The Road Ahead.
+            </h2>
+
+            <p class="future-roadmap-subtitle">
+                Building the infrastructure for the next 100 million EVs.
+            </p>
+
+        </div>
+
+        <div class="future-roadmap-wrapper">
+
+            <div class="future-road-line"></div>
+
+
+
+            <!-- CARD 1 -->
+            <div class="future-road-card">
+                <span class="future-road-year">Q1 2027</span>
+
+                <h3>600kW HyperCharge</h3>
+
+                <p>
+                    World class speeds for electric heavy-duty trucks.
+                </p>
+            </div>
+
+            <!-- ACTIVE CARD -->
+            <div class="future-road-card">
+                <span class="future-road-year">Q2 2027</span>
+
+                <h3>Solar-First Hubs</h3>
+
+                <p>
+                    100% off-grid charging stations in remote areas.
+                </p>
+            </div>
+            
+            <!-- CARD 3 -->
+            <div class="future-road-card">
+                <span class="future-road-year">Q3 2026</span>
+
+                <h3>Smart Grid Sync</h3>
+
+                <p>
+                    AI-driven load balancing for urban clusters.
+                </p>
+            </div>
+
+            <!-- CARD 4 -->
+            <div class="future-road-card">
+                <span class="future-road-year">Q4 2027</span>
+
+                <h3>V2G Integration</h3>
+
+                <p>
+                    Vehicles feeding power back to the city grid.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
         <!-- Values Section -->
         <section class="py-24">
@@ -1895,7 +2150,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 lucide.createIcons();
+
+
+// Future Roadmap Animation
+
+const roadmapCards = document.querySelectorAll('.future-road-card');
+
+const roadmapObserver = new IntersectionObserver((entries) => {
+
+    entries.forEach((entry) => {
+
+        if(entry.isIntersecting){
+
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+        }
+
+    });
+
+},{
+    threshold:0.2
+});
+
+roadmapCards.forEach((card,index)=>{
+
+    card.style.opacity = "0";
+    card.style.transform = "translateY(40px)";
+    card.style.transition = `all .7s ease ${index * 0.15}s`;
+
+    roadmapObserver.observe(card);
+});
     </script>
+
+
     
 </body>
 </html>
