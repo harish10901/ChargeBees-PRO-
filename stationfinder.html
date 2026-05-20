@@ -50,6 +50,37 @@
         box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
     }
 }
+
+
+
+
+
+
+
+@media (max-width:768px){
+
+    #filterContainer{
+        padding-bottom: 4px;
+        scroll-behavior: smooth;
+    }
+
+    #stationList{
+        padding-bottom: 10px;
+        scroll-behavior: smooth;
+    }
+
+    aside{
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+}
+
+
+
+
+
+
+
     </style>
 </head>
 <body class="antialiased text-gray-900 bg-gray-50">
@@ -253,7 +284,7 @@
     <div class="flex flex-col h-screen pt-20">
         <div class="flex-1 relative overflow-hidden">
             <!-- Sidebar -->
-            <aside class="absolute bottom-0 left-0 right-0 md:relative md:w-[400px] bg-transparent md:bg-white z-30 flex flex-col pointer-events-none">
+            <aside class="absolute bottom-4 left-0 right-0 md:relative md:w-[400px] bg-transparent md:bg-white z-30 flex flex-col pointer-events-none md:bottom-0">
                 <div class="p-4 md:p-6 shrink-0 pointer-events-auto">
                     <h1 class="text-3xl font-black text-gray-900 mb-2 tracking-tighter">Find Power</h1>
                     <p class="text-[10px] font-black text-gray-400 mb-6 uppercase tracking-widest">India's Largest Green Network</p>
@@ -268,7 +299,7 @@
                         />
                     </div>
 
-                    <div class="flex gap-3 overflow-x-auto no-scrollbar md:pb-2 py-2 px-1" id="filterContainer">
+                    <div class="flex gap-3 overflow-x-auto no-scrollbar md:pb-2 py-2 px-1 w-full touch-pan-x snap-x" id="filterContainer">
                         <button onclick="filterStations('All')" class="category-btn active px-6 py-2 rounded-full text-[10px] font-black whitespace-nowrap transition-all border bg-emerald-600 border-emerald-600 text-white shadow-lg shadow-emerald-600/20 uppercase tracking-wider">All</button>
                         <button onclick="filterStations('AC')" class="category-btn px-6 py-2 rounded-full text-[10px] font-black whitespace-nowrap transition-all border bg-white border-gray-100 text-gray-600 hover:border-gray-300 uppercase tracking-wider">Regular AC</button>
                         <button onclick="filterStations('DC Fast')" class="category-btn px-6 py-2 rounded-full text-[10px] font-black whitespace-nowrap transition-all border bg-white border-gray-100 text-gray-600 hover:border-gray-300 uppercase tracking-wider">DC Fast</button>
@@ -278,7 +309,7 @@
 
                 <!-- Scrollable Sidebar Area -->
                 <div class="flex-1 overflow-y-auto no-scrollbar">
-                    <<div class="flex md:block gap-4 overflow-x-auto no-scrollbar px-4 pb-6 md:p-4 md:space-y-4" id="stationList">
+                    <div class="flex md:block gap-4 overflow-x-auto no-scrollbar px-4 pb-2 md:p-4 md:space-y-4 touch-pan-x" id="stationList">
                         <!-- Stations will be injected here -->
                     </div>
 
