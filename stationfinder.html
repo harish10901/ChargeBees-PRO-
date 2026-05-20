@@ -77,10 +77,65 @@
 
 
 
+@media (min-width: 768px){
+
+    aside{
+        height: calc(100vh - 80px);
+    }
+
+    #stationList{
+        overflow-y: visible;
+    }
+
+}
 
 
+@media (min-width:768px){
 
+    /* Sidebar full height */
+    aside{
+        height: calc(100vh - 80px);
+        overflow: hidden;
+    }
 
+    /* Main scroll area */
+    aside .flex-1{
+        overflow-y: auto;
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        scrollbar-color: #10b981 #f3f4f6;
+    }
+
+    /* Chrome Scrollbar */
+    aside .flex-1::-webkit-scrollbar{
+        width: 8px;
+    }
+
+    aside .flex-1::-webkit-scrollbar-track{
+        background: #f3f4f6;
+        border-radius: 20px;
+    }
+
+    aside .flex-1::-webkit-scrollbar-thumb{
+        background: #10b981;
+        border-radius: 20px;
+    }
+
+    aside .flex-1::-webkit-scrollbar-thumb:hover{
+        background: #059669;
+    }
+
+    /* Filters always visible */
+    #filterContainer{
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: white;
+        padding-top: 8px;
+        padding-bottom: 12px;
+    }
+
+}
     </style>
 </head>
 <body class="antialiased text-gray-900 bg-gray-50">
@@ -284,7 +339,7 @@
     <div class="flex flex-col h-screen pt-20">
         <div class="flex-1 relative overflow-hidden">
             <!-- Sidebar -->
-            <aside class="absolute bottom-4 left-0 right-0 md:relative md:w-[400px] bg-transparent md:bg-white z-30 flex flex-col pointer-events-none md:bottom-0">
+            <aside id="sidebar" class="absolute bottom-4 left-0 right-0 md:relative md:w-[400px] md:h-full bg-transparent md:bg-white z-30 flex flex-col pointer-events-none md:bottom-0">
                 <div class="p-4 md:p-6 shrink-0 pointer-events-auto">
                     <h1 class="text-3xl font-black text-gray-900 mb-2 tracking-tighter">Find Power</h1>
                     <p class="text-[10px] font-black text-gray-400 mb-6 uppercase tracking-widest">India's Largest Green Network</p>
@@ -308,12 +363,13 @@
                 </div>
 
                 <!-- Scrollable Sidebar Area -->
-                <div class="flex-1 overflow-y-auto no-scrollbar">
+                <div class="flex-1 overflow-y-auto no-scrollbar min-h-0">
                     <div class="flex md:block gap-4 overflow-x-auto no-scrollbar px-4 pb-2 md:p-4 md:space-y-4 touch-pan-x" id="stationList">
                         <!-- Stations will be injected here -->
                     </div>
 
                     <!-- Footer (Appended at the end of sidebar list) -->
+                     <!--
                     <footer class="hidden md:block bg-gray-50 pt-16 pb-12 border-t border-gray-200 px-6">
                         <div class="space-y-12">
                             <div>
@@ -349,6 +405,7 @@
                             </div>
                         </div>
                     </footer>
+                    -->
                 </div>
             </aside>
 
@@ -635,6 +692,24 @@ menuBtn.addEventListener("click", () => {
     // icon animation optional
     menuBtn.classList.toggle("active");
 });        
+
+
+
+
+// Prevent map zoom while scrolling sidebar
+const sidebar = document.getElementById('sidebar');
+
+sidebar.addEventListener('mouseenter', () => {
+
+    map.scrollWheelZoom.disable();
+
+});
+
+sidebar.addEventListener('mouseleave', () => {
+
+    map.scrollWheelZoom.enable();
+
+});
     </script>
 </body>
 </html>
