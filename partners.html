@@ -92,6 +92,168 @@
             from { transform: translateX(0); }
             to { transform: translateX(calc(-100% - 3rem)); }
         }
+
+
+
+
+/* Background patterns */
+.bg-texture {
+  background-image: url("https://www.transparenttextures.com/patterns/gray-floral.png");
+  background-repeat: repeat;
+}
+
+/* Modal Entry Animation */
+.animate-modal-in {
+  animation: modalFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Base Form Styling Focus */
+input:focus {
+  background-color: white !important;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
+
+
+
+/* ===== FRANCHISE PREMIUM ANIMATION ===== */
+
+@keyframes franchiseFloat {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-14px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes franchiseGlow {
+    0% {
+        opacity: .4;
+        transform: scale(1);
+    }
+    50% {
+        opacity: .9;
+        transform: scale(1.15);
+    }
+    100% {
+        opacity: .4;
+        transform: scale(1);
+    }
+}
+
+@keyframes franchiseBorder {
+    0% {
+        border-color: rgba(16,185,129,.15);
+    }
+    50% {
+        border-color: rgba(16,185,129,.55);
+    }
+    100% {
+        border-color: rgba(16,185,129,.15);
+    }
+}
+
+@keyframes cardPulse {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-8px) scale(1.03);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Main Section Animation */
+
+#franchise-section .rounded-\[4rem\]{
+    animation:
+    franchiseFloat 7s ease-in-out infinite,
+    franchiseBorder 4s ease-in-out infinite;
+}
+
+/* Glow Animation */
+
+#franchise-section .blur-\[120px\]{
+    animation: franchiseGlow 5s ease-in-out infinite;
+}
+
+/* Stats Cards */
+
+#franchise-section .grid.grid-cols-2 > div{
+    transition:
+    transform .35s ease,
+    background .35s ease,
+    box-shadow .35s ease;
+}
+
+#franchise-section .grid.grid-cols-2 > div:hover{
+
+    transform:
+    translateY(-14px)
+    scale(1.06);
+
+    background: rgba(16,185,129,.12);
+
+    box-shadow:
+    0 25px 45px rgba(16,185,129,.18),
+    0 0 25px rgba(16,185,129,.15);
+
+}
+
+/* Button Ultra Effect */
+
+#openFranchiseBtn{
+    position: relative;
+    overflow: hidden;
+}
+
+#openFranchiseBtn::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-120%;
+    left:-40%;
+
+    width:70%;
+    height:320%;
+
+    background:rgba(255,255,255,.18);
+
+    transform:rotate(25deg);
+
+    transition:.8s;
+
+}
+
+#openFranchiseBtn:hover::before{
+    left:140%;
+}
+
+/* Heading Animation */
+
+#franchise-section h2{
+    animation: cardPulse 5s ease-in-out infinite;
+}
+
+
     </style>
 </head>
 <body class="antialiased text-gray-900">
@@ -232,27 +394,57 @@
                 </div>
                     <!-- Mobile Menu Button -->
 <!-- Mobile Menu Button -->
-<button
-    id="menu-btn"
-    class="md:hidden flex items-center justify-center w-11 h-11 rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm shadow-sm hover:bg-emerald-50 hover:border-emerald-200 transition-all duration-300"
->
-    <i data-lucide="menu" class="w-6 h-6 text-gray-900"></i>
-</button>
+                <button
+                    id="menu-btn"class="md:hidden flex items-center justify-center w-11 h-11 rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm shadow-sm hover:bg-emerald-50 hover:border-emerald-200 transition-all duration-300">
+                    <i data-lucide="menu" class="w-6 h-6 text-gray-900"></i>
+                </button>
             </div>
         </div>
     </nav>
     <!-- Mobile Menu -->
-<div id="mobile-menu" class="hidden md:hidden bg-white border-t p-4 space-y-4">
-    <a href="index.html" class="block">About</a>    
-    <a href="index.html" class="block">About</a>
-    <a href="index.html" class="block">About</a>
-    <a href="stationfinder.html" class="block">Station Finder</a>
-    <a href="products.html" class="block">Products</a>
-    <a href="partners.html" class="block text-emerald-600 font-semibold">Partners</a>
-    <a href="media-center.html" class="block">Media Center</a>
-    <a href="careers.html" class="block">Careers</a>
-    <a href="contact.html" class="block">Contact Us</a>
+<div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-white border-t border-gray-100 shadow-xl z-40">
+
+    <div class="p-6 space-y-5">
+
+        <a href="index.html"
+           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
+            About
+        </a>
+
+        <a href="stationfinder.html"
+           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
+            Station Finder
+        </a>
+
+        <a href="products.html"
+           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors"></a>
+            Products
+        </a>
+
+        <a href="partners.html"
+           class="block text-base font-semibold text-emerald-600">
+            Partners
+        </a>
+
+        <a href="media-center.html"
+           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
+            Media Center
+        </a>
+
+        <a href="careers.html"
+           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
+            Careers
+        </a>
+
+        <a href="contact.html"
+           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
+            Contact Us
+        </a>
+
+    </div>
+
 </div>
+
     <main class="relative z-10">
         <!-- Hero Section with Premium Gradient -->
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900 pt-24 md:pt-20 pb-16">            <div class="absolute inset-0 z-0">
@@ -491,6 +683,116 @@
         </section>
     </main>
 
+
+
+<!-- Franchise Section -->
+<section id="franchise-section" class="py-20 md:py-32 bg-gray-900 overflow-hidden relative">
+  <div class="absolute inset-0 bg-texture opacity-5"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="relative rounded-[3rem] md:rounded-[4rem] bg-gradient-to-br from-emerald-950 to-gray-900 border border-white/5 p-8 md:p-20 overflow-hidden shadow-2xl">
+      <!-- Glow Effect -->
+      <div class="absolute top-0 right-0 w-[50%] h-[50%] bg-emerald-500/10 rounded-full blur-[120px]"></div>
+      
+      <div class="grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
+        <!-- Left Content -->
+        <div>
+          <span class="inline-block px-4 py-1.5 bg-emerald-500/20 text-emerald-400 rounded-full text-xs font-bold uppercase tracking-widest mb-6 border border-emerald-500/30">
+            High Profit Franchise Opportunity
+          </span>
+          <h2 class="text-4xl md:text-7xl font-black text-white mb-6 leading-tight">
+            Start Your Own <br/><span class="text-emerald-500">Green Business</span>
+          </h2>
+          <p class="text-gray-400 text-lg md:text-xl mb-10 leading-relaxed">
+            Invest in the future of mobility with a high-margin business model. Our franchise program offers <strong>exceptional ROI</strong> and full-spectrum corporate support.
+          </p>
+          
+          <div class="grid sm:grid-cols-2 gap-6 mb-10">
+            <div class="flex gap-4">
+              <div class="w-12 h-12 bg-emerald-500/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                <i data-lucide="trending-up" class="w-6 h-6 text-emerald-400"></i>
+              </div>
+              <div>
+                <p class="font-bold text-lg text-white">40%+ Margin</p>
+                <p class="text-gray-500 text-sm">Profit potential per unit.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-12 h-12 bg-emerald-500/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                <i data-lucide="check-circle" class="w-6 h-6 text-emerald-400"></i>
+              </div>
+              <div>
+                <p class="font-bold text-lg text-white">Zero Royalty</p>
+                <p class="text-gray-500 text-sm">Keep all your rewards.</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Get Franchise Button -->
+          <button id="openFranchiseBtn" class="group relative px-10 py-5 bg-emerald-500 text-white rounded-2xl font-black text-xl overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-emerald-500/30">
+            <span class="relative z-10 flex items-center gap-3">
+              Get Franchise Now
+              <i data-lucide="arrow-right" class="w-6 h-6 group-hover:translate-x-2 transition-transform"></i>
+            </span>
+            <div class="absolute inset-0 bg-emerald-400 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+          </button>
+        </div>
+        
+        <!-- Right Stats Grid -->
+        <div class="grid grid-cols-2 gap-4 md:gap-6 relative franchise-stats">
+          <div class="p-8 bg-white/5 rounded-3xl border border-white/5 backdrop-blur-xl">
+            <p class="text-emerald-400 text-3xl font-black">30 Days</p>
+            <p class="text-gray-400 font-bold">Setup Time</p>
+          </div>
+          <div class="p-8 bg-white/5 rounded-3xl border border-white/5 backdrop-blur-xl">
+            <p class="text-emerald-400 text-3xl font-black">35%+</p>
+            <p class="text-gray-400 font-bold">Annual Yield</p>
+          </div>
+          <div class="p-8 bg-white/5 rounded-3xl border border-white/5 backdrop-blur-xl">
+            <p class="text-emerald-400 text-3xl font-black">Global</p>
+            <p class="text-gray-400 font-bold">Support</p>
+          </div>
+          <div class="p-8 bg-white/5 rounded-3xl border border-white/5 backdrop-blur-xl">
+            <p class="text-emerald-400 text-3xl font-black">Included</p>
+            <p class="text-gray-400 font-bold">Training</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Franchise Modal (Form) -->
+<div id="franchiseModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+  <div class="absolute inset-0 bg-black/90 backdrop-blur-md" id="modalOverlay"></div>
+  <div class="relative w-full max-w-xl bg-white rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-2xl animate-modal-in">
+    <button id="closeModalBtn" class="absolute top-8 right-8 p-3 hover:bg-gray-100 rounded-full transition-colors z-10">
+      <i data-lucide="x" class="w-6 h-6 text-gray-400"></i>
+    </button>
+    
+    <div class="p-10 md:p-16">
+      <div class="text-center mb-10">
+        <div class="w-20 h-20 bg-emerald-100 rounded-[2rem] flex items-center justify-center mx-auto mb-6">
+          <i data-lucide="award" class="w-10 h-10 text-emerald-600"></i>
+        </div>
+        <h3 class="text-3xl font-black text-gray-900 mb-2">Franchise Inquiry</h3>
+        <p class="text-gray-500">Submit your details to start your journey.</p>
+      </div>
+      
+      <form id="franchiseForm" class="space-y-4">
+        <input required type="text" placeholder="Full Name" class="w-full px-6 py-4 rounded-3xl bg-gray-50 border-none outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all" />
+        <input required type="tel" placeholder="Phone Number" class="w-full px-6 py-4 rounded-3xl bg-gray-50 border-none outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all" />
+        <input required type="email" placeholder="Email Address" class="w-full px-6 py-4 rounded-3xl bg-gray-50 border-none outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all" />
+        <div class="pt-6">
+          <button type="submit" class="w-full py-5 bg-emerald-600 text-white rounded-[2rem] font-black text-xl hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-600/30">
+            Final Submit
+          </button>
+          <p class="text-center text-gray-400 text-xs mt-6 uppercase tracking-widest font-bold">Confidential Application</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
     <!-- Footer -->
     <footer class="bg-gray-50 pt-24 pb-12 border-t border-gray-200 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -619,6 +921,48 @@ menuBtn.addEventListener("click", () => {
     // icon animation optional
     menuBtn.classList.toggle("active");
 });
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('franchiseModal');
+  const openBtn = document.getElementById('openFranchiseBtn');
+  const closeBtn = document.getElementById('closeModalBtn');
+  const overlay = document.getElementById('modalOverlay');
+  const form = document.getElementById('franchiseForm');
+
+  // Open Modal
+  openBtn.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; // Scroll disable
+  });
+
+  // Close Modal
+  const closeModal = () => {
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto'; // Scroll enable
+  };
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', closeModal);
+
+  // Form Submit
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Thank you! Your Franchise application has been submitted successfully.');
+    closeModal();
+    form.reset();
+  });
+
+  // Initialize Lucide Icons (if using the library)
+  if (window.lucide) {
+    window.lucide.createIcons();
+  }
+});
+
+
+
+
     </script>
 </body>
 </html>
