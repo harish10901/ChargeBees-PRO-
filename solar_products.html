@@ -470,6 +470,22 @@
             .process-steps { grid-template-columns: 1fr; }
             .stats-inner { grid-template-columns: 1fr 1fr; }
         }
+@media (max-width: 768px){
+
+    .nav-links{
+        display:none !important;
+    }
+
+    .nav-btn{
+        display:none !important;
+    }
+
+    #menu-btn{
+        display:flex !important;
+    }
+
+}
+
     </style>
 </head>
 <body>
@@ -591,45 +607,62 @@
    Download App
 </a>
                 <a href="contact.html" class="nav-btn">Contact Us</a>
-                <button id="menu-btn" style="display:none;width:44px;height:44px;border-radius:12px;border:1px solid #e5e7eb;background:rgba(255,255,255,0.8);backdrop-filter:blur(8px);align-items:center;justify-content:center;cursor:pointer;">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111827" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-                </button>
+<button id="menu-btn" class="md:hidden flex items-center justify-center w-11 h-11 rounded-xl border border-gray-200 bg-white shadow-sm">
+<i data-lucide="menu"class="w-6 h-6 text-gray-900"></i>
+</button>
             </div>
         </div>
     </nav>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu">
-        <a href="index.html" class="mob-link">About</a>
-        <a href="stationfinder.html" class="mob-link">Station Finder</a>
-        <button class="mob-accordion-toggle" onclick="toggleMobAccordion('ev-sub')">
+<div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-white border-t border-gray-100 shadow-xl z-40">
+
+    <div class="p-6 space-y-5">
+
+        <a href="index.html"
+           class="block text-base font-semibold text-emerald-600">
+            About
+        </a>
+
+        <a href="stationfinder.html"
+           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
+            Station Finder
+        </a>
+
+        <a href="products.html"
+           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
             EV Products
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="mob-sub" id="ev-sub" style="display:none;">
-            <a href="products.html#hardware">All Chargers</a>
-            <a href="products.html#software">ChargeCloud</a>
-            <a href="products.html#software">Chargebees App</a>
-            <a href="products.html#services">Energy As A Service</a>
-            <a href="products.html#services">Battery As A Service</a>
-            <a href="products.html#services">RFID Card</a>
-        </div>
-        <button class="mob-accordion-toggle" onclick="toggleMobAccordion('solar-sub')" style="color:#059669;">
+        </a>
+        <a href="solar_products.html"
+           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
             Solar Products
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="mob-sub" id="solar-sub" style="display:none;">
-            <a href="#residential">Residential Solar Rooftops</a>
-            <a href="#commercial">Commercial Solar Rooftops</a>
-            <a href="#industrial">Industrial Solar Rooftops</a>
-            <a href="#ground">Ground Mounted Solar System</a>
-        </div>
-        <a href="partners.html" class="mob-link">Partners</a>
-        <a href="media-center.html" class="mob-link">Media Center</a>
-        <a href="careers.html" class="mob-link">Careers</a>
-        <a href="contact.html" class="mob-link active">Contact Us</a>
+        </a>
+
+
+        <a href="partners.html"
+           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
+            Partners
+        </a>
+
+        <a href="media-center.html"
+           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
+            Media Center
+        </a>
+
+        <a href="careers.html"
+           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
+            Careers
+        </a>
+
+        <a href="contact.html"
+           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
+            Contact Us
+        </a>
+
     </div>
 
+</div>
+  
     <!-- ===== HERO SECTION ===== -->
     <section class="hero">
         <div class="hero-bg">
@@ -1217,6 +1250,9 @@
                 if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
+
+
+
     </script>
 </body>
 </html>
