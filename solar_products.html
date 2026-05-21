@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Products - ChargeBees</title>
+    <meta name="description" content="ChargeBees advanced solar products for homes, businesses, EV charging stations, and industrial projects.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Chargebees",
+      "url": "https://chargebees.com",
+      "logo": "https://chargebees.com/images/logo.png"
+    }
+    </script>
+
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --emerald: #10b981;
+            --emerald-dark: #059669;
+            --emerald-light: #34d399;
+            --solar-gold: #f59e0b;
+            --solar-orange: #f97316;
+            --dark: #0a0f0d;
+            --card-bg: rgba(255,255,255,0.03);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfbf7;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* ===== BG TEXTURE & GRID ===== */
+        .bg-texture {
+            position: fixed; inset: 0; opacity: 0.12;
+            pointer-events: none; z-index: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/gray-floral.png');
+        }
+        .bg-grid {
+            position: fixed; inset: 0; pointer-events: none; z-index: 0;
+            background-image:
+                linear-gradient(to right, rgba(16,185,129,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16,185,129,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        /* ===== BRAND LOGO TEXT ===== */
+        .brand-logo-text {
+            font-size: 1.55rem; font-weight: 500; letter-spacing: -0.5px;
+            color: #111827; font-family: "Poppins", sans-serif; line-height: 1;
+        }
+        .brand-logo-text span { color: #10b981; }
+
+        /* ===== NAVBAR ===== */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #f3f4f6; }
+        .nav-inner { max-width: 80rem; margin: auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        .nav-links { display: flex; align-items: center; gap: 1.25rem; }
+        .nav-links a { font-size: 0.875rem; font-weight: 500; color: #4b5563; transition: color 0.2s; text-decoration: none; }
+        .nav-links a:hover, .nav-links a.active { color: #111827; }
+        .nav-links a.active { color: #059669; }
+        .nav-btn { background: #059669; color: #fff; padding: 0.625rem 1.5rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: background 0.2s; white-space: nowrap; }
+        .nav-btn:hover { background: #047857; }
+
+        /* Dropdown */
+        .dropdown-wrap { position: relative; }
+        .dropdown-trigger { display: flex; align-items: center; gap: 4px; font-size: 0.875rem; font-weight: 500; color: #4b5563; cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; transition: color 0.2s; white-space: nowrap; }
+        .dropdown-trigger:hover { color: #111827; }
+        .dropdown-trigger.solar-active { color: #059669; }
+        .mega-drop { position: absolute; top: calc(100% + 2px); left: 50%; transform: translateX(-50%); width: 680px; background: #fff; border-radius: 24px; box-shadow: 0 25px 60px rgba(0,0,0,0.12); border: 1px solid #f0fdf4; padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; opacity: 0; visibility: hidden; transition: all 0.25s ease; pointer-events: none; }
+        .dropdown-wrap:hover .mega-drop { opacity: 1; visibility: visible; pointer-events: all; transform: translateX(-50%) translateY(0); }
+        .drop-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; border-radius: 16px; text-decoration: none; transition: background 0.2s; }
+        .drop-item:hover { background: #f0fdf4; }
+        .drop-icon { width: 44px; height: 44px; min-width: 44px; background: linear-gradient(135deg, #10b981, #34d399); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+        .drop-icon svg { width: 22px; height: 22px; stroke: #fff; stroke-width: 2; fill: none; }
+        .drop-text p { font-weight: 700; font-size: 0.9rem; color: #111827; margin-bottom: 2px; }
+        .drop-text span { font-size: 0.78rem; color: #6b7280; }
+
+        /* EV Products dropdown (reused from index) */
+        .mega-menu-ev { position: absolute; top: calc(100% + 16px); left: 50%; transform: translateX(-50%); width: 800px; background: #fff; border-radius: 24px; box-shadow: 0 25px 60px rgba(0,0,0,0.12); border: 1px solid #f3f4f6; padding: 32px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; opacity: 0; visibility: hidden; transition: all 0.25s ease; }
+        .dropdown-wrap:hover .mega-menu-ev { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+        .ev-col h3 { font-size: 1rem; font-weight: 700; color: #111827; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        .ev-item { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 16px; text-decoration: none; transition: background 0.2s; margin-bottom: 8px; }
+        .ev-item:hover { background: #f0fdf4; }
+        .ev-item-icon { width: 44px; height: 44px; min-width: 44px; background: #f3f4f6; border-radius: 12px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+        .ev-item:hover .ev-item-icon { background: #fff; }
+        .ev-item-icon svg { width: 22px; height: 22px; stroke: #10b981; stroke-width: 2; fill: none; }
+        .ev-item p { font-weight: 700; font-size: 0.875rem; color: #111827; }
+        .ev-item span { font-size: 0.75rem; color: #6b7280; }
+        .badge { font-size: 10px; background: #f3f4f6; color: #6b7280; padding: 2px 8px; border-radius: 999px; font-weight: 700; text-transform: uppercase; }
+
+        /* Mobile menu */
+        #mobile-menu { display: none; position: fixed; top: 80px; left: 0; width: 100%; background: #fff; border-top: 1px solid #f3f4f6; box-shadow: 0 20px 40px rgba(0,0,0,0.1); z-index: 40; max-height: calc(100vh - 80px); overflow-y: auto; }
+        #mobile-menu.open { display: block; }
+        .mob-link { display: block; padding: 14px 24px; font-size: 1rem; font-weight: 600; color: #374151; text-decoration: none; border-bottom: 1px solid #f9fafb; }
+        .mob-link:hover, .mob-link.active { color: #059669; }
+        .mob-sub { background: #f9fafb; }
+        .mob-sub a { display: block; padding: 12px 36px; font-size: 0.9rem; color: #4b5563; text-decoration: none; border-bottom: 1px solid #f3f4f6; }
+        .mob-sub a:hover { color: #059669; }
+        .mob-accordion-toggle { width: 100%; text-align: left; padding: 14px 24px; font-size: 1rem; font-weight: 600; color: #374151; background: none; border: none; border-bottom: 1px solid #f9fafb; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: inherit; }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero-bg {
+            position: absolute; inset: 0; z-index: 0;
+        }
+        .hero-bg img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(105deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.2) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative; z-index: 10;
+            max-width: 80rem; margin: auto;
+            padding: 60px 32px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 18px; border-radius: 999px;
+            color: #fff; font-size: 0.82rem; font-weight: 600;
+            letter-spacing: 0.5px; margin-bottom: 28px;
+        }
+        .hero-badge svg { width: 16px; height: 16px; stroke: #f59e0b; fill: none; }
+
+        .hero-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3.2rem, 6vw, 6rem);
+            line-height: 0.95;
+            color: #fff;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+        }
+        .hero-title .accent { color: #10b981; }
+
+        .hero-desc {
+            font-size: 1.05rem; line-height: 1.75;
+            color: rgba(255,255,255,0.82);
+            max-width: 500px; margin-bottom: 36px;
+        }
+
+        .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+        .btn-primary {
+            background: #10b981; color: #fff;
+            padding: 14px 32px; border-radius: 999px;
+            font-weight: 700; font-size: 0.95rem;
+            text-decoration: none; transition: all 0.25s;
+            border: none; cursor: pointer;
+        }
+        .btn-primary:hover { background: #059669; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(16,185,129,0.35); }
+        .btn-outline {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff; padding: 14px 32px; border-radius: 999px;
+            font-weight: 700; font-size: 0.95rem;
+            text-decoration: none; transition: all 0.25s;
+            cursor: pointer;
+        }
+        .btn-outline:hover { background: rgba(255,255,255,0.2); }
+
+        /* ===== FLOATING CONTACT FORM ===== */
+        .contact-form-card {
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(20px);
+            border-radius: 28px;
+            padding: 40px 36px;
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.25),
+                0 0 0 1px rgba(255,255,255,0.6),
+                inset 0 1px 0 rgba(255,255,255,0.9);
+            transform: perspective(1000px) rotateY(-4deg) rotateX(2deg);
+            transition: transform 0.4s ease;
+            animation: formFloat 5s ease-in-out infinite;
+        }
+        .contact-form-card:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg) translateY(-6px);
+        }
+        @keyframes formFloat {
+            0%, 100% { transform: perspective(1000px) rotateY(-4deg) rotateX(2deg) translateY(0); }
+            50% { transform: perspective(1000px) rotateY(-4deg) rotateX(2deg) translateY(-12px); }
+        }
+        .contact-form-card:hover { animation: none; }
+
+        .form-title {
+            font-size: 1.4rem; font-weight: 800; color: #111827; margin-bottom: 6px;
+        }
+        .form-sub { font-size: 0.85rem; color: #6b7280; margin-bottom: 24px; }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+        .form-group { margin-bottom: 14px; }
+        .form-group label { display: block; font-size: 0.78rem; font-weight: 600; color: #374151; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%; padding: 11px 15px;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            color: #111827;
+            background: #fafafa;
+            transition: all 0.2s;
+            outline: none;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #10b981;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(16,185,129,0.12);
+        }
+        .form-group textarea { resize: none; height: 80px; }
+
+        .form-submit {
+            width: 100%; padding: 14px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff; border: none; border-radius: 14px;
+            font-size: 1rem; font-weight: 700; cursor: pointer;
+            font-family: inherit; transition: all 0.25s;
+            box-shadow: 0 8px 20px rgba(16,185,129,0.3);
+        }
+        .form-submit:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(16,185,129,0.4); }
+
+        /* ===== 3D STATS BAR ===== */
+        .stats-bar {
+            background: linear-gradient(135deg, #0a3d2e, #0d5c45);
+            padding: 40px 0;
+            position: relative; z-index: 10;
+        }
+        .stats-inner { max-width: 80rem; margin: auto; padding: 0 32px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        .stat-item { text-align: center; }
+        .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: #10b981; line-height: 1; }
+        .stat-lbl { font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-top: 4px; font-weight: 500; }
+
+        /* ===== PRODUCTS SECTIONS ===== */
+        .section-tag {
+            display: inline-block; font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 3px; color: #059669; margin-bottom: 14px;
+            text-transform: uppercase;
+        }
+        .section-heading {
+            font-size: clamp(2rem, 3.5vw, 3.2rem);
+            font-weight: 800; color: #0a1a12; line-height: 1.1;
+            margin-bottom: 16px; letter-spacing: -1px;
+        }
+        .section-heading .hl { color: #10b981; }
+        .section-sub { font-size: 1.05rem; color: #4b5563; line-height: 1.75; max-width: 560px; }
+
+        /* 3D Product Cards */
+        .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+        .product-card {
+            background: #fff;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid #e5f5ef;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+            transition: all 0.35s cubic-bezier(.22,1,.36,1);
+            transform: perspective(800px) rotateX(0deg);
+            cursor: pointer;
+        }
+        .product-card:hover {
+            transform: perspective(800px) rotateX(-4deg) translateY(-12px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(16,185,129,0.15), 0 15px 30px rgba(0,0,0,0.1);
+            border-color: #10b981;
+        }
+        .product-img { width: 100%; height: 200px; object-fit: cover; display: block; transition: transform 0.4s; }
+        .product-card:hover .product-img { transform: scale(1.05); }
+        .product-body { padding: 24px 26px 28px; }
+        .product-icon { width: 44px; height: 44px; background: linear-gradient(135deg, #10b981, #34d399); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+        .product-icon svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 2; }
+        .product-name { font-size: 1.1rem; font-weight: 800; color: #0a1a12; margin-bottom: 8px; }
+        .product-desc { font-size: 0.88rem; color: #6b7280; line-height: 1.65; margin-bottom: 16px; }
+        .product-tag { display: inline-block; font-size: 0.75rem; font-weight: 600; padding: 4px 12px; background: #f0fdf4; color: #059669; border-radius: 999px; }
+
+        /* ===== FEATURE HIGHLIGHT SECTION ===== */
+        .feature-split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .feature-img-wrap { position: relative; border-radius: 32px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.14); }
+        .feature-img-wrap img { width: 100%; display: block; }
+        .feature-badge-float {
+            position: absolute; bottom: 24px; left: 24px;
+            background: #fff; border-radius: 16px; padding: 14px 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: flex; align-items: center; gap: 12px;
+        }
+        .badge-icon { width: 40px; height: 40px; background: #f0fdf4; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+        .badge-icon svg { width: 20px; height: 20px; stroke: #10b981; fill: none; }
+        .badge-num { font-size: 1.2rem; font-weight: 800; color: #0a1a12; }
+        .badge-lbl { font-size: 0.75rem; color: #6b7280; }
+
+        .features-list { margin-top: 32px; display: flex; flex-direction: column; gap: 18px; }
+        .feature-item { display: flex; gap: 16px; }
+        .feat-dot { width: 36px; height: 36px; min-width: 36px; background: #f0fdf4; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+        .feat-dot svg { width: 18px; height: 18px; stroke: #10b981; fill: none; stroke-width: 2.5; }
+        .feat-title { font-weight: 700; color: #0a1a12; margin-bottom: 4px; }
+        .feat-desc { font-size: 0.88rem; color: #6b7280; line-height: 1.6; }
+
+        /* ===== 3D PROCESS STEPS ===== */
+        .process-section { background: linear-gradient(135deg, #0a1a12, #0d2a1c); padding: 100px 0; position: relative; overflow: hidden; }
+        .process-section::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(16,185,129,0.08), transparent 70%); border-radius: 50%; }
+        .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+        .process-steps::before { content: ''; position: absolute; top: 60px; left: 12.5%; right: 12.5%; height: 2px; background: linear-gradient(to right, #10b981, #34d399, #10b981); opacity: 0.3; border-radius: 999px; }
+        .process-step { text-align: center; padding: 0 20px; }
+        .step-num {
+            width: 80px; height: 80px; border-radius: 50%;
+            background: linear-gradient(135deg, #10b981, #059669);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 24px;
+            font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: #fff;
+            box-shadow: 0 12px 30px rgba(16,185,129,0.35);
+            position: relative; z-index: 2;
+            transition: transform 0.3s;
+        }
+        .process-step:hover .step-num { transform: scale(1.12) translateY(-4px); }
+        .step-title { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+        .step-desc { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
+
+        /* ===== SOLAR TYPES DEEP DIVE ===== */
+        .solar-type-section { padding: 100px 0; }
+        .solar-type-card {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 60px; align-items: center;
+            padding: 60px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .solar-type-card:last-child { border-bottom: none; }
+        .solar-type-card.reverse { direction: rtl; }
+        .solar-type-card.reverse > * { direction: ltr; }
+        .type-img-wrap { border-radius: 28px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.1); transform: perspective(900px) rotateY(6deg); transition: transform 0.4s; }
+        .solar-type-card.reverse .type-img-wrap { transform: perspective(900px) rotateY(-6deg); }
+        .type-img-wrap:hover { transform: perspective(900px) rotateY(0deg) !important; }
+        .type-img-wrap img { width: 100%; display: block; height: 340px; object-fit: cover; }
+        .type-number { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; color: #f0fdf4; line-height: 1; margin-bottom: -16px; }
+        .type-name { font-size: 1.8rem; font-weight: 800; color: #0a1a12; margin-bottom: 14px; letter-spacing: -0.5px; }
+        .type-desc { font-size: 0.98rem; color: #4b5563; line-height: 1.8; margin-bottom: 20px; }
+        .type-specs { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; }
+        .spec-pill { background: #f0fdf4; border: 1px solid #bbf7d0; padding: 6px 16px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; color: #059669; }
+        .type-cta { display: inline-flex; align-items: center; gap: 8px; color: #10b981; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: gap 0.2s; }
+        .type-cta:hover { gap: 14px; }
+        .type-cta svg { width: 18px; height: 18px; stroke: currentColor; fill: none; }
+
+        /* ===== WHY CHARGEBEES ===== */
+        .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .why-card {
+            background: #fff;
+            border: 1px solid #e5f5ef;
+            border-radius: 24px;
+            padding: 36px 30px;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        .why-card:hover {
+            background: linear-gradient(135deg, #0d5c45, #0a3d2e);
+            border-color: transparent;
+            transform: translateY(-10px) rotateX(-3deg);
+            box-shadow: 0 25px 50px rgba(13,92,69,0.3);
+        }
+        .why-card:hover .why-title, .why-card:hover .why-desc { color: #fff; }
+        .why-card:hover .why-icon-wrap { background: rgba(255,255,255,0.1); }
+        .why-card:hover .why-icon-wrap svg { stroke: #34d399; }
+        .why-icon-wrap { width: 52px; height: 52px; background: #f0fdf4; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; transition: background 0.3s; }
+        .why-icon-wrap svg { width: 26px; height: 26px; stroke: #10b981; fill: none; stroke-width: 2; transition: stroke 0.3s; }
+        .why-title { font-size: 1.05rem; font-weight: 800; color: #0a1a12; margin-bottom: 10px; transition: color 0.3s; }
+        .why-desc { font-size: 0.88rem; color: #6b7280; line-height: 1.65; transition: color 0.3s; }
+
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            background: linear-gradient(135deg, #0a3d2e, #0d5c45);
+            padding: 80px 0;
+            position: relative; overflow: hidden;
+        }
+        .cta-section::before { content: ''; position: absolute; top: -150px; right: -150px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(16,185,129,0.1), transparent 70%); border-radius: 50%; }
+        .cta-inner { max-width: 56rem; margin: auto; text-align: center; padding: 0 32px; position: relative; z-index: 2; }
+        .cta-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); color: #fff; letter-spacing: 1px; margin-bottom: 16px; line-height: 1; }
+        .cta-title span { color: #10b981; }
+        .cta-sub { font-size: 1.05rem; color: rgba(255,255,255,0.75); margin-bottom: 36px; }
+        .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .cta-btn-white { background: #fff; color: #0a3d2e; padding: 14px 36px; border-radius: 999px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: all 0.25s; }
+        .cta-btn-white:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); }
+        .cta-btn-outline { border: 2px solid rgba(255,255,255,0.4); color: #fff; padding: 14px 36px; border-radius: 999px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: all 0.25s; }
+        .cta-btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+
+        /* ===== FOOTER ===== */
+        footer { background: #f9fafb; padding-top: 80px; padding-bottom: 40px; border-top: 1px solid #e5e7eb; }
+        .footer-inner { max-width: 80rem; margin: auto; padding: 0 32px; }
+        .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.3fr; gap: 48px; margin-bottom: 60px; }
+        .footer-about p { font-size: 0.9rem; color: #6b7280; line-height: 1.75; margin: 20px 0; }
+        .socials { display: flex; gap: 12px; }
+        .social-btn { width: 44px; height: 44px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.2s; }
+        .social-btn:hover { transform: scale(1.1); }
+        .social-btn img { width: 22px; height: 22px; }
+        .footer-col h4 { font-weight: 700; color: #111827; margin-bottom: 20px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: #6b7280; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+        .footer-col ul li a:hover { color: #10b981; }
+        .footer-contact li { display: flex; flex-direction: column; gap: 2px; margin-bottom: 14px; font-size: 0.9rem; color: #6b7280; }
+        .footer-contact li strong { color: #374151; font-weight: 600; }
+        .footer-bottom { border-top: 1px solid #e5e7eb; padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .footer-bottom p { font-size: 0.85rem; color: #9ca3af; }
+        .footer-bottom-links { display: flex; gap: 24px; }
+        .footer-bottom-links a { font-size: 0.85rem; color: #9ca3af; text-decoration: none; transition: color 0.2s; }
+        .footer-bottom-links a:hover { color: #374151; }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .fade-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .fade-left.visible { opacity: 1; transform: translateX(0); }
+        .fade-right { opacity: 0; transform: translateX(50px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .fade-right.visible { opacity: 1; transform: translateX(0); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero-content { grid-template-columns: 1fr; gap: 40px; text-align: left; }
+            .contact-form-card { animation: none; transform: none; }
+            .product-grid { grid-template-columns: repeat(2, 1fr); }
+            .feature-split { grid-template-columns: 1fr; }
+            .solar-type-card { grid-template-columns: 1fr; }
+            .solar-type-card.reverse { direction: ltr; }
+            .type-img-wrap, .solar-type-card.reverse .type-img-wrap { transform: none; }
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+            .mega-drop, .mega-menu-ev { display: none !important; }
+            .nav-links { display: none; }
+        }
+        @media (max-width: 768px) {
+            .product-grid { grid-template-columns: 1fr; }
+            .why-grid { grid-template-columns: 1fr; }
+            .process-steps { grid-template-columns: repeat(2, 1fr); }
+            .process-steps::before { display: none; }
+            .stats-inner { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 3rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+        @media (max-width: 480px) {
+            .process-steps { grid-template-columns: 1fr; }
+            .stats-inner { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-texture"></div>
+    <div class="bg-grid"></div>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav>
+        <div class="nav-inner">
+            <!-- Logo -->
+            <a href="index.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;">
+                <img src="images/logo.png" alt="ChargeBees Logo" style="height:40px;width:auto;object-fit:contain;">
+                <span class="brand-logo-text">Charge <span>Bees</span></span>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="nav-links">
+                <a href="index.html">About</a>
+                <a href="stationfinder.html">Station Finder</a>
+
+                <!-- EV Products Dropdown -->
+                <div class="dropdown-wrap" style="position:relative;">
+                    <button class="dropdown-trigger">
+                        <a href="products.html" style="color:inherit;text-decoration:none;display:flex;align-items:center;gap:4px;">
+                            EV Products
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                        </a>
+                    </button>
+                    <div class="mega-menu-ev" style="z-index:100;">
+                        <div class="ev-col">
+                            <h3>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                                Hardware
+                            </h3>
+                            <a href="products.html#hardware" class="ev-item">
+                                <div class="ev-item-icon"><svg viewBox="0 0 24 24"><path d="M13 2l-10 12h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                                <div><p>All Chargers</p><span>AC & DC Solutions</span></div>
+                            </a>
+                        </div>
+                        <div class="ev-col">
+                            <h3>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                                Software
+                            </h3>
+                            <a href="products.html#software" class="ev-item">
+                                <div class="ev-item-icon"><svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+                                <div><p>ChargeCloud <span class="badge">Soon</span></p><span>CMS Platform</span></div>
+                            </a>
+                            <a href="products.html#software" class="ev-item">
+                                <div class="ev-item-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg></div>
+                                <div><p>Chargebees App</p><span>User Experience</span></div>
+                            </a>
+                        </div>
+                        <div class="ev-col">
+                            <h3>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+                                Services
+                            </h3>
+                            <a href="products.html#services" class="ev-item">
+                                <div class="ev-item-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+                                <div><p>Energy As A Service</p><span>Renewable Energy</span></div>
+                            </a>
+                            <a href="products.html#services" class="ev-item">
+                                <div class="ev-item-icon"><svg viewBox="0 0 24 24"><rect x="1" y="6" width="22" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/></svg></div>
+                                <div><p>Battery As A Service <span class="badge">Soon</span></p><span>Swapping Solutions</span></div>
+                            </a>
+                            <a href="products.html#services" class="ev-item">
+                                <div class="ev-item-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+                                <div><p>RFID Card</p><span>Seamless Payments</span></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Solar Products Dropdown -->
+                <div class="dropdown-wrap" style="position:relative;">
+                    <button class="dropdown-trigger solar-active">
+                        Solar Products
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="mega-drop" style="z-index:100;">
+                        <a href="#residential" class="drop-item">
+                            <div class="drop-icon">
+                                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                            </div>
+                            <div class="drop-text"><p>Residential Solar Rooftops</p><span>For homes & apartments</span></div>
+                        </a>
+                        <a href="#commercial" class="drop-item">
+                            <div class="drop-icon">
+                                <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                            </div>
+                            <div class="drop-text"><p>Commercial Solar Rooftops</p><span>For offices & retail</span></div>
+                        </a>
+                        <a href="#industrial" class="drop-item">
+                            <div class="drop-icon">
+                                <svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg>
+                            </div>
+                            <div class="drop-text"><p>Industrial Solar Rooftops</p><span>For factories & warehouses</span></div>
+                        </a>
+                        <a href="#ground" class="drop-item">
+                            <div class="drop-icon">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            </div>
+                            <div class="drop-text"><p>Ground Mounted Solar System</p><span>Large scale solar farms</span></div>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="partners.html">Partners</a>
+                <a href="media-center.html">Media Center</a>
+                <a href="careers.html">Careers</a>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:12px;">
+                <a href="https://play.google.com/store"
+   target="_blank"
+   class="nav-btn"
+   id="app-btn-desk">
+   Download App
+</a>
+                <a href="contact.html" class="nav-btn">Contact Us</a>
+                <button id="menu-btn" style="display:none;width:44px;height:44px;border-radius:12px;border:1px solid #e5e7eb;background:rgba(255,255,255,0.8);backdrop-filter:blur(8px);align-items:center;justify-content:center;cursor:pointer;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111827" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu">
+        <a href="index.html" class="mob-link">About</a>
+        <a href="stationfinder.html" class="mob-link">Station Finder</a>
+        <button class="mob-accordion-toggle" onclick="toggleMobAccordion('ev-sub')">
+            EV Products
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="mob-sub" id="ev-sub" style="display:none;">
+            <a href="products.html#hardware">All Chargers</a>
+            <a href="products.html#software">ChargeCloud</a>
+            <a href="products.html#software">Chargebees App</a>
+            <a href="products.html#services">Energy As A Service</a>
+            <a href="products.html#services">Battery As A Service</a>
+            <a href="products.html#services">RFID Card</a>
+        </div>
+        <button class="mob-accordion-toggle" onclick="toggleMobAccordion('solar-sub')" style="color:#059669;">
+            Solar Products
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="mob-sub" id="solar-sub" style="display:none;">
+            <a href="#residential">Residential Solar Rooftops</a>
+            <a href="#commercial">Commercial Solar Rooftops</a>
+            <a href="#industrial">Industrial Solar Rooftops</a>
+            <a href="#ground">Ground Mounted Solar System</a>
+        </div>
+        <a href="partners.html" class="mob-link">Partners</a>
+        <a href="media-center.html" class="mob-link">Media Center</a>
+        <a href="careers.html" class="mob-link">Careers</a>
+        <a href="contact.html" class="mob-link active">Contact Us</a>
+    </div>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1920&auto=format&fit=crop" alt="Solar Panels">
+        </div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <!-- Left: Text -->
+            <div>
+                <div class="hero-badge">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    Sustainable Solar Energy Solutions
+                </div>
+                <h1 class="hero-title">
+                    Smart Solar<br>
+                    <span class="accent">Power</span> For<br>
+                    Modern India.
+                </h1>
+                <p class="hero-desc">
+                    ChargeBees provides advanced solar products for homes, businesses, EV charging stations, and industrial projects with maximum efficiency and future-ready technology.
+                </p>
+                <div class="hero-btns">
+                    <a href="#solar-products" class="btn-primary">Explore Solutions</a>
+                    <a href="#residential" class="btn-outline">View Products</a>
+                </div>
+            </div>
+
+            <!-- Right: Floating Contact Form -->
+            <div>
+                <div class="contact-form-card">
+                    <div class="form-title">Get a Free Quote</div>
+                    <div class="form-sub">Our solar experts will contact you within 24 hours</div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" placeholder="Ravi">
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" placeholder="Kumar">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" placeholder="+91 90000 40477">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="you@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Solar Solution Type</label>
+                        <select>
+                            <option value="">Select a solution...</option>
+                            <option>Residential Solar Rooftop</option>
+                            <option>Commercial Solar Rooftop</option>
+                            <option>Industrial Solar Rooftop</option>
+                            <option>Ground Mounted Solar System</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Message (Optional)</label>
+                        <textarea placeholder="Tell us about your energy needs..."></textarea>
+                    </div>
+                    <button class="form-submit" onclick="handleFormSubmit()">
+                        ⚡ Get My Free Quote
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATS BAR ===== -->
+    <div class="stats-bar">
+        <div class="stats-inner">
+            <div class="stat-item fade-up">
+                <div class="stat-num">500+</div>
+                <div class="stat-lbl">Solar Installations</div>
+            </div>
+            <div class="stat-item fade-up" style="transition-delay:0.1s">
+                <div class="stat-num">10MW+</div>
+                <div class="stat-lbl">Total Capacity Deployed</div>
+            </div>
+            <div class="stat-item fade-up" style="transition-delay:0.2s">
+                <div class="stat-num">25%</div>
+                <div class="stat-lbl">Avg. Bill Savings</div>
+            </div>
+            <div class="stat-item fade-up" style="transition-delay:0.3s">
+                <div class="stat-num">100+</div>
+                <div class="stat-lbl">Cities Covered</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SOLAR PRODUCTS OVERVIEW ===== -->
+    <section id="solar-products" style="padding: 100px 0; background: linear-gradient(180deg, #f5fbf9 0%, #edf5f3 100%);">
+        <div style="max-width:80rem;margin:auto;padding:0 32px;">
+            <div style="text-align:center;margin-bottom:60px;" class="fade-up">
+                <span class="section-tag">Our Solar Range</span>
+                <h2 class="section-heading">Built for Every <span class="hl">Scale</span></h2>
+                <p class="section-sub" style="margin:auto;">From individual homes to massive solar farms — ChargeBees delivers end-to-end solar solutions engineered for Indian conditions.</p>
+            </div>
+
+            <div class="product-grid">
+                <!-- Card 1 -->
+                <div class="product-card fade-up">
+                    <div style="overflow:hidden;height:200px;">
+                        <img class="product-img" src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=800&auto=format&fit=crop" alt="Residential Solar">
+                    </div>
+                    <div class="product-body">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        </div>
+                        <div class="product-name">Residential Solar Rooftops</div>
+                        <div class="product-desc">Efficient rooftop solutions for homes and apartments. Reduce your electricity bills by up to 90% with smart monitoring included.</div>
+                        <span class="product-tag">1kW – 10kW</span>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="product-card fade-up" style="transition-delay:0.1s">
+                    <div style="overflow:hidden;height:200px;">
+                        <img class="product-img" src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?q=80&w=800&auto=format&fit=crop" alt="Commercial Solar">
+                    </div>
+                    <div class="product-body">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                        </div>
+                        <div class="product-name">Commercial Solar Rooftops</div>
+                        <div class="product-desc">Designed for offices, retail spaces, hotels, and educational institutions seeking significant operational cost reduction.</div>
+                        <span class="product-tag">10kW – 500kW</span>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="product-card fade-up" style="transition-delay:0.2s">
+                    <div style="overflow:hidden;height:200px;">
+                        <img class="product-img" src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=800&auto=format&fit=crop" alt="Industrial Solar">
+                    </div>
+                    <div class="product-body">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg>
+                        </div>
+                        <div class="product-name">Industrial Solar Rooftops</div>
+                        <div class="product-desc">Heavy-duty installations for factories, warehouses, and manufacturing units with high energy demand and peak load management.</div>
+                        <span class="product-tag">500kW – 5MW</span>
+                    </div>
+                </div>
+                <!-- Card 4 — spans 3 cols on desktop -->
+                <div class="product-card fade-up" style="transition-delay:0.3s; grid-column: span 1;">
+                    <div style="overflow:hidden;height:200px;">
+                        <img class="product-img" src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=800&auto=format&fit=crop" alt="Ground Mounted">
+                    </div>
+                    <div class="product-body">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+                        </div>
+                        <div class="product-name">Ground Mounted Solar System</div>
+                        <div class="product-desc">Utility-scale solar farms and open-land installations for maximum energy generation with full EPC and O&M support.</div>
+                        <span class="product-tag">1MW+</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURE HIGHLIGHT ===== -->
+    <section style="padding:100px 0; background:#fff;">
+        <div style="max-width:80rem;margin:auto;padding:0 32px;">
+            <div class="feature-split">
+                <div class="fade-left">
+                    <div class="feature-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?q=80&w=800&auto=format&fit=crop" alt="Smart Solar Technology">
+                        <div class="feature-badge-float">
+                            <div class="badge-icon">
+                                <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                            </div>
+                            <div>
+                                <div class="badge-num">24/7</div>
+                                <div class="badge-lbl">Smart Monitoring</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-right">
+                    <span class="section-tag">Why ChargeBees Solar</span>
+                    <h2 class="section-heading">Technology That <span class="hl">Thinks</span> For You.</h2>
+                    <p class="section-sub">Our solar systems are powered by intelligent software that optimizes every watt of energy you generate.</p>
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <div class="feat-dot">
+                                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            </div>
+                            <div>
+                                <div class="feat-title">25-Year Performance Warranty</div>
+                                <div class="feat-desc">Industry-leading warranty on panels with guaranteed minimum 80% efficiency at end of warranty period.</div>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feat-dot">
+                                <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                            </div>
+                            <div>
+                                <div class="feat-title">Real-time App Monitoring</div>
+                                <div class="feat-desc">Track energy generation, consumption, savings, and carbon credits live via the ChargeBees mobile app.</div>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feat-dot">
+                                <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                            </div>
+                            <div>
+                                <div class="feat-title">Net Metering & Grid Export</div>
+                                <div class="feat-desc">Sell excess power back to the grid and earn credits on your electricity bill with our grid-tie solutions.</div>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feat-dot">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            </div>
+                            <div>
+                                <div class="feat-title">Fast Installation — 3 to 7 Days</div>
+                                <div class="feat-desc">Our certified installation teams complete most residential projects within a week, with zero disruption.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="process-section">
+        <div style="max-width:80rem;margin:auto;padding:0 32px;">
+            <div style="text-align:center;margin-bottom:70px;" class="fade-up">
+                <span class="section-tag" style="color:#34d399;">Simple Process</span>
+                <h2 class="section-heading" style="color:#fff;">From Inquiry to <span style="color:#10b981;">Power-On</span></h2>
+            </div>
+            <div class="process-steps">
+                <div class="process-step fade-up">
+                    <div class="step-num">1</div>
+                    <div class="step-title">Free Site Survey</div>
+                    <div class="step-desc">Our engineers assess your roof, energy needs, and grid connection for a custom design.</div>
+                </div>
+                <div class="process-step fade-up" style="transition-delay:0.15s">
+                    <div class="step-num">2</div>
+                    <div class="step-title">Custom Proposal</div>
+                    <div class="step-desc">Get a detailed proposal with system size, savings projection, ROI, and financing options.</div>
+                </div>
+                <div class="process-step fade-up" style="transition-delay:0.3s">
+                    <div class="step-num">3</div>
+                    <div class="step-title">Installation</div>
+                    <div class="step-desc">Our certified teams install your system with minimal disruption, typically within 3–7 days.</div>
+                </div>
+                <div class="process-step fade-up" style="transition-delay:0.45s">
+                    <div class="step-num">4</div>
+                    <div class="step-title">Go Solar!</div>
+                    <div class="step-desc">Your system goes live. Monitor everything from your phone and start saving from day one.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DEEP DIVE: SOLAR TYPES ===== -->
+    <section class="solar-type-section" style="background: linear-gradient(180deg, #fff 0%, #f5fbf9 100%);">
+        <div style="max-width:80rem;margin:auto;padding:0 32px;">
+            <div style="text-align:center;margin-bottom:20px;" class="fade-up">
+                <span class="section-tag">Our Solutions in Detail</span>
+                <h2 class="section-heading">Tailored for <span class="hl">Every Need</span></h2>
+            </div>
+
+            <!-- Residential -->
+            <div class="solar-type-card" id="residential">
+                <div class="type-img-wrap fade-left">
+                    <img src="https://images.unsplash.com/photo-1564522789523-3ce36a41e7bc?q=80&w=800&auto=format&fit=crop" alt="Residential Solar">
+                </div>
+                <div class="fade-right">
+                    <div class="type-number">01</div>
+                    <div class="type-name">Residential Solar Rooftops</div>
+                    <div class="type-desc">Power your home with clean, renewable energy. Our residential solar panels are designed for Indian weather conditions — built to withstand heavy rain, dust, and extreme heat while delivering consistent performance.</div>
+                    <div class="type-specs">
+                        <span class="spec-pill">1kW – 10kW</span>
+                        <span class="spec-pill">Grid-Tied & Off-Grid</span>
+                        <span class="spec-pill">Smart Inverter</span>
+                        <span class="spec-pill">EMI Available</span>
+                    </div>
+                    <a href="contact.html" class="type-cta">
+                        Get Residential Quote
+                        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Commercial -->
+            <div class="solar-type-card reverse" id="commercial">
+                <div class="type-img-wrap fade-right">
+                    <img src="https://images.unsplash.com/photo-1548337138-e87d889cc369?q=80&w=800&auto=format&fit=crop" alt="Commercial Solar">
+                </div>
+                <div class="fade-left">
+                    <div class="type-number">02</div>
+                    <div class="type-name">Commercial Solar Rooftops</div>
+                    <div class="type-desc">Cut your business's electricity costs dramatically. From retail to hospitality, our commercial solar installations deliver substantial ROI with transparent payback periods of 4–6 years and subsidy assistance.</div>
+                    <div class="type-specs">
+                        <span class="spec-pill">10kW – 500kW</span>
+                        <span class="spec-pill">Net Metering</span>
+                        <span class="spec-pill">Subsidy Eligible</span>
+                        <span class="spec-pill">RESCO Model</span>
+                    </div>
+                    <a href="contact.html" class="type-cta">
+                        Get Commercial Quote
+                        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Industrial -->
+            <div class="solar-type-card" id="industrial">
+                <div class="type-img-wrap fade-left">
+                    <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=800&auto=format&fit=crop" alt="Industrial Solar">
+                </div>
+                <div class="fade-right">
+                    <div class="type-number">03</div>
+                    <div class="type-name">Industrial Solar Rooftops</div>
+                    <div class="type-desc">Large-scale energy independence for industrial facilities. Our solutions handle peak demand management, power factor correction, and integration with existing captive power plants for maximum efficiency.</div>
+                    <div class="type-specs">
+                        <span class="spec-pill">500kW – 5MW</span>
+                        <span class="spec-pill">Open Access</span>
+                        <span class="spec-pill">Peak Load Management</span>
+                        <span class="spec-pill">Full EPC</span>
+                    </div>
+                    <a href="contact.html" class="type-cta">
+                        Get Industrial Quote
+                        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Ground Mounted -->
+            <div class="solar-type-card reverse" id="ground">
+                <div class="type-img-wrap fade-right">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop" alt="Ground Mounted Solar">
+                </div>
+                <div class="fade-left">
+                    <div class="type-number">04</div>
+                    <div class="type-name">Ground Mounted Solar System</div>
+                    <div class="type-desc">Utility-scale solar farms for organizations with available land. We provide complete EPC (Engineering, Procurement & Construction) services, along with long-term O&M contracts and performance guarantees for hassle-free operation.</div>
+                    <div class="type-specs">
+                        <span class="spec-pill">1MW+</span>
+                        <span class="spec-pill">Utility Scale</span>
+                        <span class="spec-pill">Tracker Systems</span>
+                        <span class="spec-pill">O&M Included</span>
+                    </div>
+                    <a href="contact.html" class="type-cta">
+                        Get Ground Mount Quote
+                        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHY CHARGEBEES ===== -->
+    <section style="padding:100px 0; background: linear-gradient(180deg, #f5fbf9 0%, #edf5f3 100%);">
+        <div style="max-width:80rem;margin:auto;padding:0 32px;">
+            <div style="text-align:center;margin-bottom:60px;" class="fade-up">
+                <span class="section-tag">Our Edge</span>
+                <h2 class="section-heading">Why Choose <span class="hl">ChargeBees</span> Solar?</h2>
+            </div>
+            <div class="why-grid">
+                <div class="why-card fade-up">
+                    <div class="why-icon-wrap">
+                        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <div class="why-title">Tier-1 Panel Partners</div>
+                    <div class="why-desc">We source only from globally certified Tier-1 manufacturers with proven track records, ensuring your system delivers peak performance for decades.</div>
+                </div>
+                <div class="why-card fade-up" style="transition-delay:0.1s">
+                    <div class="why-icon-wrap">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <div class="why-title">End-to-End EPC</div>
+                    <div class="why-desc">From site assessment and design to installation, net metering, and subsidy filing — we handle everything so you don't have to coordinate with multiple vendors.</div>
+                </div>
+                <div class="why-card fade-up" style="transition-delay:0.2s">
+                    <div class="why-icon-wrap">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <div class="why-title">Smart App Dashboard</div>
+                    <div class="why-desc">Real-time monitoring of your solar system through the ChargeBees app — track units generated, bill savings, and CO₂ offset anytime, anywhere.</div>
+                </div>
+                <div class="why-card fade-up" style="transition-delay:0.3s">
+                    <div class="why-icon-wrap">
+                        <svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+                    </div>
+                    <div class="why-title">Subsidy Assistance</div>
+                    <div class="why-desc">We actively assist with central and state government subsidy applications under PM Surya Ghar and MNRE schemes, maximizing your savings from day one.</div>
+                </div>
+                <div class="why-card fade-up" style="transition-delay:0.4s">
+                    <div class="why-icon-wrap">
+                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <div class="why-title">Dedicated Support Team</div>
+                    <div class="why-desc">After-sales support with AMC packages, preventive maintenance scheduling, and rapid response for system faults — we are with you for the long run.</div>
+                </div>
+                <div class="why-card fade-up" style="transition-delay:0.5s">
+                    <div class="why-icon-wrap">
+                        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <div class="why-title">Flexible Financing</div>
+                    <div class="why-desc">Zero-cost EMI options, RESCO (no-upfront-cost) models, and solar loans with our banking partners make going solar affordable for everyone.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-section">
+        <div class="cta-inner">
+            <span class="section-tag" style="color:#34d399;">Ready to Switch?</span>
+            <h2 class="cta-title">Start Saving with <span>Solar</span> Today.</h2>
+            <p class="cta-sub">Join thousands of homes and businesses across India that have made the switch to clean, affordable solar energy with ChargeBees.</p>
+            <div class="cta-btns">
+                <a href="solar_products.html" class="cta-btn-white">Get Free Consultation</a>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <img src="images/logo.png" alt="ChargeBees Logo" style="height:40px;width:auto;object-fit:contain;">
+                        <span class="brand-logo-text">Charge <span>Bees</span></span>
+                    </div>
+                    <p>Leading the charge towards a sustainable electric future with India's largest EV charging network.</p>
+                    <div class="socials">
+                        <a href="https://www.instagram.com/chargebees" target="_blank" class="social-btn">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+                        </a>
+                        <a href="https://www.facebook.com/share/1ESQNWy5Zs/" target="_blank" class="social-btn">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+                        </a>
+                        <a href="https://wa.me/919000040477" target="_blank" class="social-btn">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+                        </a>
+                        <a href="mailto:db@chargebees.com" class="social-btn">
+                            <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Mail">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="partners.html#Partnerships">Partnerships</a></li>
+                        <li><a href="media-center.html#media">Media Center</a></li>
+                        <li><a href="careers.html#careers">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Solutions</h4>
+                    <ul>
+                        <li><a href="stationfinder.html">Station Finder</a></li>
+                        <li><a href="products.html#services">EV Services</a></li>
+                        <li><a href="products.html#software">Mobile App</a></li>
+                        <li><a href="#residential">Residential Solar</a></li>
+                        <li><a href="#commercial">Commercial Solar</a></li>
+                        <li><a href="#industrial">Industrial Solar</a></li>
+                        <li><a href="#ground">Ground Mounted</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <span>db@chargebees.com</span>
+                        </li>
+                        <li>
+                            <span>+91 90000 40477</span>
+                        </li>
+                        <li style="margin-top:8px;">
+                            <strong>HYDERABAD</strong>
+                            <span>Nanakramguda, Hyderabad, Telangana 500008</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 Chargebees. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="terms.html#terms">Terms & Services</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Lucide icons
+        lucide.createIcons();
+
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+            });
+        }
+
+        // Mobile sub-accordion
+        function toggleMobAccordion(id) {
+            const el = document.getElementById(id);
+            el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Show mobile menu button on small screens
+        function handleResize() {
+            const btn = document.getElementById('menu-btn');
+            if (btn) btn.style.display = window.innerWidth < 1024 ? 'flex' : 'none';
+        }
+        handleResize();
+        window.addEventListener('resize', handleResize);
+
+        // Scroll animations
+        const animEls = document.querySelectorAll('.fade-up, .fade-left, .fade-right');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        animEls.forEach(el => observer.observe(el));
+
+        // Counter animation for stats
+        const statNums = document.querySelectorAll('.stat-num');
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    animateCounter(e.target);
+                    statsObserver.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        statNums.forEach(el => statsObserver.observe(el));
+
+        function animateCounter(el) {
+            const text = el.innerText;
+            const num = parseInt(text.replace(/[^0-9]/g, ''));
+            const suffix = text.replace(/[0-9]/g, '');
+            let current = 0;
+            const step = num / 80;
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= num) { current = num; clearInterval(timer); }
+                el.innerText = Math.floor(current) + suffix;
+            }, 16);
+        }
+
+        // Form submit handler
+        function handleFormSubmit() {
+            const btn = document.querySelector('.form-submit');
+            btn.innerText = '✓ Request Submitted!';
+            btn.style.background = 'linear-gradient(135deg, #059669, #047857)';
+            setTimeout(() => {
+                btn.innerText = '⚡ Get My Free Quote';
+                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+            }, 3000);
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
