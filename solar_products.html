@@ -39,6 +39,7 @@
             background-color: #fdfbf7;
             scroll-behavior: smooth;
             overflow-x: hidden;
+            padding-top:80px;
         }
 
         /* ===== BG TEXTURE & GRID ===== */
@@ -63,7 +64,22 @@
         .brand-logo-text span { color: #10b981; }
 
         /* ===== NAVBAR ===== */
-        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #f3f4f6; }
+        nav{
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 99999 !important;
+
+    background: #ffffff !important;
+    border-bottom: 1px solid #f3f4f6;
+
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+    -webkit-transform: translateZ(0);
+}
         .nav-inner { max-width: 80rem; margin: auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; height: 80px; }
         .nav-links { display: flex; align-items: center; gap: 1.25rem; }
         .nav-links a { font-size: 0.875rem; font-weight: 500; color: #4b5563; transition: color 0.2s; text-decoration: none; }
@@ -116,7 +132,7 @@
             display: flex;
             align-items: center;
             overflow: hidden;
-            padding-top: 80px;
+            padding-top: 0px;
         }
 
         .hero-bg {
