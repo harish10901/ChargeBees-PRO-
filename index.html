@@ -4,699 +4,938 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chargebees - Sustainable Mobility</title>
-      <meta name="description" content="Chargebees official site for sustainable charging solutions.">
+    <meta name="description" content="Chargebees official site for sustainable charging solutions.">
 
-  <!-- Organization Schema Markup -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Chargebees",
-  "url": "https://chargebees.com",
-  "logo": "https://chargebees.com/images/logo.png",
-  "image": "https://chargebees.com/images/logo.png",
-  "description": "Chargebees official site for sustainable mobility and EV charging solutions"
-}
+    <!-- Organization Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Chargebees",
+      "url": "https://chargebees.com",
+      "logo": "https://chargebees.com/images/logo.png",
+      "image": "https://chargebees.com/images/logo.png",
+      "description": "Chargebees official site for sustainable mobility and EV charging solutions"
+    }
+    </script>
 
-</script>
-
-
-
-    <link rel="icon" type="image/png" href="images\favicon.png">
+    <link rel="icon" type="image/png" href="images/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        
-
-
-        /* ===== TEAM SECTION EXACT FIX ===== */
-
-#team{
-background: linear-gradient(180deg,#0b1f1b 0%,#122b26 100%);
-padding:120px 0 100px;
-position:relative;
-overflow:hidden;
-}
-
-#team .container{
-max-width:1180px;
-margin:0 auto;
-padding:0 24px;
-}
-
-#team .section-header{
-text-align:center;
-max-width:760px;
-margin:0 auto 50px;
-}
-
-#team .section-title{
-font-size:clamp(1.8rem,3vw,2.6rem);
-line-height:1.15;
-margin-bottom:.75rem;
-color:#ecfffa;
-font-weight:700;
-}
-
-#team .divider{
-width:74px;
-height:5px;
-border-radius:999px;
-margin:0 auto;
-background:linear-gradient(135deg,#00b894,#00d7ab);
-}
-
-.team-content{
-max-width:1160px;
-margin:0 auto;
-}
-
-.team-intro{
-max-width:820px;
-margin:0 auto 50px;
-text-align:center;
-}
-
-.team-intro p{
-color:rgba(238,255,250,.9);
-font-size:1.07rem;
-line-height:1.7;
-margin-bottom:18px;
-}
-
-.team-members{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:28px;
-}
-
-.member-card{
-background:#fff;
-border-radius:22px;
-border:1px solid #d8ece6;
-box-shadow:0 12px 35px rgba(16,42,38,.10);
-text-align:center;
-padding:40px 25px;
-transition:.3s ease;
-}
-
-.member-card:hover{
-transform:translateY(-6px);
-}
-
-.member-image{
-width:96px;
-height:96px;
-margin:0 auto 20px;
-border-radius:50%;
-overflow:hidden;
-border:3px solid #dcf6ef;
-}
-
-.member-image img{
-width:100%;
-height:100%;
-object-fit:cover;
-display:block;
-}
-
-.member-info h3{
-font-size:30px;
-margin-bottom:10px;
-color:#102a26;
-}
-
-.member-info p{
-color:#0a9377;
-font-size:22px;
-font-weight:500;
-}
-
-/* ===== RESPONSIVE ===== */
-
-@media(max-width:1024px){
-#team{
-padding:100px 0 80px;
-}
-
-.team-members{
-grid-template-columns:repeat(2,1fr);
-}
-}
-
-@media(max-width:768px){
-#team{
-padding:80px 0 70px;
-}
-
-.team-members{
-grid-template-columns:1fr;
-gap:22px;
-}
-
-.team-intro p{
-font-size:1rem;
-}
-}
-
-
-
-
-/* ===== OUR PARTNERSHIPS EXACT SAME ===== */
-
-#partnerships{
-padding:35px 0 100px;
-
-background:linear-gradient(180deg,#f5fbf9 0%, #edf5f3 100%);
-}
-
-#partnerships .container{
-max-width:1280px;
-margin:0 auto;
-padding:0 30px;
-}
-
-#partnerships .section-header{
-text-align:center;
-margin-bottom:65px;
-}
-
-#partnerships .section-title{
-font-size:68px;
-font-weight:700;
-line-height:1.1;
-letter-spacing:-1px;
-color:#17232d;
-margin-bottom:18px;
-}
-
-#partnerships .divider{
-width:80px;
-height:6px;
-background:#11d3b1;
-border-radius:50px;
-margin:auto;
-}
-
-.partnership-intro{
-max-width:900px;
-margin:0 auto 55px;
-text-align:center;
-}
-
-.partnership-intro p{
-font-size:19px;
-line-height:1.8;
-color:#5f7671;
-margin:0;
-}
-
-.partnership-details{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:34px;
-}
-
-.partnership-category{
-background:#ffffff;
-border-radius:28px;
-padding:42px 34px;
-box-shadow:
-0 15px 35px rgba(15,55,46,.06),
-0 2px 2px rgba(15,55,46,.03);
-border:1px solid #dfeee9;
-transition:.3s ease;
-}
-
-.partnership-category:hover{
-transform:translateY(-8px);
-}
-
-.partnership-category h3{
-display:flex;
-align-items:center;
-gap:14px;
-font-size:34px;
-font-weight:700;
-margin-bottom:28px;
-color:#17232d;
-}
-
-.icon-circle{
-width:54px;
-height:54px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:50%;
-background:linear-gradient(135deg,#00caa5,#17e2b8);
-color:#fff;
-font-size:24px;
-flex-shrink:0;
-}
-
-.partnership-category p{
-font-size:18px;
-line-height:1.9;
-color:#627872;
-margin-bottom:25px;
-}
-
-.partner-benefits{
-margin-top:10px;
-}
-
-.partner-benefits ul{
-list-style:none;
-padding:0;
-margin:0;
-}
-
-.partner-benefits li{
-position:relative;
-padding-left:32px;
-margin-bottom:16px;
-font-size:17px;
-color:#29443d;
-line-height:1.6;
-}
-
-.partner-benefits li:before{
-content:"•";
-position:absolute;
-left:10px;
-top:-2px;
-font-size:24px;
-color:#00b894;
-}
-
-
-/* responsive */
-
-@media(max-width:1200px){
-
-#partnerships .section-title{
-font-size:58px;
-}
-
-.partnership-category h3{
-font-size:28px;
-}
-
-.partnership-details{
-gap:24px;
-}
-
-}
-
-@media(max-width:992px){
-
-.partnership-details{
-grid-template-columns:1fr;
-max-width:820px;
-margin:auto;
-}
-
-#partnerships .section-title{
-font-size:52px;
-}
-
-}
-
-@media(max-width:768px){
-
-#partnerships{
-padding:80px 0;
-}
-
-#partnerships .section-title{
-font-size:42px;
-}
-
-.partnership-category{
-padding:30px 25px;
-}
-
-.partnership-category h3{
-font-size:24px;
-}
-
-.partnership-category p,
-.partner-benefits li{
-font-size:16px;
-}
-
-}
-
-@media(max-width:480px){
-
-#partnerships .section-title{
-font-size:34px;
-}
-
-.icon-circle{
-width:46px;
-height:46px;
-font-size:20px;
-}
-
-}
-
-
-
-/* ==== OUR OFFERINGS COMPACT FIX ==== */
-
-#offerings{
-background:linear-gradient(180deg,#f5fbf9 0%, #edf5f3 100%);
-padding:70px 0 65px;   /* reduced height */
-}
-
-#offerings .container{
-max-width:1180px;
-margin:auto;
-padding:0 20px;
-}
-
-#offerings .section-header{
-text-align:center;
-margin-bottom:45px;
-}
-
-#offerings .section-title{
-font-size:58px;
-font-weight:700;
-color:#000;  /* black heading */
-margin-bottom:15px;
-line-height:1.1;
-}
-
-#offerings .divider{
-width:78px;
-height:5px;
-background:#14d3b0;
-border-radius:50px;
-margin:auto;
-}
-
-.offerings-content{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:22px;
-margin-top:35px;
-}
-
-/* cards same as 2nd screenshot */
-.offering-category{
-background:#fff;
-border-radius:24px;
-padding:28px 30px;
-border:1px solid #dceae6;
-box-shadow:0 10px 25px rgba(0,0,0,.06);
-}
-
-.offering-header{
-display:flex;
-align-items:center;
-gap:14px;
-margin-bottom:18px;
-}
-
-/* icons black */
-.offering-header{
-display:flex;
-align-items:center;
-gap:14px;
-margin-bottom:18px;
-}
-
-.offering-icon{
-width:38px;
-height:38px;
-border-radius:10px;
-display:flex;
-align-items:center;
-justify-content:center;
-background:linear-gradient(135deg,#11caa4,#19dfb5);
-box-shadow:0 6px 14px rgba(17,202,164,.22);
-}
-
-.offering-icon svg{
-width:20px;
-height:20px;
-stroke:#fff;
-stroke-width:2.5;
-}
-
-.offering-header h3{
-font-size:22px;
-font-weight:700;
-color:#111827;
-margin:0;
-}
-
-.offering-description p{
-margin:0;
-font-size:16px;
-line-height:1.7;
-color:#556d67;
-}
-
-/* responsive */
-@media(max-width:900px){
-.offerings-content{
-grid-template-columns:1fr;
-}
-}
-
-@media(max-width:768px){
-#offerings{
-padding:55px 0;
-}
-
-#offerings .section-title{
-font-size:40px;
-}
-
-.offering-category{
-padding:24px;
-}
-}
-
-.offering-category:hover{
-transform:translateY(-10px) scale(1.025);
-box-shadow:
-0 20px 45px rgba(0,184,148,.12),
-0 10px 20px rgba(0,0,0,.06);
-}
-
-
-
-/* ===== ABOUT SECTION FIX ===== */
-
-#about{
-padding:90px 0 80px;
-background:linear-gradient(180deg,#f5fbf9 0%,#edf5f3 100%);
-}
-
-#about .container{
-max-width:1180px;
-margin:auto;
-padding:0 20px;
-}
-
-/* FIX heading center */
-#about .section-header{
-text-align:center;
-max-width:760px;
-margin:0 auto 45px;
-}
-
-#about .section-title{
-font-size:58px;
-font-weight:700;
-line-height:1.1;
-margin-bottom:0px;
-color:#17232d;
-display:block;
-text-align:center;
-}
-
-#about .divider{
-width:78px;
-height:5px;
-background:#14d3b0;
-border-radius:50px;
-margin:0 auto;
-}
-
-/* text */
-.about-content{
-max-width:900px;
-margin:auto;
-text-align:center;
-}
-
-.about-content p{
-font-size:18px;
-line-height:1.8;
-color:#58706b;
-margin-bottom:18px;
-}
-
-/* stats */
-.about-stats{
-margin-top:45px;
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
-max-width:1100px;
-margin-left:auto;
-margin-right:auto;
-}
-
-.stat-card{
-background:linear-gradient(165deg,#12c7a4,#08b592);
-border-radius:22px;
-padding:35px 20px;
-color:#fff;
-text-align:center;
-box-shadow:0 14px 30px rgba(0,184,148,.24);
-cursor:pointer;
-position:relative;
-overflow:hidden;
-transition:
-transform .35s ease,
-box-shadow .35s ease;
-}
-
-.stat-number{
-font-size:56px;
-font-weight:800;
-line-height:1;
-margin-bottom:12px;
-}
-
-.stat-label{
-font-size:18px;
-font-weight:500;
-}
-
-/* hover pop */
-.stat-card:hover{
-transform:translateY(-8px) scale(1.03);
-box-shadow:
-0 22px 40px rgba(0,184,148,.30),
-0 0 18px rgba(0,255,204,.15);
-}
-
-/* light sweep */
-.stat-card::before{
-content:"";
-position:absolute;
-top:0;
-left:-120%;
-width:60%;
-height:100%;
-background:linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,.22),
-transparent
-);
-transform:skewX(-25deg);
-transition:.7s;
-}
-
-.stat-card:hover::before{
-left:150%;
-}
-
-
-/* responsive */
-@media(max-width:900px){
-.about-stats{
-grid-template-columns:1fr;
-max-width:420px;
-}
-
-#about .section-title{
-font-size:42px;
-}
-}
-
+        /* ============================================
+           ROOT VARIABLES
+        ============================================ */
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-light: #34d399;
+            --dark: #0a1f1c;
+            --light: #fdfbf7;
+            --gray: #6b7280;
+            --gradient-1: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+            --gradient-2: linear-gradient(135deg, #00b894 0%, #00d7ab 100%);
+            --shadow-glow: 0 20px 60px rgba(16, 185, 129, 0.25);
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: #fdfbf7;
-            scroll-behavior: smooth;
+            overflow-x: hidden;
+            color: #0f172a;
         }
+
+        /* ============================================
+           BACKGROUND TEXTURES
+        ============================================ */
         .bg-texture {
             position: fixed;
             inset: 0;
-            opacity: 0.12;
+            opacity: 0.08;
             pointer-events: none;
             z-index: 0;
             background-image: url('https://www.transparenttextures.com/patterns/gray-floral.png');
             background-repeat: repeat;
         }
+
         .bg-grid {
             position: fixed;
             inset: 0;
             pointer-events: none;
             z-index: 0;
-            background-image: 
-                linear-gradient(to right, rgba(16, 185, 129, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
+            background-image:
+                linear-gradient(to right, rgba(16, 185, 129, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16, 185, 129, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
         }
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
+
+        /* ============================================
+           FLOATING ORBS BACKGROUND
+        ============================================ */
+        .floating-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatOrb 20s ease-in-out infinite;
         }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+
+        .orb-1 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, #10b981, transparent);
+            top: -10%; left: -10%;
+        }
+
+        .orb-2 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, #06b6d4, transparent);
+            bottom: 10%; right: -5%;
+            animation-delay: -7s;
+        }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(60px,-40px) scale(1.1); }
+            66% { transform: translate(-40px,30px) scale(0.95); }
+        }
+
+        /* ============================================
+           BRAND LOGO
+        ============================================ */
+.brand-logo-text{
+    font-size:1.55rem;
+    font-weight:500;
+    letter-spacing:-0.5px;
+    color:#111827;
+    font-family:
+    "Poppins",
+    "Nunito",
+    "Quicksand",
+    sans-serif;
+    line-height:1;
+    text-decoration:none;
+}
+
+.brand-logo-text span{
+    color:#10b981;
+}
+
+@media(max-width:768px){
+    .brand-logo-text{
+        font-size:1.3rem;
+    }
+}
+
+        /* ============================================
+           DROPDOWN NAV
+        ============================================ */
+        .dropdown-wrap { position: relative; }
+        .mega-drop {
+            position: absolute;
+            top: calc(100% + 2px);
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            width: 680px;
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.15);
+            border: 1px solid #f0fdf4;
+            padding: 28px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+        .dropdown-wrap:hover .mega-drop {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all;
+            transform: translateX(-50%) translateY(0);
+        }
+        .drop-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 16px;
+            border-radius: 16px;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+        .drop-item:hover {
+            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+            transform: translateX(4px);
+        }
+        .drop-icon {
+            width: 44px; height: 44px; min-width: 44px;
+            background: linear-gradient(135deg, #10b981, #34d399);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 16px rgba(16,185,129,0.25);
+        }
+        .drop-icon svg {
+            width: 22px; height: 22px;
+            stroke: #fff;
+            stroke-width: 2;
+            fill: none;
+        }
+        .drop-text p { font-weight: 700; font-size: 0.9rem; color: #111827; margin-bottom: 2px; }
+        .drop-text span { font-size: 0.78rem; color: #6b7280; }
+
+        /* ============================================
+           HERO VIDEO SECTION
+        ============================================ */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .hero-section video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(10,31,28,0.55), rgba(0,0,0,0.35) 60%, rgba(16,185,129,0.25));
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 0 24px;
+            max-width: 1100px;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 50px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 28px;
+            animation: fadeInDown 1s ease-out;
+        }
+        .hero-badge .dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 12px #10b981;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.8rem, 7vw, 6.5rem);
+            font-weight: 800;
+            line-height: 1;
+            color: #fff;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+            text-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        .hero-title .gradient-text {
+            background: linear-gradient(135deg, #10b981, #34d399, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+        .hero-subtitle {
+            font-size: clamp(1rem, 1.6vw, 1.35rem);
+            color: rgba(255,255,255,0.92);
+            max-width: 680px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+            font-weight: 400;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            box-shadow: 0 12px 30px rgba(16,185,129,0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #059669, #10b981);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .btn-primary > * { position: relative; z-index: 1; }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 40px rgba(16,185,129,0.5);
+        }
+        .btn-primary:hover::before { opacity: 1; }
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            color: #fff;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 15px;
+            border: 1px solid rgba(255,255,255,0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+        .hero-stat-item { text-align: center; }
+        .hero-stat-item .num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #fff;
+            display: block;
+            line-height: 1;
+        }
+        .hero-stat-item .lbl {
+            color: rgba(255,255,255,0.7);
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-top: 6px;
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: rgba(255,255,255,0.7);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            animation: bounceDown 2s ease-in-out infinite;
+        }
+        .scroll-indicator .line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, transparent, #fff);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.6; }
+        }
+        @keyframes bounceDown {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* ============================================
+           SECTION HEADINGS
+        ============================================ */
+        .section-tag {
+            display: inline-block;
+            padding: 6px 18px;
+            background: rgba(16,185,129,0.1);
+            color: #059669;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+        .section-title-main {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        .section-title-main .accent {
+            background: linear-gradient(135deg, #10b981, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .section-divider {
+            width: 80px; height: 5px;
+            background: linear-gradient(135deg, #10b981, #34d399);
+            border-radius: 999px;
+            margin: 0 auto 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        .section-divider::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            animation: shimmer 2.5s linear infinite;
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* ============================================
+           HEADING ROAD ANIMATION
+        ============================================ */
+        .heading-road-animation {
+            position: relative;
+            width: 420px;
+            max-width: 90%;
+            height: 24px;
+            margin: 18px auto 0;
+        }
+        .road-line {
+            position: absolute;
+            top: 20px; left: 30px; right: 30px;
+            height: 2px;
+            background: linear-gradient(to right, #10b981, #34d399);
+            opacity: 0.4;
+            border-radius: 50px;
+        }
+        .road-car {
+            position: absolute;
+            left: 0; top: 9px;
+            width: 18px; height: 18px;
+            stroke: #10b981;
+            stroke-width: 2.5;
+            animation: carDrive 5s ease-in-out infinite;
+        }
+        .road-station { position: absolute; right: 0; top: 6px; }
+        .road-station svg { width: 20px; height: 20px; stroke: #10b981; stroke-width: 2.5; }
+        @keyframes carDrive {
+            0% { left: 0; }
+            80% { left: calc(100% - 35px); }
+            100% { left: calc(100% - 35px); }
+        }
+        @media(max-width:768px) {
+            .heading-road-animation { width: 260px; height: 20px; }
+            .road-line { top: 16px; left: 22px; right: 22px; }
+            .road-car { top: 6px; width: 14px; height: 14px; }
+            .road-station svg { width: 16px; height: 16px; }
+        }
+
+        /* ============================================
+           ABOUT SECTION
+        ============================================ */
+        #about {
+            padding: 110px 0 100px;
+            background: linear-gradient(180deg, #fdfbf7 0%, #f0fdf4 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        #about .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        #about .section-header { text-align: center; max-width: 760px; margin: 0 auto 50px; }
+        .about-content { max-width: 920px; margin: auto; text-align: center; }
+        .about-content p {
+            font-size: 18px;
+            line-height: 1.85;
+            color: #475569;
+            margin-bottom: 20px;
+        }
+        .about-stats {
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 28px;
+            padding: 45px 25px;
+            color: #fff;
+            text-align: center;
+            box-shadow: 0 18px 40px rgba(16,185,129,0.25);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.45s ease;
+        }
+        .stat-card::before {
+            content: "";
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2), transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .stat-card:hover {
+            transform: translateY(-12px) scale(1.04);
+            box-shadow: 0 30px 60px rgba(16,185,129,0.4);
+        }
+        .stat-card:hover::before { opacity: 1; }
+        .stat-card::after {
+            content: "";
+            position: absolute;
+            top: 0; left: -120%;
+            width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: skewX(-25deg);
+            transition: 0.8s;
+        }
+        .stat-card:hover::after { left: 150%; }
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 60px;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1;
+        }
+        .stat-label {
+            font-size: 17px;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+        @media(max-width:900px) {
+            .about-stats { grid-template-columns: 1fr; max-width: 420px; }
+        }
+
+        /* ============================================
+           FUTURE SECTION (REVEAL ANIMATIONS)
+        ============================================ */
+        .future-heading {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.2rem, 3.6vw, 4rem);
+            font-weight: 800;
+            line-height: 1.05;
+            color: #0f172a;
+            margin-bottom: 28px;
+            letter-spacing: -2px;
+            max-width: 540px;
+        }
+        .future-paragraphs p {
+            font-size: 17px;
+            line-height: 1.9;
+            color: #475569;
+            margin-bottom: 18px;
+            opacity: 0;
+            transform: translateX(-80px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        .reveal-left.active .future-paragraphs p { opacity: 1; transform: translateX(0); }
+        .reveal-left.active .future-paragraphs p:nth-child(1) { transition-delay: 0.3s; }
+        .reveal-left.active .future-paragraphs p:nth-child(2) { transition-delay: 0.6s; }
+
+        .typing-text {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            width: fit-content;
+            max-width: 540px;
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: opacity 1.2s ease, transform 1.2s ease;
+        }
+        .reveal-left.active .typing-text { opacity: 1; transform: translateX(0); }
+        .typing-text::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: #fdfbf7;
+            transform: translateX(0);
+            transition: transform 2.4s cubic-bezier(0.77, 0, 0.18, 1);
+            z-index: 2;
+        }
+        .reveal-left.active .typing-text::before { transform: translateX(102%); }
+
+        .floating-image {
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .floating-image img {
+            animation: floatImage 5s ease-in-out infinite;
+            will-change: transform;
+            border-radius: 2rem;
+        }
+        @keyframes floatImage {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-18px); }
+        }
+        .floating-image::before {
+            content: "";
+            position: absolute;
+            inset: -25px;
+            background: radial-gradient(circle, rgba(16,185,129,0.22), transparent 70%);
+            z-index: -1;
+            filter: blur(40px);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: opacity 1.2s ease, transform 1.2s ease;
+        }
+        .reveal-left.active { opacity: 1; transform: translateX(0); }
+
+        @media(max-width:768px) {
+            .future-heading { font-size: 32px; max-width: 290px; }
+            .typing-text { max-width: 290px; }
+        }
+
+        /* ============================================
+           FUTURE ROADMAP
+        ============================================ */
+        .future-roadmap-section {
+            padding: 120px 0;
+            background: linear-gradient(180deg, #f7f8fa 0%, #eff6ff 100%);
+            overflow: hidden;
+            position: relative;
+        }
+        .future-roadmap-container {
+            max-width: 1300px;
+            margin: auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .future-roadmap-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        .future-roadmap-tag {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #0891b2;
+            margin-bottom: 18px;
+            padding: 6px 16px;
+            background: rgba(8,145,178,0.08);
+            border-radius: 50px;
+        }
+        .future-roadmap-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1;
+            color: #0f172a;
+            margin-bottom: 20px;
+            letter-spacing: -2.5px;
+        }
+        .future-roadmap-subtitle {
+            font-size: clamp(1.1rem, 1.8vw, 1.6rem);
+            color: #64748b;
+            font-style: italic;
+            font-weight: 400;
+        }
+        .future-roadmap-wrapper {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            align-items: center;
+        }
+        .future-road-line {
+            position: absolute;
+            top: 50%; left: 5%; right: 5%;
+            height: 4px;
+            background: linear-gradient(to right, #10b981, #06b6d4, #10b981);
+            transform: translateY(-50%);
+            z-index: 0;
+            border-radius: 999px;
+            opacity: 0.3;
+        }
+        .future-road-card {
+            position: relative;
+            z-index: 2;
+            background: #fff;
+            border-radius: 32px;
+            padding: 38px 32px 44px;
+            min-height: 260px;
+            box-shadow: 0 10px 35px rgba(15,23,42,0.06);
+            transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+            border: 1px solid #edf1f4;
+        }
+        .future-road-card::before {
+            content: "";
+            position: absolute;
+            top: -8px; left: 50%;
+            transform: translateX(-50%);
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 0 0 6px rgba(16,185,129,0.15);
+            transition: transform 0.4s;
+        }
+        .future-road-card:hover {
+            background: linear-gradient(135deg, #0f9d69, #0891b2);
+            color: #fff;
+            transform: translateY(-14px) scale(1.05);
+            box-shadow: 0 30px 60px rgba(15,157,105,0.35);
+        }
+        .future-road-card:hover::before {
+            transform: translateX(-50%) scale(1.3);
+            background: #fff;
+        }
+        .future-road-year {
+            display: block;
+            font-size: 14px;
+            font-weight: 800;
+            color: #0f9d69;
+            margin-bottom: 22px;
+            letter-spacing: 1.5px;
+        }
+        .future-road-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            line-height: 1.3;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: inherit;
+        }
+        .future-road-card p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #64748b;
+        }
+        .future-road-card:hover p,
+        .future-road-card:hover .future-road-year { color: #fff; }
+        @media(max-width:1100px) {
+            .future-roadmap-wrapper { grid-template-columns: repeat(2, 1fr); }
+            .future-road-line { display: none; }
+        }
+        @media(max-width:768px) {
+            .future-roadmap-section { padding: 90px 0; }
+            .future-roadmap-wrapper { grid-template-columns: 1fr; gap: 22px; }
+            .future-road-card { min-height: auto; padding: 32px 26px; border-radius: 24px; }
+        }
+
+        /* ============================================
+           VALUES ACCORDION
+        ============================================ */
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 4px 24px;
+            margin-bottom: 14px;
+            transition: all 0.35s ease;
+            background: #fff;
+        }
+        .accordion-item.active {
+            border-color: #10b981;
+            box-shadow: 0 16px 40px rgba(16,185,129,0.12);
+            background: linear-gradient(135deg, #fff, #f0fdf4);
+        }
+        .accordion-item button {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
         }
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            transition: max-height 0.4s ease, opacity 0.4s ease;
             opacity: 0;
         }
         .accordion-item.active .accordion-content {
-            max-height: 200px;
+            max-height: 250px;
             opacity: 1;
+            padding-bottom: 18px;
         }
-        .accordion-item.active .plus-icon {
-            display: none;
+        .accordion-item.active .plus-icon { display: none; }
+        .accordion-item.active .minus-icon { display: block; }
+        .minus-icon { display: none; }
+
+        /* ============================================
+           PARTNERSHIPS
+        ============================================ */
+        #partnerships {
+            padding: 110px 0;
+            background: linear-gradient(180deg, #f5fbf9 0%, #edf5f3 100%);
+            position: relative;
+            overflow: hidden;
         }
-        .accordion-item.active .minus-icon {
-            display: block;
+        #partnerships .container {
+            max-width: 1280px;
+            margin: auto;
+            padding: 0 24px;
         }
-        .minus-icon {
-            display: none;
+        #partnerships .section-header { text-align: center; margin-bottom: 60px; }
+        .partnership-intro {
+            max-width: 850px;
+            margin: 0 auto 50px;
+            text-align: center;
         }
-        .team-member {
-            transition: transform 0.3s ease;
+        .partnership-intro p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #5f7671;
         }
-        .team-member:hover {
-            transform: scale(1.02);
+        .partnership-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
         }
-        .grayscale-hover {
-            filter: grayscale(100%);
-            transition: filter 0.5s ease;
+        .partnership-category {
+            background: #fff;
+            border-radius: 28px;
+            padding: 38px 32px;
+            box-shadow: 0 15px 40px rgba(15,55,46,0.07);
+            border: 1px solid #dfeee9;
+            transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+            position: relative;
+            overflow: hidden;
         }
-        .grayscale-hover:hover {
-            filter: grayscale(0%);
+        .partnership-category::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: linear-gradient(90deg, #10b981, #06b6d4);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
         }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .partnership-category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(15,55,46,0.12);
         }
-        .animate-fade-in {
-            animation: fadeInUp 0.8s ease-out forwards;
+        .partnership-category:hover::before { transform: scaleX(1); }
+        .partnership-category h3 {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 22px;
+            color: #17232d;
         }
-        /* Marquee Animation */
+        .icon-circle {
+            width: 54px; height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00caa5, #17e2b8);
+            color: #fff;
+            font-size: 24px;
+            flex-shrink: 0;
+            box-shadow: 0 10px 25px rgba(0,202,165,0.3);
+        }
+        .partnership-category p {
+            font-size: 16px;
+            line-height: 1.85;
+            color: #627872;
+            margin-bottom: 22px;
+        }
+        .partner-benefits ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .partner-benefits li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 14px;
+            font-size: 15.5px;
+            color: #29443d;
+            line-height: 1.6;
+        }
+        .partner-benefits li::before {
+            content: "";
+            position: absolute;
+            left: 8px; top: 8px;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #10b981, #06b6d4);
+        }
+        @media(max-width:992px) {
+            .partnership-details { grid-template-columns: 1fr; max-width: 820px; margin: auto; }
+        }
+
+        /* ============================================
+           MARQUEE PARTNERS
+        ============================================ */
         .marquee {
             display: flex;
             overflow: hidden;
@@ -716,707 +955,267 @@ font-size:42px;
             from { transform: translateX(0); }
             to { transform: translateX(calc(-100% - 3rem)); }
         }
-        .marquee:hover .marquee-content {
-            animation-play-state: paused;
+        .marquee:hover .marquee-content { animation-play-state: paused; }
+
+        /* ============================================
+           OFFERINGS
+        ============================================ */
+        #offerings {
+            background: linear-gradient(180deg, #fdfbf7 0%, #f0fdf4 100%);
+            padding: 100px 0 90px;
+        }
+        #offerings .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 24px;
+        }
+        #offerings .section-header { text-align: center; margin-bottom: 55px; }
+        .offerings-content {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        .offering-category {
+            background: #fff;
+            border-radius: 24px;
+            padding: 32px 30px;
+            border: 1px solid #dceae6;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+            position: relative;
+            overflow: hidden;
+        }
+        .offering-category::after {
+            content: "";
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 3px;
+            background: linear-gradient(90deg, #10b981, #06b6d4);
+            transition: width 0.4s;
+        }
+        .offering-category:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,184,148,0.15);
+        }
+        .offering-category:hover::after { width: 100%; }
+        .offering-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+        .offering-icon {
+            width: 44px; height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #10b981, #06b6d4);
+            box-shadow: 0 8px 18px rgba(17,202,164,0.25);
+        }
+        .offering-icon svg { width: 22px; height: 22px; stroke: #fff; stroke-width: 2.5; }
+        .offering-header h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #111827;
+            margin: 0;
+        }
+        .offering-description p {
+            margin: 0;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #556d67;
+        }
+        @media(max-width:768px) {
+            .offerings-content { grid-template-columns: 1fr; }
         }
 
-
-
-
-
-
-
-
-
-/* ===== HEADING ROAD ANIMATION ===== */
-
-.heading-road-animation{
-position:relative;
-width:420px;
-max-width:90%;
-height:24px;
-margin:-8px auto -22px auto;
-}
-
-.road-line{
-position:absolute;
-top:20px;
-left:30px;
-right:30px;
-height:2px;
-background:linear-gradient(to right,#10b981,#34d399);
-opacity:0.4;
-border-radius:50px;
-}
-
-.road-car{
-position:absolute;
-left:0;
-top:9px;
-width:18px;
-height:18px;
-stroke:#10b981;
-stroke-width:2.5;
-animation:carDrive 5s ease-in-out infinite;
-}
-
-.road-station{
-position:absolute;
-right:0;
-top:6px;
-}
-
-.road-station svg{
-width:20px;
-height:20px;
-stroke:#10b981;
-stroke-width:2.5;
-}
-
-@keyframes carDrive{
-
-0%{
-left:0;
-}
-
-80%{
-left:calc(100% - 35px);
-}
-
-100%{
-left:calc(100% - 35px);
-}
-
-}
-
-/* ===== MOBILE RESPONSIVE ===== */
-
-@media(max-width:768px){
-
-.heading-road-animation{
-width:260px;
-height:20px;
-margin:-4px auto -14px auto;
-}
-
-.road-line{
-top:16px;
-left:22px;
-right:22px;
-}
-
-.road-car{
-top:6px;
-width:14px;
-height:14px;
-}
-
-.road-station{
-top:4px;
-}
-
-.road-station svg{
-width:16px;
-height:16px;
-}
-
-}
-
-@media(max-width:480px){
-
-.heading-road-animation{
-width:220px;
-}
-
-}
-
-
-/* ===== FUTURE ROADMAP SECTION ===== */
-
-.future-roadmap-section{
-    padding:120px 0;
-    background:#f7f8fa;
-    overflow:hidden;
-}
-
-.future-roadmap-container{
-    max-width:1300px;
-    margin:auto;
-    padding:0 24px;
-}
-
-.future-roadmap-header{
-    text-align:center;
-    margin-bottom:90px;
-}
-
-.future-roadmap-tag{
-    display:inline-block;
-    font-size:14px;
-    font-weight:700;
-    letter-spacing:3px;
-    color:#0891b2;
-    margin-bottom:20px;
-}
-
-.future-roadmap-title{
-    font-size:72px;
-    font-weight:800;
-    line-height:1;
-    color:#0f172a;
-    margin-bottom:24px;
-    letter-spacing:-3px;
-}
-
-.future-roadmap-subtitle{
-    font-size:32px;
-    color:#64748b;
-    font-style:italic;
-    font-weight:400;
-}
-
-.future-roadmap-wrapper{
-    position:relative;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:34px;
-    align-items:center;
-}
-
-.future-road-line{
-    position:absolute;
-    top:50%;
-    left:5%;
-    right:5%;
-    height:4px;
-    background:#dfe5ea;
-    transform:translateY(-50%);
-    z-index:0;
-    border-radius:999px;
-}
-
-.future-road-card{
-    position:relative;
-    z-index:2;
-    background:white;
-    border-radius:40px;
-    padding:42px 42px 48px;
-    min-height:260px;
-    box-shadow:0 10px 35px rgba(15,23,42,.06);
-transition:
-    transform .22s cubic-bezier(.22,1,.36,1),
-    background .18s ease,
-    color .18s ease,
-    box-shadow .22s ease;
-    border:1px solid #edf1f4;
-}
-
-.future-road-card:hover{
-
-    background:#0f9d69;
-    color:white;
-
-    transform:
-        translateY(-12px)
-        scale(1.06);
-
-    box-shadow:
-        0 30px 60px rgba(15,23,42,.18),
-        0 0 35px rgba(15,157,105,.35);
-
-}
-
-
-.future-road-year{
-    display:block;
-    font-size:15px;
-    font-weight:800;
-    color:#0f9d69;
-    margin-bottom:24px;
-    letter-spacing:1px;
-}
-
-.future-road-card h3{
-    font-size:28px;
-    line-height:1.3;
-    font-weight:800;
-    margin-bottom:22px;
-    color:inherit;
-}
-
-.future-road-card p{
-    font-size:18px;
-    line-height:1.7;
-    color:#64748b;
-}
-
-.future-road-card:hover p,
-.future-road-card:hover .future-road-year{
-    color:white;
-}
-
-/* ===== RESPONSIVE ===== */
-
-@media(max-width:1100px){
-
-    .future-roadmap-wrapper{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .future-road-line{
-        display:none;
-    }
-}
-
-@media(max-width:768px){
-
-    .future-roadmap-section{
-        padding:90px 0;
-    }
-
-    .future-roadmap-title{
-        font-size:48px;
-    }
-
-    .future-roadmap-subtitle{
-        font-size:22px;
-    }
-
-    .future-roadmap-wrapper{
-        grid-template-columns:1fr;
-        gap:24px;
-    }
-
-    .future-road-card{
-        min-height:auto;
-        padding:34px 30px;
-        border-radius:30px;
-    }
-
-    .future-road-card h3{
-        font-size:24px;
-    }
-
-    .future-road-card p{
-        font-size:16px;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-.phone-left,
-.phone-right{
-    position:absolute;
-    z-index:30;
-}
-
-.phone-left img,
-.phone-right img{
-    width:190px;
-    border-radius:32px;
-    box-shadow:0 25px 50px rgba(0,0,0,.35);
-    border:4px solid rgba(255,255,255,.9);
-}
-
-/* LEFT MOBILE */
-.phone-left{
-    left:50px;
-    bottom:-120px;
-
-    animation:leftFloat 4s ease-in-out infinite;
-}
-
-/* RIGHT MOBILE */
-.phone-right{
-    right:60px;
-    top:-95px;
-
-    animation:rightFloat 4s ease-in-out infinite;
-}
-
-/* FLOAT ANIMATIONS */
-@keyframes leftFloat{
-
-    0%{
-        transform:translateY(0px);
-    }
-
-    50%{
-        transform:translateY(-18px);
-    }
-
-    100%{
-        transform:translateY(0px);
-    }
-
-}
-
-@keyframes rightFloat{
-
-    0%{
-        transform:translateY(0px);
-    }
-
-    50%{
-        transform:translateY(18px);
-    }
-
-    100%{
-        transform:translateY(0px);
-    }
-
-}
-
-/* RESPONSIVE */
-@media(max-width:1100px){
-
-    .phone-left img,
-    .phone-right img{
-        width:150px;
-    }
-
-    .phone-left{
-        left:25px;
-        bottom:-90px;
-    }
-
-    .phone-right{
-        right:25px;
-        top:-70px;
-    }
-
-}
-
-@media(max-width:768px){
-
-    .phone-left,
-    .phone-right{
-        display:none;
-    }
-
-}
-
-
-
-/* =========================================
-FUTURE TEXT REVEAL ANIMATION
-========================================= */
-
-.future-heading{
-
-    font-size: clamp(2.4rem,3.6vw,4.4rem);
-
-    font-weight:800;
-
-    line-height:1.02;
-
-    color:#111827;
-
-    margin-bottom:28px;
-
-    letter-spacing:-3px;
-
-    max-width:480px;
-}
-
-.future-paragraphs p{
-    font-size:18px;
-    line-height:1.9;
-    color:#5b6470;
-    margin-bottom:22px;
-
-    opacity:0;
-    transform:translateX(-80px);
-
-    transition:
-    opacity 1s ease,
-    transform 1s ease;
-}
-
-.reveal-left.active .future-paragraphs p{
-    opacity:1;
-    transform:translateX(0);
-}
-
-.reveal-left.active .future-paragraphs p:nth-child(1){
-    transition-delay:.3s;
-}
-
-.reveal-left.active .future-paragraphs p:nth-child(2){
-    transition-delay:.7s;
-}
-
-/* =========================================
-PERFECT MULTILINE TYPE REVEAL
-========================================= */
-
-.typing-text{
-
-    position:relative;
-
-    display:inline-block;
-
-    overflow:hidden;
-
-    width:fit-content;
-
-    max-width:480px;
-
-    opacity:0;
-
-    transform:translateX(-60px);
-
-    transition:
-    opacity 1.2s ease,
-    transform 1.2s ease;
-}
-
-/* reveal active */
-
-.reveal-left.active .typing-text{
-
-    opacity:1;
-    transform:translateX(0);
-
-}
-
-/* animated overlay */
-
-.typing-text::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:#fdfbf7;
-
-    transform:translateX(0);
-
-    transition:
-    transform 2.6s cubic-bezier(.77,0,.18,1);
-
-    z-index:2;
-
-}
-
-/* green cursor */
-
-
-/* animate */
-
-.reveal-left.active .typing-text::before{
-    transform:translateX(102%);
-}
-
-
-
-/* cursor */
-
-
-
-@keyframes blink{
-    0%,50%{
-        opacity:1;
-    }
-
-    51%,100%{
-        opacity:0;
-    }
-}
-
-/* =========================================
-FLOATING IMAGE
-========================================= */
-
-.floating-image{
-    position:relative;
-    transition:transform .3s ease;
-}
-
-.floating-image img{
-    animation:floatImage 5s ease-in-out infinite;
-    will-change:transform;
-}
-
-@keyframes floatImage{
-
-    0%{
-        transform:translateY(0px);
-    }
-
-    50%{
-        transform:translateY(-18px);
-    }
-
-    100%{
-        transform:translateY(0px);
-    }
-}
-
-/* glow */
-
-.floating-image::before{
-    content:"";
-    position:absolute;
-    inset:-20px;
-    background:
-    radial-gradient(circle,
-    rgba(16,185,129,.18),
-    transparent 70%);
-
-    z-index:-1;
-    filter:blur(35px);
-}
-
-/* =========================================
-SCROLL ENTRY
-========================================= */
-
-.reveal-left{
-    opacity:0;
-    transform:translateX(-100px);
-    transition:
-    opacity 1.2s ease,
-    transform 1.2s ease;
-}
-
-.reveal-left.active{
-    opacity:1;
-    transform:translateX(0);
-}
-
-/* =========================================
-MOBILE
-========================================= */
-
-@media(max-width:768px){
-
-    .future-heading{
-
-        font-size:34px;
-
-        line-height:1.08;
-
-        max-width:290px;
-
-        letter-spacing:-2px;
-    }
-
-    .typing-text{
-        max-width:290px;
-    }
-
-}
-
-
-
-/* ===== BRAND LOGO TEXT ===== */
-
-.brand-logo-text{
-
-    font-size: 1.55rem;
-
-    font-weight: 500;
-
-    letter-spacing: -0.5px;
-
-    color: #111827;
-
-    font-family:
-    "Poppins",
-    "Nunito",
-    "Quicksand",
-    sans-serif;
-
-    line-height: 1;
-}
-
-.brand-logo-text span{
-    color:#10b981;
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-    .brand-logo-text{
-        font-size:1.3rem;
-    }
-
-}
-
-
-
-
-        /* Dropdown */
-        .dropdown-wrap { position: relative; }
-        .dropdown-trigger { display: flex; align-items: center; gap: 4px; font-size: 0.875rem; font-weight: 500; color: #4b5563; cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; transition: color 0.2s; white-space: nowrap; }
-        .dropdown-trigger:hover { color: #111827; }
-        .dropdown-trigger.solar-active { color: #059669; }
-        .mega-drop { position: absolute; top: calc(100% + 2px); left: 50%; transform: translateX(-50%); width: 680px; background: #fff; border-radius: 24px; box-shadow: 0 25px 60px rgba(0,0,0,0.12); border: 1px solid #f0fdf4; padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; opacity: 0; visibility: hidden; transition: all 0.25s ease; pointer-events: none; }
-        .dropdown-wrap:hover .mega-drop { opacity: 1; visibility: visible; pointer-events: all; transform: translateX(-50%) translateY(0); }
-        .drop-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; border-radius: 16px; text-decoration: none; transition: background 0.2s; }
-        .drop-item:hover { background: #f0fdf4; }
-        .drop-icon { width: 44px; height: 44px; min-width: 44px; background: linear-gradient(135deg, #10b981, #34d399); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
-        .drop-icon svg { width: 22px; height: 22px; stroke: #fff; stroke-width: 2; fill: none; }
-        .drop-text p { font-weight: 700; font-size: 0.9rem; color: #111827; margin-bottom: 2px; }
-        .drop-text span { font-size: 0.78rem; color: #6b7280; }
+        /* ============================================
+           VIDEO GALLERY (NEW SECTION)
+        ============================================ */
+        .video-gallery-section {
+            padding: 100px 0;
+            background: #fff;
+        }
+        .video-gallery-container {
+            max-width: 1280px;
+            margin: auto;
+            padding: 0 24px;
+        }
+        .video-gallery-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .video-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 16/10;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+        }
+        .video-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(16,185,129,0.25);
+        }
+        .video-card video {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .video-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.85));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+            transition: background 0.4s;
+        }
+        .video-card:hover .video-card-overlay {
+            background: linear-gradient(180deg, rgba(16,185,129,0.15), rgba(0,0,0,0.9));
+        }
+        .video-play-btn {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+        .video-card:hover .video-play-btn {
+            transform: translate(-50%, -50%) scale(1.15);
+            background: #10b981;
+        }
+        .video-play-btn::before {
+            content: "";
+            border-left: 18px solid #10b981;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 4px;
+            transition: border-color 0.3s;
+        }
+        .video-card:hover .video-play-btn::before { border-left-color: #fff; }
+        .video-card-title {
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .video-card-desc {
+            color: rgba(255,255,255,0.85);
+            font-size: 14px;
+        }
+        @media(max-width:1024px) {
+            .video-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media(max-width:640px) {
+            .video-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ============================================
+           MOBILE APP SECTION
+        ============================================ */
+        .phone-left, .phone-right {
+            position: absolute;
+            z-index: 30;
+        }
+        .phone-left img, .phone-right img {
+            width: 190px;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.35);
+            border: 4px solid rgba(255,255,255,0.9);
+        }
+        .phone-left { left: 50px; bottom: -120px; animation: leftFloat 4s ease-in-out infinite; }
+        .phone-right { right: 60px; top: -95px; animation: rightFloat 4s ease-in-out infinite; }
+        @keyframes leftFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-18px); }
+        }
+        @keyframes rightFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(18px); }
+        }
+        @media(max-width:1100px) {
+            .phone-left img, .phone-right img { width: 150px; }
+            .phone-left { left: 25px; bottom: -90px; }
+            .phone-right { right: 25px; top: -70px; }
+        }
+        @media(max-width:768px) {
+            .phone-left, .phone-right { display: none; }
+        }
+
+        /* ============================================
+           UTIL
+        ============================================ */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .grayscale-hover { filter: grayscale(100%); transition: filter 0.5s ease; }
+        .grayscale-hover:hover { filter: grayscale(0%); }
+
+        /* ============================================
+           SCROLLBAR
+        ============================================ */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #10b981, #059669);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #059669; }
     </style>
 </head>
 <body class="antialiased text-gray-900">
+
     <div class="bg-texture"></div>
     <div class="bg-grid"></div>
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
 
-    <!-- Navbar -->
+    <!-- ==================== NAVBAR ==================== -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-<div class="flex-shrink-0 flex items-center gap-1">
+                <div class="flex-shrink-0 flex items-center gap-1">
+                    <a href="index.html" class="flex items-center gap-2">
+                        <img src="images/logo.png" alt="Logo" class="h-10 w-auto object-contain">
+                        <span class="brand-logo-text">Charge <span>Bees</span></span>
+                    </a>
+                </div>
 
-<a href="index.html" class="flex items-center gap-2">
-
-    <img src="images/logo.png" alt="Logo" class="h-10 w-auto object-contain">
-
-    <span class="brand-logo-text">
-        Charge <span>Bees</span>
-    </span>
-
-</a>
-
-</div>
-                
                 <div class="hidden md:flex items-center space-x-5">
-                    <a href="index.html" class="text-sm font-medium text-emerald-600 transition-colors">About</a>
+                    <a href="index.html" class="text-sm font-medium text-emerald-600 transition-colors">Home</a>
                     <a href="stationfinder.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Station Finder</a>
-                    
+
                     <!-- Products Dropdown -->
                     <div class="relative group">
-<button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
-
-    <a href="products.html" class="flex items-center gap-1">EV Products
-        <i data-lucide="chevron-down" class="w-4 h-4"></i>
-    </a>
-
-</button>
-                        
-                        <!-- Mega Menu -->
+                        <button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
+                            <a href="products.html" class="flex items-center gap-1">EV Products
+                                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                            </a>
+                        </button>
                         <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-white rounded-3xl shadow-2xl border border-gray-100 p-8 grid grid-cols-3 gap-8 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                            <!-- Hardware -->
                             <div>
                                 <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
                                     <i data-lucide="zap" class="w-5 h-5 text-emerald-600"></i> Hardware
                                 </h3>
-                                <a href="products.html#hardware" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
-                                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                <a href="products.html#hardware" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
                                         <i data-lucide="battery-charging" class="w-6 h-6 text-emerald-600"></i>
                                     </div>
                                     <div>
@@ -1425,15 +1224,13 @@ MOBILE
                                     </div>
                                 </a>
                             </div>
-
-                            <!-- Software -->
                             <div>
                                 <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
                                     <i data-lucide="layout" class="w-5 h-5 text-emerald-600"></i> Software
                                 </h3>
                                 <div class="space-y-2">
-                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
-                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
                                             <i data-lucide="cloud" class="w-6 h-6 text-emerald-600"></i>
                                         </div>
                                         <div>
@@ -1444,8 +1241,8 @@ MOBILE
                                             <p class="text-xs text-gray-500">CMS Platform</p>
                                         </div>
                                     </a>
-                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
-                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
                                             <i data-lucide="smartphone" class="w-6 h-6 text-emerald-600"></i>
                                         </div>
                                         <div>
@@ -1455,15 +1252,13 @@ MOBILE
                                     </a>
                                 </div>
                             </div>
-
-                            <!-- Services -->
                             <div>
                                 <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
                                     <i data-lucide="settings" class="w-5 h-5 text-emerald-600"></i> Services
                                 </h3>
                                 <div class="space-y-2">
-                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
-                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
                                             <i data-lucide="activity" class="w-6 h-6 text-emerald-600"></i>
                                         </div>
                                         <div>
@@ -1471,8 +1266,8 @@ MOBILE
                                             <p class="text-xs text-gray-500">Renewable Energy</p>
                                         </div>
                                     </a>
-                                    <a href="product.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
-                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                    <a href="product.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
                                             <i data-lucide="battery-full" class="w-6 h-6 text-emerald-600"></i>
                                         </div>
                                         <div>
@@ -1483,8 +1278,8 @@ MOBILE
                                             <p class="text-xs text-gray-500">Swapping Solutions</p>
                                         </div>
                                     </a>
-                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
-                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
                                             <i data-lucide="credit-card" class="w-6 h-6 text-emerald-600"></i>
                                         </div>
                                         <div>
@@ -1497,262 +1292,182 @@ MOBILE
                         </div>
                     </div>
 
-
-                <!-- Solar Products Dropdown -->
-                <div class="dropdown-wrap" style="position:relative;">
-<button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
-
-    <a href="solar_products.html" class="flex items-center gap-1">Solar Products
-        <i data-lucide="chevron-down" class="w-4 h-4"></i>
-    </a>
-
-</button>
-                    <div class="mega-drop" style="z-index:100;">
-                        <a href="Solar_products.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                            </div>
-                            <div class="drop-text"><p>Our Solar Solutions</p><span>For all your energy needs</span></div>
-                        </a>
-                        <a href="residential.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                            </div>
-                            <div class="drop-text"><p>Residential Solar Rooftops</p><span>For homes & apartments</span></div>
-                        </a>
-                        <a href="commercial.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                            </div>
-                            <div class="drop-text"><p>Commercial Solar Rooftops</p><span>For offices & retail</span></div>
-                        </a>
-                        <a href="industrial.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg>
-                            </div>
-                            <div class="drop-text"><p>Industrial Solar Rooftops</p><span>For factories & warehouses</span></div>
-                        </a>
-                        <a href="ground.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-                            </div>
-                            <div class="drop-text"><p>Ground Mounted Solar System</p><span>Large scale solar farms</span></div>
-                        </a>
+                    <!-- Solar Products Dropdown -->
+                    <div class="dropdown-wrap">
+                        <button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
+                            <a href="solar_products.html" class="flex items-center gap-1">Solar Products
+                                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                            </a>
+                        </button>
+                        <div class="mega-drop" style="z-index:100;">
+                            <a href="solar_products.html" class="drop-item">
+                                <div class="drop-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                </div>
+                                <div class="drop-text"><p>Our Solar Solutions</p><span>For all your energy needs</span></div>
+                            </a>
+                            <a href="residential.html" class="drop-item">
+                                <div class="drop-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                </div>
+                                <div class="drop-text"><p>Residential Solar Rooftops</p><span>For homes & apartments</span></div>
+                            </a>
+                            <a href="commercial.html" class="drop-item">
+                                <div class="drop-icon">
+                                    <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                                </div>
+                                <div class="drop-text"><p>Commercial Solar Rooftops</p><span>For offices & retail</span></div>
+                            </a>
+                            <a href="industrial.html" class="drop-item">
+                                <div class="drop-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg>
+                                </div>
+                                <div class="drop-text"><p>Industrial Solar Rooftops</p><span>For factories & warehouses</span></div>
+                            </a>
+                            <a href="ground.html" class="drop-item">
+                                <div class="drop-icon">
+                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/></svg>
+                                </div>
+                                <div class="drop-text"><p>Ground Mounted Solar System</p><span>Large scale solar farms</span></div>
+                            </a>
+                        </div>
                     </div>
-                </div>
+
                     <a href="partners.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Partners</a>
                     <a href="media-center.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Media Center</a>
                     <a href="careers.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Careers</a>
                 </div>
-                <div class="flex items-center gap-4">
-                     <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://play.google.com/store/games%3Fhl%3Den_IN&ved=2ahUKEwjP48zKm5WUAxVrTGwGHTWhBIAQFnoECB8QAQ&sqi=2&usg=AOvVaw1xFWwUV1XhFXXR_Z_npZ2_" class="hidden md:block bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700">
-                        Download App
-                    </a>
+
+                <div class="flex items-center gap-3">
+                    <a href="https://play.google.com" class="hidden lg:block bg-emerald-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700 transition">Download App</a>
+                    <a href="contact.html" class="hidden md:block bg-emerald-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700 transition">Contact Us</a>
+                    <button id="menu-btn" class="md:hidden flex items-center justify-center w-11 h-11 rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm shadow-sm hover:bg-emerald-50 hover:border-emerald-200 transition-all duration-300">
+                        <i data-lucide="menu" class="w-6 h-6 text-gray-900"></i>
+                    </button>
                 </div>
-                <div class="flex items-center gap-4">
-                     <a href="contact.html" class="hidden md:block bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700">
-                        Contact Us
-                    </a>
-                </div>
-                    <!-- Mobile Menu Button -->
-<!-- Mobile Menu Button -->
-<button
-    id="menu-btn"
-    class="md:hidden flex items-center justify-center w-11 h-11 rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm shadow-sm hover:bg-emerald-50 hover:border-emerald-200 transition-all duration-300"
->
-    <i data-lucide="menu" class="w-6 h-6 text-gray-900"></i>
-</button>
             </div>
         </div>
     </nav>
 
     <!-- Mobile Menu -->
-<!-- Mobile Menu -->
-<div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-white border-t border-gray-100 shadow-xl z-40">
-
-    <div class="p-6 space-y-5">
-
-        <a href="index.html"
-           class="block text-base font-semibold text-emerald-600">
-            About
-        </a>
-
-        <a href="stationfinder.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Station Finder
-        </a>
-
-        <a href="products.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            EV Products
-        </a>
-        <a href="solar_products.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Solar Products
-        </a>
-
-
-        <a href="partners.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Partners
-        </a>
-
-        <a href="media-center.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Media Center
-        </a>
-
-        <a href="careers.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Careers
-        </a>
-
-        <a href="contact.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Contact Us
-        </a>
-
+    <div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-white border-t border-gray-100 shadow-xl z-40">
+        <div class="p-6 space-y-5">
+            <a href="index.html" class="block text-base font-semibold text-emerald-600">Home</a>
+            <a href="stationfinder.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Station Finder</a>
+            <a href="products.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">EV Products</a>
+            <a href="solar_products.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Solar Products</a>
+            <a href="partners.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Partners</a>
+            <a href="media-center.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Media Center</a>
+            <a href="careers.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Careers</a>
+            <a href="contact.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Contact Us</a>
+        </div>
     </div>
-
-</div>
 
     <main class="relative z-10">
-        <!-- Video Intro Section -->
-            <section class="relative min-h-screen flex items-center justify-center overflow-hidden">            <!-- Background Video -->
-            <div class="absolute inset-0 z-0">
-                <!-- Desktop Video -->
-<!-- Desktop Video -->
-<!-- HERO VIDEO -->
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
 
-<!-- instant poster appears first -->
-<div class="absolute inset-0 z-0">
+        <!-- ==================== HERO VIDEO ==================== -->
+        <section class="hero-section">
+            <video id="heroVideo" autoplay muted loop playsinline preload="auto" poster="images/hero-poster.webp">
+                <source src="videos/bg1video.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
 
-<video
-id="heroVideo"
-class="w-full h-full object-cover"
-autoplay
-muted
-loop
-playsinline
-preload="none"
-poster="images/hero-poster.webp">
-
-<source src="videos/bg1video.mp4" type="video/mp4">
-
-</video>
-
-<div class="absolute inset-0 bg-black/10"></div>
-
-</div>
-
-
-
-
-<!-- Mobile Video -->
-<!--
-<video autoplay muted loop playsinline preload="auto"
-class="block md:hidden w-full h-full object-cover">
-    <source src="videos/bg1video.mp4" type="video/mp4">
-</video>
--->
-
-
-
-
-
-
-                <!-- Ultra-light overlay to let video shine -->
-                <div class="absolute inset-0 bg-black/10"></div>
-            </div>
-<!--
-            <div class="relative z-10 text-center px-4 animate-fade-in opacity-60 hover:opacity-100 transition-opacity duration-500 mb-10">
-                <h2 class="text-3xl sm:text-5xl md:text-7xl lg:text-9xl font-black tracking-[0.2em] text-white mb-6 drop-shadow-2xl">
-                    CHARGE<span class="text-emerald-500">BEES</span>
-                </h2>
-                <div class="w-32 h-1.5 bg-emerald-500 mx-auto mb-8 rounded-full"></div>
-                <p class="text-base sm:text-lg md:text-2xl text-white font-medium max-w-3xl mx-auto leading-relaxed italic drop-shadow-lg px-6">
-                    "Leading the charge towards a greener tomorrow. <br class="hidden md:block">
-                    Innovation in every spark, sustainability in every mile."
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="dot"></span>
+                    POWERING INDIA'S EV REVOLUTION
+                </div>
+                <h1 class="hero-title">
+                    Charge Smart. <br>
+                    Drive <span class="gradient-text">Sustainable.</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Leading the charge towards a greener tomorrow. Innovation in every spark, sustainability in every mile.
                 </p>
-            </div>
--->
-        </section>
+                <div class="hero-cta">
+                    <a href="stationfinder.html" class="btn-primary">
+                        <i data-lucide="map-pin" class="w-5 h-5"></i>
+                        Find a Station
+                    </a>
+                    <a href="#about" class="btn-secondary">
+                        <i data-lucide="play-circle" class="w-5 h-5"></i>
+                        Watch Story
+                    </a>
+                </div>
 
-        <!-- Hero Section -->
-
-
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <div class="section-header">
-                <!--<h2 class="section-title">About ChargeBees</h2> -->
-                <h2 class="section-title">About ChargeBees</h2>
-
-<div class="heading-road-animation">
-
-    <i data-lucide="car" class="road-car"></i>
-
-    <div class="road-line"></div>
-
-    <div class="road-station">
-        <i data-lucide="fuel"></i>
-    </div>
-
-</div>
-  
-                
-            </div>
-            <div class="about-content">
-                <p>
-                    ChargeBees is an EV ecosystem brand focused on accelerating electric mobility through smart charging experiences and dependable infrastructure.
-                </p>
-                <p>
-                    We connect drivers, fleets, station operators, and technology partners in one integrated platform to simplify EV charging access across urban and highway routes.
-                </p>
-                <div class="about-stats">
-                    <div class="stat-card">
-                        <div class="stat-number">500+</div>
-                        <div class="stat-label">Charging Stations</div>
+                <div class="hero-stats">
+                    <div class="hero-stat-item">
+                        <span class="num">500+</span>
+                        <span class="lbl">Stations</span>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-number">50K+</div>
-                        <div class="stat-label">Active Users</div>
+                    <div class="hero-stat-item">
+                        <span class="num">50K+</span>
+                        <span class="lbl">Users</span>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-number">100+</div>
-                        <div class="stat-label">Cities Covered</div>
+                    <div class="hero-stat-item">
+                        <span class="num">100+</span>
+                        <span class="lbl">Cities</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
+            <div class="scroll-indicator">
+                <span>Scroll</span>
+                <div class="line"></div>
+            </div>
+        </section>
+
+        <!-- ==================== ABOUT ==================== -->
+        <section id="about">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">Who We Are</span>
+                    <h2 class="section-title-main">About <span class="accent">ChargeBees</span></h2>
+                    
+                    <div class="heading-road-animation">
+                        <i data-lucide="car" class="road-car"></i>
+                        <div class="road-line"></div>
+                        <div class="road-station"><i data-lucide="fuel"></i></div>
+                    </div>
+                </div>
+
+                <div class="about-content">
+                    <p>ChargeBees is an EV ecosystem brand focused on accelerating electric mobility through smart charging experiences and dependable infrastructure.</p>
+                    <p>We connect drivers, fleets, station operators, and technology partners in one integrated platform to simplify EV charging access across urban and highway routes.</p>
+
+                    <div class="about-stats">
+                        <div class="stat-card">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Charging Stations</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">50K+</div>
+                            <div class="stat-label">Active Users</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">100+</div>
+                            <div class="stat-label">Cities Covered</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FUTURE / IMAGE ROW ==================== -->
         <section class="relative py-24 overflow-hidden">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div class="future-text-content reveal-left">
-                        <h2 class="future-heading typing-text">
-                            Helping you prepare for an electric future.
-                        </h2>
+                    <div class="reveal-left">
+                        <span class="section-tag">Our Mission</span>
+                        <h2 class="future-heading typing-text">Helping you prepare for an electric future.</h2>
                         <div class="future-paragraphs">
-                            <p>
-                                Chargebees® is India's fastest growing company to have a fully integrated technology, powered by software systems with hardware and renewable energy capabilities.
-                            </p>
-                            <p>
-                                We have made a leap in our ecosystem and thereby created a playbook of Fleet Electrification (B2B) and Inter-City Retail EV Charging (B2C).
-                            </p>
+                            <p>Chargebees® is India's fastest growing company to have a fully integrated technology, powered by software systems with hardware and renewable energy capabilities.</p>
+                            <p>We have made a leap in our ecosystem and thereby created a playbook of Fleet Electrification (B2B) and Inter-City Retail EV Charging (B2C).</p>
                         </div>
                     </div>
-
-                    <div class="future-image-wrapper floating-image">
+                    <div class="floating-image">
                         <div class="relative z-10 rounded-[2rem] overflow-hidden shadow-2xl">
-                            <img
-                                src="images\post 1.jpg"
-                                alt="Electric Future Illustration"
-                                class="w-full h-auto"
-                                referrerPolicy="no-referrer"
-                            />
+                            <img src="images/post 1.jpg" alt="Electric Future Illustration" class="w-full h-auto" referrerPolicy="no-referrer"/>
                         </div>
                         <div class="absolute -top-10 -right-10 w-40 h-40 bg-emerald-100 rounded-full blur-3xl opacity-50 -z-10"></div>
                         <div class="absolute -bottom-10 -left-10 w-60 h-60 bg-blue-100 rounded-full blur-3xl opacity-50 -z-10"></div>
@@ -1761,173 +1476,109 @@ class="block md:hidden w-full h-full object-cover">
             </div>
         </section>
 
-        <!-- Vision Section -->
-        <section class="py-24 bg-gray-50">
+        <!-- ==================== VISION ==================== -->
+        <section class="py-24 bg-gray-50/50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid lg:grid-cols-2 gap-16 items-center">
                     <div class="order-2 lg:order-1 floating-image">
                         <div class="rounded-[2rem] overflow-hidden shadow-xl">
-                            <img
-                                src="images\post 2.jpg"
-                                alt="Our Vision"
-                                class="w-full h-auto"
-                                referrerPolicy="no-referrer"
-                            />
+                            <img src="images/post 2.jpg" alt="Our Vision" class="w-full h-auto" referrerPolicy="no-referrer"/>
                         </div>
                     </div>
-
                     <div class="order-1 lg:order-2 reveal-left">
-                        <h2 class="future-heading typing-text">
-                            Our Vision: Energizing tomorrow, Today.
-                        </h2>
+                        <span class="section-tag">Our Vision</span>
+                        <h2 class="future-heading typing-text">Energizing tomorrow, Today.</h2>
                         <div class="future-paragraphs">
-                            <p>
-                                At Chargebees®, we envision a future where sustainable mobility is seamless and available to all. Our mission is to lead the way in cutting-edge charging solutions, spearheading innovation in electric vehicle infrastructure.
-                            </p>
-                            <p>
-                                Through a focus on accessibility, community empowerment, and sustainable practices, we dedicate ourselves to creating a cleaner, greener future for everyone. Join us on the expedition to redefine electric mobility and fuel a sustainable tomorrow.
-                            </p>
+                            <p>At Chargebees®, we envision a future where sustainable mobility is seamless and available to all. Our mission is to lead the way in cutting-edge charging solutions, spearheading innovation in electric vehicle infrastructure.</p>
+                            <p>Through a focus on accessibility, community empowerment, and sustainable practices, we dedicate ourselves to creating a cleaner, greener future for everyone.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- ==================== FUTURE ROADMAP ==================== -->
+        <section id="future-roadmap" class="future-roadmap-section">
+            <div class="future-roadmap-container">
+                <div class="future-roadmap-header">
+                    <span class="future-roadmap-tag">INNOVATING FOR 2027</span>
+                    <h2 class="future-roadmap-title">The Road Ahead.</h2>
+                    <p class="future-roadmap-subtitle">Building the infrastructure for the next 100 million EVs.</p>
+                </div>
 
-<!-- Future Roadmap Section -->
-<section id="future-roadmap" class="future-roadmap-section">
+                <div class="future-roadmap-wrapper">
+                    <div class="future-road-line"></div>
 
-    <div class="future-roadmap-container">
+                    <div class="future-road-card">
+                        <span class="future-road-year">Q1 2027</span>
+                        <h3>600kW HyperCharge</h3>
+                        <p>World class speeds for electric heavy-duty trucks.</p>
+                    </div>
 
-        <div class="future-roadmap-header">
+                    <div class="future-road-card">
+                        <span class="future-road-year">Q2 2027</span>
+                        <h3>Solar-First Hubs</h3>
+                        <p>100% off-grid charging stations in remote areas.</p>
+                    </div>
 
-            <span class="future-roadmap-tag">
-                INNOVATING FOR 2027
-            </span>
+                    <div class="future-road-card">
+                        <span class="future-road-year">Q3 2026</span>
+                        <h3>Smart Grid Sync</h3>
+                        <p>AI-driven load balancing for urban clusters.</p>
+                    </div>
 
-            <h2 class="future-roadmap-title">
-                The Road Ahead.
-            </h2>
-
-            <p class="future-roadmap-subtitle">
-                Building the infrastructure for the next 100 million EVs.
-            </p>
-
-        </div>
-
-        <div class="future-roadmap-wrapper">
-
-            <div class="future-road-line"></div>
-
-
-
-            <!-- CARD 1 -->
-            <div class="future-road-card">
-                <span class="future-road-year">Q1 2027</span>
-
-                <h3>600kW HyperCharge</h3>
-
-                <p>
-                    World class speeds for electric heavy-duty trucks.
-                </p>
+                    <div class="future-road-card">
+                        <span class="future-road-year">Q4 2027</span>
+                        <h3>V2G Integration</h3>
+                        <p>Vehicles feeding power back to the city grid.</p>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <!-- ACTIVE CARD -->
-            <div class="future-road-card">
-                <span class="future-road-year">Q2 2027</span>
-
-                <h3>Solar-First Hubs</h3>
-
-                <p>
-                    100% off-grid charging stations in remote areas.
-                </p>
-            </div>
-            
-            <!-- CARD 3 -->
-            <div class="future-road-card">
-                <span class="future-road-year">Q3 2026</span>
-
-                <h3>Smart Grid Sync</h3>
-
-                <p>
-                    AI-driven load balancing for urban clusters.
-                </p>
-            </div>
-
-            <!-- CARD 4 -->
-            <div class="future-road-card">
-                <span class="future-road-year">Q4 2027</span>
-
-                <h3>V2G Integration</h3>
-
-                <p>
-                    Vehicles feeding power back to the city grid.
-                </p>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-        <!-- Values Section -->
+        <!-- ==================== VALUES (ACCORDION) ==================== -->
         <section class="py-24">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid lg:grid-cols-2 gap-16">
                     <div>
-                        <h2 class="text-4xl font-bold text-gray-900 mb-6">Our values</h2>
-                        <p class="text-lg text-gray-600 mb-8 max-w-md">
+                        <span class="section-tag">What We Stand For</span>
+                        <h2 class="future-heading">Our values</h2>
+                        <p class="text-lg text-gray-600 mb-8 max-w-md leading-relaxed">
                             Empowering sustainable mobility, our values drive innovation, reliability, and accessibility in electric vehicle charging, fostering a cleaner, connected future.
                         </p>
                     </div>
 
-                    <div class="space-y-4">
-                        <!-- Accordion Item 1 -->
-                        <div class="accordion-item border-b border-gray-200 pb-4 active" onclick="toggleAccordion(this)">
-                            <button class="w-full flex justify-between items-center py-4 text-left group">
-                                <span class="text-xl font-semibold text-gray-900 group-hover:text-emerald-600 transition-colors">
-                                    Safety First
-                                </span>
-                                <i data-lucide="plus" class="plus-icon text-gray-400 group-hover:text-emerald-600 transition-colors"></i>
+                    <div class="space-y-2">
+                        <div class="accordion-item active" onclick="toggleAccordion(this)">
+                            <button>
+                                <span class="text-xl font-semibold text-gray-900">Safety First</span>
+                                <i data-lucide="plus" class="plus-icon text-gray-400"></i>
                                 <i data-lucide="minus" class="minus-icon text-emerald-600"></i>
                             </button>
                             <div class="accordion-content">
-                                <p class="text-gray-600 pb-4 leading-relaxed">
-                                    We prioritize the safety of our users and infrastructure above all else. Our charging stations are built with multiple layers of protection to ensure a secure charging experience.
-                                </p>
+                                <p class="text-gray-600 leading-relaxed">We prioritize the safety of our users and infrastructure above all else. Our charging stations are built with multiple layers of protection to ensure a secure charging experience.</p>
                             </div>
                         </div>
 
-                        <!-- Accordion Item 2 -->
-                        <div class="accordion-item border-b border-gray-200 pb-4" onclick="toggleAccordion(this)">
-                            <button class="w-full flex justify-between items-center py-4 text-left group">
-                                <span class="text-xl font-semibold text-gray-900 group-hover:text-emerald-600 transition-colors">
-                                    For the future
-                                </span>
-                                <i data-lucide="plus" class="plus-icon text-gray-400 group-hover:text-emerald-600 transition-colors"></i>
+                        <div class="accordion-item" onclick="toggleAccordion(this)">
+                            <button>
+                                <span class="text-xl font-semibold text-gray-900">For the future</span>
+                                <i data-lucide="plus" class="plus-icon text-gray-400"></i>
                                 <i data-lucide="minus" class="minus-icon text-emerald-600"></i>
                             </button>
                             <div class="accordion-content">
-                                <p class="text-gray-600 pb-4 leading-relaxed">
-                                    We are committed to building a sustainable future. Our solutions are designed to scale with the growing needs of the electric vehicle ecosystem.
-                                </p>
+                                <p class="text-gray-600 leading-relaxed">We are committed to building a sustainable future. Our solutions are designed to scale with the growing needs of the electric vehicle ecosystem.</p>
                             </div>
                         </div>
 
-                        <!-- Accordion Item 3 -->
-                        <div class="accordion-item border-b border-gray-200 pb-4" onclick="toggleAccordion(this)">
-                            <button class="w-full flex justify-between items-center py-4 text-left group">
-                                <span class="text-xl font-semibold text-gray-900 group-hover:text-emerald-600 transition-colors">
-                                    Do the right thing
-                                </span>
-                                <i data-lucide="plus" class="plus-icon text-gray-400 group-hover:text-emerald-600 transition-colors"></i>
+                        <div class="accordion-item" onclick="toggleAccordion(this)">
+                            <button>
+                                <span class="text-xl font-semibold text-gray-900">Do the right thing</span>
+                                <i data-lucide="plus" class="plus-icon text-gray-400"></i>
                                 <i data-lucide="minus" class="minus-icon text-emerald-600"></i>
                             </button>
                             <div class="accordion-content">
-                                <p class="text-gray-600 pb-4 leading-relaxed">
-                                    Integrity is at the heart of everything we do. We believe in transparent business practices and delivering on our promises to our partners and customers.
-                                </p>
+                                <p class="text-gray-600 leading-relaxed">Integrity is at the heart of everything we do. We believe in transparent business practices and delivering on our promises to our partners and customers.</p>
                             </div>
                         </div>
                     </div>
@@ -1935,178 +1586,24 @@ class="block md:hidden w-full h-full object-cover">
             </div>
         </section>
 
-        <!-- Journey Section -->
-         <!--
-        <section class="py-24 bg-gray-50 overflow-hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-4xl font-bold text-gray-900 mb-16">Our journey</h2>
-                
-                <div class="flex overflow-x-auto pb-8 gap-6 snap-x no-scrollbar lg:grid lg:grid-cols-3 lg:overflow-visible">
-                    -->
-                    <!-- Milestone 1 -->
-                     <!--
-                    <div class="min-w-[300px] bg-white p-8 rounded-2xl shadow-sm border border-gray-100 snap-start hover:shadow-md transition-all">
-                        <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-6">
-                            <i data-lucide="zap" class="text-emerald-600"></i>
-                        </div>
-                        <span class="text-3xl font-bold text-emerald-600 mb-2 block">2020</span>
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">The Spark of Innovation</h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            Chargebees was founded with a vision to revolutionize the electric vehicle charging landscape.
-                        </p>
-                    </div>
-                    -->
-                    <!-- Milestone 2 -->
-                        <!--
-                    <div class="min-w-[300px] bg-white p-8 rounded-2xl shadow-sm border border-gray-100 snap-start hover:shadow-md transition-all">
-                        <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-6">
-                            <i data-lucide="users" class="text-emerald-600"></i>
-                        </div>
-                        <span class="text-3xl font-bold text-emerald-600 mb-2 block">2021</span>
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">Powering Communities</h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            Launched its first generation of charging stations, emphasizing accessibility in urban and suburban areas.
-                        </p>
-                    </div>
-                        -->
-                    <!-- Milestone 3 -->
-                        <!--
-                    <div class="min-w-[300px] bg-white p-8 rounded-2xl shadow-sm border border-gray-100 snap-start hover:shadow-md transition-all">
-                        <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-6">
-                            <i data-lucide="battery" class="text-emerald-600"></i>
-                        </div>
-                        <span class="text-3xl font-bold text-emerald-600 mb-2 block">2022</span>
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">Charging into the Future</h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            A significant milestone as Chargebees introduces fast-charging technology, reducing charging times for EVs.
-                        </p>
-                    </div>
-                        -->
-                    <!-- Milestone 4 -->
-                    <!--
-                    <div class="min-w-[300px] bg-white p-8 rounded-2xl shadow-sm border border-gray-100 snap-start hover:shadow-md transition-all">
-                        <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-6">
-                            <i data-lucide="globe" class="text-emerald-600"></i>
-                        </div>
-                        <span class="text-3xl font-bold text-emerald-600 mb-2 block">2023</span>
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">National Network Expansion</h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            Undergoes a nationwide expansion, increasing the density of charging stations along highways and key travel routes.
-                        </p>
-                    </div>
-                        -->
-                    <!-- Milestone 5 -->
-                     <!--
-                    <div class="min-w-[300px] bg-white p-8 rounded-2xl shadow-sm border border-gray-100 snap-start hover:shadow-md transition-all">
-                        <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-6">
-                            <i data-lucide="cpu" class="text-emerald-600"></i>
-                        </div>
-                        <span class="text-3xl font-bold text-emerald-600 mb-2 block">2026</span>
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">Advancements in Technology</h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            Introduces smart charging capabilities, allowing users to schedule and monitor charging remotely.
-                        </p>
-                    </div>
-                            -->
-                    <!-- Milestone 6 -->
-                        <!--
-                    <div class="min-w-[300px] bg-white p-8 rounded-2xl shadow-sm border border-gray-100 snap-start hover:shadow-md transition-all">
-                        <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-6">
-                            <i data-lucide="award" class="text-emerald-600"></i>
-                        </div>
-                        <span class="text-3xl font-bold text-emerald-600 mb-2 block">2025</span>
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">India’s Fastest Growing EV Charging Service Provider</h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            We touched our milestone of becoming India's largest EV charging network with 13,500+ charging points.
-                        </p>
+        <!-- ==================== PARTNERSHIPS ==================== -->
+        <section id="partnerships">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">Collaborations</span>
+                    <h2 class="section-title-main">Our <span class="accent">Partnerships</span></h2>
+                   
+                    <div class="heading-road-animation">
+                        <i data-lucide="car" class="road-car"></i>
+                        <div class="road-line"></div>
+                        <div class="road-station"><i data-lucide="fuel"></i></div>
                     </div>
                 </div>
-            </div>
-        </section>
-            -->
 
-    <!-- Team Section -->
-     <!--
-    <section id="team" class="section section-dark">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Our Team</h2>
-              
-            </div>
-            <div class="team-content">
-                <div class="team-intro">
-                    <p>Our dedicated team brings together energy experts, mobility strategists, software engineers, and operations specialists to deliver a dependable charging experience.</p>
-                    <p>We work with a customer-first mindset to improve EV confidence and make every charging stop smooth and efficient.</p>
-                </div>
-                <div class="team-members">
-                    <div class="team-member">
-                        <div class="member-card">
-                            <div class="member-image">
-                                <img src="./images/team-1.jpg" alt="Team Member">
-                            </div>
-                            <div class="member-info">
-                                <h3>XXX</h3>
-                                <p>Leadership Team</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-card">
-                            <div class="member-image">
-                                <img src="./images/team-2.jpg" alt="Team Member">
-                            </div>
-                            <div class="member-info">
-                                <h3>YYY</h3>
-                                <p>Technology Team</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-card">
-                            <div class="member-image">
-                                <img src="./images/team-3.jpg" alt="Team Member">
-                            </div>
-                            <div class="member-info">
-                                <h3>ZZZ</h3>
-                                <p>Operations Team</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    -->
-
-
-
-
-
-        <!-- Partnerships Section -->
-    <section id="partnerships" class="section">
-        <div class="container">
-            <div class="section-header">
-                <!--<h2 class="section-title">Our Partnerships</h2> -->
-                <h2 class="section-title">Our Partnerships</h2>
-
-<div class="heading-road-animation">
-
-    <i data-lucide="car" class="road-car"></i>
-
-    <div class="road-line"></div>
-
-    <div class="road-station">
-        <i data-lucide="fuel"></i>
-    </div>
-
-</div>
-
-                
-            </div>
-            <div class="partnerships-content">
                 <div class="partnership-intro">
                     <p>Collaborating with leading automotive and mobility brands to create a comprehensive EV ecosystem.</p>
                 </div>
+
                 <div class="partnership-details">
                     <div class="partnership-category">
                         <h3><span class="icon-circle">🚗</span>Automotive Partners</h3>
@@ -2146,323 +1643,221 @@ class="block md:hidden w-full h-full object-cover">
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-
-
-        <!-- Partners Section -->
-        <section class="py-14 bg-gray-50/50">
+        <!-- ==================== EV PARTNERS MARQUEE ==================== -->
+        <section class="py-16 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Our EV Partners</h2>
-                    <p class="text-gray-600">Collaborating with leading EV manufacturers to build a seamless charging ecosystem.</p>
+                <div class="text-center mb-12">
+                    <span class="section-tag">Trusted By</span>
+                    <h2 class="section-title-main">Our EV <span class="accent">Partners</span></h2>
+                    <p class="text-gray-600 mt-4">Collaborating with leading EV manufacturers to build a seamless charging ecosystem.</p>
                 </div>
 
                 <div class="marquee py-4">
                     <div class="marquee-content">
-                        <!-- EV Logos Set 1 -->
-                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
-                            <img src="images\partner-ather.png" alt="Tesla" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                        <div class="flex items-center justify-center px-12 py-6 bg-gray-50 rounded-2xl border border-gray-100 grayscale-hover shadow-sm"><img src="images/partner-ather.png" alt="Ather" class="max-h-10 w-auto object-contain"></div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-gray-50 rounded-2xl border border-gray-100 grayscale-hover shadow-sm"><img src="images/partner-tata.png" alt="Tata EV" class="max-h-10 w-auto object-contain"></div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-gray-50 rounded-2xl border border-gray-100 grayscale-hover shadow-sm"><img src="images/partner-bridgestone.png" alt="Bridgestone" class="max-h-10 w-auto object-contain"></div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-gray-50 rounded-2xl border border-gray-100 grayscale-hover shadow-sm"><img src="images/partner-mg.png" alt="MG" class="max-h-10 w-auto object-contain"></div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-gray-50 rounded-2xl border border-gray-100 grayscale-hover shadow-sm"><img src="images/partner-hyundai.png" alt="Hyundai" class="max-h-10 w-auto object-contain"></div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-gray-50 rounded-2xl border border-gray-100 grayscale-hover shadow-sm"><img src="images/partner-tesla.png" alt="Tesla" class="max-h-10 w-auto object-contain"></div>
+                    </div>
+                    <div class="marquee-content" aria-hidden="true">
+                        <div class="flex items-center justify-center px-12 py-6 bg-gray-50 rounded-2xl border border-gray-100 grayscale-hover shadow-sm"><img src="images/partner-ather.png" alt="Ather" class="max-h-10 w-auto object-contain"></div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-gray-50 rounded-2xl border border-gray-100 grayscale-hover shadow-sm"><img src="images/partner-tata.png" alt="Tata EV" class="max-h-10 w-auto object-contain"></div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-gray-50 rounded-2xl border border-gray-100 grayscale-hover shadow-sm"><img src="images/partner-bridgestone.png" alt="Bridgestone" class="max-h-10 w-auto object-contain"></div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-gray-50 rounded-2xl border border-gray-100 grayscale-hover shadow-sm"><img src="images/partner-mg.png" alt="MG" class="max-h-10 w-auto object-contain"></div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-gray-50 rounded-2xl border border-gray-100 grayscale-hover shadow-sm"><img src="images/partner-mahindra.png" alt="Mahindra" class="max-h-10 w-auto object-contain"></div>
+                        <div class="flex items-center justify-center px-12 py-6 bg-gray-50 rounded-2xl border border-gray-100 grayscale-hover shadow-sm"><img src="images/partner-kia.png" alt="Kia" class="max-h-10 w-auto object-contain"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== OFFERINGS ==================== -->
+        <section id="offerings">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">What We Provide</span>
+                    <h2 class="section-title-main">Our <span class="accent">Offerings</span></h2>
+                    
+                    <div class="heading-road-animation">
+                        <i data-lucide="car" class="road-car"></i>
+                        <div class="road-line"></div>
+                        <div class="road-station"><i data-lucide="fuel"></i></div>
+                    </div>
+                </div>
+
+                <div class="offerings-content">
+                    <div class="offering-category">
+                        <div class="offering-header">
+                            <div class="offering-icon"><i data-lucide="zap" class="w-5 h-5"></i></div>
+                            <h3>Public Fast Charging</h3>
                         </div>
-                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
-                            <img src="images\partner-tata.png" alt="Tata EV" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
-                        </div>
-                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
-                            <img src="images\partner-bridgestone.png" alt="Hyundai" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
-                        </div>
-                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
-                            <img src="images\partner-mg.png" alt="MG" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
-                        </div>
-                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
-                            <img src="images\partner-hyundai.png" alt="Mahindra" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
-                        </div>
-                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
-                            <img src="images\partner-tesla.png" alt="Kia" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
-                        </div>
-                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
-                            <img src="images\partner-bridgestone.png" alt="BYD" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                        <div class="offering-description">
+                            <p>High-speed charging corridors for city users and highway travelers with 50-150kW power delivery.</p>
                         </div>
                     </div>
-                    <!-- Duplicate for seamless scroll -->
-                    <div class="marquee-content" aria-hidden="true">
-                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
-                            <img src="images\partner-ather.png" alt="Tesla" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                    <div class="offering-category">
+                        <div class="offering-header">
+                            <div class="offering-icon"><i data-lucide="home" class="w-5 h-5"></i></div>
+                            <h3>Home & Workplace</h3>
                         </div>
-                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
-                            <img src="images\partner-tata.png" alt="Tata EV" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                        <div class="offering-description">
+                            <p>AC charging setup for residential and enterprise use with smart features and mobile app control.</p>
                         </div>
-                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
-                            <img src="images\partner-bridgestone.png" alt="Hyundai" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                    </div>
+                    <div class="offering-category">
+                        <div class="offering-header">
+                            <div class="offering-icon"><i data-lucide="truck" class="w-5 h-5"></i></div>
+                            <h3>Fleet Services</h3>
                         </div>
-                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
-                            <img src="images\partner-mg.png" alt="MG" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                        <div class="offering-description">
+                            <p>Optimized charging plans and infrastructure support for commercial EV fleets with analytics.</p>
                         </div>
-                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
-                            <img src="images\partner-mahindra.png" alt="Mahindra" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                    </div>
+                    <div class="offering-category">
+                        <div class="offering-header">
+                            <div class="offering-icon"><i data-lucide="bar-chart-3" class="w-5 h-5"></i></div>
+                            <h3>Energy Platform</h3>
                         </div>
-                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
-                            <img src="images\partner-kia.png" alt="Kia" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
-                        </div>
-                        <div class="flex items-center justify-center px-12 py-6 bg-white rounded-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all shadow-sm">
-                            <img src="images\partner-byd.png" alt="BYD" class="max-h-10 w-auto object-contain" referrerPolicy="no-referrer">
+                        <div class="offering-description">
+                            <p>Data-driven monitoring and control tools for station operators with real-time analytics.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-
-
-
-
-
-        
-
-            <!-- Offerings Section -->
-    <section id="offerings" class="section section-dark">
-        <div class="container">
-            <div class="section-header">
-                <!-- <h2 class="section-title">Our Offerings</h2> -->
-                 <h2 class="section-title">Our Partnerships</h2>
-
-<div class="heading-road-animation">
-
-    <i data-lucide="car" class="road-car"></i>
-
-    <div class="road-line"></div>
-
-    <div class="road-station">
-        <i data-lucide="fuel"></i>
-    </div>
-                
-            </div>
-            <div class="offerings-content">
-                <div class="offering-category">
-                    <div class="offering-header">
-                        <div class="offering-icon">
-                            <i data-lucide="zap" class="w-5 h-5"></i>
-                        </div>
-                        <h3>Public Fast Charging</h3>
-                    </div>
-                    <div class="offering-description">
-                        
-                        <p>High-speed charging corridors for city users and highway travelers with 50-150kW power delivery.</p>
-                    </div>
+        <!-- ==================== VIDEO GALLERY (NEW) ==================== -->
+        <section class="video-gallery-section">
+            <div class="video-gallery-container">
+                <div class="video-gallery-header">
+                    <span class="section-tag">Watch & Learn</span>
+                    <h2 class="section-title-main">Stories of <span class="accent">Change</span></h2>
+                    
+                    <p class="text-gray-600 max-w-2xl mx-auto mt-4">Explore how ChargeBees is transforming the EV landscape across India.</p>
                 </div>
-                <div class="offering-category">
-                    <div class="offering-header">
-                        <div class="offering-icon">
-                            <i data-lucide="home" class="w-5 h-5"></i>
+
+                <div class="video-grid">
+                    <div class="video-card">
+                        <video muted loop playsinline preload="metadata" poster="images/hero-poster.webp"
+                               onmouseenter="this.play()" onmouseleave="this.pause(); this.currentTime=0;">
+                            <source src="videos/bg1video.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-card-overlay">
+                            <h3 class="video-card-title">EV Revolution</h3>
+                            <p class="video-card-desc">Powering India's electric future</p>
                         </div>
-                        <h3>Home & Workplace</h3>
+                        <div class="video-play-btn"></div>
                     </div>
-                    <div class="offering-description">
-                        <p>AC charging setup for residential and enterprise use with smart features and mobile app control.</p>
-                    </div>
-                </div>
-                <div class="offering-category">
-                    <div class="offering-header">
-                        <div class="offering-icon">
-                            <i data-lucide="truck" class="w-5 h-5"></i>
+
+                    <div class="video-card">
+                        <video muted loop playsinline preload="metadata" poster="images/hero-poster.webp"
+                               onmouseenter="this.play()" onmouseleave="this.pause(); this.currentTime=0;">
+                            <source src="videos/bg1video.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-card-overlay">
+                            <h3 class="video-card-title">Smart Charging</h3>
+                            <p class="video-card-desc">Technology meets sustainability</p>
                         </div>
-                        <h3>Fleet Services</h3>
+                        <div class="video-play-btn"></div>
                     </div>
-                    <div class="offering-description">
-                        <p>Optimized charging plans and infrastructure support for commercial EV fleets with analytics.</p>
-                    </div>
-                </div>
-                <div class="offering-category">
-                    <div class="offering-header">
-                        <div class="offering-icon">
-                            <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
+
+                    <div class="video-card">
+                        <video muted loop playsinline preload="metadata" poster="images/hero-poster.webp"
+                               onmouseenter="this.play()" onmouseleave="this.pause(); this.currentTime=0;">
+                            <source src="videos/bg1video.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-card-overlay">
+                            <h3 class="video-card-title">Green Future</h3>
+                            <p class="video-card-desc">Building a cleaner tomorrow</p>
                         </div>
-                        <h3>Energy Platform</h3>
-                    </div>
-                    <div class="offering-description">
-                        <p>Data-driven monitoring and control tools for station operators with real-time analytics.</p>
+                        <div class="video-play-btn"></div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
+        <!-- ==================== MOBILE APP CTA ==================== -->
+        <section class="relative py-24 bg-[#f5f5f5] overflow-visible">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="relative bg-black rounded-[32px] overflow-visible min-h-[420px] flex items-center justify-center">
+                    <div class="absolute inset-0 rounded-[32px] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1509395176047-4a66953fd231?q=80&w=1920&auto=format&fit=crop" class="w-full h-full object-cover opacity-30"/>
+                        <div class="absolute inset-0 bg-black/70"></div>
+                    </div>
 
-<!-- MOBILE APP SECTION -->
-<section class="relative py-24 bg-[#f5f5f5] overflow-visible">
-
-    <div class="max-w-7xl mx-auto px-6">
-
-        <!-- Card -->
-        <div class="relative bg-black rounded-[32px] overflow-visible min-h-[420px] flex items-center justify-center">
-
-            <!-- Background Image -->
-            <div class="absolute inset-0">
-                <img 
-                    src="https://images.unsplash.com/photo-1509395176047-4a66953fd231?q=80&w=1920&auto=format&fit=crop"
-                    class="w-full h-full object-cover opacity-30"
-                />
-                <div class="absolute inset-0 bg-black/70"></div>
-            </div>
-
-            <!-- Content -->
-            <div class="relative z-20 text-center px-6">
-
-                <h2 class="text-white text-4xl md:text-5xl font-extrabold leading-tight mb-5">
-                    Find charging station <br>
-                    on the our app
-                </h2>
-
-                <p class="text-gray-300 max-w-xl mx-auto text-sm md:text-base leading-relaxed mb-8">
-                    Chargebees provides OCPP-compliant chargers suitable for residential,
-                    commercial, and highway applications.
-                </p>
-
-                <!-- Store Buttons -->
-                <div class="flex items-center justify-center gap-4 flex-wrap">
-
-                    <a href="#"
-                       class="bg-black border border-white/20 hover:border-emerald-500 transition-all duration-300 rounded-full px-5 py-3 flex items-center gap-3">
-
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             class="w-6 h-6 fill-white"
-                             viewBox="0 0 384 512">
-                            <path d="M318.7 268.7c-.2-36.7 16.3-64.4 49.6-84.5-18.6-26.7-46.7-41.4-83.9-44.2-35.2-2.8-73.7 20.6-87.8 20.6-15 0-49-19.6-75.7-19.6C66.6 141 24 183.2 24 260.8c0 22.9 4.2 46.6 12.6 71 11.2 32.5 51.6 112.1 93.8 110.8 22-.5 37.5-15.6 66.1-15.6 27.7 0 42.1 15.6 66.6 15.6 42.6-.6 79.1-73 89.8-105.6-59.2-27.9-54.2-81.7-54.2-88.3z"/>
-                        </svg>
-
-                        <div class="text-left">
-                            <p class="text-[10px] text-gray-400">Download on the</p>
-                            <h4 class="text-white font-semibold text-sm">App Store</h4>
+                    <div class="relative z-20 text-center px-6 py-12">
+                        <h2 class="text-white text-4xl md:text-5xl font-extrabold leading-tight mb-5" style="font-family: 'Space Grotesk', sans-serif;">
+                            Find charging station <br> on our app
+                        </h2>
+                        <p class="text-gray-300 max-w-xl mx-auto text-sm md:text-base leading-relaxed mb-8">
+                            Chargebees provides OCPP-compliant chargers suitable for residential, commercial, and highway applications.
+                        </p>
+                        <div class="flex items-center justify-center gap-4 flex-wrap">
+                            <a href="#" class="bg-black border border-white/20 hover:border-emerald-500 transition-all duration-300 rounded-full px-5 py-3 flex items-center gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-white" viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.3-64.4 49.6-84.5-18.6-26.7-46.7-41.4-83.9-44.2-35.2-2.8-73.7 20.6-87.8 20.6-15 0-49-19.6-75.7-19.6C66.6 141 24 183.2 24 260.8c0 22.9 4.2 46.6 12.6 71 11.2 32.5 51.6 112.1 93.8 110.8 22-.5 37.5-15.6 66.1-15.6 27.7 0 42.1 15.6 66.6 15.6 42.6-.6 79.1-73 89.8-105.6-59.2-27.9-54.2-81.7-54.2-88.3z"/></svg>
+                                <div class="text-left">
+                                    <p class="text-[10px] text-gray-400">Download on the</p>
+                                    <h4 class="text-white font-semibold text-sm">App Store</h4>
+                                </div>
+                            </a>
+                            <a href="#" class="bg-black border border-white/20 hover:border-emerald-500 transition-all duration-300 rounded-full px-5 py-3 flex items-center gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 512 512">
+                                    <path fill="#34A853" d="M325.3 234.3L104.6 13.6C96.5 5.5 82.6 11.3 82.6 23v466c0 11.7 13.9 17.5 22 9.4l220.7-220.7z"/>
+                                    <path fill="#FBBC04" d="M404.6 313.6l-79.3-79.3-64 64 64 64z"/>
+                                    <path fill="#EA4335" d="M404.6 198.4L325.3 119l-64 64 64 64z"/>
+                                </svg>
+                                <div class="text-left">
+                                    <p class="text-[10px] text-gray-400">Get it on</p>
+                                    <h4 class="text-white font-semibold text-sm">Google Play</h4>
+                                </div>
+                            </a>
                         </div>
+                    </div>
 
-                    </a>
-
-                    <a href="#"
-                       class="bg-black border border-white/20 hover:border-emerald-500 transition-all duration-300 rounded-full px-5 py-3 flex items-center gap-3">
-
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             class="w-6 h-6"
-                             viewBox="0 0 512 512">
-                            <path fill="#34A853" d="M325.3 234.3L104.6 13.6C96.5 5.5 82.6 11.3 82.6 23v466c0 11.7 13.9 17.5 22 9.4l220.7-220.7z"/>
-                            <path fill="#FBBC04" d="M404.6 313.6l-79.3-79.3-64 64 64 64z"/>
-                            <path fill="#EA4335" d="M404.6 198.4L325.3 119l-64 64 64 64z"/>
-                        </svg>
-
-                        <div class="text-left">
-                            <p class="text-[10px] text-gray-400">Get it on</p>
-                            <h4 class="text-white font-semibold text-sm">Google Play</h4>
-                        </div>
-
-                    </a>
-
+                    <div class="phone-left hidden md:block">
+                        <img src="images/left mobile.png" class="w-[170px] rounded-[32px] shadow-2xl border-4 border-white"/>
+                    </div>
+                    <div class="phone-right hidden md:block">
+                        <img src="images/right mobile.png" class="w-[170px] rounded-[32px] shadow-2xl border-4 border-white"/>
+                    </div>
                 </div>
-
             </div>
+        </section>
 
-            <!-- Floating Mobile Left -->
-            <div class="phone-left hidden md:block">
-
-                <img
-                    src="images\left mobile.png"
-                    class="w-[170px] rounded-[32px] shadow-2xl border-4 border-white"
-                />
-
-            </div>
-
-            <!-- Floating Mobile Right -->
-            <div class="phone-right hidden md:block">
-
-                <img
-                    src="images\right mobile.png"
-                    class="w-[170px] rounded-[32px] shadow-2xl border-4 border-white"
-                />
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
     </main>
 
-    <!-- Footer -->
+    <!-- ==================== FOOTER ==================== -->
     <footer class="bg-gray-50 pt-24 pb-12 border-t border-gray-200 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-4 gap-12 mb-20">
                 <div class="lg:col-span-1">
                     <div class="mb-8">
-<div class="flex items-center gap-2">
-
-    <img
-        src="images/logo.png"
-        alt="ChargeBees Logo"
-        class="h-10 w-auto object-contain"
-    >
-
-    <span class="brand-logo-text">
-        Charge <span>Bees</span>
-    </span>
-
-</div>
+                        <div class="flex items-center gap-2">
+                            <img src="images/logo.png" alt="ChargeBees Logo" class="h-10 w-auto object-contain">
+                            <span class="brand-logo-text">Charge <span>Bees</span></span>
+                        </div>
                     </div>
                     <p class="text-gray-600 mb-8 leading-relaxed">
                         Leading the charge towards a sustainable electric future with India's largest EV charging network.
                     </p>
-<div class="flex gap-4">
-
-    <!-- Instagram -->
-    <a 
-        href="https://www.instagram.com/chargebees"
-        target="_blank"
-        class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300"
-    >
-        <img 
-            src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
-            alt="Instagram"
-            class="w-6 h-6"
-        >
-    </a>
-
-    <!-- Facebook -->
-    <a 
-        href="https://www.facebook.com/share/1ESQNWy5Zs/"
-        target="_blank"
-        class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300"
-    >
-        <img 
-            src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
-            alt="Facebook"
-            class="w-6 h-6"
-        >
-    </a>
-
-    <!-- WhatsApp -->
-    <a 
-        href="https://wa.me/919000040477"
-        target="_blank"
-        class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300"
-    >
-        <img 
-            src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
-            alt="WhatsApp"
-            class="w-6 h-6"
-        >
-    </a>
-
-    <!-- Mail -->
-    <a 
-        href="mailto:db@chargebees.com"
-        class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300"
-    >
-        <img 
-            src="https://cdn-icons-png.flaticon.com/512/732/732200.png"
-            alt="Mail"
-            class="w-6 h-6"
-        >
-    </a>
-
-</div>
+                    <div class="flex gap-4">
+                        <a href="https://www.instagram.com/chargebees" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="w-6 h-6">
+                        </a>
+                        <a href="https://www.facebook.com/share/1ESQNWy5Zs/" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" class="w-6 h-6">
+                        </a>
+                        <a href="https://wa.me/919000040477" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="w-6 h-6">
+                        </a>
+                        <a href="mailto:db@chargebees.com" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                            <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Mail" class="w-6 h-6">
+                        </a>
+                    </div>
                 </div>
 
                 <div>
@@ -2496,12 +1891,6 @@ class="block md:hidden w-full h-full object-cover">
                             <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
                         </li>
                         <li>+91 90000 40477</li>
-                        <!--
-                        <li class="pt-4">
-                            <p class="font-semibold text-gray-900">Visakhapatnam HQ</p>
-                            <p class="text-sm">8th Floor, chargebees LTD,  IT Park, Visakhapatnam, Andhra Pradesh 530001</p>
-                        </li>
-                        -->
                         <li class="pt-4">
                             <p class="font-semibold text-gray-900">HYDERABAD</p>
                             <p class="text-sm">Nanakramguda, Hyderabad, Telangana 500008</p>
@@ -2515,12 +1904,12 @@ class="block md:hidden w-full h-full object-cover">
                 <div class="flex gap-8">
                     <a href="terms.html#terms" class="hover:text-gray-900 transition-colors">Terms & Services</a>
                     <a href="privacy.html" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
-                    
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- ==================== SCRIPTS ==================== -->
     <script>
         // Initialize Lucide icons
         lucide.createIcons();
@@ -2529,224 +1918,94 @@ class="block md:hidden w-full h-full object-cover">
         function toggleAccordion(element) {
             const items = document.querySelectorAll('.accordion-item');
             const isActive = element.classList.contains('active');
-            
             items.forEach(item => item.classList.remove('active'));
-            
-            if (!isActive) {
-                element.classList.add('active');
-            }
+            if (!isActive) element.classList.add('active');
         }
 
-        // Team Tab Logic
-        function switchTab(category) {
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('bg-red-600', 'text-white', 'shadow-lg');
-                btn.classList.add('text-gray-600', 'hover:text-gray-900');
+        // Mobile menu toggle
+        const menuBtn = document.getElementById("menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        menuBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+            menuBtn.classList.toggle("active");
+        });
+
+        // Autoplay videos
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll("video").forEach(video => {
+                video.muted = true;
+                video.play().catch(() => {});
             });
-
-            const activeBtn = document.querySelector(`#tab-${category.split(' ')[0]}`);
-            activeBtn.classList.add('bg-emerald-600', 'text-white', 'shadow-lg');
-            activeBtn.classList.remove('text-gray-600', 'hover:text-gray-900');
-
-            // In a real app, you'd filter the grid here. 
-            // For this demo, we'll just show a fade effect.
-            const grid = document.querySelector('#team-grid');
-            grid.style.opacity = '0';
-            setTimeout(() => {
-                grid.style.opacity = '1';
-            }, 300);
-        }
-
-
-const menuBtn = document.getElementById("menu-btn");
-const mobileMenu = document.getElementById("mobile-menu");
-
-menuBtn.addEventListener("click", () => {
-
-    mobileMenu.classList.toggle("hidden");
-
-    // icon animation optional
-    menuBtn.classList.toggle("active");
-});
-
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    const videos = document.querySelectorAll("video");
-
-    videos.forEach(video => {
-        video.muted = true;
-        video.play().catch(() => {
-            console.log("Autoplay blocked");
         });
-    });
-});
 
-
-
-
-
-
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    const statsSection = document.querySelector(".about-stats");
-    const counters = document.querySelectorAll(".stat-number");
-
-    let started = false;
-
-    const startCounter = () => {
-
-        if (started) return;
-        started = true;
-
-        counters.forEach(counter => {
-
-            const targetText = counter.innerText;
-
-            let target;
-
-            if (targetText.includes("K")) {
-                target = parseInt(targetText) * 1000;
-            } else {
-                target = parseInt(targetText);
-            }
-
-            let current = 0;
-
-            const speed = target / 120;
-
-            const updateCounter = () => {
-
-                current += speed;
-
-                if (current < target) {
-
-                    if (targetText.includes("K")) {
-                        counter.innerText = Math.floor(current / 1000) + "K+";
-                    } else {
-                        counter.innerText = Math.floor(current) + "+";
-                    }
-
-                    requestAnimationFrame(updateCounter);
-
-                } else {
-
-                    counter.innerText = targetText;
-                }
+        // Stat counter
+        document.addEventListener("DOMContentLoaded", () => {
+            const statsSection = document.querySelector(".about-stats");
+            const counters = document.querySelectorAll(".stat-number");
+            let started = false;
+            const startCounter = () => {
+                if (started) return;
+                started = true;
+                counters.forEach(counter => {
+                    const targetText = counter.innerText;
+                    let target = targetText.includes("K") ? parseInt(targetText) * 1000 : parseInt(targetText);
+                    let current = 0;
+                    const speed = target / 120;
+                    const update = () => {
+                        current += speed;
+                        if (current < target) {
+                            counter.innerText = targetText.includes("K")
+                                ? Math.floor(current / 1000) + "K+"
+                                : Math.floor(current) + "+";
+                            requestAnimationFrame(update);
+                        } else counter.innerText = targetText;
+                    };
+                    update();
+                });
             };
-
-            updateCounter();
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => { if (e.isIntersecting) startCounter(); });
+            }, { threshold: 0.5 });
+            if (statsSection) obs.observe(statsSection);
         });
-    };
 
-    const observer = new IntersectionObserver((entries) => {
+        // Future Roadmap card reveal
+        const roadmapCards = document.querySelectorAll('.future-road-card');
+        const roadmapObs = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, { threshold: 0.2 });
+        roadmapCards.forEach((card, i) => {
+            card.style.opacity = "0";
+            card.style.transform = "translateY(40px)";
+            card.style.transition = `all .7s ease ${i * 0.15}s`;
+            roadmapObs.observe(card);
+        });
 
-        entries.forEach(entry => {
+        // Reveal-left animations
+        const revealElements = document.querySelectorAll(".reveal-left");
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const top = el.getBoundingClientRect().top;
+                if (top < window.innerHeight - 120) el.classList.add("active");
+            });
+        };
+        window.addEventListener("scroll", revealOnScroll);
+        revealOnScroll();
 
-            if (entry.isIntersecting) {
-                startCounter();
+        // Navbar scroll effect
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 30) {
+                nav.classList.add('shadow-md');
+            } else {
+                nav.classList.remove('shadow-md');
             }
-
         });
-
-    }, {
-        threshold: 0.5
-    });
-
-    observer.observe(statsSection);
-
-});
-
-
-
-lucide.createIcons();
-
-
-// Future Roadmap Animation
-
-const roadmapCards = document.querySelectorAll('.future-road-card');
-
-const roadmapObserver = new IntersectionObserver((entries) => {
-
-    entries.forEach((entry) => {
-
-        if(entry.isIntersecting){
-
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-        }
-
-    });
-
-},{
-    threshold:0.2
-});
-
-roadmapCards.forEach((card,index)=>{
-
-    card.style.opacity = "0";
-    card.style.transform = "translateY(40px)";
-    card.style.transition = `all .7s ease ${index * 0.15}s`;
-
-    roadmapObserver.observe(card);
-});
-
-
-/* =========================================
-TEXT REVEAL ON SCROLL
-========================================= */
-
-const revealElements = document.querySelectorAll(".reveal-left");
-
-const revealOnScroll = () => {
-
-    revealElements.forEach((element)=>{
-
-        const top = element.getBoundingClientRect().top;
-
-        if(top < window.innerHeight - 120){
-
-            element.classList.add("active");
-
-        }
-
-    });
-
-};
-
-window.addEventListener("scroll", revealOnScroll);
-
-revealOnScroll();
-
-
-/* =========================================
-PARALLAX FLOAT
-========================================= */
-
-window.addEventListener("scroll",()=>{
-
-    document.querySelectorAll(".floating-image").forEach((img)=>{
-
-        let speed = window.scrollY * 0.04;
-
-        img.style.transform =
-        `translateY(${speed}px)`;
-
-    });
-
-});
     </script>
-
-
-    
 </body>
 </html>
