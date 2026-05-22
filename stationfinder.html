@@ -52,7 +52,7 @@
         .dropdown-trigger:hover { color: #111827; }
         .dropdown-trigger.solar-active { color: #059669; }
         .mega-drop { position: absolute; top: calc(100% + 2px); left: 50%; transform: translateX(-50%); width: 680px; background: #fff; border-radius: 24px; box-shadow: 0 25px 60px rgba(0,0,0,0.12); border: 1px solid #f0fdf4; padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; opacity: 0; visibility: hidden; transition: all 0.25s ease; pointer-events: none; }
-        .dropdown-wrap:hover .mega-drop { opacity: 1; visibility: visible; pointer-events: all; transform: translateX(-50%) translateY(0); }
+        .dropdown-wrap:hover .mega-drop,.mega-drop:hover{opacity:1;visibility:visible;pointer-events:all;transform:translateX(-50%) translateY(0);}
         .drop-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; border-radius: 16px; text-decoration: none; transition: background 0.2s; }
         .drop-item:hover { background: #f0fdf4; }
         .drop-icon { width: 44px; height: 44px; min-width: 44px; background: linear-gradient(135deg, #10b981, #34d399); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
@@ -630,6 +630,45 @@
         .type-ac { background: #dbeafe; color: #1e40af; }
         .type-dc { background: #fef3c7; color: #92400e; }
         .type-ultra { background: #f3e8ff; color: #6b21a8; }
+
+/* Mobile menu fix */
+#mobile-menu{
+    z-index:99999 !important;
+}
+
+#menu-btn{
+    z-index:100000 !important;
+    position:relative;
+}
+
+
+/* Desktop dropdown fix */
+.mega-menu,
+.mega-drop{
+    z-index:99999 !important;
+    pointer-events:auto !important;
+}
+
+.dropdown-wrap,
+.group{
+    position:relative;
+}
+
+nav{
+    overflow:visible !important;
+}
+
+
+.group:hover .mega-menu,
+.mega-menu:hover{
+    opacity:1 !important;
+    visibility:visible !important;
+    pointer-events:auto !important;
+}
+
+
+
+
     </style>
 </head>
 <body>
@@ -653,14 +692,14 @@
                 <!-- EV Products Dropdown -->
                 <div class="relative group">
                     <button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
-                        <a href="products.html" class="flex items-center gap-1">
-                            EV Products
-                            <i data-lucide="chevron-down" class="w-4 h-4"></i>
-                        </a>
+                        <a href="products.html" class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
+                        EV Products
+                        <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    </a>
                     </button>
 
                     <!-- Mega Menu -->
-                    <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-white rounded-3xl shadow-2xl border border-gray-100 p-8 grid grid-cols-3 gap-8 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                    <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-white rounded-3xl shadow-2xl border border-gray-100 p-8 grid grid-cols-3 gap-8 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300 z-[99999]">
                         <!-- Hardware -->
                         <div>
                             <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
@@ -751,9 +790,10 @@
                 <!-- Solar Products Dropdown -->
                 <div class="dropdown-wrap" style="position:relative;">
                     <button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
-                        <a href="solar_products.html" class="flex items-center gap-1">Solar Products
-                            <i data-lucide="chevron-down" class="w-4 h-4"></i>
-                        </a>
+                        <a href="solar_products.html" class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
+                        Solar Products
+                        <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    </a>
                     </button>
                     <div class="mega-drop" style="z-index:100;">
                         <a href="solar_products.html" class="drop-item">
