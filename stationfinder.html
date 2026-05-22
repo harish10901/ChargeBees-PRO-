@@ -4,810 +4,1270 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Station Finder | Chargebees</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Leaflet Map CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-        <link rel="icon" type="image/png" href="images\favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        body { font-family: 'Inter', sans-serif; overflow: hidden; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        #map { height: 100%; width: 100%; z-index: 10; }
-        .leaflet-popup-content-wrapper { border-radius: 1rem; padding: 0.5rem; }
-        .leaflet-popup-content { margin: 0.5rem; }
-        
-        /* Navbar specific styles from index.html */
-        .mega-menu {
-            transition: all 0.3s ease;
+        :root {
+            --green: #10b981;
+            --green-dark: #059669;
+            --green-light: #d1fae5;
+            --green-glow: rgba(16,185,129,0.18);
+            --card-bg: rgba(255,255,255,0.97);
+            --sidebar-w: 400px;
         }
-        .live-location-marker {
-    width: 20px;
-    height: 20px;
-    background: #2563eb;
-    border: 4px solid white;
-    border-radius: 50%;
-    box-shadow: 0 0 0 8px rgba(37, 99, 235, 0.25);
-    animation: pulseLocation 1.5s infinite;
-}
 
-@keyframes pulseLocation {
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    0% {
-        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.5);
-    }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #f0fdf4;
+            overflow: hidden;
+            height: 100dvh;
+        }
 
-    70% {
-        box-shadow: 0 0 0 16px rgba(37, 99, 235, 0);
-    }
+        /* ===== NAVBAR ===== */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 9999;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(16,185,129,0.12);
+            height: 72px;
+        }
 
-    100% {
-        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
-    }
-}
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
 
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
 
+        .brand img { height: 38px; width: auto; object-fit: contain; }
 
+        .brand-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #111827;
+            letter-spacing: -0.5px;
+            line-height: 1;
+        }
 
+        .brand-text span { color: var(--green); }
 
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
+        .nav-link {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #4b5563;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 10px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
 
-@media (max-width:768px){
-
-    #filterContainer{
-        padding-bottom: 4px;
-        scroll-behavior: smooth;
-    }
-
-#stationList{
-    padding-bottom: 16px;
-    scroll-behavior: smooth;
-    scroll-snap-type:x mandatory;
-}
-
-aside{
-    padding-bottom: calc(env(safe-area-inset-bottom) + 12px);
-    max-height: calc(100vh - 90px);
-}
-}
-
-
-
-@media (min-width: 768px){
-
-    aside{
-        height: calc(100vh - 80px);
-    }
-
-    #stationList{
-        overflow-y: visible;
-    }
-
-}
-
-
-@media (min-width:768px){
-
-    /* Sidebar full height */
-    aside{
-        height: calc(100vh - 80px);
-        overflow: hidden;
-    }
-
-    /* Main scroll area */
-    aside .flex-1{
-        overflow-y: auto;
-        scroll-behavior: smooth;
-        scrollbar-width: thin;
-        scrollbar-color: #10b981 #f3f4f6;
-    }
-
-    /* Chrome Scrollbar */
-    aside .flex-1::-webkit-scrollbar{
-        width: 8px;
-    }
-
-    aside .flex-1::-webkit-scrollbar-track{
-        background: #f3f4f6;
-        border-radius: 20px;
-    }
-
-    aside .flex-1::-webkit-scrollbar-thumb{
-        background: #10b981;
-        border-radius: 20px;
-    }
-
-    aside .flex-1::-webkit-scrollbar-thumb:hover{
-        background: #059669;
-    }
-
-    /* Filters always visible */
-    #filterContainer{
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        background: white;
-        padding-top: 8px;
-        padding-bottom: 12px;
-    }
-
-}
-
-
-/* ===== BRAND LOGO ===== */
-
-.brand-logo-text{
-
-    font-size:1.55rem;
-
-    font-weight:500;
-
-    letter-spacing:-0.5px;
-
-    color:#111827;
-
-    font-family:
-    "Poppins",
-    "Nunito",
-    "Quicksand",
-    sans-serif;
-
-    line-height:1;
-
-    text-decoration:none;
-}
-
-.brand-logo-text span{
-    color:#10b981;
-}
-
-@media(max-width:768px){
-
-    .brand-logo-text{
-        font-size:1.3rem;
-    }
-
-}
-
+        .nav-link:hover { color: #111827; background: #f9fafb; }
+        .nav-link.active { color: var(--green-dark); font-weight: 700; }
 
         /* Dropdown */
-        .dropdown-wrap { position: relative; }
-        .dropdown-trigger { display: flex; align-items: center; gap: 4px; font-size: 0.875rem; font-weight: 500; color: #4b5563; cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; transition: color 0.2s; white-space: nowrap; }
-        .dropdown-trigger:hover { color: #111827; }
-        .dropdown-trigger.solar-active { color: #059669; }
-        .mega-drop { position: absolute; top: calc(100% + 2px); left: 50%; transform: translateX(-50%); width: 680px; background: #fff; border-radius: 24px; box-shadow: 0 25px 60px rgba(0,0,0,0.12); border: 1px solid #f0fdf4; padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; opacity: 0; visibility: hidden; transition: all 0.25s ease; pointer-events: none; }
-        .dropdown-wrap:hover .mega-drop { opacity: 1; visibility: visible; pointer-events: all; transform: translateX(-50%) translateY(0); }
-        .drop-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; border-radius: 16px; text-decoration: none; transition: background 0.2s; }
+        .drop-wrap { position: relative; }
+        .drop-trigger {
+            display: flex; align-items: center; gap: 4px;
+            font-size: 0.875rem; font-weight: 500; color: #4b5563;
+            background: none; border: none; cursor: pointer;
+            padding: 8px 12px; border-radius: 10px;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .drop-trigger:hover { color: #111827; background: #f9fafb; }
+
+        .mega-drop {
+            position: absolute; top: calc(100% + 8px); left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.12), 0 0 0 1px rgba(16,185,129,0.08);
+            padding: 28px;
+            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
+            opacity: 0; visibility: hidden;
+            transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+            pointer-events: none;
+            transform: translateX(-50%) translateY(8px);
+        }
+        .drop-wrap:hover .mega-drop {
+            opacity: 1; visibility: visible; pointer-events: all;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .mega-col h4 {
+            font-size: 0.75rem; font-weight: 700; color: #9ca3af;
+            text-transform: uppercase; letter-spacing: 0.08em;
+            margin-bottom: 12px; padding: 0 8px;
+        }
+
+        .drop-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px; border-radius: 16px; text-decoration: none;
+            transition: background 0.2s;
+        }
         .drop-item:hover { background: #f0fdf4; }
-        .drop-icon { width: 44px; height: 44px; min-width: 44px; background: linear-gradient(135deg, #10b981, #34d399); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
-        .drop-icon svg { width: 22px; height: 22px; stroke: #fff; stroke-width: 2; fill: none; }
-        .drop-text p { font-weight: 700; font-size: 0.9rem; color: #111827; margin-bottom: 2px; }
-        .drop-text span { font-size: 0.78rem; color: #6b7280; }
+
+        .drop-icon {
+            width: 40px; height: 40px; min-width: 40px;
+            background: linear-gradient(135deg, var(--green), #34d399);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .drop-icon svg, .drop-icon i { color: white; width: 18px; height: 18px; }
+
+        .drop-text p { font-weight: 700; font-size: 0.85rem; color: #111827; }
+        .drop-text span { font-size: 0.72rem; color: #6b7280; }
+
+        .solar-drop {
+            width: 440px;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .nav-cta {
+            background: var(--green);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav-cta:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(16,185,129,0.35); }
+
+        /* Mobile Menu */
+        #menu-btn {
+            display: none;
+            width: 44px; height: 44px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            background: white;
+            cursor: pointer;
+            align-items: center; justify-content: center;
+            transition: all 0.2s;
+        }
+        #menu-btn:hover { background: #f0fdf4; border-color: var(--green); }
+
+        #mobile-menu {
+            display: none;
+            position: fixed;
+            top: 72px; left: 0; right: 0;
+            background: white;
+            border-top: 1px solid #f3f4f6;
+            padding: 20px 24px;
+            z-index: 9998;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        #mobile-menu.open { display: block; }
+
+        #mobile-menu a {
+            display: block;
+            padding: 14px 0;
+            border-bottom: 1px solid #f3f4f6;
+            font-weight: 600;
+            color: #374151;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        #mobile-menu a:last-child { border-bottom: none; }
+        #mobile-menu a:hover, #mobile-menu a.active { color: var(--green); }
+
+        /* ===== LAYOUT ===== */
+        .layout {
+            display: flex;
+            height: 100dvh;
+            padding-top: 72px;
+        }
+
+        /* ===== SIDEBAR ===== */
+        #sidebar {
+            width: var(--sidebar-w);
+            flex-shrink: 0;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border-right: 1px solid rgba(16,185,129,0.1);
+            position: relative;
+            z-index: 100;
+            box-shadow: 4px 0 30px rgba(0,0,0,0.06);
+        }
+
+        .sidebar-header {
+            padding: 28px 24px 0;
+            flex-shrink: 0;
+        }
+
+        .sidebar-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+
+        .sidebar-subtitle {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-top: 6px;
+            margin-bottom: 20px;
+        }
+
+        /* Search */
+        .search-wrap {
+            position: relative;
+            margin-bottom: 16px;
+        }
+        .search-wrap i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #94a3b8; width: 18px; height: 18px; }
+        #stationSearch {
+            width: 100%;
+            padding: 14px 16px 14px 46px;
+            background: #f8fafc;
+            border: 2px solid transparent;
+            border-radius: 16px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            font-family: 'DM Sans', sans-serif;
+            color: #111827;
+            outline: none;
+            transition: all 0.2s;
+        }
+        #stationSearch:focus { background: white; border-color: var(--green); box-shadow: 0 0 0 4px var(--green-glow); }
+        #stationSearch::placeholder { color: #9ca3af; }
+
+        /* Stats bar */
+        .stats-bar {
+            display: flex;
+            gap: 10px;
+            padding: 0 24px 16px;
+        }
+
+        .stat-pill {
+            flex: 1;
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 1px solid #a7f3d0;
+            border-radius: 14px;
+            padding: 12px 10px;
+            text-align: center;
+        }
+
+        .stat-pill .num {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--green-dark);
+            line-height: 1;
+        }
+
+        .stat-pill .lbl {
+            font-size: 0.62rem;
+            font-weight: 700;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-top: 3px;
+        }
+
+        /* Filters */
+        .filter-bar {
+            display: flex;
+            gap: 8px;
+            padding: 0 24px 16px;
+            overflow-x: auto;
+            flex-shrink: 0;
+        }
+        .filter-bar::-webkit-scrollbar { display: none; }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            white-space: nowrap;
+            border: 2px solid #e5e7eb;
+            background: white;
+            color: #6b7280;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.2s;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .filter-btn:hover { border-color: var(--green); color: var(--green-dark); }
+        .filter-btn.active {
+            background: var(--green);
+            border-color: var(--green);
+            color: white;
+            box-shadow: 0 4px 14px rgba(16,185,129,0.35);
+        }
+
+        /* Station List */
+        #stationList {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 16px 20px;
+            scrollbar-width: thin;
+            scrollbar-color: #a7f3d0 transparent;
+        }
+        #stationList::-webkit-scrollbar { width: 4px; }
+        #stationList::-webkit-scrollbar-track { background: transparent; }
+        #stationList::-webkit-scrollbar-thumb { background: #a7f3d0; border-radius: 99px; }
+
+        /* Station Card */
+        .station-card {
+            background: white;
+            border: 1.5px solid #f1f5f9;
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.34,1.2,0.64,1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .station-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: var(--green);
+            opacity: 0;
+            transition: opacity 0.2s;
+            border-radius: 20px 0 0 20px;
+        }
+
+        .station-card:hover {
+            border-color: var(--green);
+            transform: translateY(-2px) translateX(2px);
+            box-shadow: 0 12px 32px rgba(16,185,129,0.15);
+        }
+        .station-card:hover::before { opacity: 1; }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .card-icon {
+            width: 44px; height: 44px; min-width: 44px;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .card-icon.available { background: #d1fae5; }
+        .card-icon.in-use { background: #fef3c7; }
+        .card-icon.maintenance { background: #fee2e2; }
+
+        .card-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.3;
+            flex: 1;
+        }
+
+        .status-badge {
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 4px 10px;
+            border-radius: 50px;
+            flex-shrink: 0;
+        }
+        .status-available { background: #d1fae5; color: #065f46; }
+        .status-inuse { background: #fef3c7; color: #92400e; }
+        .status-maintenance { background: #fee2e2; color: #991b1b; }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .card-type {
+            display: flex; align-items: center; gap: 5px;
+            font-size: 0.72rem; font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .card-type i { width: 13px; height: 13px; color: var(--green); }
+
+        .card-rating {
+            display: flex; align-items: center; gap: 4px;
+            font-size: 0.75rem; font-weight: 700; color: #f59e0b;
+        }
+        .card-rating i { width: 13px; height: 13px; fill: #f59e0b; }
+
+        .card-pills {
+            display: flex; gap: 6px; flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
+        .pill {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 50px;
+            background: #f8fafc;
+            color: #64748b;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card-bottom {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-navigate {
+            flex: 1;
+            padding: 10px;
+            background: var(--green);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            transition: all 0.2s;
+        }
+        .btn-navigate:hover { background: var(--green-dark); transform: translateY(-1px); }
+
+        .btn-details {
+            padding: 10px 14px;
+            background: #f8fafc;
+            color: #374151;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.2s;
+        }
+        .btn-details:hover { border-color: var(--green); color: var(--green-dark); background: #f0fdf4; }
+
+        /* ===== MAP ===== */
+        #mapContainer {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #map { width: 100%; height: 100%; }
+
+        /* Floating Cards on Map */
+        .map-widget {
+            position: absolute;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .stats-widget {
+            top: 20px; right: 20px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 0 0 1px rgba(16,185,129,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            min-width: 180px;
+        }
+
+        .widget-stat {
+            display: flex; align-items: center; gap: 12px;
+        }
+
+        .widget-icon {
+            width: 42px; height: 42px;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .widget-icon.green { background: #d1fae5; }
+        .widget-icon.blue { background: #dbeafe; }
+        .widget-icon.amber { background: #fef3c7; }
+
+        .widget-icon i { width: 20px; height: 20px; }
+        .widget-icon.green i { color: var(--green-dark); }
+        .widget-icon.blue i { color: #2563eb; }
+        .widget-icon.amber i { color: #d97706; }
+
+        .widget-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem; font-weight: 800;
+            color: #0f172a; line-height: 1;
+        }
+        .widget-lbl {
+            font-size: 0.65rem; font-weight: 700;
+            color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em;
+        }
+
+        /* Live Dot */
+        .live-badge {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 0.65rem; font-weight: 800;
+            color: var(--green-dark); text-transform: uppercase; letter-spacing: 0.1em;
+        }
+
+        .live-dot {
+            width: 8px; height: 8px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: livePulse 1.5s infinite;
+        }
+
+        @keyframes livePulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.4); }
+        }
+
+        /* Locate Button */
+        #locateBtn {
+            position: absolute;
+            bottom: 24px; right: 24px;
+            z-index: 1000;
+            width: 56px; height: 56px;
+            background: white;
+            border: none;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s;
+        }
+        #locateBtn:hover { background: var(--green); transform: scale(1.1); }
+        #locateBtn:hover i { color: white; }
+        #locateBtn i { color: var(--green); width: 22px; height: 22px; transition: color 0.2s; }
+
+        /* Live Location Marker */
+        .live-marker {
+            width: 20px; height: 20px;
+            background: #2563eb;
+            border: 3px solid white;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(37,99,235,0.4);
+            animation: markerPulse 2s infinite;
+        }
+        @keyframes markerPulse {
+            0% { box-shadow: 0 0 0 0 rgba(37,99,235,0.4); }
+            70% { box-shadow: 0 0 0 16px rgba(37,99,235,0); }
+            100% { box-shadow: 0 0 0 0 rgba(37,99,235,0); }
+        }
+
+        /* Detail Panel */
+        #detailPanel {
+            position: absolute;
+            bottom: 24px; left: 50%;
+            transform: translateX(-50%) translateY(200px);
+            z-index: 1001;
+            background: white;
+            border-radius: 24px;
+            padding: 24px;
+            width: 340px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+            transition: transform 0.35s cubic-bezier(0.34,1.2,0.64,1);
+            pointer-events: none;
+        }
+        #detailPanel.open {
+            transform: translateX(-50%) translateY(0);
+            pointer-events: all;
+        }
+
+        /* Map Popup overrides */
+        .leaflet-popup-content-wrapper {
+            border-radius: 20px !important;
+            padding: 0 !important;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15) !important;
+            border: 1px solid rgba(16,185,129,0.1) !important;
+        }
+        .leaflet-popup-content { margin: 0 !important; }
+        .leaflet-popup-tip { background: white !important; }
+
+        .popup-inner {
+            padding: 20px;
+            min-width: 220px;
+        }
+        .popup-header {
+            display: flex; justify-content: space-between;
+            align-items: flex-start; gap: 10px; margin-bottom: 12px;
+        }
+        .popup-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.95rem; font-weight: 800; color: #0f172a;
+        }
+        .popup-type {
+            font-size: 0.7rem; font-weight: 700;
+            color: var(--green-dark); margin-top: 3px;
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .popup-rating {
+            display: flex; align-items: center; gap: 3px;
+            font-size: 0.8rem; font-weight: 800; color: #f59e0b;
+        }
+        .popup-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--green);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            margin-top: 14px;
+            transition: background 0.2s;
+        }
+        .popup-btn:hover { background: var(--green-dark); }
+
+        /* ===== MOBILE ===== */
+        @media (max-width: 768px) {
+            :root { --sidebar-w: 100%; }
+
+            #menu-btn { display: flex; }
+
+            .nav-links, .nav-cta-wrap { display: none; }
+
+            .layout { flex-direction: column; }
+
+            #sidebar {
+                position: fixed;
+                bottom: 0; left: 0; right: 0;
+                width: 100%;
+                height: auto;
+                max-height: 55dvh;
+                border-right: none;
+                border-top: 1px solid rgba(16,185,129,0.15);
+                border-radius: 28px 28px 0 0;
+                z-index: 500;
+                box-shadow: 0 -20px 60px rgba(0,0,0,0.12);
+                transition: max-height 0.4s cubic-bezier(0.34,1.2,0.64,1);
+            }
+
+            #sidebar.expanded { max-height: 85dvh; }
+
+            .sidebar-handle {
+                width: 40px; height: 4px;
+                background: #d1d5db;
+                border-radius: 99px;
+                margin: 10px auto 0;
+            }
+
+            .sidebar-header { padding: 14px 20px 0; }
+            .sidebar-title { font-size: 1.5rem; }
+
+            .stats-bar { padding: 10px 20px 8px; gap: 8px; }
+            .stat-pill .num { font-size: 1.1rem; }
+
+            .filter-bar { padding: 0 20px 10px; }
+
+            #stationList {
+                display: flex;
+                flex-direction: row;
+                overflow-x: auto;
+                overflow-y: hidden;
+                padding: 0 16px 16px;
+                gap: 10px;
+                scroll-snap-type: x mandatory;
+            }
+            #stationList::-webkit-scrollbar { display: none; }
+
+            .station-card {
+                min-width: 280px;
+                scroll-snap-align: start;
+                margin-bottom: 0;
+            }
+
+            #mapContainer {
+                flex: 1;
+                height: calc(100dvh - 72px - 220px);
+            }
+
+            .stats-widget { display: none; }
+
+            #detailPanel {
+                width: calc(100% - 32px);
+                left: 16px;
+                transform: translateX(0) translateY(200px);
+            }
+            #detailPanel.open { transform: translateX(0) translateY(0); }
+
+            .sidebar-search-mobile {
+                display: block !important;
+            }
+
+            .sidebar-search-desktop { display: none; }
+        }
+
+        @media (min-width: 769px) {
+            .sidebar-handle { display: none; }
+            .sidebar-search-mobile { display: none !important; }
+        }
+
+        /* Sidebar slide-in animation on load */
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #sidebar { animation: slideInLeft 0.5s cubic-bezier(0.34,1.2,0.64,1) both; }
+
+        .station-card {
+            animation: fadeInUp 0.4s both;
+        }
+
+        /* Connector Type Colors */
+        .type-ac { background: #dbeafe; color: #1e40af; }
+        .type-dc { background: #fef3c7; color: #92400e; }
+        .type-ultra { background: #f3e8ff; color: #6b21a8; }
     </style>
 </head>
-<body class="antialiased text-gray-900 bg-gray-50">
+<body>
 
-    <!-- Navbar (Copy from index.html) -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-<div class="flex-shrink-0 flex items-center gap-1">
+<!-- ===== NAVBAR ===== -->
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="brand">
+            <img src="images/logo.png" alt="Chargebees" onerror="this.style.display='none'">
+            <span class="brand-text">Charge<span>Bees</span></span>
+        </a>
 
-<a href="index.html" class="flex items-center gap-2">
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="stationfinder.html" class="nav-link active">Station Finder</a>
 
-    <img src="images/logo.png" alt="Logo" class="h-10 w-auto object-contain">
-
-    <span class="brand-logo-text">
-        Charge <span>Bees</span>
-    </span>
-
-</a>
-
-</div>
-                
-                <div class="hidden md:flex items-center space-x-5">
-                    <a href="index.html" class="text-sm font-medium text-gray-600 hover:text-emerald-600 transition-colors">Home</a>
-                    <a href="stationfinder.html" class="text-sm font-medium text-emerald-600 transition-colors">Station Finder</a>
-                    
-                    <!-- Products Dropdown -->
-                    <div class="relative group">
-<button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
-
-    <a href="products.html" class="flex items-center gap-1">
-
-        EV Products
-
-        <i data-lucide="chevron-down" class="w-4 h-4"></i>
-
-    </a>
-
-</button>
-                        
-                        <!-- Mega Menu -->
-                        <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-white rounded-3xl shadow-2xl border border-gray-100 p-8 grid grid-cols-3 gap-8 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                            <!-- Hardware -->
-                            <div>
-                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
-                                    <i data-lucide="zap" class="w-5 h-5 text-emerald-600"></i> Hardware
-                                </h3>
-                                <a href="products.html#hardware" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
-                                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
-                                        <i data-lucide="battery-charging" class="w-6 h-6 text-emerald-600"></i>
-                                    </div>
-                                    <div>
-                                        <p class="font-bold text-gray-900">All chargers</p>
-                                        <p class="text-xs text-gray-500">AC & DC Solutions</p>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <!-- Software -->
-                            <div>
-                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
-                                    <i data-lucide="layout" class="w-5 h-5 text-emerald-600"></i> Software
-                                </h3>
-                                <div class="space-y-2">
-                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
-                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
-                                            <i data-lucide="cloud" class="w-6 h-6 text-emerald-600"></i>
-                                        </div>
-                                        <div>
-                                            <div class="flex items-center gap-2">
-                                                <p class="font-bold text-gray-900">ChargeCloud</p>
-                                                <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
-                                            </div>
-                                            <p class="text-xs text-gray-500">CMS Platform</p>
-                                        </div>
-                                    </a>
-                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
-                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
-                                            <i data-lucide="smartphone" class="w-6 h-6 text-emerald-600"></i>
-                                        </div>
-                                        <div>
-                                            <p class="font-bold text-gray-900">Chargebees App</p>
-                                            <p class="text-xs text-gray-500">User Experience</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Services -->
-                            <div>
-                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
-                                    <i data-lucide="settings" class="w-5 h-5 text-emerald-600"></i> Services
-                                </h3>
-                                <div class="space-y-2">
-                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
-                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
-                                            <i data-lucide="activity" class="w-6 h-6 text-emerald-600"></i>
-                                        </div>
-                                        <div>
-                                            <p class="font-bold text-gray-900">Energy As A Service</p>
-                                            <p class="text-xs text-gray-500">Renewable Energy</p>
-                                        </div>
-                                    </a>
-                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
-                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
-                                            <i data-lucide="battery-full" class="w-6 h-6 text-emerald-600"></i>
-                                        </div>
-                                        <div>
-                                            <div class="flex items-center gap-2">
-                                                <p class="font-bold text-gray-900">Battery As A Service</p>
-                                                <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
-                                            </div>
-                                            <p class="text-xs text-gray-500">Swapping Solutions</p>
-                                        </div>
-                                    </a>
-                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
-                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
-                                            <i data-lucide="credit-card" class="w-6 h-6 text-emerald-600"></i>
-                                        </div>
-                                        <div>
-                                            <p class="font-bold text-gray-900">RFID Card</p>
-                                            <p class="text-xs text-gray-500">Seamless Payments</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+            <!-- EV Products -->
+            <div class="drop-wrap">
+                <a href="products.html" class="drop-trigger">
+                    EV Products
+                    <i data-lucide="chevron-down" style="width:15px;height:15px;"></i>
+                </a>
+                <div class="mega-drop">
+                    <div class="mega-col">
+                        <h4>Hardware</h4>
+                        <a href="products.html#hardware" class="drop-item">
+                            <div class="drop-icon"><i data-lucide="battery-charging"></i></div>
+                            <div class="drop-text"><p>All Chargers</p><span>AC & DC Solutions</span></div>
+                        </a>
                     </div>
-                <!-- Solar Products Dropdown -->
-                <div class="dropdown-wrap" style="position:relative;">
-<button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
-
-    <a href="solar_products.html" class="flex items-center gap-1">Solar Products
-        <i data-lucide="chevron-down" class="w-4 h-4"></i>
-    </a>
-
-</button>
-                    <div class="mega-drop" style="z-index:100;">
-                        <a href="solar_products.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                            </div>
-                            <div class="drop-text"><p>Our Solar Solutions</p><span>For all your energy needs</span></div>
+                    <div class="mega-col">
+                        <h4>Software</h4>
+                        <a href="products.html#software" class="drop-item">
+                            <div class="drop-icon"><i data-lucide="cloud"></i></div>
+                            <div class="drop-text"><p>ChargeCloud</p><span>CMS Platform</span></div>
                         </a>
-                        <a href="residential.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                            </div>
-                            <div class="drop-text"><p>Residential Solar Rooftops</p><span>For homes & apartments</span></div>
+                        <a href="products.html#software" class="drop-item">
+                            <div class="drop-icon"><i data-lucide="smartphone"></i></div>
+                            <div class="drop-text"><p>Chargebees App</p><span>User Experience</span></div>
                         </a>
-                        <a href="commercial.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                            </div>
-                            <div class="drop-text"><p>Commercial Solar Rooftops</p><span>For offices & retail</span></div>
+                    </div>
+                    <div class="mega-col">
+                        <h4>Services</h4>
+                        <a href="products.html#services" class="drop-item">
+                            <div class="drop-icon"><i data-lucide="activity"></i></div>
+                            <div class="drop-text"><p>Energy As A Service</p><span>Renewable Energy</span></div>
                         </a>
-                        <a href="industrial.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg>
-                            </div>
-                            <div class="drop-text"><p>Industrial Solar Rooftops</p><span>For factories & warehouses</span></div>
-                        </a>
-                        <a href="ground.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-                            </div>
-                            <div class="drop-text"><p>Ground Mounted Solar System</p><span>Large scale solar farms</span></div>
+                        <a href="products.html#services" class="drop-item">
+                            <div class="drop-icon"><i data-lucide="credit-card"></i></div>
+                            <div class="drop-text"><p>RFID Card</p><span>Seamless Payments</span></div>
                         </a>
                     </div>
                 </div>
-
-                    <a href="partners.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Partners</a>
-                    <a href="media-center.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Media Center</a>
-                    <a href="careers.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Careers</a>
-                </div>
-                <div class="flex items-center gap-4">
-                     <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://play.google.com/store/games%3Fhl%3Den_IN&ved=2ahUKEwjP48zKm5WUAxVrTGwGHTWhBIAQFnoECB8QAQ&sqi=2&usg=AOvVaw1xFWwUV1XhFXXR_Z_npZ2_" class="hidden md:block bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700">
-                        Download App
-                    </a>
-                </div>
-                <div class="flex items-center gap-4">
-                     <a href="contact.html" class="hidden md:block bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700">
-                        Contact Us
-                    </a>
-                </div>
-                <!-- Mobile Menu Button -->
-<!-- Mobile Menu Button -->
-<button
-    id="menu-btn"
-    class="md:hidden flex items-center justify-center w-11 h-11 rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm shadow-sm hover:bg-emerald-50 hover:border-emerald-200 transition-all duration-300"
->
-    <i data-lucide="menu" class="w-6 h-6 text-gray-900"></i>
-</button>
             </div>
+
+            <!-- Solar Products -->
+            <div class="drop-wrap">
+                <a href="solar_products.html" class="drop-trigger">
+                    Solar Products
+                    <i data-lucide="chevron-down" style="width:15px;height:15px;"></i>
+                </a>
+                <div class="mega-drop solar-drop">
+                    <a href="solar_products.html" class="drop-item">
+                        <div class="drop-icon"><i data-lucide="sun"></i></div>
+                        <div class="drop-text"><p>Our Solar Solutions</p><span>For all energy needs</span></div>
+                    </a>
+                    <a href="residential.html" class="drop-item">
+                        <div class="drop-icon"><i data-lucide="home"></i></div>
+                        <div class="drop-text"><p>Residential Solar</p><span>Homes & Apartments</span></div>
+                    </a>
+                    <a href="commercial.html" class="drop-item">
+                        <div class="drop-icon"><i data-lucide="building-2"></i></div>
+                        <div class="drop-text"><p>Commercial Solar</p><span>Offices & Retail</span></div>
+                    </a>
+                    <a href="industrial.html" class="drop-item">
+                        <div class="drop-icon"><i data-lucide="factory"></i></div>
+                        <div class="drop-text"><p>Industrial Solar</p><span>Factories & Warehouses</span></div>
+                    </a>
+                </div>
+            </div>
+
+            <a href="partners.html" class="nav-link">Partners</a>
+            <a href="media-center.html" class="nav-link">Media Center</a>
+            <a href="careers.html" class="nav-link">Careers</a>
         </div>
-    </nav>
+
+        <div class="nav-cta-wrap" style="display:flex;gap:10px;align-items:center;">
+            <a href="https://play.google.com/store" class="nav-cta" style="background:#f0fdf4;color:var(--green-dark)!important;border:1.5px solid #a7f3d0;">Download App</a>
+            <a href="contact.html" class="nav-cta">Contact Us</a>
+            <button id="menu-btn">
+                <i data-lucide="menu" style="width:22px;height:22px;color:#374151;"></i>
+            </button>
+        </div>
+    </div>
+</nav>
 
 <!-- Mobile Menu -->
-<div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-white border-t border-gray-100 shadow-xl z-40">
+<div id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="stationfinder.html" class="active">Station Finder</a>
+    <a href="products.html">EV Products</a>
+    <a href="solar_products.html">Solar Products</a>
+    <a href="partners.html">Partners</a>
+    <a href="media-center.html">Media Center</a>
+    <a href="careers.html">Careers</a>
+    <a href="contact.html">Contact Us</a>
+</div>
 
-    <div class="p-6 space-y-5">
+<!-- ===== MAIN LAYOUT ===== -->
+<div class="layout">
 
-        <a href="index.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Home
-        </a>
+    <!-- ===== SIDEBAR ===== -->
+    <aside id="sidebar">
+        <div class="sidebar-handle" id="sidebarHandle"></div>
 
-        <a href="stationfinder.html"
-           class="block text-base font-semibold text-emerald-600">
-            Station Finder
-        </a>
+        <div class="sidebar-header">
+            <div class="live-badge" style="margin-bottom:10px;">
+                <div class="live-dot"></div> Live Network
+            </div>
+            <h1 class="sidebar-title">Find Power</h1>
+            <p class="sidebar-subtitle">India's Largest Green Network</p>
 
-        <a href="products.html"
-            class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            EV Products
-        </a>
-            <a href="solar_products.html"
-                class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-                Solar Products
-            </a>
+            <!-- Search Desktop -->
+            <div class="search-wrap sidebar-search-desktop">
+                <i data-lucide="search"></i>
+                <input type="text" id="stationSearch" placeholder="Search city or station...">
+            </div>
 
-        <a href="partners.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Partners
-        </a>
+            <!-- Search Mobile -->
+            <div class="search-wrap sidebar-search-mobile" style="display:none;">
+                <i data-lucide="search"></i>
+                <input type="text" id="stationSearchMobile" placeholder="Search stations...">
+            </div>
+        </div>
 
-        <a href="media-center.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Media Center
-        </a>
+        <!-- Stats -->
+        <div class="stats-bar">
+            <div class="stat-pill">
+                <div class="num" id="totalCount">5</div>
+                <div class="lbl">Stations</div>
+            </div>
+            <div class="stat-pill">
+                <div class="num" id="availCount">3</div>
+                <div class="lbl">Available</div>
+            </div>
+            <div class="stat-pill" style="background:linear-gradient(135deg,#fff7ed,#fed7aa);border-color:#fdba74;">
+                <div class="num" style="color:#c2410c;" id="inuseCount">1</div>
+                <div class="lbl">In Use</div>
+            </div>
+        </div>
 
-        <a href="careers.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Careers
-        </a>
+        <!-- Filters -->
+        <div class="filter-bar" id="filterContainer">
+            <button class="filter-btn active" onclick="filterStations('All')">All</button>
+            <button class="filter-btn" onclick="filterStations('AC')">Regular AC</button>
+            <button class="filter-btn" onclick="filterStations('DC')">DC Fast</button>
+            <button class="filter-btn" onclick="filterStations('Ultra')">Ultra Fast</button>
+        </div>
 
-        <a href="contact.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Contact Us
-        </a>
+        <!-- Station List -->
+        <div id="stationList"></div>
+    </aside>
 
+    <!-- ===== MAP ===== -->
+    <div id="mapContainer">
+        <div id="map"></div>
+
+        <!-- Stats Widget -->
+        <div class="map-widget stats-widget">
+            <div class="live-badge" style="margin-bottom:4px;">
+                <div class="live-dot"></div> Live Network
+            </div>
+            <div class="widget-stat">
+                <div class="widget-icon green"><i data-lucide="zap"></i></div>
+                <div>
+                    <div class="widget-num">2,541</div>
+                    <div class="widget-lbl">Live Connections</div>
+                </div>
+            </div>
+            <div class="widget-stat">
+                <div class="widget-icon blue"><i data-lucide="map-pin"></i></div>
+                <div>
+                    <div class="widget-num">482</div>
+                    <div class="widget-lbl">Total Hubs</div>
+                </div>
+            </div>
+            <div class="widget-stat">
+                <div class="widget-icon amber"><i data-lucide="battery-charging"></i></div>
+                <div>
+                    <div class="widget-num">98%</div>
+                    <div class="widget-lbl">Uptime</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Locate Button -->
+        <button id="locateBtn" title="My Location">
+            <i data-lucide="locate-fixed"></i>
+        </button>
     </div>
 
 </div>
 
-    <!-- Main Content Wrapper -->
-    <div class="flex flex-col h-screen pt-20">
-        <div class="flex-1 relative overflow-hidden">
-            <!-- Sidebar -->
-            <aside id="sidebar" class="absolute bottom-4 left-0 right-0 md:relative md:w-[400px] md:h-full bg-transparent md:bg-white z-30 flex flex-col pointer-events-none md:bottom-0">
-                <div class="p-4 md:p-6 shrink-0 pointer-events-auto">
-                    <h1 class="text-3xl font-black text-gray-900 mb-2 tracking-tighter">Find Power</h1>
-                    <p class="text-[10px] font-black text-gray-400 mb-6 uppercase tracking-widest">India's Largest Green Network</p>
-                    
-                    <div class="relative mb-4 hidden md:block">
-                        <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5"></i>
-                        <input 
-                            type="text" 
-                            id="stationSearch"
-                            placeholder="Search city or station..."
-                            class="w-full pl-12 pr-4 py-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none font-semibold transition-all text-sm"
-                        />
-                    </div>
+<!-- ===== SCRIPTS ===== -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+<script>
+lucide.createIcons();
 
-                    <div class="flex gap-3 overflow-x-auto no-scrollbar md:pb-2 py-2 px-1 w-full touch-pan-x snap-x" id="filterContainer">
-                        <button onclick="filterStations('All')" class="category-btn active px-6 py-2 rounded-full text-[10px] font-black whitespace-nowrap transition-all border bg-emerald-600 border-emerald-600 text-white shadow-lg shadow-emerald-600/20 uppercase tracking-wider">All</button>
-                        <button onclick="filterStations('AC')" class="category-btn px-6 py-2 rounded-full text-[10px] font-black whitespace-nowrap transition-all border bg-white border-gray-100 text-gray-600 hover:border-gray-300 uppercase tracking-wider">Regular AC</button>
-                        <button onclick="filterStations('DC Fast')" class="category-btn px-6 py-2 rounded-full text-[10px] font-black whitespace-nowrap transition-all border bg-white border-gray-100 text-gray-600 hover:border-gray-300 uppercase tracking-wider">DC Fast</button>
-                        <button onclick="filterStations('Ultra Fast')" class="category-btn px-6 py-2 rounded-full text-[10px] font-black whitespace-nowrap transition-all border bg-white border-gray-100 text-gray-600 hover:border-gray-300 uppercase tracking-wider">Ultra Fast</button>
-                    </div>
-                </div>
-
-                <!-- Scrollable Sidebar Area -->
-                <div class="flex-1 overflow-y-auto no-scrollbar min-h-0">
-                    <div class="flex md:block gap-4 overflow-x-auto no-scrollbar px-4 pb-2 md:p-4 md:space-y-4 touch-pan-x" id="stationList">
-                        <!-- Stations will be injected here -->
-                    </div>
-
-                    <!-- Footer (Appended at the end of sidebar list) -->
-                     <!--
-                    <footer class="hidden md:block bg-gray-50 pt-16 pb-12 border-t border-gray-200 px-6">
-                        <div class="space-y-12">
-                            <div>
-                                <div class="mb-6">
-                                    <span class="text-xl font-bold tracking-tighter text-gray-900">
-                                        CHARGE<span class="text-emerald-600">BEES</span>
-                                    </span>
-                                </div>
-                                <p class="text-gray-500 text-sm mb-6 leading-relaxed">
-                                    Leading the charge towards a sustainable electric future with India's largest EV charging network.
-                                </p>
-                                <div class="flex gap-3">
-                                    <a href="#" class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 transition-all shadow-sm"><i data-lucide="twitter" class="w-4 h-4"></i></a>
-                                    <a href="#" class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 transition-all shadow-sm"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
-                                    <a href="https://www.instagram.com/chargebees" class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-600 transition-all shadow-sm"><i data-lucide="instagram" class="w-4 h-4"></i></a>
-                                </div>
-                            </div>
-
-                            <div>
-                                <h4 class="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Contact</h4>
-                                <ul class="space-y-3 text-sm text-gray-600">
-                                    <li>db@chargebees.com</li>
-                                    <li>+91 90000 40477</li>
-                                    <li class="pt-2">
-                                        <p class="font-bold text-gray-900">Visakhapatnam HQ</p>
-                                        <p class="text-xs">8th Floor, chargebees LTD, IT Park, Visakhapatnam</p>
-                                    </li>
-                                </ul>
-                            </div>
-                            
-                            <div class="pt-8 border-t border-gray-200 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
-                                © 2026 Chargebees. All rights reserved.
-                            </div>
-                        </div>
-                    </footer>
-                    -->
-                </div>
-            </aside>
-
-            <!-- Map View -->
-            <main class="absolute inset-0 bg-gray-200 z-10">
-                <div id="map"></div>
-                <!-- Current Location Button -->
-<button
-    id="locateBtn"
-    class="absolute bottom-6 right-6 z-[1000] w-14 h-14 rounded-full bg-white shadow-2xl flex items-center justify-center hover:scale-110 transition-all border border-gray-200"
->
-    <i data-lucide="locate-fixed" class="w-6 h-6 text-emerald-600"></i>
-</button>
-                <!-- Floating Info Card -->
-                <div class="absolute top-6 right-6 hidden md:block scale-90 origin-top-right z-[1000]">
-                    <div class="bg-white/90 backdrop-blur-xl p-6 rounded-[2rem] shadow-2xl border border-white/50">
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600">
-                                <i data-lucide="activity" class="w-6 h-6 animate-pulse"></i>
-                            </div>
-                            <div>
-                                <p class="text-2xl font-black text-gray-900 tracking-tighter">2,541</p>
-                                <p class="text-[10px] font-black text-gray-400 uppercase tracking-tight">Live Connections</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-cyan-50 rounded-2xl flex items-center justify-center text-cyan-600">
-                                <i data-lucide="map-pin" class="w-6 h-6"></i>
-                            </div>
-                            <div>
-                                <p class="text-2xl font-black text-gray-900 tracking-tighter">482</p>
-                                <p class="text-[10px] font-black text-gray-400 uppercase tracking-tight">Total Hubs</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
-    <script>
-        // Init Lucide
-        // add location icon to lucide library
-        lucide.createIcons();
-
-        const STATIONS = [
-            { id: 1, name: 'Chargebees Hub - GMR Airport', lat: 17.2403, lng: 78.4294, type: 'Fast DC', status: 'Available', rating: 4.8 },
-            { id: 2, name: 'Cyber Towers Charging Point', lat: 17.4504, lng: 78.3808, type: 'Regular AC', status: 'In Use', rating: 4.5 },
-            { id: 3, name: 'Visakhapatnam IT Park Hub', lat: 17.7231, lng: 83.3013, type: 'Ultra Fast', status: 'Available', rating: 4.9 },
-            { id: 4, name: 'Vijayawada Highway Point', lat: 16.5062, lng: 80.6480, type: 'DC Fast', status: 'Maintenance', rating: 4.2 },
-                {
+const STATIONS = [
+    {
+        id: 1,
+        name: 'Chargebees Hub — GMR Airport',
+        lat: 17.2403, lng: 78.4294,
+        type: 'DC Fast',
+        status: 'Available',
+        rating: 4.8,
+        connectors: ['CCS2', 'CHAdeMO'],
+        power: '150kW',
+        price: '₹18/kWh'
+    },
+    {
+        id: 2,
+        name: 'Cyber Towers Charging Point',
+        lat: 17.4504, lng: 78.3808,
+        type: 'Regular AC',
+        status: 'In Use',
+        rating: 4.5,
+        connectors: ['Type 2'],
+        power: '22kW',
+        price: '₹12/kWh'
+    },
+    {
+        id: 3,
+        name: 'Visakhapatnam IT Park Hub',
+        lat: 17.7231, lng: 83.3013,
+        type: 'Ultra Fast',
+        status: 'Available',
+        rating: 4.9,
+        connectors: ['CCS2', 'GB/T'],
+        power: '350kW',
+        price: '₹22/kWh'
+    },
+    {
         id: 4,
-        name: 'Kukatpally EV Point',
-        lat: 17.4948,
-        lng: 78.3996,
+        name: 'Vijayawada Highway Point',
+        lat: 16.5062, lng: 80.6480,
         type: 'DC Fast',
         status: 'Maintenance',
-        rating: 4.2
+        rating: 4.2,
+        connectors: ['CCS2'],
+        power: '60kW',
+        price: '₹16/kWh'
     },
-        ];
+    {
+        id: 5,
+        name: 'Kukatpally EV Point',
+        lat: 17.4948, lng: 78.3996,
+        type: 'DC Fast',
+        status: 'Available',
+        rating: 4.6,
+        connectors: ['CCS2', 'Type 2'],
+        power: '120kW',
+        price: '₹17/kWh'
+    }
+];
 
-        let map, markers = [];
-        let currentLocation = null;
-        let routingControl = null;
-        let currentFilter = 'All';
-        let currentMarker = null;
+let map, markers = [], currentLocation = null, routingControl = null, currentFilter = 'All', liveMarker = null;
 
-        function initMap() {
-            map = L.map('map', {
-                zoomControl: false,
-                center: [17.3850, 78.4867],
-                zoom: 12
-            });
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(map);
-
-            renderStations();
-            // Get Current Location
-if (navigator.geolocation) {
-
-    navigator.geolocation.watchPosition(
-
-        (position) => {
-
-            currentLocation = [
-                position.coords.latitude,
-                position.coords.longitude
-            ];
-
-            // first time marker create
-            if (!currentMarker) {
-
-currentMarker = L.marker(currentLocation, {
-
-    icon: L.divIcon({
-        className: '',
-        html: `<div class="live-location-marker"></div>`,
-        iconSize: [20, 20]
-    })
-
-}).addTo(map);
-
-                map.flyTo(currentLocation, 15);
-
-            } else {
-
-                // update marker position live
-                currentMarker.setLatLng(currentLocation);
-            }
-        },
-
-        (error) => {
-            console.log(error);
-        },
-
-        {
-            enableHighAccuracy: true,
-            maximumAge: 0,
-            timeout: 5000
-        }
-    );
+function statusClass(s) {
+    if (s === 'Available') return 'available';
+    if (s === 'In Use') return 'in-use';
+    return 'maintenance';
 }
-        }
+function statusBadge(s) {
+    if (s === 'Available') return 'status-available';
+    if (s === 'In Use') return 'status-inuse';
+    return 'status-maintenance';
+}
+function typeEmoji(t) {
+    if (t.includes('Ultra')) return '⚡⚡';
+    if (t.includes('DC')) return '⚡';
+    return '🔌';
+}
+function typePillClass(t) {
+    if (t.includes('Ultra')) return 'type-ultra';
+    if (t.includes('DC')) return 'type-dc';
+    return 'type-ac';
+}
 
-        function renderStations() {
-            const list = document.getElementById('stationList');
-            const query = document.getElementById('stationSearch').value.toLowerCase();
-            list.innerHTML = '';
-            
-            markers.forEach(m => m.remove());
-            markers = [];
+function initMap() {
+    map = L.map('map', { zoomControl: false, center: [17.3850, 78.4867], zoom: 12 });
 
-            const filtered = STATIONS.filter(s => {
-                const matchesSearch = s.name.toLowerCase().includes(query);
-                const matchesFilter = currentFilter === 'All' || s.type.includes(currentFilter);
-                return matchesSearch && matchesFilter;
-            });
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://openstreetmap.org">OpenStreetMap</a>'
+    }).addTo(map);
 
-            filtered.forEach((station) => {
-                const card = document.createElement('div');
-                card.className = 'group min-w-[280px] md:min-w-0 p-5 bg-white/95 backdrop-blur-xl rounded-[2rem] border border-white/50 hover:border-emerald-600 transition-all cursor-pointer shadow-2xl hover:shadow-xl duration-300 pointer-events-auto';
-                card.onclick = () => map.flyTo([station.lat, station.lng], 15);
-                
-                card.innerHTML = `
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <h3 class="font-black text-gray-900 group-hover:text-emerald-600 transition-colors uppercase tracking-tight text-sm">${station.name}</h3>
-                            <div class="flex items-center gap-2 mt-2">
-                                <span class="text-[9px] font-black uppercase text-gray-400 tracking-widest">${station.type}</span>
-                                <div class="flex items-center gap-1 text-amber-500 font-black text-[10px]">
-                                    <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                    ${station.rating}
-                                </div>
-                            </div>
-                        </div>
-                        <span class="px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest ${
-                            station.status === 'Available' ? 'bg-emerald-100 text-emerald-700' : 
-                            station.status === 'In Use' ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700'
-                        }">${station.status}</span>
+    L.control.zoom({ position: 'bottomleft' }).addTo(map);
+
+    renderStations();
+    startGeolocation();
+}
+
+function renderStations() {
+    const list = document.getElementById('stationList');
+    const query = (document.getElementById('stationSearch')?.value || document.getElementById('stationSearchMobile')?.value || '').toLowerCase();
+
+    list.innerHTML = '';
+    markers.forEach(m => m.remove());
+    markers = [];
+
+    const filtered = STATIONS.filter(s => {
+        const matchSearch = s.name.toLowerCase().includes(query) || s.type.toLowerCase().includes(query);
+        const matchFilter = currentFilter === 'All' || s.type.includes(currentFilter);
+        return matchSearch && matchFilter;
+    });
+
+    // Update counts
+    document.getElementById('totalCount').textContent = filtered.length;
+    document.getElementById('availCount').textContent = filtered.filter(s => s.status === 'Available').length;
+    document.getElementById('inuseCount').textContent = filtered.filter(s => s.status === 'In Use').length;
+
+    filtered.forEach((s, idx) => {
+        // Card
+        const card = document.createElement('div');
+        card.className = 'station-card';
+        card.style.animationDelay = (idx * 0.07) + 's';
+        card.innerHTML = `
+            <div class="card-top">
+                <div class="card-icon ${statusClass(s.status)}">${typeEmoji(s.type)}</div>
+                <div class="card-name" style="flex:1;">${s.name}</div>
+                <span class="status-badge ${statusBadge(s.status)}">${s.status}</span>
+            </div>
+            <div class="card-meta">
+                <div class="card-type">
+                    <i data-lucide="zap"></i>
+                    ${s.type}
+                </div>
+                <div class="card-rating">
+                    <i data-lucide="star"></i>
+                    ${s.rating}
+                </div>
+                <div style="margin-left:auto;font-size:0.75rem;font-weight:700;color:var(--green-dark);">${s.power}</div>
+            </div>
+            <div class="card-pills">
+                ${s.connectors.map(c => `<span class="pill">${c}</span>`).join('')}
+                <span class="pill ${typePillClass(s.type)}">${s.price}</span>
+            </div>
+            <div class="card-bottom">
+                <button class="btn-navigate" onclick="triggerDirection(${s.lat},${s.lng})">
+                    <i data-lucide="navigation-2" style="width:14px;height:14px;"></i>
+                    Directions
+                </button>
+                <button class="btn-details" onclick="flyToStation(${s.lat},${s.lng})">
+                    <i data-lucide="map-pin" style="width:14px;height:14px;display:inline;"></i>
+                    View
+                </button>
+            </div>
+        `;
+        list.appendChild(card);
+
+        // Map Marker
+        const icon = L.divIcon({
+            className: '',
+            html: `
+                <div style="
+                    background:${s.status==='Available'?'#059669':s.status==='In Use'?'#d97706':'#dc2626'};
+                    width:36px;height:36px;border-radius:50% 50% 50% 4px;
+                    transform:rotate(-45deg);
+                    border:3px solid white;
+                    box-shadow:0 4px 20px rgba(0,0,0,0.25);
+                    display:flex;align-items:center;justify-content:center;
+                    cursor:pointer;
+                ">
+                    <span style="transform:rotate(45deg);font-size:14px;">⚡</span>
+                </div>
+            `,
+            iconSize: [36, 36],
+            iconAnchor: [18, 36],
+            popupAnchor: [0, -40]
+        });
+
+        const marker = L.marker([s.lat, s.lng], { icon }).addTo(map);
+
+        marker.bindPopup(`
+            <div class="popup-inner">
+                <div class="popup-header">
+                    <div>
+                        <div class="popup-name">${s.name}</div>
+                        <div class="popup-type">${s.type} · ${s.power}</div>
                     </div>
-                `;
-                list.appendChild(card);
+                    <div class="popup-rating">⭐ ${s.rating}</div>
+                </div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px;">
+                    ${s.connectors.map(c=>`<span style="font-size:0.65rem;font-weight:700;padding:4px 10px;border-radius:50px;background:#f0fdf4;color:#065f46;border:1px solid #a7f3d0;">${c}</span>`).join('')}
+                    <span style="font-size:0.65rem;font-weight:700;padding:4px 10px;border-radius:50px;background:#f0fdf4;color:#065f46;border:1px solid #a7f3d0;">${s.price}</span>
+                </div>
+                <button class="popup-btn" onclick="triggerDirection(${s.lat},${s.lng})">
+                    <span>⬆ Get Directions</span>
+                </button>
+            </div>
+        `);
 
-                const marker = L.marker([station.lat, station.lng]).addTo(map);
-marker.bindPopup(`
-    <div class="p-2" style="min-width:220px;">
-        <h3 style="font-weight:800; font-size:14px; margin-bottom:8px;">
-            ${station.name}
-        </h3>
+        markers.push(marker);
+    });
 
-        <p style="font-size:11px; color:#059669; font-weight:700; margin-bottom:12px;">
-            ${station.type}
-        </p>
+    lucide.createIcons();
+}
 
-        <div style="display:flex; align-items:center; gap:6px; margin-bottom:14px;">
-            <span style="color:#f59e0b;">★</span>
-            <span style="font-weight:700; font-size:12px;">
-                ${station.rating}
-            </span>
-        </div>
+function flyToStation(lat, lng) {
+    map.flyTo([lat, lng], 15, { duration: 1.2 });
+}
 
-        <button
-            onclick="showDirection(${station.lat}, ${station.lng})"
-            style="
-                width:100%;
-                background:#059669;
-                color:white;
-                border:none;
-                padding:10px;
-                border-radius:12px;
-                font-size:12px;
-                font-weight:700;
-                cursor:pointer;
-            "
-        >
-            Directions
-        </button>
-    </div>
-`);
-                markers.push(marker);
-            });
-            lucide.createIcons();
-        }
+function filterStations(type) {
+    currentFilter = type;
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.trim().toLowerCase().includes(type.toLowerCase()) || (type === 'All' && btn.textContent.trim() === 'All'));
+    });
+    renderStations();
+}
 
-        function filterStations(type) {
-            currentFilter = type;
-            const btns = document.querySelectorAll('.category-btn');
-            btns.forEach(btn => {
-                const isActive = btn.innerText.includes(type) || (type === 'All' && btn.innerText === 'ALL');
-                btn.className = isActive ? 'category-btn active px-6 py-2 rounded-full text-[10px] font-black whitespace-nowrap transition-all border bg-emerald-600 border-emerald-600 text-white' : 'category-btn px-6 py-2 rounded-full text-[10px] font-black whitespace-nowrap transition-all border bg-white border-gray-100 text-gray-600';
-            });
-            renderStations();
-        }
-
-        // Mobile Menu Logic
-
-
-        document.getElementById('stationSearch').oninput = renderStations;
-        document.getElementById('locateBtn').addEventListener('click', () => {
-
+function triggerDirection(lat, lng) {
     if (!currentLocation) {
-        alert("Current location not found");
+        alert('Enable location access to get directions.');
         return;
     }
-
-    map.flyTo(currentLocation, 15);
-});
-        function showDirection(lat, lng) {
-
-    if (!currentLocation) {
-        alert("Current location not found");
-        return;
-    }
-
-    // remove previous route
-    if (routingControl) {
-        map.removeControl(routingControl);
-    }
-
+    if (routingControl) map.removeControl(routingControl);
     routingControl = L.Routing.control({
         show: false,
-
-        waypoints: [
-            L.latLng(currentLocation[0], currentLocation[1]),
-            L.latLng(lat, lng)
-        ],
-
+        waypoints: [L.latLng(...currentLocation), L.latLng(lat, lng)],
         routeWhileDragging: false,
-
         draggableWaypoints: false,
-
         addWaypoints: false,
-
-        createMarker: function () {
-            return null;
-        },
-
-        lineOptions: {
-            styles: [{
-                color: '#059669',
-                opacity: 0.9,
-                weight: 6
-            }]
-        }
-
+        createMarker: () => null,
+        lineOptions: { styles: [{ color: '#059669', opacity: 0.9, weight: 5 }] }
     }).addTo(map);
+    map.closePopup();
 }
-        window.onload = initMap;
 
+function startGeolocation() {
+    if (!navigator.geolocation) return;
+    navigator.geolocation.watchPosition(pos => {
+        currentLocation = [pos.coords.latitude, pos.coords.longitude];
+        if (!liveMarker) {
+            liveMarker = L.marker(currentLocation, {
+                icon: L.divIcon({
+                    className: '',
+                    html: `<div class="live-marker"></div>`,
+                    iconSize: [20, 20], iconAnchor: [10, 10]
+                })
+            }).addTo(map);
+            map.flyTo(currentLocation, 14, { duration: 1.5 });
+        } else {
+            liveMarker.setLatLng(currentLocation);
+        }
+    }, () => {}, { enableHighAccuracy: true, maximumAge: 0, timeout: 8000 });
+}
 
+document.getElementById('locateBtn').addEventListener('click', () => {
+    if (!currentLocation) { alert('Location not available.'); return; }
+    map.flyTo(currentLocation, 15, { duration: 1 });
+});
 
-const menuBtn = document.getElementById("menu-btn");
-const mobileMenu = document.getElementById("mobile-menu");
+// Search inputs
+document.getElementById('stationSearch')?.addEventListener('input', renderStations);
+document.getElementById('stationSearchMobile')?.addEventListener('input', () => {
+    document.getElementById('stationSearch').value = document.getElementById('stationSearchMobile').value;
+    renderStations();
+});
 
-menuBtn.addEventListener("click", () => {
+// Mobile menu
+document.getElementById('menu-btn').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
+});
 
-    mobileMenu.classList.toggle("hidden");
-
-    // icon animation optional
-    menuBtn.classList.toggle("active");
-});        
-
-
-
-
-// Prevent map zoom while scrolling sidebar
+// Sidebar drag-to-expand on mobile
+const handle = document.getElementById('sidebarHandle');
 const sidebar = document.getElementById('sidebar');
+let touchStartY = 0;
 
-sidebar.addEventListener('mouseenter', () => {
+handle.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, { passive: true });
+handle.addEventListener('touchend', e => {
+    const dy = touchStartY - e.changedTouches[0].clientY;
+    if (dy > 40) sidebar.classList.add('expanded');
+    else if (dy < -40) sidebar.classList.remove('expanded');
+}, { passive: true });
 
-    map.scrollWheelZoom.disable();
+// Prevent map scroll on sidebar hover (desktop)
+sidebar.addEventListener('mouseenter', () => map?.scrollWheelZoom.disable());
+sidebar.addEventListener('mouseleave', () => map?.scrollWheelZoom.enable());
 
-});
-
-sidebar.addEventListener('mouseleave', () => {
-
-    map.scrollWheelZoom.enable();
-
-});
-    </script>
+window.onload = initMap;
+window.showDirection = triggerDirection;
+</script>
 </body>
 </html>
