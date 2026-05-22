@@ -29,187 +29,42 @@
             height: 100dvh;
         }
 
-        /* ===== NAVBAR ===== */
-        nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 9999;
-            background: rgba(255,255,255,0.92);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(16,185,129,0.12);
-            height: 72px;
-        }
+        /* ===== NAVBAR — exact from original ===== */
+        .mega-menu { transition: all 0.3s ease; }
 
-        .nav-inner {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 24px;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 24px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            flex-shrink: 0;
-        }
-
-        .brand img { height: 38px; width: auto; object-fit: contain; }
-
-        .brand-text {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.4rem;
+        .brand-logo-text {
+            font-size: 1.55rem;
             font-weight: 500;
-            color: #111827;
             letter-spacing: -0.5px;
+            color: #111827;
+            font-family: "Poppins","Nunito","Quicksand",sans-serif;
             line-height: 1;
-        }
-
-        .brand-text span { color: var(--green); }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-link {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: #4b5563;
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 10px;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-
-        .nav-link:hover { color: #111827; background: #f9fafb; }
-        .nav-link.active { color: var(--green-dark); font-weight: 700; }
-
-        /* Dropdown */
-        .drop-wrap { position: relative; }
-        .drop-trigger {
-            display: flex; align-items: center; gap: 4px;
-            font-size: 0.875rem; font-weight: 500; color: #4b5563;
-            background: none; border: none; cursor: pointer;
-            padding: 8px 12px; border-radius: 10px;
-            font-family: 'DM Sans', sans-serif;
-            transition: all 0.2s;
             text-decoration: none;
         }
-        .drop-trigger:hover { color: #111827; background: #f9fafb; }
+        .brand-logo-text span { color: #10b981; }
 
-        .mega-drop {
-            position: absolute; top: calc(100% + 8px); left: 50%;
-            transform: translateX(-50%);
-            width: 700px;
-            background: white;
-            border-radius: 24px;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.12), 0 0 0 1px rgba(16,185,129,0.08);
-            padding: 28px;
-            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
-            opacity: 0; visibility: hidden;
-            transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
-            pointer-events: none;
-            transform: translateX(-50%) translateY(8px);
-        }
-        .drop-wrap:hover .mega-drop {
-            opacity: 1; visibility: visible; pointer-events: all;
-            transform: translateX(-50%) translateY(0);
+        @media(max-width:768px){
+            .brand-logo-text { font-size: 1.3rem; }
         }
 
-        .mega-col h4 {
-            font-size: 0.75rem; font-weight: 700; color: #9ca3af;
-            text-transform: uppercase; letter-spacing: 0.08em;
-            margin-bottom: 12px; padding: 0 8px;
-        }
-
-        .drop-item {
-            display: flex; align-items: center; gap: 12px;
-            padding: 12px; border-radius: 16px; text-decoration: none;
-            transition: background 0.2s;
-        }
+        .dropdown-wrap { position: relative; }
+        .dropdown-trigger { display: flex; align-items: center; gap: 4px; font-size: 0.875rem; font-weight: 500; color: #4b5563; cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; transition: color 0.2s; white-space: nowrap; }
+        .dropdown-trigger:hover { color: #111827; }
+        .dropdown-trigger.solar-active { color: #059669; }
+        .mega-drop { position: absolute; top: calc(100% + 2px); left: 50%; transform: translateX(-50%); width: 680px; background: #fff; border-radius: 24px; box-shadow: 0 25px 60px rgba(0,0,0,0.12); border: 1px solid #f0fdf4; padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; opacity: 0; visibility: hidden; transition: all 0.25s ease; pointer-events: none; }
+        .dropdown-wrap:hover .mega-drop { opacity: 1; visibility: visible; pointer-events: all; transform: translateX(-50%) translateY(0); }
+        .drop-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; border-radius: 16px; text-decoration: none; transition: background 0.2s; }
         .drop-item:hover { background: #f0fdf4; }
-
-        .drop-icon {
-            width: 40px; height: 40px; min-width: 40px;
-            background: linear-gradient(135deg, var(--green), #34d399);
-            border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .drop-icon svg, .drop-icon i { color: white; width: 18px; height: 18px; }
-
-        .drop-text p { font-weight: 700; font-size: 0.85rem; color: #111827; }
-        .drop-text span { font-size: 0.72rem; color: #6b7280; }
-
-        .solar-drop {
-            width: 440px;
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .nav-cta {
-            background: var(--green);
-            color: white !important;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-decoration: none;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-        .nav-cta:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(16,185,129,0.35); }
-
-        /* Mobile Menu */
-        #menu-btn {
-            display: none;
-            width: 44px; height: 44px;
-            border-radius: 12px;
-            border: 1px solid #e5e7eb;
-            background: white;
-            cursor: pointer;
-            align-items: center; justify-content: center;
-            transition: all 0.2s;
-        }
-        #menu-btn:hover { background: #f0fdf4; border-color: var(--green); }
-
-        #mobile-menu {
-            display: none;
-            position: fixed;
-            top: 72px; left: 0; right: 0;
-            background: white;
-            border-top: 1px solid #f3f4f6;
-            padding: 20px 24px;
-            z-index: 9998;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        #mobile-menu.open { display: block; }
-
-        #mobile-menu a {
-            display: block;
-            padding: 14px 0;
-            border-bottom: 1px solid #f3f4f6;
-            font-weight: 600;
-            color: #374151;
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.2s;
-        }
-        #mobile-menu a:last-child { border-bottom: none; }
-        #mobile-menu a:hover, #mobile-menu a.active { color: var(--green); }
+        .drop-icon { width: 44px; height: 44px; min-width: 44px; background: linear-gradient(135deg, #10b981, #34d399); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+        .drop-icon svg { width: 22px; height: 22px; stroke: #fff; stroke-width: 2; fill: none; }
+        .drop-text p { font-weight: 700; font-size: 0.9rem; color: #111827; margin-bottom: 2px; }
+        .drop-text span { font-size: 0.78rem; color: #6b7280; }
 
         /* ===== LAYOUT ===== */
         .layout {
             display: flex;
             height: 100dvh;
-            padding-top: 72px;
+            padding-top: 80px;
         }
 
         /* ===== SIDEBAR ===== */
@@ -730,7 +585,7 @@
 
             #mapContainer {
                 flex: 1;
-                height: calc(100dvh - 72px - 220px);
+                height: calc(100dvh - 80px - 220px);
             }
 
             .stats-widget { display: none; }
@@ -779,108 +634,200 @@
 </head>
 <body>
 
-<!-- ===== NAVBAR ===== -->
-<nav>
-    <div class="nav-inner">
-        <a href="index.html" class="brand">
-            <img src="images/logo.png" alt="Chargebees" onerror="this.style.display='none'">
-            <span class="brand-text">Charge<span>Bees</span></span>
-        </a>
+<!-- ===== NAVBAR — exact from original index.html ===== -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
 
-        <div class="nav-links">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="stationfinder.html" class="nav-link active">Station Finder</a>
-
-            <!-- EV Products -->
-            <div class="drop-wrap">
-                <a href="products.html" class="drop-trigger">
-                    EV Products
-                    <i data-lucide="chevron-down" style="width:15px;height:15px;"></i>
+            <div class="flex-shrink-0 flex items-center gap-1">
+                <a href="index.html" class="flex items-center gap-2">
+                    <img src="images/logo.png" alt="Logo" class="h-10 w-auto object-contain">
+                    <span class="brand-logo-text">Charge <span>Bees</span></span>
                 </a>
-                <div class="mega-drop">
-                    <div class="mega-col">
-                        <h4>Hardware</h4>
-                        <a href="products.html#hardware" class="drop-item">
-                            <div class="drop-icon"><i data-lucide="battery-charging"></i></div>
-                            <div class="drop-text"><p>All Chargers</p><span>AC & DC Solutions</span></div>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-5">
+                <a href="index.html" class="text-sm font-medium text-gray-600 hover:text-emerald-600 transition-colors">Home</a>
+                <a href="stationfinder.html" class="text-sm font-medium text-emerald-600 transition-colors">Station Finder</a>
+
+                <!-- EV Products Dropdown -->
+                <div class="relative group">
+                    <button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
+                        <a href="products.html" class="flex items-center gap-1">
+                            EV Products
+                            <i data-lucide="chevron-down" class="w-4 h-4"></i>
                         </a>
+                    </button>
+
+                    <!-- Mega Menu -->
+                    <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-white rounded-3xl shadow-2xl border border-gray-100 p-8 grid grid-cols-3 gap-8 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                        <!-- Hardware -->
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                <i data-lucide="zap" class="w-5 h-5 text-emerald-600"></i> Hardware
+                            </h3>
+                            <a href="products.html#hardware" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                    <i data-lucide="battery-charging" class="w-6 h-6 text-emerald-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-900">All chargers</p>
+                                    <p class="text-xs text-gray-500">AC & DC Solutions</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Software -->
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                <i data-lucide="layout" class="w-5 h-5 text-emerald-600"></i> Software
+                            </h3>
+                            <div class="space-y-2">
+                                <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                        <i data-lucide="cloud" class="w-6 h-6 text-emerald-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-2">
+                                            <p class="font-bold text-gray-900">ChargeCloud</p>
+                                            <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
+                                        </div>
+                                        <p class="text-xs text-gray-500">CMS Platform</p>
+                                    </div>
+                                </a>
+                                <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                        <i data-lucide="smartphone" class="w-6 h-6 text-emerald-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-900">Chargebees App</p>
+                                        <p class="text-xs text-gray-500">User Experience</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Services -->
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                <i data-lucide="settings" class="w-5 h-5 text-emerald-600"></i> Services
+                            </h3>
+                            <div class="space-y-2">
+                                <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                        <i data-lucide="activity" class="w-6 h-6 text-emerald-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-900">Energy As A Service</p>
+                                        <p class="text-xs text-gray-500">Renewable Energy</p>
+                                    </div>
+                                </a>
+                                <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                        <i data-lucide="battery-full" class="w-6 h-6 text-emerald-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-2">
+                                            <p class="font-bold text-gray-900">Battery As A Service</p>
+                                            <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
+                                        </div>
+                                        <p class="text-xs text-gray-500">Swapping Solutions</p>
+                                    </div>
+                                </a>
+                                <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                        <i data-lucide="credit-card" class="w-6 h-6 text-emerald-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-900">RFID Card</p>
+                                        <p class="text-xs text-gray-500">Seamless Payments</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mega-col">
-                        <h4>Software</h4>
-                        <a href="products.html#software" class="drop-item">
-                            <div class="drop-icon"><i data-lucide="cloud"></i></div>
-                            <div class="drop-text"><p>ChargeCloud</p><span>CMS Platform</span></div>
+                </div>
+
+                <!-- Solar Products Dropdown -->
+                <div class="dropdown-wrap" style="position:relative;">
+                    <button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
+                        <a href="solar_products.html" class="flex items-center gap-1">Solar Products
+                            <i data-lucide="chevron-down" class="w-4 h-4"></i>
                         </a>
-                        <a href="products.html#software" class="drop-item">
-                            <div class="drop-icon"><i data-lucide="smartphone"></i></div>
-                            <div class="drop-text"><p>Chargebees App</p><span>User Experience</span></div>
+                    </button>
+                    <div class="mega-drop" style="z-index:100;">
+                        <a href="solar_products.html" class="drop-item">
+                            <div class="drop-icon">
+                                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                            </div>
+                            <div class="drop-text"><p>Our Solar Solutions</p><span>For all your energy needs</span></div>
                         </a>
-                    </div>
-                    <div class="mega-col">
-                        <h4>Services</h4>
-                        <a href="products.html#services" class="drop-item">
-                            <div class="drop-icon"><i data-lucide="activity"></i></div>
-                            <div class="drop-text"><p>Energy As A Service</p><span>Renewable Energy</span></div>
+                        <a href="residential.html" class="drop-item">
+                            <div class="drop-icon">
+                                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                            </div>
+                            <div class="drop-text"><p>Residential Solar Rooftops</p><span>For homes & apartments</span></div>
                         </a>
-                        <a href="products.html#services" class="drop-item">
-                            <div class="drop-icon"><i data-lucide="credit-card"></i></div>
-                            <div class="drop-text"><p>RFID Card</p><span>Seamless Payments</span></div>
+                        <a href="commercial.html" class="drop-item">
+                            <div class="drop-icon">
+                                <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                            </div>
+                            <div class="drop-text"><p>Commercial Solar Rooftops</p><span>For offices & retail</span></div>
+                        </a>
+                        <a href="industrial.html" class="drop-item">
+                            <div class="drop-icon">
+                                <svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg>
+                            </div>
+                            <div class="drop-text"><p>Industrial Solar Rooftops</p><span>For factories & warehouses</span></div>
+                        </a>
+                        <a href="ground.html" class="drop-item">
+                            <div class="drop-icon">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            </div>
+                            <div class="drop-text"><p>Ground Mounted Solar System</p><span>Large scale solar farms</span></div>
                         </a>
                     </div>
                 </div>
+
+                <a href="partners.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Partners</a>
+                <a href="media-center.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Media Center</a>
+                <a href="careers.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Careers</a>
             </div>
 
-            <!-- Solar Products -->
-            <div class="drop-wrap">
-                <a href="solar_products.html" class="drop-trigger">
-                    Solar Products
-                    <i data-lucide="chevron-down" style="width:15px;height:15px;"></i>
+            <div class="flex items-center gap-4">
+                <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://play.google.com/store/games%3Fhl%3Den_IN&ved=2ahUKEwjP48zKm5WUAxVrTGwGHTWhBIAQFnoECB8QAQ&sqi=2&usg=AOvVaw1xFWwUV1XhFXXR_Z_npZ2_" class="hidden md:block bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700">
+                    Download App
                 </a>
-                <div class="mega-drop solar-drop">
-                    <a href="solar_products.html" class="drop-item">
-                        <div class="drop-icon"><i data-lucide="sun"></i></div>
-                        <div class="drop-text"><p>Our Solar Solutions</p><span>For all energy needs</span></div>
-                    </a>
-                    <a href="residential.html" class="drop-item">
-                        <div class="drop-icon"><i data-lucide="home"></i></div>
-                        <div class="drop-text"><p>Residential Solar</p><span>Homes & Apartments</span></div>
-                    </a>
-                    <a href="commercial.html" class="drop-item">
-                        <div class="drop-icon"><i data-lucide="building-2"></i></div>
-                        <div class="drop-text"><p>Commercial Solar</p><span>Offices & Retail</span></div>
-                    </a>
-                    <a href="industrial.html" class="drop-item">
-                        <div class="drop-icon"><i data-lucide="factory"></i></div>
-                        <div class="drop-text"><p>Industrial Solar</p><span>Factories & Warehouses</span></div>
-                    </a>
-                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="contact.html" class="hidden md:block bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700">
+                    Contact Us
+                </a>
             </div>
 
-            <a href="partners.html" class="nav-link">Partners</a>
-            <a href="media-center.html" class="nav-link">Media Center</a>
-            <a href="careers.html" class="nav-link">Careers</a>
-        </div>
-
-        <div class="nav-cta-wrap" style="display:flex;gap:10px;align-items:center;">
-            <a href="https://play.google.com/store" class="nav-cta" style="background:#f0fdf4;color:var(--green-dark)!important;border:1.5px solid #a7f3d0;">Download App</a>
-            <a href="contact.html" class="nav-cta">Contact Us</a>
-            <button id="menu-btn">
-                <i data-lucide="menu" style="width:22px;height:22px;color:#374151;"></i>
+            <!-- Mobile Menu Button -->
+            <button
+                id="menu-btn"
+                class="md:hidden flex items-center justify-center w-11 h-11 rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm shadow-sm hover:bg-emerald-50 hover:border-emerald-200 transition-all duration-300"
+            >
+                <i data-lucide="menu" class="w-6 h-6 text-gray-900"></i>
             </button>
         </div>
     </div>
 </nav>
 
-<!-- Mobile Menu -->
-<div id="mobile-menu">
-    <a href="index.html">Home</a>
-    <a href="stationfinder.html" class="active">Station Finder</a>
-    <a href="products.html">EV Products</a>
-    <a href="solar_products.html">Solar Products</a>
-    <a href="partners.html">Partners</a>
-    <a href="media-center.html">Media Center</a>
-    <a href="careers.html">Careers</a>
-    <a href="contact.html">Contact Us</a>
+<!-- Mobile Menu — exact from original -->
+<div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-white border-t border-gray-100 shadow-xl z-40">
+    <div class="p-6 space-y-5">
+        <a href="index.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Home</a>
+        <a href="stationfinder.html" class="block text-base font-semibold text-emerald-600">Station Finder</a>
+        <a href="products.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">EV Products</a>
+        <a href="solar_products.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Solar Products</a>
+        <a href="partners.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Partners</a>
+        <a href="media-center.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Media Center</a>
+        <a href="careers.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Careers</a>
+        <a href="contact.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Contact Us</a>
+    </div>
 </div>
 
 <!-- ===== MAIN LAYOUT ===== -->
@@ -1245,9 +1192,12 @@ document.getElementById('stationSearchMobile')?.addEventListener('input', () => 
     renderStations();
 });
 
-// Mobile menu
-document.getElementById('menu-btn').addEventListener('click', () => {
-    document.getElementById('mobile-menu').classList.toggle('open');
+// Mobile menu — exact from original
+const menuBtn = document.getElementById("menu-btn");
+const mobileMenu = document.getElementById("mobile-menu");
+menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+    menuBtn.classList.toggle("active");
 });
 
 // Sidebar drag-to-expand on mobile
