@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ground Mounted Solar System – ChargeBees</title>
+<meta name="description" content="ChargeBees utility-scale ground mounted solar systems. 1MW+ capacity with full EPC and O&M support across India.">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --emerald:#10b981;--emerald-dark:#059669;--emerald-light:#34d399;
+  --earth:#15803d;--deep-green:#052e16;--mid-green:#166534;
+  --lime:#84cc16;--teal:#0d9488;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Space Grotesk',sans-serif;background:#020f07;overflow-x:hidden;padding-top:80px;}
+
+/* BG */
+.bg-texture{position:fixed;inset:0;opacity:.08;pointer-events:none;z-index:0;background-image:url('https://www.transparenttextures.com/patterns/noise.png');}
+.bg-grid{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(to right,rgba(16,185,129,.05) 1px,transparent 1px),linear-gradient(to bottom,rgba(16,185,129,.05) 1px,transparent 1px);background-size:80px 80px;}
+
+/* BRAND */
+.brand-logo-text{font-size:1.55rem;font-weight:500;letter-spacing:-.5px;color:#111827;font-family:"Poppins",sans-serif;line-height:1;}
+.brand-logo-text span{color:#10b981;}
+
+/* NAV */
+nav{position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:99999!important;background:#ffffff!important;border-bottom:1px solid #f3f4f6;-webkit-transform:translateZ(0);}
+.nav-inner{max-width:80rem;margin:auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center;height:80px;}
+.nav-links{display:flex;align-items:center;gap:1.25rem;}
+.nav-links a{font-size:.875rem;font-weight:500;color:#4b5563;transition:color .2s;text-decoration:none;}
+.nav-links a:hover{color:#111827;}
+.nav-btn{background:#059669;color:#fff;padding:.625rem 1.5rem;border-radius:9999px;font-size:.875rem;font-weight:600;text-decoration:none;transition:background .2s;white-space:nowrap;}
+.nav-btn:hover{background:#047857;}
+.dropdown-wrap{position:relative;}
+.dropdown-trigger{display:flex;align-items:center;gap:4px;font-size:.875rem;font-weight:500;color:#4b5563;cursor:pointer;background:none;border:none;padding:0;font-family:inherit;transition:color .2s;white-space:nowrap;}
+.dropdown-trigger:hover{color:#111827;}
+.dropdown-trigger.solar-active{color:#059669;}
+.mega-drop{position:absolute;top:calc(100% + 2px);left:50%;transform:translateX(-50%);width:680px;background:#fff;border-radius:24px;box-shadow:0 25px 60px rgba(0,0,0,.12);border:1px solid #f0fdf4;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:12px;opacity:0;visibility:hidden;transition:all .25s ease;pointer-events:none;z-index:100;}
+.dropdown-wrap:hover .mega-drop{opacity:1;visibility:visible;pointer-events:all;transform:translateX(-50%) translateY(0);}
+.drop-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border-radius:16px;text-decoration:none;transition:background .2s;}
+.drop-item:hover{background:#f0fdf4;}
+.drop-icon{width:44px;height:44px;min-width:44px;background:linear-gradient(135deg,#10b981,#34d399);border-radius:12px;display:flex;align-items:center;justify-content:center;}
+.drop-icon svg{width:22px;height:22px;stroke:#fff;stroke-width:2;fill:none;}
+.drop-text p{font-weight:700;font-size:.9rem;color:#111827;margin-bottom:2px;}
+.drop-text span{font-size:.78rem;color:#6b7280;}
+.mega-menu-ev{position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%);width:800px;background:#fff;border-radius:24px;box-shadow:0 25px 60px rgba(0,0,0,.12);border:1px solid #f3f4f6;padding:32px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;opacity:0;visibility:hidden;transition:all .25s ease;z-index:100;}
+.dropdown-wrap:hover .mega-menu-ev{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+.ev-col h3{font-size:1rem;font-weight:700;color:#111827;margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+.ev-item{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:16px;text-decoration:none;transition:background .2s;margin-bottom:8px;}
+.ev-item:hover{background:#f0fdf4;}
+.ev-item-icon{width:44px;height:44px;min-width:44px;background:#f3f4f6;border-radius:12px;display:flex;align-items:center;justify-content:center;}
+.ev-item:hover .ev-item-icon{background:#fff;}
+.ev-item-icon svg{width:22px;height:22px;stroke:#10b981;stroke-width:2;fill:none;}
+.ev-item p{font-weight:700;font-size:.875rem;color:#111827;}
+.ev-item span{font-size:.75rem;color:#6b7280;}
+.badge{font-size:10px;background:#f3f4f6;color:#6b7280;padding:2px 8px;border-radius:999px;font-weight:700;text-transform:uppercase;}
+#mobile-menu{display:none;position:fixed;top:80px;left:0;width:100%;background:#fff;border-top:1px solid #f3f4f6;box-shadow:0 20px 40px rgba(0,0,0,.1);z-index:40;max-height:calc(100vh - 80px);overflow-y:auto;}
+#mobile-menu.open{display:block;}
+.mob-link{display:block;padding:14px 24px;font-size:1rem;font-weight:600;color:#374151;text-decoration:none;border-bottom:1px solid #f9fafb;}
+.mob-link:hover{color:#059669;}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,rgba(2,15,7,.97) 0%,rgba(5,46,22,.88) 50%,rgba(13,148,136,.12) 100%);}
+/* Animated sun rays */
+.sun-rays{position:absolute;top:-50%;right:-10%;width:900px;height:900px;pointer-events:none;z-index:1;animation:raysRotate 30s linear infinite;opacity:.08;}
+.sun-ray{position:absolute;top:50%;left:50%;width:450px;height:2px;background:linear-gradient(to right,transparent,#10b981,transparent);transform-origin:left center;}
+@keyframes raysRotate{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+/* Horizon glow */
+.horizon{position:absolute;bottom:0;left:0;right:0;height:300px;background:linear-gradient(to top,rgba(16,185,129,.08),transparent);pointer-events:none;z-index:1;}
+
+.hero-left{position:relative;z-index:10;padding:100px 60px 100px 80px;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);padding:8px 20px;border-radius:999px;color:#34d399;font-size:.78rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:32px;}
+.hero-eyebrow svg{width:16px;height:16px;stroke:#10b981;fill:none;}
+.hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,6vw,6.5rem);line-height:.95;color:#fff;letter-spacing:2px;margin-bottom:24px;}
+.hero-h1 .accent{color:#10b981;}
+.hero-p{font-size:1.05rem;line-height:1.8;color:rgba(255,255,255,.7);max-width:480px;margin-bottom:40px;}
+.scale-strip{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:40px;}
+.scale-chip{background:rgba(255,255,255,.05);border:1px solid rgba(16,185,129,.2);border-radius:12px;padding:12px 20px;}
+.sc-n{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#10b981;line-height:1;}
+.sc-l{font-size:.7rem;color:rgba(255,255,255,.5);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-top:2px;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-green{background:linear-gradient(135deg,#10b981,#059669);color:#fff;padding:14px 34px;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .25s;border:none;cursor:pointer;box-shadow:0 8px 25px rgba(16,185,129,.35);}
+.btn-green:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(16,185,129,.5);}
+.btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:#fff;padding:14px 34px;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .25s;cursor:pointer;}
+.btn-ghost:hover{background:rgba(255,255,255,.12);}
+
+/* FORM */
+.hero-right{position:relative;z-index:10;padding:60px 80px 60px 40px;}
+.form-card{background:rgba(255,255,255,.97);border-radius:32px;padding:44px 38px;box-shadow:0 50px 120px rgba(0,0,0,.5),0 0 0 1px rgba(16,185,129,.15),inset 0 1px 0 rgba(255,255,255,.9);animation:formFloat 6s ease-in-out infinite;}
+@keyframes formFloat{0%,100%{transform:perspective(1000px) rotateY(-3deg) translateY(0);}50%{transform:perspective(1000px) rotateY(-3deg) translateY(-14px);}}
+.form-card:hover{animation:none;transform:perspective(1000px) rotateY(0) translateY(-8px);}
+.fc-header{display:flex;align-items:center;gap:14px;margin-bottom:8px;}
+.fc-icon{width:52px;height:52px;background:linear-gradient(135deg,#10b981,#059669);border-radius:16px;display:flex;align-items:center;justify-content:center;}
+.fc-icon svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:2;}
+.form-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#111827;letter-spacing:1px;}
+.form-sub{font-size:.85rem;color:#6b7280;margin-bottom:26px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.fg{margin-bottom:14px;}
+.fg label{display:block;font-size:.72rem;font-weight:700;color:#374151;margin-bottom:5px;text-transform:uppercase;letter-spacing:.6px;}
+.fg input,.fg select,.fg textarea{width:100%;padding:11px 15px;border:1.5px solid #e5e7eb;border-radius:12px;font-size:.9rem;font-family:inherit;color:#111827;background:#fafafa;transition:all .2s;outline:none;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:#10b981;background:#fff;box-shadow:0 0 0 3px rgba(16,185,129,.12);}
+.fg textarea{resize:none;height:80px;}
+.form-btn{width:100%;padding:15px;background:linear-gradient(135deg,#10b981,#059669);color:#fff;border:none;border-radius:14px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .25s;box-shadow:0 8px 20px rgba(16,185,129,.3);}
+.form-btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(16,185,129,.5);}
+
+/* STATS */
+.stats-bar{background:linear-gradient(135deg,#052e16,#064e3b);padding:48px 0;border-top:2px solid rgba(16,185,129,.2);}
+.stats-inner{max-width:80rem;margin:auto;padding:0 32px;display:grid;grid-template-columns:repeat(5,1fr);gap:20px;}
+.st{text-align:center;padding:16px;border-right:1px solid rgba(16,185,129,.15);}
+.st:last-child{border-right:none;}
+.st-n{font-family:'Bebas Neue',sans-serif;font-size:3rem;background:linear-gradient(135deg,#10b981,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+.st-l{font-size:.8rem;color:rgba(255,255,255,.6);font-weight:600;margin-top:4px;}
+
+/* SECTION */
+.section-tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:3px;color:#10b981;margin-bottom:14px;text-transform:uppercase;}
+.section-h{font-size:clamp(2rem,3.5vw,3.2rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:16px;letter-spacing:-.5px;}
+.section-h .hl{background:linear-gradient(135deg,#10b981,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.section-sub{font-size:1rem;color:rgba(255,255,255,.6);line-height:1.75;max-width:560px;}
+
+/* ADVANTAGES GRID */
+.adv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.adv-card{background:rgba(16,185,129,.04);border:1px solid rgba(16,185,129,.12);border-radius:28px;padding:36px 30px;transition:all .4s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden;}
+.adv-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 100%,rgba(16,185,129,.06),transparent 60%);opacity:0;transition:opacity .4s;}
+.adv-card:hover{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.3);transform:translateY(-12px) scale(1.02);box-shadow:0 30px 60px rgba(16,185,129,.15);}
+.adv-card:hover::after{opacity:1;}
+.adv-card:hover .adv-title{color:#10b981;}
+.adv-num{font-family:'Bebas Neue',sans-serif;font-size:4rem;color:rgba(16,185,129,.08);line-height:1;position:absolute;top:16px;right:20px;}
+.adv-icon{width:56px;height:56px;background:rgba(16,185,129,.12);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:background .3s;}
+.adv-card:hover .adv-icon{background:rgba(16,185,129,.2);}
+.adv-icon svg{width:28px;height:28px;stroke:#10b981;fill:none;stroke-width:2;}
+.adv-title{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:10px;transition:color .3s;}
+.adv-desc{font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.7;}
+
+/* SHOWCASE CARDS */
+.showcase-split{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:center;}
+.showcase-img-stack{position:relative;height:520px;}
+.s-img-main{position:absolute;top:0;left:0;right:60px;bottom:60px;border-radius:28px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.4);transform:perspective(900px) rotateY(-4deg);transition:transform .5s;}
+.s-img-main:hover{transform:perspective(900px) rotateY(0);}
+.s-img-main img{width:100%;height:100%;object-fit:cover;display:block;}
+.s-img-small{position:absolute;bottom:0;right:0;width:200px;border-radius:20px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.4);border:3px solid rgba(16,185,129,.2);}
+.s-img-small img{width:100%;height:130px;object-fit:cover;display:block;}
+.feat-list{display:flex;flex-direction:column;gap:14px;margin-top:28px;}
+.feat{display:flex;gap:14px;align-items:flex-start;padding:16px;background:rgba(16,185,129,.04);border:1px solid rgba(16,185,129,.1);border-radius:16px;transition:all .3s;}
+.feat:hover{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.25);transform:translateX(6px);}
+.feat-icon{width:36px;height:36px;min-width:36px;background:rgba(16,185,129,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;}
+.feat-icon svg{width:18px;height:18px;stroke:#10b981;fill:none;stroke-width:2.5;}
+.feat-title{font-weight:700;color:#fff;margin-bottom:3px;font-size:.92rem;}
+.feat-desc{font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.55;}
+
+/* TRACKER TYPES */
+.tracker-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.tracker-card{background:rgba(255,255,255,.03);border:1px solid rgba(16,185,129,.1);border-radius:28px;overflow:hidden;transition:all .35s cubic-bezier(.22,1,.36,1);}
+.tracker-card:hover{transform:translateY(-10px);box-shadow:0 30px 60px rgba(16,185,129,.15);border-color:rgba(16,185,129,.35);}
+.tracker-top{padding:32px;background:linear-gradient(135deg,rgba(16,185,129,.06),rgba(16,185,129,.03));}
+.tracker-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.tracker-name{font-size:1.2rem;font-weight:800;color:#fff;margin-bottom:6px;}
+.tracker-sub{font-size:.82rem;color:rgba(255,255,255,.5);}
+.tracker-body{padding:0 32px 32px;}
+.tracker-feats{list-style:none;margin-top:20px;}
+.tracker-feats li{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.88rem;color:rgba(255,255,255,.65);}
+.tracker-feats li:last-child{border-bottom:none;}
+.tracker-feats li svg{width:16px;height:16px;stroke:#10b981;fill:none;stroke-width:2.5;flex-shrink:0;}
+.tracker-gain{background:rgba(16,185,129,.08);border-radius:12px;padding:14px;text-align:center;margin-top:16px;}
+.tracker-gain-val{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#10b981;line-height:1;}
+.tracker-gain-lbl{font-size:.72rem;color:rgba(255,255,255,.5);font-weight:600;margin-top:2px;text-transform:uppercase;letter-spacing:.5px;}
+
+/* PROCESS */
+.process-section{background:linear-gradient(135deg,#052e16,#064e3b);padding:100px 0;position:relative;overflow:hidden;}
+.process-section::before{content:'';position:absolute;inset:0;background:url('https://www.transparenttextures.com/patterns/noise.png');opacity:.05;}
+.process-section::after{content:'';position:absolute;top:-150px;right:-150px;width:600px;height:600px;background:radial-gradient(circle,rgba(16,185,129,.08),transparent 70%);border-radius:50%;}
+.proc-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;z-index:2;}
+.proc-line{position:absolute;top:44px;left:10%;right:10%;height:2px;background:linear-gradient(to right,rgba(16,185,129,.2),rgba(52,211,153,.4),rgba(16,185,129,.2));}
+.proc-step{text-align:center;padding:0 16px;position:relative;z-index:2;}
+.proc-num{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;box-shadow:0 12px 30px rgba(16,185,129,.4);transition:transform .3s;}
+.proc-step:hover .proc-num{transform:scale(1.12) translateY(-6px);box-shadow:0 20px 50px rgba(16,185,129,.5);}
+.proc-title{font-size:.92rem;font-weight:800;color:#fff;margin-bottom:8px;}
+.proc-desc{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.65;}
+
+/* WHY */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.why-card{background:rgba(16,185,129,.04);border:1px solid rgba(16,185,129,.12);border-radius:24px;padding:36px 30px;transition:all .3s;transform-style:preserve-3d;}
+.why-card:hover{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.3);transform:translateY(-10px) rotateX(-3deg);box-shadow:0 25px 50px rgba(16,185,129,.15);}
+.why-card:hover .why-title{color:#10b981;}
+.wi{width:52px;height:52px;background:rgba(16,185,129,.12);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:background .3s;}
+.why-card:hover .wi{background:rgba(16,185,129,.2);}
+.wi svg{width:26px;height:26px;stroke:#10b981;fill:none;stroke-width:2;}
+.why-title{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:10px;transition:color .3s;}
+.why-desc{font-size:.88rem;color:rgba(255,255,255,.5);line-height:1.65;}
+
+/* CTA */
+.cta-band{background:#052e16;padding:80px 0;position:relative;overflow:hidden;border-top:1px solid rgba(16,185,129,.15);}
+.cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(16,185,129,.08),transparent 70%);}
+.cta-inner{max-width:60rem;margin:auto;text-align:center;padding:0 32px;position:relative;z-index:2;}
+.cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,5rem);color:#fff;letter-spacing:2px;margin-bottom:16px;line-height:.95;}
+.cta-title span{background:linear-gradient(135deg,#10b981,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.cta-sub{font-size:1.05rem;color:rgba(255,255,255,.65);margin-bottom:36px;}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.cta-btn-green{background:linear-gradient(135deg,#10b981,#059669);color:#fff;padding:14px 36px;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .25s;box-shadow:0 8px 25px rgba(16,185,129,.4);}
+.cta-btn-green:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(16,185,129,.6);}
+.cta-btn-outline{border:2px solid rgba(16,185,129,.4);color:#10b981;padding:14px 36px;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .25s;}
+.cta-btn-outline:hover{border-color:#10b981;background:rgba(16,185,129,.08);}
+
+/* FOOTER */
+footer{background:#f9fafb;padding-top:80px;padding-bottom:40px;border-top:1px solid #e5e7eb;}
+.footer-inner{max-width:80rem;margin:auto;padding:0 32px;}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:48px;margin-bottom:60px;}
+.footer-about p{font-size:.9rem;color:#6b7280;line-height:1.75;margin:20px 0;}
+.socials{display:flex;gap:12px;}
+.social-btn{width:44px;height:44px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.08);transition:transform .2s;}
+.social-btn:hover{transform:scale(1.1);}
+.social-btn img{width:22px;height:22px;}
+.footer-col h4{font-weight:700;color:#111827;margin-bottom:20px;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:12px;}
+.footer-col ul li a{color:#6b7280;text-decoration:none;font-size:.9rem;transition:color .2s;}
+.footer-col ul li a:hover{color:#10b981;}
+.footer-contact li{display:flex;flex-direction:column;gap:2px;margin-bottom:14px;font-size:.9rem;color:#6b7280;}
+.footer-contact li strong{color:#374151;font-weight:600;}
+.footer-bottom{border-top:1px solid #e5e7eb;padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:.85rem;color:#9ca3af;}
+.footer-bottom-links{display:flex;gap:24px;}
+.footer-bottom-links a{font-size:.85rem;color:#9ca3af;text-decoration:none;transition:color .2s;}
+.footer-bottom-links a:hover{color:#374151;}
+
+/* ANIMS */
+.fade-up{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+.fade-left{opacity:0;transform:translateX(-50px);transition:opacity .8s ease,transform .8s ease;}
+.fade-left.visible{opacity:1;transform:translateX(0);}
+.fade-right{opacity:0;transform:translateX(50px);transition:opacity .8s ease,transform .8s ease;}
+.fade-right.visible{opacity:1;transform:translateX(0);}
+
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;min-height:auto;}
+  .hero-left{padding:60px 32px 40px;}
+  .hero-right{padding:40px 32px 60px;}
+  .form-card{animation:none!important;transform:none!important;}
+  .adv-grid,.why-grid{grid-template-columns:repeat(2,1fr);}
+  .showcase-split{grid-template-columns:1fr;}
+  .showcase-img-stack{height:320px;}
+  .tracker-grid{grid-template-columns:1fr;}
+  .proc-steps{grid-template-columns:repeat(3,1fr);}
+  .proc-line{display:none;}
+  .stats-inner{grid-template-columns:repeat(3,1fr);}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px;}
+  .mega-drop,.mega-menu-ev{display:none!important;}
+  .nav-links{display:none;}
+  .scale-strip{gap:10px;}
+}
+@media(max-width:768px){
+  .adv-grid,.why-grid,.tracker-grid{grid-template-columns:1fr;}
+  .stats-inner{grid-template-columns:repeat(2,1fr);}
+  .proc-steps{grid-template-columns:repeat(2,1fr);}
+  .footer-grid{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .frow{grid-template-columns:1fr;}
+  .showcase-img-stack{height:240px;}
+  .nav-links{display:none!important;}
+  .nav-btn{display:none!important;}
+  #menu-btn{display:flex!important;}
+}
+</style>
+</head>
+<body>
+<div class="bg-texture"></div>
+<div class="bg-grid"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;">
+      <img src="images/logo.png" alt="ChargeBees Logo" style="height:40px;width:auto;object-fit:contain;">
+      <span class="brand-logo-text">Charge <span>Bees</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">About</a>
+      <a href="stationfinder.html">Station Finder</a>
+      <div class="dropdown-wrap">
+        <button class="dropdown-trigger"><a href="products.html" style="color:inherit;text-decoration:none;display:flex;align-items:center;gap:4px;">EV Products<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a></button>
+        <div class="mega-menu-ev">
+          <div class="ev-col"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Hardware</h3><a href="products.html#hardware" class="ev-item"><div class="ev-item-icon"><svg viewBox="0 0 24 24"><path d="M13 2l-10 12h9l-1 8 10-12h-9l1-8z"/></svg></div><div><p>All Chargers</p><span>AC & DC Solutions</span></div></a></div>
+          <div class="ev-col"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Software</h3><a href="products.html#software" class="ev-item"><div class="ev-item-icon"><svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div><div><p>ChargeCloud <span class="badge">Soon</span></p><span>CMS Platform</span></div></a></div>
+          <div class="ev-col"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>Services</h3><a href="products.html#services" class="ev-item"><div class="ev-item-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><p>Energy As A Service</p><span>Renewable Energy</span></div></a></div>
+        </div>
+      </div>
+      <div class="dropdown-wrap">
+        <button class="dropdown-trigger solar-active">Solar Products<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="mega-drop">
+          <a href="Solar_products.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="drop-text"><p>Our Solar Solutions</p><span>For all your energy needs</span></div></a>
+          <a href="residential.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="drop-text"><p>Residential Solar Rooftops</p><span>For homes & apartments</span></div></a>
+          <a href="commercial.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div><div class="drop-text"><p>Commercial Solar Rooftops</p><span>For offices & retail</span></div></a>
+          <a href="industrial.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg></div><div class="drop-text"><p>Industrial Solar Rooftops</p><span>For factories & warehouses</span></div></a>
+          <a href="ground.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></div><div class="drop-text"><p>Ground Mounted Solar System</p><span>Large scale solar farms</span></div></a>
+        </div>
+      </div>
+      <a href="partners.html">Partners</a>
+      <a href="media-center.html">Media Center</a>
+      <a href="careers.html">Careers</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a href="https://play.google.com/store" target="_blank" class="nav-btn">Download App</a>
+      <a href="contact.html" class="nav-btn">Contact Us</a>
+      <button id="menu-btn" style="display:none;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;border:1px solid #e5e7eb;background:#fff;cursor:pointer;"><i data-lucide="menu" style="width:24px;height:24px;color:#111827;"></i></button>
+    </div>
+  </div>
+</nav>
+<div id="mobile-menu">
+  <div style="padding:24px;display:flex;flex-direction:column;gap:4px;">
+    <a href="index.html" class="mob-link">About</a>
+    <a href="stationfinder.html" class="mob-link">Station Finder</a>
+    <a href="products.html" class="mob-link">EV Products</a>
+    <a href="solar_products.html" class="mob-link">Solar Products</a>
+    <a href="residential.html" class="mob-link" style="padding-left:36px;font-size:.9rem;">↳ Residential Solar</a>
+    <a href="commercial.html" class="mob-link" style="padding-left:36px;font-size:.9rem;">↳ Commercial Solar</a>
+    <a href="industrial.html" class="mob-link" style="padding-left:36px;font-size:.9rem;">↳ Industrial Solar</a>
+    <a href="ground.html" class="mob-link" style="color:#059669;padding-left:36px;font-size:.9rem;">↳ Ground Mounted</a>
+    <a href="partners.html" class="mob-link">Partners</a>
+    <a href="media-center.html" class="mob-link">Media Center</a>
+    <a href="careers.html" class="mob-link">Careers</a>
+    <a href="contact.html" class="mob-link">Contact Us</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="quote">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1920&auto=format&fit=crop" alt="Ground Mounted Solar Farm"></div>
+  <div class="sun-rays" id="rays"></div>
+  <div class="horizon"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+      Ground Mounted Solar Systems
+    </div>
+    <h1 class="hero-h1">Utility-Scale<br><span class="accent">Solar Farms</span><br>Built For India.</h1>
+    <p class="hero-p">From 1MW to large-scale solar parks — ChargeBees delivers complete EPC, O&M, and financing solutions for ground-mounted solar projects across India's open lands.</p>
+    <div class="scale-strip">
+      <div class="scale-chip"><div class="sc-n">1MW+</div><div class="sc-l">Minimum Scale</div></div>
+      <div class="scale-chip"><div class="sc-n">100MW</div><div class="sc-l">Max Projects</div></div>
+      <div class="scale-chip"><div class="sc-n">25yr</div><div class="sc-l">O&M Available</div></div>
+      <div class="scale-chip"><div class="sc-n">40%</div><div class="sc-l">More Output vs Rooftop</div></div>
+    </div>
+    <div class="hero-btns">
+      <a href="#contact-form" class="btn-green">Get Project Quote</a>
+      <a href="#advantages" class="btn-ghost">Explore Benefits</a>
+    </div>
+  </div>
+  <div class="hero-right" id="contact-form">
+    <div class="form-card">
+      <div class="fc-header">
+        <div class="fc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></div>
+        <div><div class="form-title">Solar Farm Enquiry</div></div>
+      </div>
+      <div class="form-sub">Our utility-scale solar specialists will prepare a detailed DPR for your land within 5 working days.</div>
+      <div class="frow">
+        <div class="fg"><label>Name</label><input type="text" placeholder="Suresh Reddy"></div>
+        <div class="fg"><label>Organisation</label><input type="text" placeholder="Reddy Power Ltd."></div>
+      </div>
+      <div class="fg"><label>Phone Number</label><input type="tel" placeholder="+91 90000 40477"></div>
+      <div class="fg"><label>Email Address</label><input type="email" placeholder="suresh@reddypower.com"></div>
+      <div class="frow">
+        <div class="fg"><label>Land Available (Acres)</label><input type="text" placeholder="e.g. 50 acres"></div>
+        <div class="fg"><label>Target Capacity</label>
+          <select><option>Select...</option><option>1 – 5 MW</option><option>5 – 20 MW</option><option>20 – 50 MW</option><option>50 – 100 MW</option><option>100 MW+</option></select>
+        </div>
+      </div>
+      <div class="fg"><label>Location / State</label><input type="text" placeholder="e.g. Rajasthan, Gujarat, Telangana"></div>
+      <div class="fg"><label>Project Type</label>
+        <select><option>Select type...</option><option>Captive Solar (Self Use)</option><option>Third-Party Sale / IPP</option><option>Group Captive</option><option>PSA (Power Sale Agreement)</option><option>Government / PSU Project</option></select>
+      </div>
+      <div class="fg"><label>Message / Special Requirements</label><textarea placeholder="Tell us about your land, grid availability, power offtake plans..."></textarea></div>
+      <button class="form-btn" onclick="submitForm(this)">🌅 Submit Project Enquiry</button>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="st fade-up"><div class="st-n">500MW</div><div class="st-l">Pipeline Projects</div></div>
+    <div class="st fade-up" style="transition-delay:.1s"><div class="st-n">40%</div><div class="st-l">More Output vs Rooftop</div></div>
+    <div class="st fade-up" style="transition-delay:.2s"><div class="st-n">25yr</div><div class="st-l">O&M Available</div></div>
+    <div class="st fade-up" style="transition-delay:.3s"><div class="st-n">6yr</div><div class="st-l">Avg. Payback Period</div></div>
+    <div class="st fade-up" style="transition-delay:.4s"><div class="st-n">100%</div><div class="st-l">EPC Capability</div></div>
+  </div>
+</div>
+
+<!-- ADVANTAGES -->
+<section id="advantages" style="padding:100px 0;">
+  <div style="max-width:80rem;margin:auto;padding:0 32px;">
+    <div style="text-align:center;margin-bottom:60px;" class="fade-up">
+      <span class="section-tag">Why Ground Mounted</span>
+      <h2 class="section-h">Maximum Power,<br><span class="hl">Maximum Returns</span></h2>
+      <p class="section-sub" style="margin:auto;">Ground-mounted systems offer unmatched generation potential and flexibility compared to rooftop installations.</p>
+    </div>
+    <div class="adv-grid">
+      <div class="adv-card fade-up"><div class="adv-num">01</div><div class="adv-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></div><div class="adv-title">Optimal Panel Orientation</div><div class="adv-desc">Panels tilted at the precise angle for maximum annual generation — no roof slope constraints. Install at the optimal 15–25° tilt for Indian latitudes.</div></div>
+      <div class="adv-card fade-up" style="transition-delay:.1s"><div class="adv-num">02</div><div class="adv-icon"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><div class="adv-title">Solar Tracker Systems</div><div class="adv-desc">Single-axis and dual-axis trackers available — follow the sun throughout the day to generate up to 40% more energy than fixed-tilt systems.</div></div>
+      <div class="adv-card fade-up" style="transition-delay:.2s"><div class="adv-num">03</div><div class="adv-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><div class="adv-title">Unlimited Scale</div><div class="adv-desc">No rooftop area constraints — scale from 1MW to 500MW+ on any available land parcel. Modular design allows phased development.</div></div>
+      <div class="adv-card fade-up" style="transition-delay:.3s"><div class="adv-num">04</div><div class="adv-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="adv-title">Monetise Unused Land</div><div class="adv-desc">Transform unused agricultural or barren land into a revenue-generating solar asset — long-term power sale agreements with guaranteed income.</div></div>
+      <div class="adv-card fade-up" style="transition-delay:.4s"><div class="adv-num">05</div><div class="adv-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="adv-title">Easier Maintenance</div><div class="adv-desc">Ground-level access for cleaning, inspection, and repairs — significantly lower maintenance costs and faster fault resolution vs rooftop.</div></div>
+      <div class="adv-card fade-up" style="transition-delay:.5s"><div class="adv-num">06</div><div class="adv-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="adv-title">Carbon Credits & REC</div><div class="adv-desc">Earn Renewable Energy Certificates (REC) and carbon credits from your solar farm — additional revenue stream on top of power generation.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE -->
+<section style="padding:100px 0;background:rgba(255,255,255,.02);">
+  <div style="max-width:80rem;margin:auto;padding:0 32px;">
+    <div class="showcase-split">
+      <div class="fade-left">
+        <div class="showcase-img-stack">
+          <div class="s-img-main"><img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=800&auto=format&fit=crop" alt="Ground Solar Farm"></div>
+          <div class="s-img-small"><img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=400&auto=format&fit=crop" alt="Solar Monitoring"></div>
+        </div>
+      </div>
+      <div class="fade-right">
+        <span class="section-tag">Full EPC Capability</span>
+        <h2 class="section-h">End-to-End <span class="hl">Project Delivery</span></h2>
+        <p class="section-sub">ChargeBees manages the complete lifecycle of your ground-mounted solar project — from land assessment to power delivery and long-term O&M.</p>
+        <div class="feat-list">
+          <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="feat-title">Detailed Project Report (DPR)</div><div class="feat-desc">Comprehensive feasibility study, shadow analysis, yield simulation, financial model, and regulatory roadmap.</div></div></div>
+          <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="feat-title">Land & Grid Assessment</div><div class="feat-desc">Geotechnical survey, solar resource assessment, grid interconnection feasibility, and evacuation line planning.</div></div></div>
+          <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><div class="feat-title">Regulatory Clearances</div><div class="feat-desc">All statutory approvals, DISCOM grid connectivity, CEA compliance, land-use permissions, and PPA structuring.</div></div></div>
+          <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div><div class="feat-title">SCADA & Remote Monitoring</div><div class="feat-desc">24/7 remote monitoring via cloud SCADA with performance analytics, predictive maintenance alerts, and investor reporting.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRACKER TYPES -->
+<section style="padding:100px 0;">
+  <div style="max-width:80rem;margin:auto;padding:0 32px;">
+    <div style="text-align:center;margin-bottom:60px;" class="fade-up">
+      <span class="section-tag">Mounting Systems</span>
+      <h2 class="section-h">Choose Your <span class="hl">Tracker System</span></h2>
+      <p class="section-sub" style="margin:auto;">We offer fixed-tilt, single-axis, and dual-axis tracker systems — chosen based on your location, project economics, and energy targets.</p>
+    </div>
+    <div class="tracker-grid">
+      <div class="tracker-card fade-left">
+        <div class="tracker-top"><div class="tracker-icon" style="background:rgba(16,185,129,.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" width="28" height="28"><rect x="3" y="11" width="18" height="2" rx="1"/><path d="M12 3v4M12 17v4M3 12H1M23 12h-2"/></svg></div><div class="tracker-name">Fixed Tilt System</div><div class="tracker-sub">Best for: Budget-optimised projects</div></div>
+        <div class="tracker-body"><ul class="tracker-feats"><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Lowest capital cost per MW</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Simple structure, minimal maintenance</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Optimal fixed angle (15–25°)</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Best for flat terrain projects</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>East-West racking option available</li></ul><div class="tracker-gain"><div class="tracker-gain-val">Baseline</div><div class="tracker-gain-lbl">Generation Reference</div></div></div>
+      </div>
+      <div class="tracker-card fade-up" style="border-color:rgba(16,185,129,.25);">
+        <div class="tracker-top" style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(16,185,129,.05));"><div style="background:#10b981;color:#fff;font-size:.72rem;font-weight:700;padding:3px 12px;border-radius:999px;display:inline-block;margin-bottom:12px;letter-spacing:.5px;">MOST POPULAR</div><div class="tracker-icon" style="background:rgba(16,185,129,.15);"><svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" width="28" height="28"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><div class="tracker-name">Single-Axis Tracker</div><div class="tracker-sub">Best for: Maximum ROI projects</div></div>
+        <div class="tracker-body"><ul class="tracker-feats"><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Follows sun East to West daily</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>20–30% more energy vs fixed tilt</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Proven technology, lower risk</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Ideal for MW-scale projects</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Motor-driven precision tracking</li></ul><div class="tracker-gain"><div class="tracker-gain-val">+25%</div><div class="tracker-gain-lbl">vs Fixed Tilt Generation</div></div></div>
+      </div>
+      <div class="tracker-card fade-up" style="transition-delay:.15s">
+        <div class="tracker-top"><div class="tracker-icon" style="background:rgba(132,204,22,.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#84cc16" stroke-width="2" width="28" height="28"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" y1="12" x2="22" y2="12"/></svg></div><div class="tracker-name">Dual-Axis Tracker</div><div class="tracker-sub">Best for: Premium yield projects</div></div>
+        <div class="tracker-body"><ul class="tracker-feats"><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Tracks sun in both axes</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>35–40% more energy vs fixed tilt</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Maximum per-panel output</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Best for smaller, premium sites</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Advanced motor + GPS tracking</li></ul><div class="tracker-gain"><div class="tracker-gain-val">+40%</div><div class="tracker-gain-lbl">vs Fixed Tilt Generation</div></div></div>
+      </div>
+      <div class="tracker-card fade-right">
+        <div class="tracker-top"><div class="tracker-icon" style="background:rgba(13,148,136,.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2" width="28" height="28"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><div class="tracker-name">Agri-Solar (Agrivoltaic)</div><div class="tracker-sub">Best for: Agricultural land dual use</div></div>
+        <div class="tracker-body"><ul class="tracker-feats"><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Elevated panels — farming below</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dual income: power + crops</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Shade benefits certain crops</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>PM-KUSUM scheme eligible</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Land productivity maximised</li></ul><div class="tracker-gain"><div class="tracker-gain-val">2x</div><div class="tracker-gain-lbl">Land Revenue Potential</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+  <div style="max-width:80rem;margin:auto;padding:0 32px;position:relative;z-index:2;">
+    <div style="text-align:center;margin-bottom:70px;" class="fade-up">
+      <span class="section-tag" style="color:#34d399;">Project Journey</span>
+      <h2 class="section-h">How We <span class="hl">Build Your Solar Farm</span></h2>
+    </div>
+    <div class="proc-steps" style="position:relative;">
+      <div class="proc-line"></div>
+      <div class="proc-step fade-up"><div class="proc-num">1</div><div class="proc-title">Land & Grid Assessment</div><div class="proc-desc">Geotechnical, solar resource, and grid interconnection feasibility study.</div></div>
+      <div class="proc-step fade-up" style="transition-delay:.12s"><div class="proc-num">2</div><div class="proc-title">DPR & Financing</div><div class="proc-desc">Detailed Project Report, PPA structuring, and financing arrangement with lenders.</div></div>
+      <div class="proc-step fade-up" style="transition-delay:.24s"><div class="proc-num">3</div><div class="proc-title">Clearances</div><div class="proc-desc">All statutory approvals, land use, DISCOM grid, and CEA compliance sorted.</div></div>
+      <div class="proc-step fade-up" style="transition-delay:.36s"><div class="proc-num">4</div><div class="proc-title">EPC Construction</div><div class="proc-desc">Civil, structural, electrical, and commissioning by our specialised solar farm teams.</div></div>
+      <div class="proc-step fade-up" style="transition-delay:.48s"><div class="proc-num">5</div><div class="proc-title">O&M & Revenue</div><div class="proc-desc">Long-term O&M, SCADA monitoring, performance guarantees, and power delivery to offtakers.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHARGEBEES -->
+<section style="padding:100px 0;">
+  <div style="max-width:80rem;margin:auto;padding:0 32px;">
+    <div style="text-align:center;margin-bottom:60px;" class="fade-up">
+      <span class="section-tag">Our Edge</span>
+      <h2 class="section-h">Why Developers <span class="hl">Choose</span> ChargeBees</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-up"><div class="wi"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="why-title">Complete EPC Capability</div><div class="why-desc">In-house civil, structural, electrical, and commissioning teams for full project control, cost certainty, and quality assurance.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.1s"><div class="wi"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="why-title">SCADA & Remote O&M</div><div class="why-desc">24/7 cloud-based SCADA monitoring with predictive maintenance, drone inspection, and performance guarantees for peace of mind.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.2s"><div class="wi"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="why-title">PPA & Financing Support</div><div class="why-desc">We help structure Power Purchase Agreements, connect you with DFI financing, and create bankable project structures for investors.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.3s"><div class="wi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="why-title">All Tracker Options</div><div class="why-desc">Expertise in fixed tilt, single-axis, dual-axis, and agrivoltaic systems — we recommend the right technology for maximum IRR.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.4s"><div class="wi"><svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/></svg></div><div class="why-title">Government Scheme Navigation</div><div class="why-desc">PM-KUSUM, SECI, MNRE, and state-level scheme expertise — we help you access maximum incentives for your project.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.5s"><div class="wi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div><div class="why-title">Land Optimisation</div><div class="why-desc">Maximise energy output per acre with advanced layout design, terrain analysis, and optimal row spacing calculations.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="cta-inner">
+    <span class="section-tag" style="color:#34d399;">The Future is Large-Scale</span>
+    <h2 class="cta-title">Build India's<br><span>Next Solar Farm</span><br>With Us.</h2>
+    <p class="cta-sub">Whether it's 1MW or 500MW — ChargeBees has the capability, experience, and team to deliver your ground-mounted solar project on time and within budget.</p>
+    <div class="cta-btns">
+      <a href="#contact-form" class="cta-btn-green">Submit Project Enquiry</a>
+      <a href="solar_products.html" class="cta-btn-outline">All Solar Products</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer><div class="footer-inner"><div class="footer-grid"><div class="footer-about"><div style="display:flex;align-items:center;gap:8px;"><img src="images/logo.png" alt="ChargeBees Logo" style="height:40px;width:auto;object-fit:contain;"><span class="brand-logo-text">Charge <span>Bees</span></span></div><p>Leading the charge towards a sustainable electric future with India's largest EV charging network.</p><div class="socials"><a href="https://www.instagram.com/chargebees" target="_blank" class="social-btn"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a><a href="https://www.facebook.com/share/1ESQNWy5Zs/" target="_blank" class="social-btn"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a><a href="https://wa.me/919000040477" target="_blank" class="social-btn"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"></a><a href="mailto:db@chargebees.com" class="social-btn"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Mail"></a></div></div><div class="footer-col"><h4>Company</h4><ul><li><a href="index.html#about">About Us</a></li><li><a href="partners.html#Partnerships">Partnerships</a></li><li><a href="media-center.html#media">Media Center</a></li><li><a href="careers.html#careers">Careers</a></li></ul></div><div class="footer-col"><h4>Solutions</h4><ul><li><a href="stationfinder.html">Station Finder</a></li><li><a href="products.html#services">EV Services</a></li><li><a href="residential.html">Residential Solar</a></li><li><a href="commercial.html">Commercial Solar</a></li><li><a href="industrial.html">Industrial Solar</a></li><li><a href="ground.html">Ground Mounted</a></li></ul></div><div class="footer-col"><h4>Contact</h4><ul class="footer-contact"><li><span>db@chargebees.com</span></li><li><span>+91 90000 40477</span></li><li style="margin-top:8px;"><strong>HYDERABAD</strong><span>Nanakramguda, Hyderabad, Telangana 500008</span></li></ul></div></div><div class="footer-bottom"><p>© 2026 Chargebees. All rights reserved.</p><div class="footer-bottom-links"><a href="terms.html#terms">Terms & Services</a><a href="privacy.html">Privacy Policy</a></div></div></div></footer>
+
+<script>
+lucide.createIcons();
+// Build sun rays
+const raysEl=document.getElementById('rays');
+if(raysEl){for(let i=0;i<18;i++){const r=document.createElement('div');r.className='sun-ray';r.style.transform=`rotate(${i*20}deg)`;raysEl.appendChild(r);}}
+const menuBtn=document.getElementById('menu-btn');
+const mobileMenu=document.getElementById('mobile-menu');
+if(menuBtn)menuBtn.addEventListener('click',()=>mobileMenu.classList.toggle('open'));
+function handleResize(){const btn=document.getElementById('menu-btn');if(btn)btn.style.display=window.innerWidth<1024?'flex':'none';}
+handleResize();window.addEventListener('resize',handleResize);
+const animEls=document.querySelectorAll('.fade-up,.fade-left,.fade-right');
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});},{threshold:.1});
+animEls.forEach(el=>observer.observe(el));
+function submitForm(btn){btn.textContent='✓ Enquiry Received! Our project team will reach out soon.';btn.style.background='linear-gradient(135deg,#059669,#047857)';setTimeout(()=>{btn.textContent='🌅 Submit Project Enquiry';btn.style.background='linear-gradient(135deg,#10b981,#059669)';},3500);}
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});});
+</script>
+</body>
+</html>

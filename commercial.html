@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Commercial Solar Rooftops – ChargeBees</title>
+<meta name="description" content="ChargeBees commercial solar rooftop solutions for offices, retail, hotels and businesses. Reduce operational costs dramatically.">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&family=Bebas+Neue&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --emerald:#10b981;--emerald-dark:#059669;--emerald-light:#34d399;
+  --cobalt:#1e40af;--sky:#0ea5e9;--slate:#1e293b;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:#f8fafc;overflow-x:hidden;padding-top:80px;}
+.bg-texture{position:fixed;inset:0;opacity:.12;pointer-events:none;z-index:0;background-image:url('https://www.transparenttextures.com/patterns/gray-floral.png');}
+.bg-grid{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(to right,rgba(16,185,129,.03) 1px,transparent 1px),linear-gradient(to bottom,rgba(16,185,129,.03) 1px,transparent 1px);background-size:50px 50px;}
+
+/* BRAND */
+.brand-logo-text{font-size:1.55rem;font-weight:500;letter-spacing:-.5px;color:#111827;font-family:"Poppins",sans-serif;line-height:1;}
+.brand-logo-text span{color:#10b981;}
+
+/* NAV */
+nav{position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:99999!important;background:#ffffff!important;border-bottom:1px solid #f3f4f6;-webkit-transform:translateZ(0);}
+.nav-inner{max-width:80rem;margin:auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center;height:80px;}
+.nav-links{display:flex;align-items:center;gap:1.25rem;}
+.nav-links a{font-size:.875rem;font-weight:500;color:#4b5563;transition:color .2s;text-decoration:none;}
+.nav-links a:hover{color:#111827;}
+.nav-btn{background:#059669;color:#fff;padding:.625rem 1.5rem;border-radius:9999px;font-size:.875rem;font-weight:600;text-decoration:none;transition:background .2s;white-space:nowrap;}
+.nav-btn:hover{background:#047857;}
+.dropdown-wrap{position:relative;}
+.dropdown-trigger{display:flex;align-items:center;gap:4px;font-size:.875rem;font-weight:500;color:#4b5563;cursor:pointer;background:none;border:none;padding:0;font-family:inherit;transition:color .2s;white-space:nowrap;}
+.dropdown-trigger:hover{color:#111827;}
+.dropdown-trigger.solar-active{color:#059669;}
+.mega-drop{position:absolute;top:calc(100% + 2px);left:50%;transform:translateX(-50%);width:680px;background:#fff;border-radius:24px;box-shadow:0 25px 60px rgba(0,0,0,.12);border:1px solid #f0fdf4;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:12px;opacity:0;visibility:hidden;transition:all .25s ease;pointer-events:none;z-index:100;}
+.dropdown-wrap:hover .mega-drop{opacity:1;visibility:visible;pointer-events:all;transform:translateX(-50%) translateY(0);}
+.drop-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border-radius:16px;text-decoration:none;transition:background .2s;}
+.drop-item:hover{background:#f0fdf4;}
+.drop-icon{width:44px;height:44px;min-width:44px;background:linear-gradient(135deg,#10b981,#34d399);border-radius:12px;display:flex;align-items:center;justify-content:center;}
+.drop-icon svg{width:22px;height:22px;stroke:#fff;stroke-width:2;fill:none;}
+.drop-text p{font-weight:700;font-size:.9rem;color:#111827;margin-bottom:2px;}
+.drop-text span{font-size:.78rem;color:#6b7280;}
+.mega-menu-ev{position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%);width:800px;background:#fff;border-radius:24px;box-shadow:0 25px 60px rgba(0,0,0,.12);border:1px solid #f3f4f6;padding:32px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;opacity:0;visibility:hidden;transition:all .25s ease;z-index:100;}
+.dropdown-wrap:hover .mega-menu-ev{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+.ev-col h3{font-size:1rem;font-weight:700;color:#111827;margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+.ev-item{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:16px;text-decoration:none;transition:background .2s;margin-bottom:8px;}
+.ev-item:hover{background:#f0fdf4;}
+.ev-item-icon{width:44px;height:44px;min-width:44px;background:#f3f4f6;border-radius:12px;display:flex;align-items:center;justify-content:center;}
+.ev-item:hover .ev-item-icon{background:#fff;}
+.ev-item-icon svg{width:22px;height:22px;stroke:#10b981;stroke-width:2;fill:none;}
+.ev-item p{font-weight:700;font-size:.875rem;color:#111827;}
+.ev-item span{font-size:.75rem;color:#6b7280;}
+.badge{font-size:10px;background:#f3f4f6;color:#6b7280;padding:2px 8px;border-radius:999px;font-weight:700;text-transform:uppercase;}
+#mobile-menu{display:none;position:fixed;top:80px;left:0;width:100%;background:#fff;border-top:1px solid #f3f4f6;box-shadow:0 20px 40px rgba(0,0,0,.1);z-index:40;max-height:calc(100vh - 80px);overflow-y:auto;}
+#mobile-menu.open{display:block;}
+.mob-link{display:block;padding:14px 24px;font-size:1rem;font-weight:600;color:#374151;text-decoration:none;border-bottom:1px solid #f9fafb;}
+.mob-link:hover{color:#059669;}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;position:relative;overflow:hidden;}
+.hero-bg-img{position:absolute;inset:0;}
+.hero-bg-img img{width:100%;height:100%;object-fit:cover;}
+.hero-bg-img::after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,rgba(15,23,42,.92) 0%,rgba(15,23,42,.75) 50%,rgba(14,165,233,.15) 100%);}
+.hero-particles{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.particle{position:absolute;width:4px;height:4px;background:#0ea5e9;border-radius:50%;animation:particleFloat linear infinite;opacity:.6;}
+@keyframes particleFloat{0%{transform:translateY(100vh) translateX(0);opacity:0;}10%{opacity:.6;}90%{opacity:.6;}100%{transform:translateY(-100px) translateX(60px);opacity:0;}}
+
+.hero-left{position:relative;z-index:10;padding:100px 60px 100px 80px;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:32px;}
+.eyebrow-line{width:40px;height:2px;background:linear-gradient(to right,#0ea5e9,#10b981);}
+.eyebrow-text{font-family:'Syne',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0ea5e9;}
+.hero-h1{font-family:'Syne',sans-serif;font-size:clamp(2.8rem,5vw,5.2rem);line-height:1.0;color:#fff;font-weight:800;margin-bottom:24px;}
+.hero-h1 .accent{background:linear-gradient(135deg,#0ea5e9,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-p{font-size:1.05rem;line-height:1.8;color:rgba(255,255,255,.72);max-width:460px;margin-bottom:40px;}
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px;}
+.kpi{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px;text-align:center;backdrop-filter:blur(10px);}
+.kpi-n{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#0ea5e9;line-height:1;}
+.kpi-l{font-size:.72rem;color:rgba(255,255,255,.6);font-weight:600;margin-top:4px;text-transform:uppercase;letter-spacing:.5px;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-sky{background:linear-gradient(135deg,#0ea5e9,#0284c7);color:#fff;padding:14px 34px;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .25s;border:none;cursor:pointer;box-shadow:0 8px 25px rgba(14,165,233,.35);}
+.btn-sky:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(14,165,233,.45);}
+.btn-ghost{background:rgba(255,255,255,.08);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);color:#fff;padding:14px 34px;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .25s;cursor:pointer;}
+.btn-ghost:hover{background:rgba(255,255,255,.15);}
+
+/* FORM */
+.hero-right{position:relative;z-index:10;padding:60px 80px 60px 40px;}
+.form-card{background:rgba(255,255,255,.98);border-radius:32px;padding:44px 40px;box-shadow:0 40px 100px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.5);}
+.form-card-hd{display:flex;align-items:center;gap:14px;margin-bottom:8px;}
+.fc-icon{width:52px;height:52px;background:linear-gradient(135deg,#0ea5e9,#0284c7);border-radius:16px;display:flex;align-items:center;justify-content:center;}
+.fc-icon svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:2;}
+.form-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:#111827;}
+.form-sub{font-size:.85rem;color:#6b7280;margin-bottom:26px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.fg{margin-bottom:14px;}
+.fg label{display:block;font-size:.72rem;font-weight:700;color:#374151;margin-bottom:5px;text-transform:uppercase;letter-spacing:.6px;}
+.fg input,.fg select,.fg textarea{width:100%;padding:11px 15px;border:1.5px solid #e5e7eb;border-radius:12px;font-size:.9rem;font-family:inherit;color:#111827;background:#fafafa;transition:all .2s;outline:none;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:#0ea5e9;background:#fff;box-shadow:0 0 0 3px rgba(14,165,233,.12);}
+.fg textarea{resize:none;height:80px;}
+.form-btn{width:100%;padding:15px;background:linear-gradient(135deg,#0ea5e9,#0284c7);color:#fff;border:none;border-radius:14px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .25s;box-shadow:0 8px 20px rgba(14,165,233,.3);}
+.form-btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(14,165,233,.45);}
+
+/* STATS */
+.stats-bar{background:linear-gradient(135deg,#0f172a,#1e293b);padding:40px 0;}
+.stats-inner{max-width:80rem;margin:auto;padding:0 32px;display:grid;grid-template-columns:repeat(5,1fr);gap:20px;}
+.st{text-align:center;}
+.st-n{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;background:linear-gradient(135deg,#0ea5e9,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+.st-l{font-size:.8rem;color:rgba(255,255,255,.6);font-weight:600;margin-top:4px;}
+
+/* TAGS */
+.section-tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:3px;color:#0284c7;margin-bottom:14px;text-transform:uppercase;}
+.section-h{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;color:#0f172a;line-height:1.1;margin-bottom:16px;letter-spacing:-.5px;}
+.section-h .hl{color:#0ea5e9;}
+.section-sub{font-size:1rem;color:#475569;line-height:1.75;max-width:560px;}
+
+/* SECTORS */
+.sectors-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.sector-card{background:#fff;border:1px solid #e2e8f0;border-radius:24px;padding:30px 24px;text-align:center;transition:all .4s cubic-bezier(.22,1,.36,1);cursor:default;}
+.sector-card:hover{background:linear-gradient(135deg,#0f172a,#1e3a5f);border-color:transparent;transform:translateY(-14px) scale(1.03) rotateX(-3deg);box-shadow:0 30px 60px rgba(14,165,233,.25);}
+.sector-card:hover .sc-title,.sector-card:hover .sc-desc{color:#fff;}
+.sector-card:hover .sc-icon{background:rgba(255,255,255,.1);}
+.sector-card:hover .sc-icon svg{stroke:#38bdf8;}
+.sc-icon{width:60px;height:60px;background:#eff6ff;border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;transition:all .3s;}
+.sc-icon svg{width:30px;height:30px;stroke:#0ea5e9;fill:none;stroke-width:2;transition:stroke .3s;}
+.sc-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:#0f172a;margin-bottom:8px;transition:color .3s;}
+.sc-desc{font-size:.82rem;color:#64748b;line-height:1.6;transition:color .3s;}
+
+/* ROI SECTION */
+.roi-split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.roi-img{border-radius:28px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.15);transform:perspective(900px) rotateY(5deg);transition:transform .5s;}
+.roi-img:hover{transform:perspective(900px) rotateY(0);}
+.roi-img img{width:100%;height:420px;object-fit:cover;display:block;}
+.roi-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px;}
+.roi-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:20px;padding:24px;text-align:center;transition:all .3s;}
+.roi-card:hover{background:linear-gradient(135deg,#0ea5e9,#0284c7);border-color:transparent;transform:translateY(-6px);}
+.roi-card:hover .roi-val,.roi-card:hover .roi-lbl{color:#fff;}
+.roi-val{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:#0ea5e9;line-height:1;transition:color .3s;}
+.roi-lbl{font-size:.8rem;color:#64748b;font-weight:600;margin-top:4px;transition:color .3s;}
+
+/* MODELS SECTION */
+.models-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.model-card{background:#fff;border:1px solid #e2e8f0;border-radius:28px;overflow:hidden;transition:all .35s cubic-bezier(.22,1,.36,1);}
+.model-card:hover{transform:translateY(-12px);box-shadow:0 30px 60px rgba(14,165,233,.2);border-color:#0ea5e9;}
+.model-top{padding:32px 32px 0;background:linear-gradient(135deg,#f8fafc,#eff6ff);}
+.model-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.model-name{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:#0f172a;margin-bottom:6px;}
+.model-sub{font-size:.82rem;color:#64748b;margin-bottom:24px;}
+.model-body{padding:0 32px 32px;}
+.model-features{list-style:none;margin:20px 0;}
+.model-features li{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f1f5f9;font-size:.88rem;color:#475569;}
+.model-features li:last-child{border-bottom:none;}
+.model-features li svg{width:16px;height:16px;stroke:#10b981;fill:none;stroke-width:2.5;flex-shrink:0;}
+.model-price{background:#f0fdf4;border-radius:12px;padding:16px;text-align:center;margin-top:20px;}
+.model-price-label{font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+.model-price-val{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:#059669;margin-top:4px;}
+
+/* PROCESS */
+.process-wrap{background:linear-gradient(135deg,#0f172a,#1e293b);border-radius:36px;padding:64px;position:relative;overflow:hidden;}
+.process-wrap::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(14,165,233,.08),transparent 70%);border-radius:50%;}
+.process-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;}
+.process-steps::before{content:'';position:absolute;top:36px;left:10%;right:10%;height:2px;background:linear-gradient(to right,#0ea5e9,#10b981);opacity:.3;}
+.proc-step{text-align:center;padding:0 12px;position:relative;z-index:2;}
+.proc-num{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#0ea5e9,#0284c7);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#fff;box-shadow:0 10px 30px rgba(14,165,233,.4);transition:transform .3s;}
+.proc-step:hover .proc-num{transform:scale(1.15) translateY(-4px);}
+.proc-title{font-size:.9rem;font-weight:700;color:#fff;margin-bottom:8px;}
+.proc-desc{font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.6;}
+
+/* WHY */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.why-card{background:#fff;border:1px solid #e2e8f0;border-radius:24px;padding:36px 30px;transition:all .3s;transform-style:preserve-3d;}
+.why-card:hover{background:linear-gradient(135deg,#0f172a,#1e3a5f);border-color:transparent;transform:translateY(-10px) rotateX(-3deg);box-shadow:0 25px 50px rgba(14,165,233,.25);}
+.why-card:hover .why-title,.why-card:hover .why-desc{color:#fff;}
+.why-card:hover .wi{background:rgba(255,255,255,.1);}
+.why-card:hover .wi svg{stroke:#38bdf8;}
+.wi{width:52px;height:52px;background:#eff6ff;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:background .3s;}
+.wi svg{width:26px;height:26px;stroke:#0ea5e9;fill:none;stroke-width:2;transition:stroke .3s;}
+.why-title{font-size:1.05rem;font-weight:800;color:#0f172a;margin-bottom:10px;transition:color .3s;}
+.why-desc{font-size:.88rem;color:#64748b;line-height:1.65;transition:color .3s;}
+
+/* CTA */
+.cta-band{background:linear-gradient(135deg,#0f172a,#1e3a5f);padding:80px 0;position:relative;overflow:hidden;}
+.cta-band::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(14,165,233,.12),transparent 70%);border-radius:50%;}
+.cta-inner{max-width:60rem;margin:auto;text-align:center;padding:0 32px;position:relative;z-index:2;}
+.cta-title{font-family:'Syne',sans-serif;font-size:clamp(2.5rem,5vw,4rem);color:#fff;font-weight:800;margin-bottom:16px;line-height:1.1;}
+.cta-title span{color:#0ea5e9;}
+.cta-sub{font-size:1.05rem;color:rgba(255,255,255,.7);margin-bottom:36px;}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.cta-btn-sky{background:linear-gradient(135deg,#0ea5e9,#0284c7);color:#fff;padding:14px 36px;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .25s;box-shadow:0 8px 25px rgba(14,165,233,.35);}
+.cta-btn-sky:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(14,165,233,.5);}
+.cta-btn-outline{border:2px solid rgba(255,255,255,.3);color:#fff;padding:14px 36px;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .25s;}
+.cta-btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.08);}
+
+/* FOOTER */
+footer{background:#f9fafb;padding-top:80px;padding-bottom:40px;border-top:1px solid #e5e7eb;}
+.footer-inner{max-width:80rem;margin:auto;padding:0 32px;}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:48px;margin-bottom:60px;}
+.footer-about p{font-size:.9rem;color:#6b7280;line-height:1.75;margin:20px 0;}
+.socials{display:flex;gap:12px;}
+.social-btn{width:44px;height:44px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.08);transition:transform .2s;}
+.social-btn:hover{transform:scale(1.1);}
+.social-btn img{width:22px;height:22px;}
+.footer-col h4{font-weight:700;color:#111827;margin-bottom:20px;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:12px;}
+.footer-col ul li a{color:#6b7280;text-decoration:none;font-size:.9rem;transition:color .2s;}
+.footer-col ul li a:hover{color:#10b981;}
+.footer-contact li{display:flex;flex-direction:column;gap:2px;margin-bottom:14px;font-size:.9rem;color:#6b7280;}
+.footer-contact li strong{color:#374151;font-weight:600;}
+.footer-bottom{border-top:1px solid #e5e7eb;padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:.85rem;color:#9ca3af;}
+.footer-bottom-links{display:flex;gap:24px;}
+.footer-bottom-links a{font-size:.85rem;color:#9ca3af;text-decoration:none;transition:color .2s;}
+.footer-bottom-links a:hover{color:#374151;}
+
+/* ANIMS */
+.fade-up{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+.fade-left{opacity:0;transform:translateX(-50px);transition:opacity .8s ease,transform .8s ease;}
+.fade-left.visible{opacity:1;transform:translateX(0);}
+.fade-right{opacity:0;transform:translateX(50px);transition:opacity .8s ease,transform .8s ease;}
+.fade-right.visible{opacity:1;transform:translateX(0);}
+
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;min-height:auto;}
+  .hero-left{padding:60px 32px 40px;}
+  .hero-right{padding:40px 32px 60px;}
+  .sectors-grid{grid-template-columns:repeat(2,1fr);}
+  .roi-split{grid-template-columns:1fr;}
+  .models-grid{grid-template-columns:1fr;}
+  .why-grid{grid-template-columns:repeat(2,1fr);}
+  .process-steps{grid-template-columns:repeat(3,1fr);}
+  .process-steps::before{display:none;}
+  .stats-inner{grid-template-columns:repeat(3,1fr);}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px;}
+  .mega-drop,.mega-menu-ev{display:none!important;}
+  .nav-links{display:none;}
+  .kpi-row{grid-template-columns:1fr 1fr 1fr;}
+}
+@media(max-width:768px){
+  .sectors-grid,.why-grid,.models-grid{grid-template-columns:1fr;}
+  .stats-inner{grid-template-columns:repeat(2,1fr);}
+  .roi-cards{grid-template-columns:1fr 1fr;}
+  .process-steps{grid-template-columns:repeat(2,1fr);}
+  .footer-grid{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .frow{grid-template-columns:1fr;}
+  .process-wrap{padding:36px 24px;}
+  .kpi-row{grid-template-columns:1fr;}
+  .nav-links{display:none!important;}
+  .nav-btn{display:none!important;}
+  #menu-btn{display:flex!important;}
+}
+</style>
+</head>
+<body>
+<div class="bg-texture"></div>
+<div class="bg-grid"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;">
+      <img src="images/logo.png" alt="ChargeBees Logo" style="height:40px;width:auto;object-fit:contain;">
+      <span class="brand-logo-text">Charge <span>Bees</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">About</a>
+      <a href="stationfinder.html">Station Finder</a>
+      <div class="dropdown-wrap">
+        <button class="dropdown-trigger"><a href="products.html" style="color:inherit;text-decoration:none;display:flex;align-items:center;gap:4px;">EV Products<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a></button>
+        <div class="mega-menu-ev">
+          <div class="ev-col"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Hardware</h3><a href="products.html#hardware" class="ev-item"><div class="ev-item-icon"><svg viewBox="0 0 24 24"><path d="M13 2l-10 12h9l-1 8 10-12h-9l1-8z"/></svg></div><div><p>All Chargers</p><span>AC & DC Solutions</span></div></a></div>
+          <div class="ev-col"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Software</h3><a href="products.html#software" class="ev-item"><div class="ev-item-icon"><svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div><div><p>ChargeCloud <span class="badge">Soon</span></p><span>CMS Platform</span></div></a><a href="products.html#software" class="ev-item"><div class="ev-item-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/></svg></div><div><p>Chargebees App</p><span>User Experience</span></div></a></div>
+          <div class="ev-col"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>Services</h3><a href="products.html#services" class="ev-item"><div class="ev-item-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><p>Energy As A Service</p><span>Renewable Energy</span></div></a></div>
+        </div>
+      </div>
+      <div class="dropdown-wrap">
+        <button class="dropdown-trigger solar-active">Solar Products<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="mega-drop">
+          <a href="Solar_products.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="drop-text"><p>Our Solar Solutions</p><span>For all your energy needs</span></div></a>
+          <a href="residential.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="drop-text"><p>Residential Solar Rooftops</p><span>For homes & apartments</span></div></a>
+          <a href="commercial.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div><div class="drop-text"><p>Commercial Solar Rooftops</p><span>For offices & retail</span></div></a>
+          <a href="industrial.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg></div><div class="drop-text"><p>Industrial Solar Rooftops</p><span>For factories & warehouses</span></div></a>
+          <a href="ground.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></div><div class="drop-text"><p>Ground Mounted Solar System</p><span>Large scale solar farms</span></div></a>
+        </div>
+      </div>
+      <a href="partners.html">Partners</a>
+      <a href="media-center.html">Media Center</a>
+      <a href="careers.html">Careers</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a href="https://play.google.com/store" target="_blank" class="nav-btn">Download App</a>
+      <a href="contact.html" class="nav-btn">Contact Us</a>
+      <button id="menu-btn" style="display:none;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;border:1px solid #e5e7eb;background:#fff;cursor:pointer;"><i data-lucide="menu" style="width:24px;height:24px;color:#111827;"></i></button>
+    </div>
+  </div>
+</nav>
+<div id="mobile-menu">
+  <div style="padding:24px;display:flex;flex-direction:column;gap:4px;">
+    <a href="index.html" class="mob-link">About</a>
+    <a href="stationfinder.html" class="mob-link">Station Finder</a>
+    <a href="products.html" class="mob-link">EV Products</a>
+    <a href="solar_products.html" class="mob-link">Solar Products</a>
+    <a href="residential.html" class="mob-link" style="padding-left:36px;font-size:.9rem;">↳ Residential Solar</a>
+    <a href="commercial.html" class="mob-link" style="color:#059669;padding-left:36px;font-size:.9rem;">↳ Commercial Solar</a>
+    <a href="industrial.html" class="mob-link" style="padding-left:36px;font-size:.9rem;">↳ Industrial Solar</a>
+    <a href="ground.html" class="mob-link" style="padding-left:36px;font-size:.9rem;">↳ Ground Mounted</a>
+    <a href="partners.html" class="mob-link">Partners</a>
+    <a href="media-center.html" class="mob-link">Media Center</a>
+    <a href="careers.html" class="mob-link">Careers</a>
+    <a href="contact.html" class="mob-link">Contact Us</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="quote">
+  <div class="hero-bg-img">
+    <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=1920&auto=format&fit=crop" alt="Commercial Building">
+  </div>
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Commercial Solar Rooftops</span></div>
+    <h1 class="hero-h1">Cut Business<br>Energy Costs With<br><span class="accent">Smart Solar.</span></h1>
+    <p class="hero-p">Designed for offices, retail chains, hotels, hospitals, and educational institutions — our commercial solar solutions deliver measurable ROI from year one.</p>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-n">60%</div><div class="kpi-l">Cost Reduction</div></div>
+      <div class="kpi"><div class="kpi-n">4-6yr</div><div class="kpi-l">Payback Period</div></div>
+      <div class="kpi"><div class="kpi-n">500kW</div><div class="kpi-l">Max Capacity</div></div>
+    </div>
+    <div class="hero-btns">
+      <a href="#contact-form" class="btn-sky">Get Business Quote</a>
+      <a href="#sectors" class="btn-ghost">Our Sectors</a>
+    </div>
+  </div>
+  <div class="hero-right" id="contact-form">
+    <div class="form-card">
+      <div class="form-card-hd">
+        <div class="fc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div>
+        <div><div class="form-title">Commercial Solar Quote</div></div>
+      </div>
+      <div class="form-sub">Receive a detailed ROI report for your business within 48 hours.</div>
+      <div class="frow">
+        <div class="fg"><label>First Name</label><input type="text" placeholder="Amit"></div>
+        <div class="fg"><label>Last Name</label><input type="text" placeholder="Sharma"></div>
+      </div>
+      <div class="fg"><label>Business Name</label><input type="text" placeholder="ABC Enterprises Pvt. Ltd."></div>
+      <div class="fg"><label>Phone Number</label><input type="tel" placeholder="+91 90000 40477"></div>
+      <div class="fg"><label>Business Email</label><input type="email" placeholder="amit@company.com"></div>
+      <div class="frow">
+        <div class="fg"><label>Business Type</label>
+          <select><option>Select type...</option><option>Office / IT Park</option><option>Retail / Mall</option><option>Hotel / Hospitality</option><option>Hospital / Healthcare</option><option>Educational Institution</option><option>Cold Storage / Warehouse</option></select>
+        </div>
+        <div class="fg"><label>Monthly Bill</label>
+          <select><option>Select range...</option><option>₹50,000 – ₹1 Lakh</option><option>₹1 – ₹3 Lakhs</option><option>₹3 – ₹10 Lakhs</option><option>Above ₹10 Lakhs</option></select>
+        </div>
+      </div>
+      <div class="fg"><label>Message</label><textarea placeholder="Tell us about your rooftop area and energy needs..."></textarea></div>
+      <button class="form-btn" onclick="submitForm(this)">🏢 Get Commercial Solar Quote</button>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="st fade-up"><div class="st-n">200+</div><div class="st-l">Commercial Projects</div></div>
+    <div class="st fade-up" style="transition-delay:.1s"><div class="st-n">5MW+</div><div class="st-l">Commercial Capacity</div></div>
+    <div class="st fade-up" style="transition-delay:.2s"><div class="st-n">60%</div><div class="st-l">Avg. Cost Savings</div></div>
+    <div class="st fade-up" style="transition-delay:.3s"><div class="st-n">4yr</div><div class="st-l">Avg. ROI Period</div></div>
+    <div class="st fade-up" style="transition-delay:.4s"><div class="st-n">50+</div><div class="st-l">Cities Covered</div></div>
+  </div>
+</div>
+
+<!-- SECTORS -->
+<section id="sectors" style="padding:100px 0;background:linear-gradient(180deg,#f8fafc 0%,#eff6ff 100%);">
+  <div style="max-width:80rem;margin:auto;padding:0 32px;">
+    <div style="text-align:center;margin-bottom:60px;" class="fade-up">
+      <span class="section-tag">Industries We Serve</span>
+      <h2 class="section-h">Solar For Every <span class="hl">Business Sector</span></h2>
+      <p class="section-sub" style="margin:auto;">From small offices to large commercial complexes — our solutions are engineered for maximum impact across sectors.</p>
+    </div>
+    <div class="sectors-grid">
+      <div class="sector-card fade-up"><div class="sc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div><div class="sc-title">Offices & IT Parks</div><div class="sc-desc">Reduce HVAC and lighting loads significantly. Ideal for 24/7 operations with high daytime consumption.</div></div>
+      <div class="sector-card fade-up" style="transition-delay:.1s"><div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div><div class="sc-title">Retail & Malls</div><div class="sc-desc">Shopping centres and retail chains with large roof areas — perfect for maximum solar capacity installation.</div></div>
+      <div class="sector-card fade-up" style="transition-delay:.2s"><div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><div class="sc-title">Hotels & Resorts</div><div class="sc-desc">Cut hospitality energy costs by up to 60%. Enhance your green credentials and attract eco-conscious guests.</div></div>
+      <div class="sector-card fade-up" style="transition-delay:.3s"><div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="sc-title">Hospitals & Clinics</div><div class="sc-desc">Critical power reliability with hybrid solar systems. Never compromise on patient care due to power cuts.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI SECTION -->
+<section style="padding:100px 0;background:#fff;">
+  <div style="max-width:80rem;margin:auto;padding:0 32px;">
+    <div class="roi-split">
+      <div class="fade-left">
+        <div class="roi-img">
+          <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800&auto=format&fit=crop" alt="Commercial Solar ROI">
+        </div>
+      </div>
+      <div class="fade-right">
+        <span class="section-tag">Business Returns</span>
+        <h2 class="section-h">Measurable <span class="hl">ROI</span> from Day One</h2>
+        <p class="section-sub">Our commercial installations are engineered to deliver tangible financial returns with full transparency on payback timelines.</p>
+        <div class="roi-cards">
+          <div class="roi-card"><div class="roi-val">4-6</div><div class="roi-lbl">Year Payback</div></div>
+          <div class="roi-card"><div class="roi-val">60%</div><div class="roi-lbl">Bill Reduction</div></div>
+          <div class="roi-card"><div class="roi-val">25yr</div><div class="roi-lbl">Panel Warranty</div></div>
+          <div class="roi-card"><div class="roi-val">₹5Cr+</div><div class="roi-lbl">Avg. Lifetime Savings</div></div>
+        </div>
+        <div style="margin-top:28px;padding:24px;background:#eff6ff;border-radius:20px;border:1px solid #bfdbfe;">
+          <div style="font-size:.85rem;font-weight:700;color:#1e40af;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;">✦ Business Financing Options</div>
+          <p style="font-size:.9rem;color:#475569;line-height:1.7;">RESCO model (zero upfront cost), EMI financing, capital purchase with depreciation benefits, and solar loans via our banking partners.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODELS -->
+<section style="padding:100px 0;background:linear-gradient(180deg,#f8fafc 0%,#eff6ff 100%);">
+  <div style="max-width:80rem;margin:auto;padding:0 32px;">
+    <div style="text-align:center;margin-bottom:60px;" class="fade-up">
+      <span class="section-tag">Financing Models</span>
+      <h2 class="section-h">Choose Your <span class="hl">Business Model</span></h2>
+    </div>
+    <div class="models-grid">
+      <div class="model-card fade-up">
+        <div class="model-top"><div class="model-icon" style="background:#eff6ff;"><svg viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" width="28" height="28"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="model-name">Capex Model</div><div class="model-sub">Own your solar system outright</div></div>
+        <div class="model-body"><ul class="model-features"><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Full ownership from day one</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Maximum savings & depreciation benefits</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>80% depreciation in Year 1 (IT Act)</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Best long-term ROI option</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Net metering credits earned</li></ul><div class="model-price"><div class="model-price-label">Best for</div><div class="model-price-val">Asset-heavy businesses</div></div></div>
+      </div>
+      <div class="model-card fade-up" style="transition-delay:.15s;border-color:#0ea5e9;box-shadow:0 20px 50px rgba(14,165,233,.2);">
+        <div class="model-top" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);"><div style="background:#0ea5e9;color:#fff;font-size:.72px;font-weight:700;padding:4px 12px;border-radius:999px;display:inline-block;margin-bottom:12px;font-size:.72rem;letter-spacing:.5px;">MOST POPULAR</div><div class="model-icon" style="background:rgba(14,165,233,.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" width="28" height="28"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div class="model-name">Opex / RESCO Model</div><div class="model-sub">Zero upfront cost solar</div></div>
+        <div class="model-body"><ul class="model-features"><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>₹0 investment required</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Pay only for units generated</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>ChargeBees owns & maintains system</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Immediate bill savings from day one</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Transfer ownership option after 10 years</li></ul><div class="model-price"><div class="model-price-label">Best for</div><div class="model-price-val">Zero-capital businesses</div></div></div>
+      </div>
+      <div class="model-card fade-up" style="transition-delay:.3s">
+        <div class="model-top"><div class="model-icon" style="background:#f0fdf4;"><svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" width="28" height="28"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><div class="model-name">EMI / Loan Model</div><div class="model-sub">Finance your solar investment</div></div>
+        <div class="model-body"><ul class="model-features"><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Low or zero interest solar loans</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Own after loan tenure</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>EMI often less than current bill</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Via leading bank partners</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>12–84 month tenure options</li></ul><div class="model-price"><div class="model-price-label">Best for</div><div class="model-price-val">Growing businesses</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section style="padding:80px 0;">
+  <div style="max-width:80rem;margin:auto;padding:0 32px;">
+    <div class="process-wrap fade-up">
+      <div style="text-align:center;margin-bottom:60px;">
+        <span class="section-tag" style="color:#38bdf8;">Simple Process</span>
+        <h2 class="section-h" style="color:#fff;">From Enquiry to <span class="hl">Energy Savings</span></h2>
+      </div>
+      <div class="process-steps">
+        <div class="proc-step"><div class="proc-num">1</div><div class="proc-title">Site Assessment</div><div class="proc-desc">Free rooftop survey and energy audit by our commercial specialists.</div></div>
+        <div class="proc-step"><div class="proc-num">2</div><div class="proc-title">Custom Design</div><div class="proc-desc">Detailed system design with 3D modeling, shading analysis, and ROI projections.</div></div>
+        <div class="proc-step"><div class="proc-num">3</div><div class="proc-title">Approvals</div><div class="proc-desc">DISCOM permissions, net metering application, and subsidy filings handled.</div></div>
+        <div class="proc-step"><div class="proc-num">4</div><div class="proc-title">Installation</div><div class="proc-desc">Professional EPC execution with minimal disruption to your business operations.</div></div>
+        <div class="proc-step"><div class="proc-num">5</div><div class="proc-title">Commissioning</div><div class="proc-desc">System goes live with full monitoring setup and team training on the app.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section style="padding:100px 0;background:#fff;">
+  <div style="max-width:80rem;margin:auto;padding:0 32px;">
+    <div style="text-align:center;margin-bottom:60px;" class="fade-up">
+      <span class="section-tag">Our Advantage</span>
+      <h2 class="section-h">Why Businesses <span class="hl">Choose</span> ChargeBees</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-up"><div class="wi"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="why-title">Dedicated Account Manager</div><div class="why-desc">Every commercial client gets a dedicated project and account manager — one point of contact from design to operation.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.1s"><div class="wi"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="why-title">MNRE-Empanelled EPC</div><div class="why-desc">Fully certified Engineering, Procurement & Construction capability with proven commercial project delivery track record.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.2s"><div class="wi"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="why-title">Commercial-Grade Monitoring</div><div class="why-desc">Enterprise dashboard with energy analytics, demand forecasting, and automated monthly reports for stakeholders.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.3s"><div class="wi"><svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/></svg></div><div class="why-title">Subsidy & Compliance</div><div class="why-desc">Full assistance with commercial subsidy schemes, DISCOM registrations, CEA compliance, and net metering agreements.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.4s"><div class="wi"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="why-title">O&M Contracts Available</div><div class="why-desc">Long-term operations and maintenance contracts with guaranteed uptime SLAs and quarterly performance reviews.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.5s"><div class="wi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="why-title">ESG & Carbon Credits</div><div class="why-desc">Get documentation for your ESG reporting, carbon credit certification, and sustainability disclosures for investors.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="cta-inner">
+    <span class="section-tag" style="color:#38bdf8;">Ready to Reduce Costs?</span>
+    <h2 class="cta-title">Go Solar. <span>Save Big.</span> Grow Faster.</h2>
+    <p class="cta-sub">Join leading businesses across India that have transformed their energy costs with ChargeBees commercial solar solutions.</p>
+    <div class="cta-btns">
+      <a href="#contact-form" class="cta-btn-sky">Get Business Quote</a>
+      <a href="solar_products.html" class="cta-btn-outline">All Solar Solutions</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer><div class="footer-inner"><div class="footer-grid"><div class="footer-about"><div style="display:flex;align-items:center;gap:8px;"><img src="images/logo.png" alt="ChargeBees Logo" style="height:40px;width:auto;object-fit:contain;"><span class="brand-logo-text">Charge <span>Bees</span></span></div><p>Leading the charge towards a sustainable electric future with India's largest EV charging network.</p><div class="socials"><a href="https://www.instagram.com/chargebees" target="_blank" class="social-btn"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a><a href="https://www.facebook.com/share/1ESQNWy5Zs/" target="_blank" class="social-btn"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a><a href="https://wa.me/919000040477" target="_blank" class="social-btn"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"></a><a href="mailto:db@chargebees.com" class="social-btn"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Mail"></a></div></div><div class="footer-col"><h4>Company</h4><ul><li><a href="index.html#about">About Us</a></li><li><a href="partners.html#Partnerships">Partnerships</a></li><li><a href="media-center.html#media">Media Center</a></li><li><a href="careers.html#careers">Careers</a></li></ul></div><div class="footer-col"><h4>Solutions</h4><ul><li><a href="stationfinder.html">Station Finder</a></li><li><a href="products.html#services">EV Services</a></li><li><a href="residential.html">Residential Solar</a></li><li><a href="commercial.html">Commercial Solar</a></li><li><a href="industrial.html">Industrial Solar</a></li><li><a href="ground.html">Ground Mounted</a></li></ul></div><div class="footer-col"><h4>Contact</h4><ul class="footer-contact"><li><span>db@chargebees.com</span></li><li><span>+91 90000 40477</span></li><li style="margin-top:8px;"><strong>HYDERABAD</strong><span>Nanakramguda, Hyderabad, Telangana 500008</span></li></ul></div></div><div class="footer-bottom"><p>© 2026 Chargebees. All rights reserved.</p><div class="footer-bottom-links"><a href="terms.html#terms">Terms & Services</a><a href="privacy.html">Privacy Policy</a></div></div></div></footer>
+
+<script>
+lucide.createIcons();
+// particles
+const pc=document.getElementById('particles');
+if(pc){for(let i=0;i<15;i++){const p=document.createElement('div');p.className='particle';p.style.left=Math.random()*100+'%';p.style.animationDuration=(8+Math.random()*12)+'s';p.style.animationDelay=(-Math.random()*20)+'s';p.style.width=p.style.height=(2+Math.random()*4)+'px';pc.appendChild(p);}}
+const menuBtn=document.getElementById('menu-btn');
+const mobileMenu=document.getElementById('mobile-menu');
+if(menuBtn)menuBtn.addEventListener('click',()=>mobileMenu.classList.toggle('open'));
+function handleResize(){const btn=document.getElementById('menu-btn');if(btn)btn.style.display=window.innerWidth<1024?'flex':'none';}
+handleResize();window.addEventListener('resize',handleResize);
+const animEls=document.querySelectorAll('.fade-up,.fade-left,.fade-right');
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});},{threshold:.12});
+animEls.forEach(el=>observer.observe(el));
+function submitForm(btn){btn.textContent='✓ Request Received! Our team will contact you shortly.';btn.style.background='linear-gradient(135deg,#059669,#047857)';setTimeout(()=>{btn.textContent='🏢 Get Commercial Solar Quote';btn.style.background='linear-gradient(135deg,#0ea5e9,#0284c7)';},3500);}
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});});
+</script>
+</body>
+</html>

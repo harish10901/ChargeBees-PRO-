@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Industrial Solar Rooftops – ChargeBees</title>
+<meta name="description" content="ChargeBees industrial solar rooftop solutions for factories, warehouses and manufacturing units. 500kW to 5MW capacity.">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&family=Bebas+Neue&family=Orbitron:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --emerald:#10b981;--emerald-dark:#059669;
+  --orange:#f97316;--amber:#f59e0b;--rust:#c2410c;
+  --steel:#1c2333;--steel-light:#252f3f;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:#0f1117;overflow-x:hidden;padding-top:80px;}
+
+/* BG */
+.bg-texture{position:fixed;inset:0;opacity:.06;pointer-events:none;z-index:0;background-image:url('https://www.transparenttextures.com/patterns/dark-stripes.png');}
+.bg-grid{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(to right,rgba(249,115,22,.04) 1px,transparent 1px),linear-gradient(to bottom,rgba(249,115,22,.04) 1px,transparent 1px);background-size:60px 60px;}
+
+/* BRAND */
+.brand-logo-text{font-size:1.55rem;font-weight:500;letter-spacing:-.5px;color:#111827;font-family:"Poppins",sans-serif;line-height:1;}
+.brand-logo-text span{color:#10b981;}
+
+/* NAV */
+nav{position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:99999!important;background:#ffffff!important;border-bottom:1px solid #f3f4f6;-webkit-transform:translateZ(0);}
+.nav-inner{max-width:80rem;margin:auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center;height:80px;}
+.nav-links{display:flex;align-items:center;gap:1.25rem;}
+.nav-links a{font-size:.875rem;font-weight:500;color:#4b5563;transition:color .2s;text-decoration:none;}
+.nav-links a:hover{color:#111827;}
+.nav-btn{background:#059669;color:#fff;padding:.625rem 1.5rem;border-radius:9999px;font-size:.875rem;font-weight:600;text-decoration:none;transition:background .2s;white-space:nowrap;}
+.nav-btn:hover{background:#047857;}
+.dropdown-wrap{position:relative;}
+.dropdown-trigger{display:flex;align-items:center;gap:4px;font-size:.875rem;font-weight:500;color:#4b5563;cursor:pointer;background:none;border:none;padding:0;font-family:inherit;transition:color .2s;white-space:nowrap;}
+.dropdown-trigger:hover{color:#111827;}
+.dropdown-trigger.solar-active{color:#059669;}
+.mega-drop{position:absolute;top:calc(100% + 2px);left:50%;transform:translateX(-50%);width:680px;background:#fff;border-radius:24px;box-shadow:0 25px 60px rgba(0,0,0,.12);border:1px solid #f0fdf4;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:12px;opacity:0;visibility:hidden;transition:all .25s ease;pointer-events:none;z-index:100;}
+.dropdown-wrap:hover .mega-drop{opacity:1;visibility:visible;pointer-events:all;transform:translateX(-50%) translateY(0);}
+.drop-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border-radius:16px;text-decoration:none;transition:background .2s;}
+.drop-item:hover{background:#f0fdf4;}
+.drop-icon{width:44px;height:44px;min-width:44px;background:linear-gradient(135deg,#10b981,#34d399);border-radius:12px;display:flex;align-items:center;justify-content:center;}
+.drop-icon svg{width:22px;height:22px;stroke:#fff;stroke-width:2;fill:none;}
+.drop-text p{font-weight:700;font-size:.9rem;color:#111827;margin-bottom:2px;}
+.drop-text span{font-size:.78rem;color:#6b7280;}
+.mega-menu-ev{position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%);width:800px;background:#fff;border-radius:24px;box-shadow:0 25px 60px rgba(0,0,0,.12);border:1px solid #f3f4f6;padding:32px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;opacity:0;visibility:hidden;transition:all .25s ease;z-index:100;}
+.dropdown-wrap:hover .mega-menu-ev{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+.ev-col h3{font-size:1rem;font-weight:700;color:#111827;margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+.ev-item{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:16px;text-decoration:none;transition:background .2s;margin-bottom:8px;}
+.ev-item:hover{background:#f0fdf4;}
+.ev-item-icon{width:44px;height:44px;min-width:44px;background:#f3f4f6;border-radius:12px;display:flex;align-items:center;justify-content:center;}
+.ev-item:hover .ev-item-icon{background:#fff;}
+.ev-item-icon svg{width:22px;height:22px;stroke:#10b981;stroke-width:2;fill:none;}
+.ev-item p{font-weight:700;font-size:.875rem;color:#111827;}
+.ev-item span{font-size:.75rem;color:#6b7280;}
+.badge{font-size:10px;background:#f3f4f6;color:#6b7280;padding:2px 8px;border-radius:999px;font-weight:700;text-transform:uppercase;}
+#mobile-menu{display:none;position:fixed;top:80px;left:0;width:100%;background:#fff;border-top:1px solid #f3f4f6;box-shadow:0 20px 40px rgba(0,0,0,.1);z-index:40;max-height:calc(100vh - 80px);overflow-y:auto;}
+#mobile-menu.open{display:block;}
+.mob-link{display:block;padding:14px 24px;font-size:1rem;font-weight:600;color:#374151;text-decoration:none;border-bottom:1px solid #f9fafb;}
+.mob-link:hover{color:#059669;}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;position:relative;overflow:hidden;background:#0a0e14;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.25;}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,rgba(10,14,20,.98) 0%,rgba(10,14,20,.85) 50%,rgba(249,115,22,.08) 100%);}
+.scan-lines{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(249,115,22,.015) 2px,rgba(249,115,22,.015) 4px);pointer-events:none;z-index:1;}
+.hero-glow{position:absolute;bottom:-200px;right:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(249,115,22,.12),transparent 70%);border-radius:50%;pointer-events:none;z-index:1;animation:glowPulse 4s ease-in-out infinite;}
+@keyframes glowPulse{0%,100%{opacity:.6;transform:scale(1);}50%{opacity:1;transform:scale(1.1);}}
+
+.hero-left{position:relative;z-index:10;padding:100px 60px 100px 80px;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.25);padding:8px 20px;border-radius:999px;color:#fb923c;font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:32px;font-family:'Orbitron',monospace;}
+.hero-eyebrow svg{width:14px;height:14px;stroke:#f97316;fill:none;animation:spin 8s linear infinite;}
+@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.hero-h1{font-family:'Orbitron',monospace;font-size:clamp(2.2rem,4.5vw,4.5rem);line-height:1.05;color:#fff;font-weight:800;margin-bottom:24px;text-shadow:0 0 60px rgba(249,115,22,.3);}
+.hero-h1 .accent{color:#f97316;}
+.hero-p{font-size:1rem;line-height:1.8;color:rgba(255,255,255,.65);max-width:460px;margin-bottom:40px;}
+.capacity-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:40px;}
+.cap-box{background:rgba(255,255,255,.04);border:1px solid rgba(249,115,22,.2);border-radius:16px;padding:16px;position:relative;overflow:hidden;}
+.cap-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,#f97316,#f59e0b);}
+.cap-n{font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:700;color:#f97316;line-height:1;}
+.cap-l{font-size:.72rem;color:rgba(255,255,255,.5);margin-top:4px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-orange{background:linear-gradient(135deg,#f97316,#c2410c);color:#fff;padding:14px 34px;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .25s;border:none;cursor:pointer;box-shadow:0 8px 25px rgba(249,115,22,.35);}
+.btn-orange:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(249,115,22,.5);}
+.btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:#fff;padding:14px 34px;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .25s;cursor:pointer;}
+.btn-ghost:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3);}
+
+/* FORM */
+.hero-right{position:relative;z-index:10;padding:60px 80px 60px 40px;}
+.form-card{background:rgba(255,255,255,.97);border-radius:28px;padding:40px 36px;box-shadow:0 40px 100px rgba(0,0,0,.5),0 0 0 1px rgba(249,115,22,.15),inset 0 1px 0 rgba(255,255,255,.9);animation:cardPulse 5s ease-in-out infinite;}
+@keyframes cardPulse{0%,100%{box-shadow:0 40px 100px rgba(0,0,0,.5),0 0 0 1px rgba(249,115,22,.15),inset 0 1px 0 rgba(255,255,255,.9);transform:translateY(0);}50%{box-shadow:0 50px 120px rgba(0,0,0,.5),0 0 0 1px rgba(249,115,22,.3),0 0 40px rgba(249,115,22,.1),inset 0 1px 0 rgba(255,255,255,.9);transform:translateY(-10px);}}
+.form-card:hover{animation:none;transform:translateY(-8px);}
+.fc-icon{width:52px;height:52px;background:linear-gradient(135deg,#f97316,#c2410c);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.fc-icon svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:2;}
+.form-title{font-family:'Orbitron',monospace;font-size:1.3rem;font-weight:700;color:#111827;margin-bottom:4px;line-height:1.2;}
+.form-sub{font-size:.83rem;color:#6b7280;margin-bottom:24px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.fg{margin-bottom:14px;}
+.fg label{display:block;font-size:.72rem;font-weight:700;color:#374151;margin-bottom:5px;text-transform:uppercase;letter-spacing:.6px;}
+.fg input,.fg select,.fg textarea{width:100%;padding:11px 15px;border:1.5px solid #e5e7eb;border-radius:12px;font-size:.9rem;font-family:inherit;color:#111827;background:#fafafa;transition:all .2s;outline:none;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:#f97316;background:#fff;box-shadow:0 0 0 3px rgba(249,115,22,.12);}
+.fg textarea{resize:none;height:80px;}
+.form-btn{width:100%;padding:15px;background:linear-gradient(135deg,#f97316,#c2410c);color:#fff;border:none;border-radius:14px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .25s;box-shadow:0 8px 20px rgba(249,115,22,.3);}
+.form-btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(249,115,22,.5);}
+
+/* STATS */
+.stats-bar{background:linear-gradient(135deg,#0a0e14,#1c2333);border-top:2px solid rgba(249,115,22,.2);padding:44px 0;position:relative;}
+.stats-bar::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(249,115,22,.04) 59px,rgba(249,115,22,.04) 60px);}
+.stats-inner{max-width:80rem;margin:auto;padding:0 32px;display:grid;grid-template-columns:repeat(5,1fr);gap:24px;position:relative;z-index:2;}
+.st{text-align:center;padding:16px;border-radius:16px;border:1px solid rgba(249,115,22,.1);}
+.st:hover{border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.05);}
+.st-n{font-family:'Orbitron',monospace;font-size:2rem;color:#f97316;line-height:1;}
+.st-l{font-size:.75rem;color:rgba(255,255,255,.5);font-weight:600;margin-top:6px;text-transform:uppercase;letter-spacing:.5px;}
+
+/* SECTION STYLES */
+.section-tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:3px;color:#f97316;margin-bottom:14px;text-transform:uppercase;font-family:'Orbitron',monospace;}
+.section-h{font-size:clamp(2rem,3.5vw,3rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:16px;}
+.section-h .hl{color:#f97316;}
+.section-sub{font-size:1rem;color:rgba(255,255,255,.6);line-height:1.75;max-width:560px;}
+
+/* APPLICATIONS GRID */
+.apps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.app-card{background:rgba(255,255,255,.03);border:1px solid rgba(249,115,22,.1);border-radius:24px;padding:32px 24px;text-align:center;transition:all .4s cubic-bezier(.22,1,.36,1);cursor:default;position:relative;overflow:hidden;}
+.app-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:2px;background:linear-gradient(to right,transparent,#f97316,transparent);transition:left .6s ease;}
+.app-card:hover::before{left:100%;}
+.app-card:hover{background:rgba(249,115,22,.06);border-color:rgba(249,115,22,.4);transform:translateY(-12px);box-shadow:0 30px 60px rgba(249,115,22,.15);}
+.app-card:hover .app-title{color:#f97316;}
+.app-icon{width:60px;height:60px;background:rgba(249,115,22,.1);border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;transition:all .3s;}
+.app-card:hover .app-icon{background:rgba(249,115,22,.2);}
+.app-icon svg{width:30px;height:30px;stroke:#f97316;fill:none;stroke-width:2;}
+.app-title{font-size:1rem;font-weight:800;color:#fff;margin-bottom:8px;transition:color .3s;}
+.app-desc{font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.6;}
+
+/* TECH SHOWCASE */
+.tech-split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.tech-img{border-radius:28px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 1px rgba(249,115,22,.1);transform:perspective(900px) rotateY(-5deg);transition:transform .5s;}
+.tech-img:hover{transform:perspective(900px) rotateY(0);}
+.tech-img img{width:100%;height:420px;object-fit:cover;display:block;}
+.tech-img-float{position:relative;}
+.tech-badge{position:absolute;bottom:24px;right:24px;background:#0f1117;border:1px solid rgba(249,115,22,.3);border-radius:16px;padding:14px 20px;display:flex;align-items:center;gap:12px;box-shadow:0 10px 30px rgba(0,0,0,.4);}
+.tb-icon{width:40px;height:40px;background:rgba(249,115,22,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;}
+.tb-icon svg{width:20px;height:20px;stroke:#f97316;fill:none;}
+.tb-num{font-family:'Orbitron',monospace;font-size:1.2rem;font-weight:800;color:#f97316;}
+.tb-lbl{font-size:.72rem;color:rgba(255,255,255,.5);}
+.tech-features{margin-top:32px;display:flex;flex-direction:column;gap:16px;}
+.tech-feat{display:flex;gap:16px;align-items:flex-start;padding:18px;background:rgba(255,255,255,.03);border:1px solid rgba(249,115,22,.1);border-radius:16px;transition:all .3s;}
+.tech-feat:hover{background:rgba(249,115,22,.06);border-color:rgba(249,115,22,.25);transform:translateX(8px);}
+.tf-icon{width:36px;height:36px;min-width:36px;background:rgba(249,115,22,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-top:2px;}
+.tf-icon svg{width:18px;height:18px;stroke:#f97316;fill:none;stroke-width:2.5;}
+.tf-title{font-weight:700;color:#fff;margin-bottom:4px;font-size:.95rem;}
+.tf-desc{font-size:.85rem;color:rgba(255,255,255,.5);line-height:1.6;}
+
+/* ENERGY CHART */
+.chart-section{background:rgba(255,255,255,.02);border:1px solid rgba(249,115,22,.1);border-radius:36px;padding:60px;position:relative;overflow:hidden;}
+.chart-section::before{content:'INDUSTRIAL SOLAR DATA';position:absolute;top:24px;right:32px;font-family:'Orbitron',monospace;font-size:.65rem;font-weight:700;color:rgba(249,115,22,.3);letter-spacing:3px;}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.energy-bars{display:flex;flex-direction:column;gap:14px;margin-top:24px;}
+.bar-row{display:flex;align-items:center;gap:14px;}
+.bar-label{font-size:.8rem;color:rgba(255,255,255,.6);font-weight:600;width:120px;flex-shrink:0;}
+.bar-track{flex:1;height:10px;background:rgba(255,255,255,.06);border-radius:5px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:5px;background:linear-gradient(to right,#f97316,#f59e0b);animation:barGrow 1.5s ease-out forwards;transform-origin:left;}
+@keyframes barGrow{from{width:0%;}to{width:var(--w);}}
+.bar-pct{font-family:'Orbitron',monospace;font-size:.8rem;color:#f97316;font-weight:700;width:40px;text-align:right;}
+
+/* SPECS TABLE */
+.specs-table{background:rgba(255,255,255,.03);border:1px solid rgba(249,115,22,.15);border-radius:28px;overflow:hidden;}
+.specs-header{background:linear-gradient(135deg,rgba(249,115,22,.2),rgba(249,115,22,.1));padding:20px 32px;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.specs-header span{font-family:'Orbitron',monospace;font-size:.78rem;font-weight:700;color:#f97316;text-transform:uppercase;letter-spacing:1px;}
+.spec-row{display:grid;grid-template-columns:1fr 1fr;padding:16px 32px;gap:16px;border-top:1px solid rgba(249,115,22,.08);transition:background .2s;}
+.spec-row:hover{background:rgba(249,115,22,.05);}
+.spec-key{font-size:.88rem;color:rgba(255,255,255,.6);font-weight:500;}
+.spec-val{font-size:.88rem;color:#fff;font-weight:700;}
+
+/* PROCESS */
+.process-band{background:linear-gradient(135deg,#0a0e14,#1c2333);border-top:1px solid rgba(249,115,22,.1);border-bottom:1px solid rgba(249,115,22,.1);padding:100px 0;position:relative;overflow:hidden;}
+.process-band::before{content:'';position:absolute;top:-100px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(249,115,22,.06),transparent 70%);border-radius:50%;}
+.proc-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+.proc-steps::before{content:'';position:absolute;top:44px;left:12%;right:12%;height:2px;background:linear-gradient(to right,#f97316,#f59e0b,#f97316);opacity:.3;}
+.proc-step{text-align:center;padding:0 20px;position:relative;z-index:2;}
+.proc-num{width:88px;height:88px;border-radius:50%;border:2px solid rgba(249,115,22,.4);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-family:'Orbitron',monospace;font-size:1.6rem;color:#f97316;position:relative;transition:transform .3s;}
+.proc-num::before{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid rgba(249,115,22,.15);}
+.proc-step:hover .proc-num{transform:scale(1.1) translateY(-4px);border-color:#f97316;box-shadow:0 0 30px rgba(249,115,22,.3);}
+.proc-title{font-size:.95rem;font-weight:800;color:#fff;margin-bottom:8px;font-family:'Orbitron',monospace;font-size:.8rem;}
+.proc-desc{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.65;}
+
+/* WHY */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.why-card{background:rgba(255,255,255,.03);border:1px solid rgba(249,115,22,.1);border-radius:24px;padding:32px 28px;transition:all .35s;cursor:default;}
+.why-card:hover{background:rgba(249,115,22,.07);border-color:rgba(249,115,22,.3);transform:translateY(-8px) rotateX(-2deg);box-shadow:0 20px 50px rgba(249,115,22,.12);}
+.why-card:hover .why-title{color:#f97316;}
+.wi{width:52px;height:52px;background:rgba(249,115,22,.1);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:background .3s;}
+.why-card:hover .wi{background:rgba(249,115,22,.2);}
+.wi svg{width:26px;height:26px;stroke:#f97316;fill:none;stroke-width:2;}
+.why-title{font-size:1rem;font-weight:800;color:#fff;margin-bottom:10px;transition:color .3s;}
+.why-desc{font-size:.85rem;color:rgba(255,255,255,.5);line-height:1.65;}
+
+/* CTA */
+.cta-band{background:linear-gradient(135deg,#0a0e14,#1c2333);border-top:1px solid rgba(249,115,22,.2);padding:80px 0;position:relative;overflow:hidden;}
+.cta-band::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(249,115,22,.1),transparent 70%);border-radius:50%;}
+.cta-inner{max-width:60rem;margin:auto;text-align:center;padding:0 32px;position:relative;z-index:2;}
+.cta-title{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,4vw,3.5rem);color:#fff;font-weight:800;margin-bottom:16px;line-height:1.15;}
+.cta-title span{color:#f97316;}
+.cta-sub{font-size:1rem;color:rgba(255,255,255,.6);margin-bottom:36px;}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.cta-btn-orange{background:linear-gradient(135deg,#f97316,#c2410c);color:#fff;padding:14px 36px;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .25s;box-shadow:0 8px 25px rgba(249,115,22,.35);}
+.cta-btn-orange:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(249,115,22,.5);}
+.cta-btn-ghost{border:2px solid rgba(249,115,22,.4);color:#f97316;padding:14px 36px;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .25s;}
+.cta-btn-ghost:hover{border-color:#f97316;background:rgba(249,115,22,.08);}
+
+/* FOOTER */
+footer{background:#f9fafb;padding-top:80px;padding-bottom:40px;border-top:1px solid #e5e7eb;}
+.footer-inner{max-width:80rem;margin:auto;padding:0 32px;}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:48px;margin-bottom:60px;}
+.footer-about p{font-size:.9rem;color:#6b7280;line-height:1.75;margin:20px 0;}
+.socials{display:flex;gap:12px;}
+.social-btn{width:44px;height:44px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.08);transition:transform .2s;}
+.social-btn:hover{transform:scale(1.1);}
+.social-btn img{width:22px;height:22px;}
+.footer-col h4{font-weight:700;color:#111827;margin-bottom:20px;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:12px;}
+.footer-col ul li a{color:#6b7280;text-decoration:none;font-size:.9rem;transition:color .2s;}
+.footer-col ul li a:hover{color:#10b981;}
+.footer-contact li{display:flex;flex-direction:column;gap:2px;margin-bottom:14px;font-size:.9rem;color:#6b7280;}
+.footer-contact li strong{color:#374151;font-weight:600;}
+.footer-bottom{border-top:1px solid #e5e7eb;padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:.85rem;color:#9ca3af;}
+.footer-bottom-links{display:flex;gap:24px;}
+.footer-bottom-links a{font-size:.85rem;color:#9ca3af;text-decoration:none;transition:color .2s;}
+.footer-bottom-links a:hover{color:#374151;}
+
+/* ANIMS */
+.fade-up{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+.fade-left{opacity:0;transform:translateX(-50px);transition:opacity .8s ease,transform .8s ease;}
+.fade-left.visible{opacity:1;transform:translateX(0);}
+.fade-right{opacity:0;transform:translateX(50px);transition:opacity .8s ease,transform .8s ease;}
+.fade-right.visible{opacity:1;transform:translateX(0);}
+
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;min-height:auto;}
+  .hero-left{padding:60px 32px 40px;}
+  .hero-right{padding:40px 32px 60px;}
+  .form-card{animation:none!important;}
+  .apps-grid{grid-template-columns:repeat(2,1fr);}
+  .tech-split{grid-template-columns:1fr;}
+  .chart-grid{grid-template-columns:1fr;}
+  .why-grid{grid-template-columns:repeat(2,1fr);}
+  .proc-steps{grid-template-columns:repeat(2,1fr);}
+  .proc-steps::before{display:none;}
+  .stats-inner{grid-template-columns:repeat(3,1fr);}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px;}
+  .mega-drop,.mega-menu-ev{display:none!important;}
+  .nav-links{display:none;}
+  .capacity-row{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  .apps-grid,.why-grid{grid-template-columns:1fr;}
+  .stats-inner{grid-template-columns:repeat(2,1fr);}
+  .footer-grid{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .frow{grid-template-columns:1fr;}
+  .nav-links{display:none!important;}
+  .nav-btn{display:none!important;}
+  #menu-btn{display:flex!important;}
+}
+</style>
+</head>
+<body>
+<div class="bg-texture"></div>
+<div class="bg-grid"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;">
+      <img src="images/logo.png" alt="ChargeBees Logo" style="height:40px;width:auto;object-fit:contain;">
+      <span class="brand-logo-text">Charge <span>Bees</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">About</a>
+      <a href="stationfinder.html">Station Finder</a>
+      <div class="dropdown-wrap">
+        <button class="dropdown-trigger"><a href="products.html" style="color:inherit;text-decoration:none;display:flex;align-items:center;gap:4px;">EV Products<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a></button>
+        <div class="mega-menu-ev">
+          <div class="ev-col"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Hardware</h3><a href="products.html#hardware" class="ev-item"><div class="ev-item-icon"><svg viewBox="0 0 24 24"><path d="M13 2l-10 12h9l-1 8 10-12h-9l1-8z"/></svg></div><div><p>All Chargers</p><span>AC & DC Solutions</span></div></a></div>
+          <div class="ev-col"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Software</h3><a href="products.html#software" class="ev-item"><div class="ev-item-icon"><svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div><div><p>ChargeCloud <span class="badge">Soon</span></p><span>CMS Platform</span></div></a></div>
+          <div class="ev-col"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>Services</h3><a href="products.html#services" class="ev-item"><div class="ev-item-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><p>Energy As A Service</p><span>Renewable Energy</span></div></a></div>
+        </div>
+      </div>
+      <div class="dropdown-wrap">
+        <button class="dropdown-trigger solar-active">Solar Products<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="mega-drop">
+          <a href="Solar_products.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="drop-text"><p>Our Solar Solutions</p><span>For all your energy needs</span></div></a>
+          <a href="residential.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="drop-text"><p>Residential Solar Rooftops</p><span>For homes & apartments</span></div></a>
+          <a href="commercial.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div><div class="drop-text"><p>Commercial Solar Rooftops</p><span>For offices & retail</span></div></a>
+          <a href="industrial.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg></div><div class="drop-text"><p>Industrial Solar Rooftops</p><span>For factories & warehouses</span></div></a>
+          <a href="ground.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></div><div class="drop-text"><p>Ground Mounted Solar System</p><span>Large scale solar farms</span></div></a>
+        </div>
+      </div>
+      <a href="partners.html">Partners</a>
+      <a href="media-center.html">Media Center</a>
+      <a href="careers.html">Careers</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a href="https://play.google.com/store" target="_blank" class="nav-btn">Download App</a>
+      <a href="contact.html" class="nav-btn">Contact Us</a>
+      <button id="menu-btn" style="display:none;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;border:1px solid #e5e7eb;background:#fff;cursor:pointer;"><i data-lucide="menu" style="width:24px;height:24px;color:#111827;"></i></button>
+    </div>
+  </div>
+</nav>
+<div id="mobile-menu">
+  <div style="padding:24px;display:flex;flex-direction:column;gap:4px;">
+    <a href="index.html" class="mob-link">About</a>
+    <a href="stationfinder.html" class="mob-link">Station Finder</a>
+    <a href="products.html" class="mob-link">EV Products</a>
+    <a href="solar_products.html" class="mob-link">Solar Products</a>
+    <a href="residential.html" class="mob-link" style="padding-left:36px;font-size:.9rem;">↳ Residential Solar</a>
+    <a href="commercial.html" class="mob-link" style="padding-left:36px;font-size:.9rem;">↳ Commercial Solar</a>
+    <a href="industrial.html" class="mob-link" style="color:#059669;padding-left:36px;font-size:.9rem;">↳ Industrial Solar</a>
+    <a href="ground.html" class="mob-link" style="padding-left:36px;font-size:.9rem;">↳ Ground Mounted</a>
+    <a href="partners.html" class="mob-link">Partners</a>
+    <a href="media-center.html" class="mob-link">Media Center</a>
+    <a href="careers.html" class="mob-link">Careers</a>
+    <a href="contact.html" class="mob-link">Contact Us</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="quote">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1920&auto=format&fit=crop" alt="Industrial Solar"></div>
+  <div class="scan-lines"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow"><svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg>Industrial Solar Rooftops</div>
+    <h1 class="hero-h1">Heavy-Duty<br><span class="accent">Solar Power</span><br>For Industry.</h1>
+    <p class="hero-p">Engineered for factories, warehouses, and manufacturing units — our industrial solar systems handle massive energy loads with precision, reliability, and peak performance guarantees.</p>
+    <div class="capacity-row">
+      <div class="cap-box"><div class="cap-n">500kW</div><div class="cap-l">Minimum Capacity</div></div>
+      <div class="cap-box"><div class="cap-n">5MW+</div><div class="cap-l">Maximum Capacity</div></div>
+      <div class="cap-box"><div class="cap-n">50%</div><div class="cap-l">Energy Cost Cut</div></div>
+    </div>
+    <div class="hero-btns">
+      <a href="#contact-form" class="btn-orange">Get Industrial Quote</a>
+      <a href="#applications" class="btn-ghost">Our Applications</a>
+    </div>
+  </div>
+  <div class="hero-right" id="contact-form">
+    <div class="form-card">
+      <div class="fc-icon"><svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg></div>
+      <div class="form-title">Industrial Solar Quote</div>
+      <div class="form-sub">Get a detailed technical proposal and energy audit for your facility within 72 hours.</div>
+      <div class="frow">
+        <div class="fg"><label>Contact Name</label><input type="text" placeholder="Rajesh Verma"></div>
+        <div class="fg"><label>Designation</label><input type="text" placeholder="Plant Manager"></div>
+      </div>
+      <div class="fg"><label>Company / Plant Name</label><input type="text" placeholder="Verma Industries Ltd."></div>
+      <div class="fg"><label>Phone Number</label><input type="tel" placeholder="+91 90000 40477"></div>
+      <div class="fg"><label>Business Email</label><input type="email" placeholder="rajesh@verma-industries.com"></div>
+      <div class="frow">
+        <div class="fg"><label>Industry Type</label>
+          <select><option>Select industry...</option><option>Manufacturing</option><option>Textile / Garments</option><option>Pharmaceuticals</option><option>Food Processing</option><option>Auto / Engineering</option><option>Chemicals</option><option>Cold Storage</option><option>Data Centre</option></select>
+        </div>
+        <div class="fg"><label>Monthly Electricity Bill</label>
+          <select><option>Select range...</option><option>₹5 – ₹20 Lakhs</option><option>₹20 – ₹50 Lakhs</option><option>₹50 Lakhs – ₹1 Cr</option><option>Above ₹1 Crore</option></select>
+        </div>
+      </div>
+      <div class="fg"><label>Rooftop / Land Area Available (sq ft)</label><input type="text" placeholder="e.g. 50,000 sq ft"></div>
+      <button class="form-btn" onclick="submitForm(this)">⚙️ Request Industrial Assessment</button>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="st fade-up"><div class="st-n">50+</div><div class="st-l">Industrial Projects</div></div>
+    <div class="st fade-up" style="transition-delay:.1s"><div class="st-n">100MW</div><div class="st-l">Capacity Planned</div></div>
+    <div class="st fade-up" style="transition-delay:.2s"><div class="st-n">50%</div><div class="st-l">Energy Cost Cut</div></div>
+    <div class="st fade-up" style="transition-delay:.3s"><div class="st-n">5yr</div><div class="st-l">Avg. Payback</div></div>
+    <div class="st fade-up" style="transition-delay:.4s"><div class="st-n">99.5%</div><div class="st-l">System Uptime</div></div>
+  </div>
+</div>
+
+<!-- APPLICATIONS -->
+<section id="applications" style="padding:100px 0;">
+  <div style="max-width:80rem;margin:auto;padding:0 32px;">
+    <div style="text-align:center;margin-bottom:60px;" class="fade-up">
+      <span class="section-tag">Industries Served</span>
+      <h2 class="section-h">Powering <span class="hl">Heavy Industries</span></h2>
+      <p class="section-sub" style="margin:auto;">Our industrial solar systems are engineered for the unique power demands of each sector.</p>
+    </div>
+    <div class="apps-grid">
+      <div class="app-card fade-up"><div class="app-icon"><svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg></div><div class="app-title">Manufacturing Units</div><div class="app-desc">High-load solar for assembly lines, heavy machinery, and production facilities with stable baseload demands.</div></div>
+      <div class="app-card fade-up" style="transition-delay:.1s"><div class="app-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div><div class="app-title">Textile & Garments</div><div class="app-desc">Power looms, dyeing units, and air conditioning loads — textile plants are ideal candidates for large rooftop solar.</div></div>
+      <div class="app-card fade-up" style="transition-delay:.2s"><div class="app-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="app-title">Pharmaceuticals</div><div class="app-desc">Uninterrupted, clean power for sensitive pharma manufacturing with hybrid backup and precision monitoring.</div></div>
+      <div class="app-card fade-up" style="transition-delay:.3s"><div class="app-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="app-title">Cold Storage & Logistics</div><div class="app-desc">Massive HVAC loads from cold storage are dramatically reduced by rooftop solar — often 60–70% savings on cooling.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH FEATURES -->
+<section style="padding:100px 0;background:rgba(255,255,255,.02);">
+  <div style="max-width:80rem;margin:auto;padding:0 32px;">
+    <div class="tech-split">
+      <div class="fade-left">
+        <div class="tech-img-float">
+          <div class="tech-img">
+            <img src="https://images.unsplash.com/photo-1548337138-e87d889cc369?q=80&w=800&auto=format&fit=crop" alt="Industrial Solar Technology">
+          </div>
+          <div class="tech-badge">
+            <div class="tb-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+            <div><div class="tb-num">5MW</div><div class="tb-lbl">Max Single Install</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-right">
+        <span class="section-tag">Technical Capabilities</span>
+        <h2 class="section-h">Industrial-Grade <span class="hl">Engineering</span></h2>
+        <p class="section-sub">Purpose-built for extreme industrial environments — high temperatures, heavy vibration, dust, and continuous operation demand our most robust solar systems.</p>
+        <div class="tech-features">
+          <div class="tech-feat"><div class="tf-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><div class="tf-title">Open Access Power</div><div class="tf-desc">Access power from utility-scale plants through open access regulations — dramatically reduce contracted demand charges.</div></div></div>
+          <div class="tech-feat"><div class="tf-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="tf-title">Peak Load Management</div><div class="tf-desc">Smart inverters and battery integration intelligently manage peak demand, reducing expensive ToD tariff charges significantly.</div></div></div>
+          <div class="tech-feat"><div class="tf-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="tf-title">Power Factor Correction</div><div class="tf-desc">Built-in power factor correction with industrial inverters reduces reactive power penalties from discoms.</div></div></div>
+          <div class="tech-feat"><div class="tf-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div><div class="tf-title">SCADA Integration</div><div class="tf-desc">Full integration with your existing plant SCADA, EMS, and BMS systems for unified energy management and reporting.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENERGY DATA SECTION -->
+<section style="padding:80px 0;">
+  <div style="max-width:80rem;margin:auto;padding:0 32px;">
+    <div class="chart-section fade-up">
+      <div class="chart-grid">
+        <div>
+          <span class="section-tag">Energy Performance</span>
+          <h2 class="section-h">Industry-Wise <span class="hl">Solar Impact</span></h2>
+          <p class="section-sub" style="margin-top:12px;">Average energy cost reduction across major industrial sectors with ChargeBees solar systems.</p>
+          <div class="energy-bars" style="margin-top:32px;">
+            <div class="bar-row"><span class="bar-label">Textiles</span><div class="bar-track"><div class="bar-fill" style="--w:75%;"></div></div><span class="bar-pct">75%</span></div>
+            <div class="bar-row"><span class="bar-label">Food Processing</span><div class="bar-track"><div class="bar-fill" style="--w:68%;"></div></div><span class="bar-pct">68%</span></div>
+            <div class="bar-row"><span class="bar-label">Cold Storage</span><div class="bar-track"><div class="bar-fill" style="--w:62%;"></div></div><span class="bar-pct">62%</span></div>
+            <div class="bar-row"><span class="bar-label">Manufacturing</span><div class="bar-track"><div class="bar-fill" style="--w:55%;"></div></div><span class="bar-pct">55%</span></div>
+            <div class="bar-row"><span class="bar-label">Pharma</span><div class="bar-track"><div class="bar-fill" style="--w:48%;"></div></div><span class="bar-pct">48%</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="specs-table">
+            <div class="specs-header"><span>Specification</span><span>Value</span></div>
+            <div class="spec-row"><div class="spec-key">Capacity Range</div><div class="spec-val">500kW – 5MW+</div></div>
+            <div class="spec-row"><div class="spec-key">Panel Efficiency</div><div class="spec-val">22–24% Mono PERC</div></div>
+            <div class="spec-row"><div class="spec-key">Inverter Type</div><div class="spec-val">Industrial String / Central</div></div>
+            <div class="spec-row"><div class="spec-key">Monitoring</div><div class="spec-val">SCADA / IoT Cloud</div></div>
+            <div class="spec-row"><div class="spec-key">Warranty</div><div class="spec-val">25yr Panel, 10yr Inverter</div></div>
+            <div class="spec-row"><div class="spec-key">O&M Contract</div><div class="spec-val">Up to 25 Years</div></div>
+            <div class="spec-row"><div class="spec-key">Uptime SLA</div><div class="spec-val">99.5% Guaranteed</div></div>
+            <div class="spec-row"><div class="spec-key">Certifications</div><div class="spec-val">IEC, BIS, MNRE Listed</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-band">
+  <div style="max-width:80rem;margin:auto;padding:0 32px;position:relative;z-index:2;">
+    <div style="text-align:center;margin-bottom:70px;" class="fade-up">
+      <span class="section-tag">Project Lifecycle</span>
+      <h2 class="section-h">Industrial <span class="hl">Project Flow</span></h2>
+    </div>
+    <div class="proc-steps">
+      <div class="proc-step fade-up"><div class="proc-num">01</div><div class="proc-title">Energy Audit</div><div class="proc-desc">Detailed consumption analysis, load profile study, and site survey by our industrial solar engineers.</div></div>
+      <div class="proc-step fade-up" style="transition-delay:.15s"><div class="proc-num">02</div><div class="proc-title">System Design</div><div class="proc-desc">Custom 3D structural design, shadow analysis, and detailed DPR with ROI projection and financing plan.</div></div>
+      <div class="proc-step fade-up" style="transition-delay:.3s"><div class="proc-num">03</div><div class="proc-title">Regulatory Approvals</div><div class="proc-desc">Open access permissions, DISCOM approvals, net metering, and industrial subsidy applications managed end-to-end.</div></div>
+      <div class="proc-step fade-up" style="transition-delay:.45s"><div class="proc-num">04</div><div class="proc-title">EPC & Commissioning</div><div class="proc-desc">Full EPC execution by certified teams with zero downtime for your plant, followed by SCADA-integrated commissioning.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHARGEBEES -->
+<section style="padding:100px 0;">
+  <div style="max-width:80rem;margin:auto;padding:0 32px;">
+    <div style="text-align:center;margin-bottom:60px;" class="fade-up">
+      <span class="section-tag">Our Advantage</span>
+      <h2 class="section-h">Why Industries <span class="hl">Choose</span> ChargeBees</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-up"><div class="wi"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="why-title">Full EPC Capability</div><div class="why-desc">End-to-end Engineering, Procurement & Construction with in-house structural, electrical, and civil teams for industrial projects.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.1s"><div class="wi"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="why-title">SCADA & EMS Integration</div><div class="why-desc">Seamless integration with plant SCADA systems, energy management platforms, and industrial IoT for unified operations.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.2s"><div class="wi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="why-title">99.5% Uptime SLA</div><div class="why-desc">Contractually guaranteed system uptime with rapid response maintenance teams and proactive monitoring to minimise downtime.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.3s"><div class="wi"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="why-title">Open Access Expertise</div><div class="why-desc">We navigate the complex open access framework for large industrial clients, enabling access to cheaper third-party power.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.4s"><div class="wi"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="why-title">Long-Term O&M</div><div class="why-desc">25-year O&M contracts with performance guarantees, preventive maintenance, panel washing, and quarterly audits.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.5s"><div class="wi"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/></svg></div><div class="why-title">Accelerated Depreciation</div><div class="why-desc">Claim 40–80% accelerated depreciation in Year 1 under the Income Tax Act — massively improving your actual ROI.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="cta-inner">
+    <span class="section-tag">Ready to Power Your Plant?</span>
+    <h2 class="cta-title">Industrial Energy<br><span>Reimagined with Solar.</span></h2>
+    <p class="cta-sub">Let our industrial solar experts assess your facility and show you exactly how much you can save — no cost, no commitment.</p>
+    <div class="cta-btns">
+      <a href="#contact-form" class="cta-btn-orange">Request Free Energy Audit</a>
+      <a href="solar_products.html" class="cta-btn-ghost">All Solar Solutions</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer><div class="footer-inner"><div class="footer-grid"><div class="footer-about"><div style="display:flex;align-items:center;gap:8px;"><img src="images/logo.png" alt="ChargeBees Logo" style="height:40px;width:auto;object-fit:contain;"><span class="brand-logo-text">Charge <span>Bees</span></span></div><p>Leading the charge towards a sustainable electric future with India's largest EV charging network.</p><div class="socials"><a href="https://www.instagram.com/chargebees" target="_blank" class="social-btn"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a><a href="https://www.facebook.com/share/1ESQNWy5Zs/" target="_blank" class="social-btn"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a><a href="https://wa.me/919000040477" target="_blank" class="social-btn"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"></a><a href="mailto:db@chargebees.com" class="social-btn"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Mail"></a></div></div><div class="footer-col"><h4>Company</h4><ul><li><a href="index.html#about">About Us</a></li><li><a href="partners.html#Partnerships">Partnerships</a></li><li><a href="media-center.html#media">Media Center</a></li><li><a href="careers.html#careers">Careers</a></li></ul></div><div class="footer-col"><h4>Solutions</h4><ul><li><a href="stationfinder.html">Station Finder</a></li><li><a href="products.html#services">EV Services</a></li><li><a href="residential.html">Residential Solar</a></li><li><a href="commercial.html">Commercial Solar</a></li><li><a href="industrial.html">Industrial Solar</a></li><li><a href="ground.html">Ground Mounted</a></li></ul></div><div class="footer-col"><h4>Contact</h4><ul class="footer-contact"><li><span>db@chargebees.com</span></li><li><span>+91 90000 40477</span></li><li style="margin-top:8px;"><strong>HYDERABAD</strong><span>Nanakramguda, Hyderabad, Telangana 500008</span></li></ul></div></div><div class="footer-bottom"><p>© 2026 Chargebees. All rights reserved.</p><div class="footer-bottom-links"><a href="terms.html#terms">Terms & Services</a><a href="privacy.html">Privacy Policy</a></div></div></div></footer>
+
+<script>
+lucide.createIcons();
+const menuBtn=document.getElementById('menu-btn');
+const mobileMenu=document.getElementById('mobile-menu');
+if(menuBtn)menuBtn.addEventListener('click',()=>mobileMenu.classList.toggle('open'));
+function handleResize(){const btn=document.getElementById('menu-btn');if(btn)btn.style.display=window.innerWidth<1024?'flex':'none';}
+handleResize();window.addEventListener('resize',handleResize);
+const animEls=document.querySelectorAll('.fade-up,.fade-left,.fade-right');
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});},{threshold:.1});
+animEls.forEach(el=>observer.observe(el));
+function submitForm(btn){btn.textContent='✓ Request Received! Industrial team will contact you.';btn.style.background='linear-gradient(135deg,#059669,#047857)';setTimeout(()=>{btn.textContent='⚙️ Request Industrial Assessment';btn.style.background='linear-gradient(135deg,#f97316,#c2410c)';},3500);}
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});});
+</script>
+</body>
+</html>

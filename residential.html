@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Residential Solar Rooftops – ChargeBees</title>
+<meta name="description" content="Power your home with ChargeBees residential solar rooftop solutions. Reduce electricity bills by up to 90%.">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --emerald:#10b981;--emerald-dark:#059669;--emerald-light:#34d399;
+  --solar-gold:#f59e0b;--solar-orange:#f97316;--dark:#0a0f0d;
+  --warm:#fdfbf7;--card-bg:rgba(255,255,255,0.03);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:#fdfbf7;overflow-x:hidden;padding-top:80px;}
+
+/* BG */
+.bg-texture{position:fixed;inset:0;opacity:.12;pointer-events:none;z-index:0;background-image:url('https://www.transparenttextures.com/patterns/gray-floral.png');}
+.bg-grid{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(to right,rgba(16,185,129,.03) 1px,transparent 1px),linear-gradient(to bottom,rgba(16,185,129,.03) 1px,transparent 1px);background-size:50px 50px;}
+
+/* BRAND */
+.brand-logo-text{font-size:1.55rem;font-weight:500;letter-spacing:-.5px;color:#111827;font-family:"Poppins",sans-serif;line-height:1;}
+.brand-logo-text span{color:#10b981;}
+
+/* NAV */
+nav{position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:99999!important;background:#ffffff!important;border-bottom:1px solid #f3f4f6;-webkit-transform:translateZ(0);}
+.nav-inner{max-width:80rem;margin:auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center;height:80px;}
+.nav-links{display:flex;align-items:center;gap:1.25rem;}
+.nav-links a{font-size:.875rem;font-weight:500;color:#4b5563;transition:color .2s;text-decoration:none;}
+.nav-links a:hover,.nav-links a.active{color:#111827;}
+.nav-links a.active{color:#059669;}
+.nav-btn{background:#059669;color:#fff;padding:.625rem 1.5rem;border-radius:9999px;font-size:.875rem;font-weight:600;text-decoration:none;transition:background .2s;white-space:nowrap;}
+.nav-btn:hover{background:#047857;}
+
+/* Dropdowns */
+.dropdown-wrap{position:relative;}
+.dropdown-trigger{display:flex;align-items:center;gap:4px;font-size:.875rem;font-weight:500;color:#4b5563;cursor:pointer;background:none;border:none;padding:0;font-family:inherit;transition:color .2s;white-space:nowrap;}
+.dropdown-trigger:hover{color:#111827;}
+.dropdown-trigger.solar-active{color:#059669;}
+.mega-drop{position:absolute;top:calc(100% + 2px);left:50%;transform:translateX(-50%);width:680px;background:#fff;border-radius:24px;box-shadow:0 25px 60px rgba(0,0,0,.12);border:1px solid #f0fdf4;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:12px;opacity:0;visibility:hidden;transition:all .25s ease;pointer-events:none;z-index:100;}
+.dropdown-wrap:hover .mega-drop{opacity:1;visibility:visible;pointer-events:all;transform:translateX(-50%) translateY(0);}
+.drop-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border-radius:16px;text-decoration:none;transition:background .2s;}
+.drop-item:hover{background:#f0fdf4;}
+.drop-icon{width:44px;height:44px;min-width:44px;background:linear-gradient(135deg,#10b981,#34d399);border-radius:12px;display:flex;align-items:center;justify-content:center;}
+.drop-icon svg{width:22px;height:22px;stroke:#fff;stroke-width:2;fill:none;}
+.drop-text p{font-weight:700;font-size:.9rem;color:#111827;margin-bottom:2px;}
+.drop-text span{font-size:.78rem;color:#6b7280;}
+.mega-menu-ev{position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%);width:800px;background:#fff;border-radius:24px;box-shadow:0 25px 60px rgba(0,0,0,.12);border:1px solid #f3f4f6;padding:32px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;opacity:0;visibility:hidden;transition:all .25s ease;z-index:100;}
+.dropdown-wrap:hover .mega-menu-ev{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+.ev-col h3{font-size:1rem;font-weight:700;color:#111827;margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+.ev-item{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:16px;text-decoration:none;transition:background .2s;margin-bottom:8px;}
+.ev-item:hover{background:#f0fdf4;}
+.ev-item-icon{width:44px;height:44px;min-width:44px;background:#f3f4f6;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.ev-item:hover .ev-item-icon{background:#fff;}
+.ev-item-icon svg{width:22px;height:22px;stroke:#10b981;stroke-width:2;fill:none;}
+.ev-item p{font-weight:700;font-size:.875rem;color:#111827;}
+.ev-item span{font-size:.75rem;color:#6b7280;}
+.badge{font-size:10px;background:#f3f4f6;color:#6b7280;padding:2px 8px;border-radius:999px;font-weight:700;text-transform:uppercase;}
+
+/* Mobile menu */
+#mobile-menu{display:none;position:fixed;top:80px;left:0;width:100%;background:#fff;border-top:1px solid #f3f4f6;box-shadow:0 20px 40px rgba(0,0,0,.1);z-index:40;max-height:calc(100vh - 80px);overflow-y:auto;}
+#mobile-menu.open{display:block;}
+.mob-link{display:block;padding:14px 24px;font-size:1rem;font-weight:600;color:#374151;text-decoration:none;border-bottom:1px solid #f9fafb;}
+.mob-link:hover,.mob-link.active{color:#059669;}
+
+/* ===== HERO ===== */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:0;position:relative;overflow:hidden;background:linear-gradient(135deg,#0a2918 0%,#0d3d20 40%,#1a5c30 100%);}
+.hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=1920&auto=format&fit=crop') center/cover;opacity:.18;}
+.hero-orbs{position:absolute;inset:0;pointer-events:none;}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);animation:orbFloat 8s ease-in-out infinite;}
+.orb1{width:500px;height:500px;background:radial-gradient(circle,rgba(245,158,11,.12),transparent 70%);top:-100px;right:-100px;animation-delay:0s;}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,rgba(16,185,129,.1),transparent 70%);bottom:-80px;left:-80px;animation-delay:-4s;}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(20px,-20px) scale(1.05);}}
+
+.hero-left{position:relative;z-index:10;padding:80px 60px 80px 80px;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);padding:8px 20px;border-radius:999px;color:#fbbf24;font-size:.8rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:32px;}
+.hero-tag svg{width:16px;height:16px;stroke:#f59e0b;fill:none;}
+.hero-h1{font-family:'DM Serif Display',serif;font-size:clamp(3rem,5.5vw,5.5rem);line-height:1.0;color:#fff;margin-bottom:24px;}
+.hero-h1 em{color:#f59e0b;font-style:italic;}
+.hero-p{font-size:1.05rem;line-height:1.8;color:rgba(255,255,255,.75);max-width:460px;margin-bottom:40px;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px;}
+.chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:6px 16px;border-radius:999px;color:rgba(255,255,255,.85);font-size:.8rem;font-weight:600;}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-gold{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;padding:14px 34px;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .25s;border:none;cursor:pointer;box-shadow:0 8px 25px rgba(245,158,11,.35);}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(245,158,11,.45);}
+.btn-ghost{background:rgba(255,255,255,.08);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.25);color:#fff;padding:14px 34px;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .25s;cursor:pointer;}
+.btn-ghost:hover{background:rgba(255,255,255,.15);}
+
+/* FORM CARD */
+.hero-right{position:relative;z-index:10;padding:60px 80px 60px 40px;}
+.form-card{background:rgba(255,255,255,.97);border-radius:32px;padding:44px 40px;box-shadow:0 40px 100px rgba(0,0,0,.3),0 0 0 1px rgba(255,255,255,.5),inset 0 1px 0 rgba(255,255,255,.9);animation:cardFloat 6s ease-in-out infinite;}
+@keyframes cardFloat{0%,100%{transform:translateY(0) rotateX(2deg);}50%{transform:translateY(-14px) rotateX(0deg);}}
+.form-card:hover{animation:none;transform:translateY(-8px);}
+.form-card-header{display:flex;align-items:center;gap:14px;margin-bottom:8px;}
+.form-icon{width:52px;height:52px;background:linear-gradient(135deg,#f59e0b,#d97706);border-radius:16px;display:flex;align-items:center;justify-content:center;}
+.form-icon svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:2;}
+.form-title{font-size:1.5rem;font-weight:800;color:#111827;}
+.form-sub{font-size:.85rem;color:#6b7280;margin-bottom:26px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.fg{margin-bottom:14px;}
+.fg label{display:block;font-size:.72rem;font-weight:700;color:#374151;margin-bottom:5px;text-transform:uppercase;letter-spacing:.6px;}
+.fg input,.fg select,.fg textarea{width:100%;padding:11px 15px;border:1.5px solid #e5e7eb;border-radius:12px;font-size:.9rem;font-family:inherit;color:#111827;background:#fafafa;transition:all .2s;outline:none;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:#f59e0b;background:#fff;box-shadow:0 0 0 3px rgba(245,158,11,.12);}
+.fg textarea{resize:none;height:80px;}
+.form-btn{width:100%;padding:15px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;border:none;border-radius:14px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .25s;box-shadow:0 8px 20px rgba(245,158,11,.3);}
+.form-btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(245,158,11,.45);}
+
+/* STATS */
+.stats-strip{background:#fff;border-top:2px solid #f0fdf4;border-bottom:2px solid #f0fdf4;padding:36px 0;}
+.stats-inner{max-width:80rem;margin:auto;padding:0 32px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+.stat{text-align:center;padding:20px;border-radius:20px;transition:all .3s;}
+.stat:hover{background:#f0fdf4;transform:translateY(-4px);}
+.stat-n{font-family:'Bebas Neue',sans-serif;font-size:3rem;background:linear-gradient(135deg,#f59e0b,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+.stat-l{font-size:.82rem;color:#6b7280;font-weight:600;margin-top:4px;}
+
+/* SECTIONS */
+.section-tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:3px;color:#d97706;margin-bottom:14px;text-transform:uppercase;}
+.section-h{font-size:clamp(2rem,3.5vw,3.2rem);font-weight:800;color:#0a1a12;line-height:1.1;margin-bottom:16px;letter-spacing:-1px;}
+.section-h .hl{color:#f59e0b;}
+.section-sub{font-size:1rem;color:#4b5563;line-height:1.75;max-width:560px;}
+
+/* BENEFITS GRID */
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.benefit-card{background:#fff;border:1px solid #e5e7eb;border-radius:28px;padding:36px 30px;transition:all .4s cubic-bezier(.22,1,.36,1);cursor:default;transform-style:preserve-3d;}
+.benefit-card:hover{background:linear-gradient(135deg,#0d5c45,#0a3d2e);border-color:transparent;transform:translateY(-12px) rotateX(-4deg) rotateY(2deg);box-shadow:0 30px 60px rgba(13,92,69,.3);}
+.benefit-card:hover .bc-title,.benefit-card:hover .bc-desc{color:#fff;}
+.benefit-card:hover .bc-icon{background:rgba(255,255,255,.12);}
+.benefit-card:hover .bc-icon svg{stroke:#34d399;}
+.bc-icon{width:56px;height:56px;background:#fef3c7;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:all .3s;}
+.bc-icon svg{width:28px;height:28px;stroke:#f59e0b;fill:none;stroke-width:2;transition:stroke .3s;}
+.bc-title{font-size:1.05rem;font-weight:800;color:#0a1a12;margin-bottom:10px;transition:color .3s;}
+.bc-desc{font-size:.88rem;color:#6b7280;line-height:1.65;transition:color .3s;}
+
+/* COMPARISON TABLE */
+.comparison-wrap{background:#fff;border-radius:32px;overflow:hidden;border:1px solid #e5e7eb;box-shadow:0 20px 60px rgba(0,0,0,.08);}
+.comp-header{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;background:linear-gradient(135deg,#0a3d2e,#0d5c45);color:#fff;padding:20px 32px;gap:16px;align-items:center;}
+.comp-header .ch{font-weight:700;font-size:.9rem;}
+.comp-header .ch.center{text-align:center;}
+.comp-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:18px 32px;gap:16px;align-items:center;border-bottom:1px solid #f3f4f6;transition:background .2s;}
+.comp-row:hover{background:#fefce8;}
+.comp-row:last-child{border-bottom:none;}
+.comp-feat{font-weight:600;color:#374151;font-size:.9rem;}
+.comp-val{text-align:center;font-size:.9rem;color:#6b7280;}
+.comp-val.yes{color:#10b981;font-weight:700;}
+.comp-val.no{color:#ef4444;}
+.comp-val.good{color:#f59e0b;font-weight:600;}
+
+/* SOLAR TYPES DEEP */
+.deep-card{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:70px 0;border-bottom:1px solid #e5e7eb;}
+.deep-card:last-child{border-bottom:none;}
+.deep-card.rev{direction:rtl;}
+.deep-card.rev>*{direction:ltr;}
+.deep-img{border-radius:28px;overflow:hidden;box-shadow:0 25px 70px rgba(0,0,0,.12);transform:perspective(900px) rotateY(5deg);transition:transform .5s ease;}
+.deep-card.rev .deep-img{transform:perspective(900px) rotateY(-5deg);}
+.deep-img:hover,.deep-card.rev .deep-img:hover{transform:perspective(900px) rotateY(0deg) scale(1.02);}
+.deep-img img{width:100%;height:380px;object-fit:cover;display:block;}
+.deep-num{font-family:'Bebas Neue',sans-serif;font-size:6rem;color:#fef3c7;line-height:1;margin-bottom:-20px;}
+.deep-name{font-size:2rem;font-weight:800;color:#0a1a12;margin-bottom:14px;letter-spacing:-.5px;}
+.deep-desc{font-size:.98rem;color:#4b5563;line-height:1.8;margin-bottom:20px;}
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;}
+.pill{background:#fef3c7;border:1px solid #fde68a;padding:6px 16px;border-radius:999px;font-size:.8rem;font-weight:600;color:#92400e;}
+.learn-cta{display:inline-flex;align-items:center;gap:8px;color:#f59e0b;font-weight:700;font-size:.9rem;text-decoration:none;transition:gap .2s;}
+.learn-cta:hover{gap:16px;}
+.learn-cta svg{width:18px;height:18px;stroke:currentColor;fill:none;}
+
+/* SAVINGS CALCULATOR */
+.calc-wrap{background:linear-gradient(135deg,#0a1a12,#0d2a1c);border-radius:36px;padding:60px;overflow:hidden;position:relative;}
+.calc-wrap::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(245,158,11,.1),transparent 70%);border-radius:50%;}
+.calc-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:2;}
+.calc-left h2{font-family:'DM Serif Display',serif;font-size:2.8rem;color:#fff;margin-bottom:16px;line-height:1.1;}
+.calc-left h2 span{color:#f59e0b;}
+.calc-left p{color:rgba(255,255,255,.7);font-size:.98rem;line-height:1.75;}
+.calc-controls{display:flex;flex-direction:column;gap:24px;}
+.slider-group label{display:flex;justify-content:space-between;color:rgba(255,255,255,.85);font-size:.85rem;font-weight:600;margin-bottom:10px;}
+.slider-group label span{color:#f59e0b;font-size:1rem;font-weight:800;}
+input[type=range]{width:100%;-webkit-appearance:none;height:6px;border-radius:3px;background:rgba(255,255,255,.2);outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#d97706);cursor:pointer;box-shadow:0 4px 12px rgba(245,158,11,.4);}
+.result-box{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:32px;text-align:center;}
+.result-label{font-size:.85rem;color:rgba(255,255,255,.6);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:1px;}
+.result-val{font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#f59e0b;line-height:1;}
+.result-sub{font-size:.82rem;color:rgba(255,255,255,.5);margin-top:6px;}
+.result-sub2{font-size:1.1rem;font-weight:700;color:#34d399;margin-top:12px;}
+
+/* WHY SECTION */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.why-card{background:#fff;border:1px solid #e5f5ef;border-radius:24px;padding:36px 30px;transition:all .3s ease;transform-style:preserve-3d;}
+.why-card:hover{background:linear-gradient(135deg,#0d5c45,#0a3d2e);border-color:transparent;transform:translateY(-10px) rotateX(-3deg);box-shadow:0 25px 50px rgba(13,92,69,.3);}
+.why-card:hover .why-title,.why-card:hover .why-desc{color:#fff;}
+.why-card:hover .wi{background:rgba(255,255,255,.1);}
+.why-card:hover .wi svg{stroke:#34d399;}
+.wi{width:52px;height:52px;background:#f0fdf4;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:background .3s;}
+.wi svg{width:26px;height:26px;stroke:#10b981;fill:none;stroke-width:2;transition:stroke .3s;}
+.why-title{font-size:1.05rem;font-weight:800;color:#0a1a12;margin-bottom:10px;transition:color .3s;}
+.why-desc{font-size:.88rem;color:#6b7280;line-height:1.65;transition:color .3s;}
+
+/* CTA */
+.cta-band{background:linear-gradient(135deg,#0a3d2e,#0d5c45);padding:80px 0;position:relative;overflow:hidden;}
+.cta-band::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(245,158,11,.1),transparent 70%);border-radius:50%;}
+.cta-inner{max-width:60rem;margin:auto;text-align:center;padding:0 32px;position:relative;z-index:2;}
+.cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);color:#fff;letter-spacing:1px;margin-bottom:16px;line-height:1;}
+.cta-title span{color:#f59e0b;}
+.cta-sub{font-size:1.05rem;color:rgba(255,255,255,.75);margin-bottom:36px;}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.cta-btn-gold{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;padding:14px 36px;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .25s;box-shadow:0 8px 25px rgba(245,158,11,.35);}
+.cta-btn-gold:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(245,158,11,.5);}
+.cta-btn-outline{border:2px solid rgba(255,255,255,.4);color:#fff;padding:14px 36px;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .25s;}
+.cta-btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.08);}
+
+/* FOOTER */
+footer{background:#f9fafb;padding-top:80px;padding-bottom:40px;border-top:1px solid #e5e7eb;}
+.footer-inner{max-width:80rem;margin:auto;padding:0 32px;}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:48px;margin-bottom:60px;}
+.footer-about p{font-size:.9rem;color:#6b7280;line-height:1.75;margin:20px 0;}
+.socials{display:flex;gap:12px;}
+.social-btn{width:44px;height:44px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.08);transition:transform .2s;}
+.social-btn:hover{transform:scale(1.1);}
+.social-btn img{width:22px;height:22px;}
+.footer-col h4{font-weight:700;color:#111827;margin-bottom:20px;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:12px;}
+.footer-col ul li a{color:#6b7280;text-decoration:none;font-size:.9rem;transition:color .2s;}
+.footer-col ul li a:hover{color:#10b981;}
+.footer-contact li{display:flex;flex-direction:column;gap:2px;margin-bottom:14px;font-size:.9rem;color:#6b7280;}
+.footer-contact li strong{color:#374151;font-weight:600;}
+.footer-bottom{border-top:1px solid #e5e7eb;padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:.85rem;color:#9ca3af;}
+.footer-bottom-links{display:flex;gap:24px;}
+.footer-bottom-links a{font-size:.85rem;color:#9ca3af;text-decoration:none;transition:color .2s;}
+.footer-bottom-links a:hover{color:#374151;}
+
+/* ANIMS */
+.fade-up{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+.fade-left{opacity:0;transform:translateX(-50px);transition:opacity .8s ease,transform .8s ease;}
+.fade-left.visible{opacity:1;transform:translateX(0);}
+.fade-right{opacity:0;transform:translateX(50px);transition:opacity .8s ease,transform .8s ease;}
+.fade-right.visible{opacity:1;transform:translateX(0);}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;min-height:auto;}
+  .hero-left{padding:60px 32px 40px;}
+  .hero-right{padding:40px 32px 60px;}
+  .form-card{animation:none;transform:none;}
+  .benefits-grid,.why-grid{grid-template-columns:repeat(2,1fr);}
+  .deep-card{grid-template-columns:1fr;}
+  .deep-card.rev{direction:ltr;}
+  .deep-img,.deep-card.rev .deep-img{transform:none;}
+  .calc-inner{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px;}
+  .mega-drop,.mega-menu-ev{display:none!important;}
+  .nav-links{display:none;}
+  .comp-header,.comp-row{grid-template-columns:2fr 1fr 1fr;}
+  .comp-header .ch:last-child,.comp-row .comp-val:last-child{display:none;}
+}
+@media(max-width:768px){
+  .benefits-grid,.why-grid{grid-template-columns:1fr;}
+  .stats-inner{grid-template-columns:repeat(2,1fr);}
+  .footer-grid{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .calc-wrap{padding:36px 24px;}
+  .frow{grid-template-columns:1fr;}
+  .nav-links{display:none!important;}
+  .nav-btn{display:none!important;}
+  #menu-btn{display:flex!important;}
+}
+</style>
+</head>
+<body>
+<div class="bg-texture"></div>
+<div class="bg-grid"></div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;">
+      <img src="images/logo.png" alt="ChargeBees Logo" style="height:40px;width:auto;object-fit:contain;">
+      <span class="brand-logo-text">Charge <span>Bees</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">About</a>
+      <a href="stationfinder.html">Station Finder</a>
+      <div class="dropdown-wrap">
+        <button class="dropdown-trigger">
+          <a href="products.html" style="color:inherit;text-decoration:none;display:flex;align-items:center;gap:4px;">EV Products<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        </button>
+        <div class="mega-menu-ev">
+          <div class="ev-col">
+            <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Hardware</h3>
+            <a href="products.html#hardware" class="ev-item"><div class="ev-item-icon"><svg viewBox="0 0 24 24"><path d="M13 2l-10 12h9l-1 8 10-12h-9l1-8z"/></svg></div><div><p>All Chargers</p><span>AC & DC Solutions</span></div></a>
+          </div>
+          <div class="ev-col">
+            <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Software</h3>
+            <a href="products.html#software" class="ev-item"><div class="ev-item-icon"><svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div><div><p>ChargeCloud <span class="badge">Soon</span></p><span>CMS Platform</span></div></a>
+            <a href="products.html#software" class="ev-item"><div class="ev-item-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg></div><div><p>Chargebees App</p><span>User Experience</span></div></a>
+          </div>
+          <div class="ev-col">
+            <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>Services</h3>
+            <a href="products.html#services" class="ev-item"><div class="ev-item-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><p>Energy As A Service</p><span>Renewable Energy</span></div></a>
+            <a href="products.html#services" class="ev-item"><div class="ev-item-icon"><svg viewBox="0 0 24 24"><rect x="1" y="6" width="22" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/></svg></div><div><p>Battery As A Service <span class="badge">Soon</span></p><span>Swapping Solutions</span></div></a>
+            <a href="products.html#services" class="ev-item"><div class="ev-item-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div><p>RFID Card</p><span>Seamless Payments</span></div></a>
+          </div>
+        </div>
+      </div>
+      <div class="dropdown-wrap">
+        <button class="dropdown-trigger solar-active">Solar Products<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="mega-drop">
+          <a href="Solar_products.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="drop-text"><p>Our Solar Solutions</p><span>For all your energy needs</span></div></a>
+          <a href="residential.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="drop-text"><p>Residential Solar Rooftops</p><span>For homes & apartments</span></div></a>
+          <a href="commercial.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div><div class="drop-text"><p>Commercial Solar Rooftops</p><span>For offices & retail</span></div></a>
+          <a href="industrial.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg></div><div class="drop-text"><p>Industrial Solar Rooftops</p><span>For factories & warehouses</span></div></a>
+          <a href="ground.html" class="drop-item"><div class="drop-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div><div class="drop-text"><p>Ground Mounted Solar System</p><span>Large scale solar farms</span></div></a>
+        </div>
+      </div>
+      <a href="partners.html">Partners</a>
+      <a href="media-center.html">Media Center</a>
+      <a href="careers.html">Careers</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a href="https://play.google.com/store" target="_blank" class="nav-btn">Download App</a>
+      <a href="contact.html" class="nav-btn">Contact Us</a>
+      <button id="menu-btn" style="display:none;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;border:1px solid #e5e7eb;background:#fff;cursor:pointer;">
+        <i data-lucide="menu" style="width:24px;height:24px;color:#111827;"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu">
+  <div style="padding:24px;display:flex;flex-direction:column;gap:4px;">
+    <a href="index.html" class="mob-link">About</a>
+    <a href="stationfinder.html" class="mob-link">Station Finder</a>
+    <a href="products.html" class="mob-link">EV Products</a>
+    <a href="solar_products.html" class="mob-link">Solar Products</a>
+    <a href="residential.html" class="mob-link active" style="color:#059669;padding-left:36px;font-size:.9rem;">↳ Residential Solar</a>
+    <a href="commercial.html" class="mob-link" style="padding-left:36px;font-size:.9rem;">↳ Commercial Solar</a>
+    <a href="industrial.html" class="mob-link" style="padding-left:36px;font-size:.9rem;">↳ Industrial Solar</a>
+    <a href="ground.html" class="mob-link" style="padding-left:36px;font-size:.9rem;">↳ Ground Mounted</a>
+    <a href="partners.html" class="mob-link">Partners</a>
+    <a href="media-center.html" class="mob-link">Media Center</a>
+    <a href="careers.html" class="mob-link">Careers</a>
+    <a href="contact.html" class="mob-link">Contact Us</a>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-orbs"><div class="orb orb1"></div><div class="orb orb2"></div></div>
+  <div class="hero-left">
+    <div class="hero-tag">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Residential Solar Rooftops
+    </div>
+    <h1 class="hero-h1">Power Your Home<br>With <em>Clean Energy</em><br>Save More Daily.</h1>
+    <p class="hero-p">India's most trusted residential solar rooftop solution — designed for every Indian home, built to handle our weather, and backed by the best warranty in the business.</p>
+    <div class="hero-chips">
+      <span class="chip">✦ 1kW – 10kW</span>
+      <span class="chip">✦ Grid-Tied & Off-Grid</span>
+      <span class="chip">✦ Smart Monitoring</span>
+      <span class="chip">✦ EMI Available</span>
+      <span class="chip">✦ 25-Year Warranty</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#quote" class="btn-gold">Get Free Quote</a>
+      <a href="#benefits" class="btn-ghost">See Benefits</a>
+    </div>
+  </div>
+  <div class="hero-right" id="quote">
+    <div class="form-card">
+      <div class="form-card-header">
+        <div class="form-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div><div class="form-title">Residential Solar Quote</div></div>
+      </div>
+      <div class="form-sub">Get your personalised savings report within 24 hours — free of charge.</div>
+      <div class="frow">
+        <div class="fg"><label>First Name</label><input type="text" placeholder="Ravi"></div>
+        <div class="fg"><label>Last Name</label><input type="text" placeholder="Kumar"></div>
+      </div>
+      <div class="fg"><label>Phone Number</label><input type="tel" placeholder="+91 90000 40477"></div>
+      <div class="fg"><label>Email Address</label><input type="email" placeholder="you@example.com"></div>
+      <div class="fg"><label>City / Location</label><input type="text" placeholder="Hyderabad, Telangana"></div>
+      <div class="fg"><label>Monthly Electricity Bill</label>
+        <select>
+          <option>Select your bill range...</option>
+          <option>Below ₹1,000</option>
+          <option>₹1,000 – ₹2,500</option>
+          <option>₹2,500 – ₹5,000</option>
+          <option>₹5,000 – ₹10,000</option>
+          <option>Above ₹10,000</option>
+        </select>
+      </div>
+      <div class="fg"><label>Message (Optional)</label><textarea placeholder="Tell us about your roof / home setup..."></textarea></div>
+      <button class="form-btn" onclick="submitForm(this)">🏠 Get My Free Residential Quote</button>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat fade-up"><div class="stat-n">90%</div><div class="stat-l">Max Bill Savings</div></div>
+    <div class="stat fade-up" style="transition-delay:.1s"><div class="stat-n">25yr</div><div class="stat-l">Panel Warranty</div></div>
+    <div class="stat fade-up" style="transition-delay:.2s"><div class="stat-n">3-7</div><div class="stat-l">Days Installation</div></div>
+    <div class="stat fade-up" style="transition-delay:.3s"><div class="stat-n">4yr</div><div class="stat-l">Average Payback</div></div>
+  </div>
+</div>
+
+<!-- BENEFITS -->
+<section id="benefits" style="padding:100px 0;background:linear-gradient(180deg,#fdfbf7 0%,#f5fbf9 100%);">
+  <div style="max-width:80rem;margin:auto;padding:0 32px;">
+    <div style="text-align:center;margin-bottom:60px;" class="fade-up">
+      <span class="section-tag">Why Go Solar at Home</span>
+      <h2 class="section-h">Benefits That <span class="hl">Matter</span> To You</h2>
+      <p class="section-sub" style="margin:auto;">Real, tangible advantages for every Indian homeowner who makes the switch to rooftop solar.</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card fade-up">
+        <div class="bc-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="bc-title">Slash Your Electricity Bills</div>
+        <div class="bc-desc">Reduce monthly electricity bills by 70–90% from day one. A typical 3kW system saves ₹2,500–₹4,500 every month for an average household.</div>
+      </div>
+      <div class="benefit-card fade-up" style="transition-delay:.1s">
+        <div class="bc-icon"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+        <div class="bc-title">Earn from Net Metering</div>
+        <div class="bc-desc">Export surplus power back to the grid and earn credits on your electricity bill. Turn your rooftop into a mini power plant.</div>
+      </div>
+      <div class="benefit-card fade-up" style="transition-delay:.2s">
+        <div class="bc-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="bc-title">Government Subsidies</div>
+        <div class="bc-desc">Eligible for central & state subsidies under PM Surya Ghar Muft Bijli Yojana — up to ₹78,000 subsidy on a 3kW system. We handle all paperwork.</div>
+      </div>
+      <div class="benefit-card fade-up" style="transition-delay:.3s">
+        <div class="bc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <div class="bc-title">Real-Time App Monitoring</div>
+        <div class="bc-desc">Watch your system generate energy live via the ChargeBees app — track daily units, savings, CO₂ offset, and get instant fault alerts.</div>
+      </div>
+      <div class="benefit-card fade-up" style="transition-delay:.4s">
+        <div class="bc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="bc-title">3–7 Day Installation</div>
+        <div class="bc-desc">Our certified technicians complete most home installations in under a week — zero disruption, clean worksite, no mess left behind.</div>
+      </div>
+      <div class="benefit-card fade-up" style="transition-delay:.5s">
+        <div class="bc-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+        <div class="bc-title">Increase Property Value</div>
+        <div class="bc-desc">Homes with solar installations sell 4–6% higher than non-solar homes. Your investment pays dividends even when you sell your home.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAVINGS CALCULATOR -->
+<section style="padding:80px 0;background:#fff;">
+  <div style="max-width:80rem;margin:auto;padding:0 32px;">
+    <div class="calc-wrap fade-up">
+      <div class="calc-inner">
+        <div class="calc-left">
+          <span class="section-tag" style="color:#f59e0b;">Savings Estimator</span>
+          <h2>How Much Will <span>You Save?</span></h2>
+          <p style="margin-top:16px;">Adjust the sliders to estimate your personalised savings. Actual savings may vary based on location and usage patterns.</p>
+          <div style="margin-top:36px;" class="calc-controls">
+            <div class="slider-group">
+              <label>Monthly Bill <span id="bill-val">₹3,000</span></label>
+              <input type="range" id="bill-slider" min="500" max="20000" step="500" value="3000" oninput="calcSavings()">
+            </div>
+            <div class="slider-group">
+              <label>System Size <span id="size-val">3 kW</span></label>
+              <input type="range" id="size-slider" min="1" max="10" step="0.5" value="3" oninput="calcSavings()">
+            </div>
+            <div class="slider-group">
+              <label>Sunlight Hours / Day <span id="sun-val">5.5 hrs</span></label>
+              <input type="range" id="sun-slider" min="3" max="8" step="0.5" value="5.5" oninput="calcSavings()">
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="result-box" style="margin-bottom:20px;">
+            <div class="result-label">Monthly Savings</div>
+            <div class="result-val" id="monthly-save">₹2,200</div>
+            <div class="result-sub">Estimated per month</div>
+          </div>
+          <div class="result-box" style="margin-bottom:20px;">
+            <div class="result-label">Yearly Savings</div>
+            <div class="result-val" id="yearly-save">₹26,400</div>
+            <div class="result-sub">Per year savings</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">Payback Period</div>
+            <div class="result-val" id="payback">4.2 yrs</div>
+            <div class="result-sub">Then it's pure savings</div>
+            <div class="result-sub2" id="co2-save">CO₂ Saved: 3.2 tonnes/yr</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SYSTEM OPTIONS -->
+<section style="padding:100px 0;background:linear-gradient(180deg,#f5fbf9 0%,#fff 100%);">
+  <div style="max-width:80rem;margin:auto;padding:0 32px;">
+    <div style="text-align:center;margin-bottom:60px;" class="fade-up">
+      <span class="section-tag">System Options</span>
+      <h2 class="section-h">Choose Your <span class="hl">Solar Setup</span></h2>
+    </div>
+    <div class="comparison-wrap fade-up">
+      <div class="comp-header">
+        <div class="ch">Feature</div>
+        <div class="ch center">Grid-Tied</div>
+        <div class="ch center">Hybrid</div>
+        <div class="ch center">Off-Grid</div>
+      </div>
+      <div class="comp-row"><div class="comp-feat">Best For</div><div class="comp-val">Urban homes with grid</div><div class="comp-val">Best of both worlds</div><div class="comp-val">Rural / No grid</div></div>
+      <div class="comp-row"><div class="comp-feat">Battery Storage</div><div class="comp-val no">✗ None</div><div class="comp-val yes">✓ Included</div><div class="comp-val yes">✓ Included</div></div>
+      <div class="comp-row"><div class="comp-feat">Net Metering</div><div class="comp-val yes">✓ Yes</div><div class="comp-val yes">✓ Yes</div><div class="comp-val no">✗ No</div></div>
+      <div class="comp-row"><div class="comp-feat">Works During Power Cut</div><div class="comp-val no">✗ No</div><div class="comp-val yes">✓ Yes</div><div class="comp-val yes">✓ Yes</div></div>
+      <div class="comp-row"><div class="comp-feat">Installation Cost</div><div class="comp-val yes">Lowest</div><div class="comp-val good">Medium</div><div class="comp-val good">Higher</div></div>
+      <div class="comp-row"><div class="comp-feat">ROI Period</div><div class="comp-val yes">3–5 years</div><div class="comp-val good">5–7 years</div><div class="comp-val good">6–8 years</div></div>
+      <div class="comp-row"><div class="comp-feat">Subsidy Eligible</div><div class="comp-val yes">✓ Yes</div><div class="comp-val yes">✓ Yes</div><div class="comp-val good">Partial</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHARGEBEES -->
+<section style="padding:100px 0;background:#fff;">
+  <div style="max-width:80rem;margin:auto;padding:0 32px;">
+    <div style="text-align:center;margin-bottom:60px;" class="fade-up">
+      <span class="section-tag">Our Difference</span>
+      <h2 class="section-h">Why Homeowners <span class="hl">Trust</span> ChargeBees</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-up"><div class="wi"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="why-title">Tier-1 Panels Only</div><div class="why-desc">We source exclusively from globally certified Tier-1 manufacturers — the same panels used in large utility projects worldwide.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.1s"><div class="wi"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="why-title">25-Year Warranty</div><div class="why-desc">Industry-leading 25-year performance warranty. Minimum 80% efficiency guaranteed at end of warranty — or we replace the panels.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.2s"><div class="wi"><svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div><div class="why-title">Subsidy Handled for You</div><div class="why-desc">We submit PM Surya Ghar and DISCOM applications on your behalf — you just enjoy the savings. No paperwork headaches.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.3s"><div class="wi"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="why-title">Smart App Monitoring</div><div class="why-desc">Live tracking of generation, savings, and CO₂ offset via ChargeBees mobile app. Instant alerts for any system issues.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.4s"><div class="wi"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="why-title">Certified Installers</div><div class="why-desc">MNRE-empanelled installation teams with structured training, safety protocols, and QC inspections after every install.</div></div>
+      <div class="why-card fade-up" style="transition-delay:.5s"><div class="wi"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="why-title">Zero-Cost EMI Options</div><div class="why-desc">Don't pay upfront. Our bank partnerships offer solar loans at 0% to low interest — monthly EMI often lower than your current bill.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="cta-inner">
+    <span class="section-tag" style="color:#f59e0b;">Ready to Switch?</span>
+    <h2 class="cta-title">Your Home Deserves <span>Solar</span> Power.</h2>
+    <p class="cta-sub">Join thousands of Indian homeowners who have cut their electricity bills and gone green with ChargeBees.</p>
+    <div class="cta-btns">
+      <a href="#quote" class="cta-btn-gold">Get Free Quote Today</a>
+      <a href="solar_products.html" class="cta-btn-outline">All Solar Products</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <img src="images/logo.png" alt="ChargeBees Logo" style="height:40px;width:auto;object-fit:contain;">
+          <span class="brand-logo-text">Charge <span>Bees</span></span>
+        </div>
+        <p>Leading the charge towards a sustainable electric future with India's largest EV charging network.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/chargebees" target="_blank" class="social-btn"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
+          <a href="https://www.facebook.com/share/1ESQNWy5Zs/" target="_blank" class="social-btn"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
+          <a href="https://wa.me/919000040477" target="_blank" class="social-btn"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"></a>
+          <a href="mailto:db@chargebees.com" class="social-btn"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Mail"></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="index.html#about">About Us</a></li><li><a href="partners.html#Partnerships">Partnerships</a></li><li><a href="media-center.html#media">Media Center</a></li><li><a href="careers.html#careers">Careers</a></li></ul></div>
+      <div class="footer-col"><h4>Solutions</h4><ul><li><a href="stationfinder.html">Station Finder</a></li><li><a href="products.html#services">EV Services</a></li><li><a href="residential.html">Residential Solar</a></li><li><a href="commercial.html">Commercial Solar</a></li><li><a href="industrial.html">Industrial Solar</a></li><li><a href="ground.html">Ground Mounted</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul class="footer-contact"><li><span>db@chargebees.com</span></li><li><span>+91 90000 40477</span></li><li style="margin-top:8px;"><strong>HYDERABAD</strong><span>Nanakramguda, Hyderabad, Telangana 500008</span></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Chargebees. All rights reserved.</p>
+      <div class="footer-bottom-links"><a href="terms.html#terms">Terms & Services</a><a href="privacy.html">Privacy Policy</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+lucide.createIcons();
+const menuBtn=document.getElementById('menu-btn');
+const mobileMenu=document.getElementById('mobile-menu');
+if(menuBtn)menuBtn.addEventListener('click',()=>mobileMenu.classList.toggle('open'));
+function handleResize(){const btn=document.getElementById('menu-btn');if(btn)btn.style.display=window.innerWidth<1024?'flex':'none';}
+handleResize();window.addEventListener('resize',handleResize);
+const animEls=document.querySelectorAll('.fade-up,.fade-left,.fade-right');
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});},{threshold:.12});
+animEls.forEach(el=>observer.observe(el));
+function submitForm(btn){btn.textContent='✓ Request Submitted! We\'ll call you soon.';btn.style.background='linear-gradient(135deg,#059669,#047857)';setTimeout(()=>{btn.textContent='🏠 Get My Free Residential Quote';btn.style.background='linear-gradient(135deg,#f59e0b,#d97706)';},3500);}
+function calcSavings(){
+  const bill=+document.getElementById('bill-slider').value;
+  const size=+document.getElementById('size-slider').value;
+  const sun=+document.getElementById('sun-slider').value;
+  document.getElementById('bill-val').textContent='₹'+bill.toLocaleString('en-IN');
+  document.getElementById('size-val').textContent=size+' kW';
+  document.getElementById('sun-val').textContent=sun+' hrs';
+  const dailyUnits=size*sun*0.8;
+  const monthlyUnits=dailyUnits*30;
+  const ratePerUnit=8;
+  const savings=Math.min(monthlyUnits*ratePerUnit,bill*0.92);
+  const yearlyS=savings*12;
+  const systemCost=size*50000;
+  const payback=systemCost/yearlyS;
+  const co2=monthlyUnits*12*0.82/1000;
+  document.getElementById('monthly-save').textContent='₹'+Math.round(savings).toLocaleString('en-IN');
+  document.getElementById('yearly-save').textContent='₹'+Math.round(yearlyS).toLocaleString('en-IN');
+  document.getElementById('payback').textContent=payback.toFixed(1)+' yrs';
+  document.getElementById('co2-save').textContent='CO₂ Saved: '+co2.toFixed(1)+' tonnes/yr';
+}
+calcSavings();
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});});
+</script>
+</body>
+</html>
