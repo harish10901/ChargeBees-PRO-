@@ -22,675 +22,721 @@
   }
 }
 </script>
-
     <link rel="icon" type="image/png" href="images/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #fdfbf7;
-            scroll-behavior: smooth;
+        *,*::before,*::after{box-sizing:border-box;}
+        body{font-family:'DM Sans',sans-serif;background:#fafdf9;color:#111827;overflow-x:hidden;}
+
+        /* BRAND LOGO */
+        .brand-logo-text{font-size:1.55rem;font-weight:500;letter-spacing:-0.5px;color:#111827;font-family:"Poppins","Nunito","Quicksand",sans-serif;line-height:1;text-decoration:none;}
+        .brand-logo-text span{color:#10b981;}
+        @media(max-width:768px){.brand-logo-text{font-size:1.3rem;}}
+
+        /* NAVBAR DROPDOWN */
+        .mega-menu{transition:all 0.3s ease;}
+        .dropdown-wrap{position:relative;}
+        .dropdown-trigger{display:flex;align-items:center;gap:4px;font-size:0.875rem;font-weight:500;color:#4b5563;cursor:pointer;background:none;border:none;padding:0;font-family:inherit;transition:color 0.2s;white-space:nowrap;}
+        .dropdown-trigger:hover{color:#111827;}
+        .dropdown-trigger.solar-active{color:#059669;}
+        .mega-drop{position:absolute;top:calc(100% + 2px);left:50%;transform:translateX(-50%);width:680px;background:#fff;border-radius:24px;box-shadow:0 25px 60px rgba(0,0,0,0.12);border:1px solid #f0fdf4;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:12px;opacity:0;visibility:hidden;transition:all 0.25s ease;pointer-events:none;}
+        .dropdown-wrap:hover .mega-drop{opacity:1;visibility:visible;pointer-events:all;transform:translateX(-50%) translateY(0);}
+        .drop-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border-radius:16px;text-decoration:none;transition:background 0.2s;}
+        .drop-item:hover{background:#f0fdf4;}
+        .drop-icon{width:44px;height:44px;min-width:44px;background:linear-gradient(135deg,#10b981,#34d399);border-radius:12px;display:flex;align-items:center;justify-content:center;}
+        .drop-icon svg{width:22px;height:22px;stroke:#fff;stroke-width:2;fill:none;}
+        .drop-text p{font-weight:700;font-size:0.9rem;color:#111827;margin-bottom:2px;}
+        .drop-text span{font-size:0.78rem;color:#6b7280;}
+
+        /* ANIMATIONS */
+        @keyframes fadeUp{from{opacity:0;transform:translateY(32px);}to{opacity:1;transform:translateY(0);}}
+        @keyframes slideLine{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+        @keyframes blobMorph{0%,100%{border-radius:60% 40% 30% 70%/60% 30% 70% 40%;}50%{border-radius:30% 60% 70% 40%/50% 60% 30% 60%;}}
+        @keyframes spinSlow{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+        @keyframes pulseGreen{0%{box-shadow:0 0 0 0 rgba(16,185,129,0.45);}70%{box-shadow:0 0 0 16px rgba(16,185,129,0);}100%{box-shadow:0 0 0 0 rgba(16,185,129,0);}}
+
+        .anim-1{animation:fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both;}
+        .anim-2{animation:fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.12s both;}
+        .anim-3{animation:fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.22s both;}
+        .anim-4{animation:fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.32s both;}
+
+        /* HERO */
+        .hero-blob{position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(16,185,129,0.11) 0%,transparent 70%);border-radius:50%;pointer-events:none;animation:blobMorph 10s ease-in-out infinite;}
+        .hero-title{font-family:'Syne',sans-serif;font-size:clamp(3rem,8vw,7rem);font-weight:800;line-height:0.95;letter-spacing:-3px;color:#0a0f0a;}
+        .hero-title .accent{color:#10b981;position:relative;display:inline-block;}
+        .hero-title .accent::after{content:'';position:absolute;bottom:2px;left:0;right:0;height:4px;background:#10b981;border-radius:2px;transform-origin:left;animation:slideLine 0.9s cubic-bezier(0.22,1,0.36,1) 0.5s both;}
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;background:#d1fae5;color:#065f46;padding:8px 18px;border-radius:50px;font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:28px;}
+        .hero-badge .dot{width:8px;height:8px;background:#10b981;border-radius:50%;animation:pulseGreen 2s infinite;}
+
+        /* STAT STRIP */
+        .stat-strip{display:flex;background:#0f1f14;border-radius:24px;overflow:hidden;max-width:920px;margin:0 auto;}
+        .stat-item{flex:1;padding:28px 20px;text-align:center;position:relative;}
+        .stat-item+.stat-item::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:1px;background:rgba(255,255,255,0.08);}
+        .stat-num{font-family:'Syne',sans-serif;font-size:2.1rem;font-weight:800;color:#10b981;line-height:1;margin-bottom:5px;}
+        .stat-lbl{font-size:0.68rem;font-weight:600;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.09em;}
+
+        /* CHANNEL CARDS */
+        .channel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1040px;margin:0 auto;}
+        .channel-card{background:white;border-radius:28px;padding:36px 28px;border:1.5px solid #f0fdf4;box-shadow:0 4px 20px rgba(0,0,0,0.04);display:flex;flex-direction:column;position:relative;overflow:hidden;transition:all 0.3s cubic-bezier(0.34,1.2,0.64,1);}
+        .channel-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(16,185,129,0.05),transparent);opacity:0;transition:opacity 0.3s;}
+        .channel-card:hover{border-color:#10b981;transform:translateY(-6px);box-shadow:0 20px 50px rgba(16,185,129,0.14);}
+        .channel-card:hover::before{opacity:1;}
+        .channel-icon-wrap{width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+        .channel-label{font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.14em;margin-bottom:8px;}
+        .channel-title{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;color:#0a0f0a;margin-bottom:8px;line-height:1.2;}
+        .channel-desc{font-size:0.84rem;color:#64748b;margin-bottom:20px;line-height:1.55;flex:1;}
+        .channel-link{font-size:0.88rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:gap 0.2s;}
+        .channel-link:hover{gap:11px;}
+
+        /* FORM SHELL */
+        .form-shell{display:grid;grid-template-columns:1fr 1.15fr;background:white;border-radius:40px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.09),0 0 0 1px rgba(16,185,129,0.07);}
+
+        /* LEFT DARK PANEL */
+        .form-left{background:#0f1f14;padding:60px 48px;display:flex;flex-direction:column;position:relative;overflow:hidden;}
+        .form-left-bg{position:absolute;bottom:-60px;right:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(16,185,129,0.16) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+        .form-left-orbit{position:absolute;top:-40px;left:-40px;width:200px;height:200px;border:1px solid rgba(16,185,129,0.12);border-radius:50%;pointer-events:none;animation:spinSlow 22s linear infinite;}
+        .form-left-title{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;color:white;line-height:1.1;margin-bottom:14px;letter-spacing:-1px;}
+        .form-left-title span{color:#10b981;}
+        .form-left-desc{font-size:0.875rem;color:rgba(255,255,255,0.45);line-height:1.65;margin-bottom:40px;}
+        .info-row{display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;}
+        .info-icon{width:44px;height:44px;min-width:44px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.22);border-radius:14px;display:flex;align-items:center;justify-content:center;}
+        .info-icon i{color:#10b981;width:18px;height:18px;}
+        .info-lbl{font-size:0.62rem;font-weight:800;color:rgba(255,255,255,0.32);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:3px;}
+        .info-val{font-size:0.875rem;font-weight:600;color:rgba(255,255,255,0.82);}
+        .social-row{display:flex;gap:10px;margin-top:auto;padding-top:36px;}
+        .social-btn{width:42px;height:42px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;text-decoration:none;}
+        .social-btn:hover{background:rgba(16,185,129,0.2);border-color:rgba(16,185,129,0.4);transform:translateY(-2px);}
+        .social-btn img{width:18px;height:18px;filter:invert(1);opacity:0.65;}
+        .social-btn:hover img{opacity:1;}
+
+        /* RIGHT FORM PANEL */
+        .form-right{padding:60px 48px;display:flex;flex-direction:column;}
+        .form-right-title{font-family:'Syne',sans-serif;font-size:1.75rem;font-weight:800;color:#0a0f0a;margin-bottom:6px;letter-spacing:-0.5px;}
+        .form-right-sub{font-size:0.875rem;color:#64748b;margin-bottom:36px;}
+
+        /* FIELDS */
+        .field-grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+        .field-wrap{margin-bottom:16px;}
+        .field-label{display:block;font-size:0.72rem;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;}
+        .field-input,.field-select,.field-textarea{width:100%;padding:14px 18px;background:#f8fafc;border:2px solid #f1f5f9;border-radius:16px;font-size:0.9rem;font-family:'DM Sans',sans-serif;color:#111827;outline:none;transition:all 0.2s;appearance:none;}
+        .field-input:focus,.field-select:focus,.field-textarea:focus{border-color:#10b981;background:white;box-shadow:0 0 0 4px rgba(16,185,129,0.1);}
+        .field-input::placeholder,.field-textarea::placeholder{color:#94a3b8;}
+        .field-textarea{resize:none;}
+
+        /* SUBJECT PILLS */
+        .subject-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;}
+        .subject-pill{padding:12px 16px;border:2px solid #e2e8f0;border-radius:14px;font-size:0.82rem;font-weight:600;color:#64748b;cursor:pointer;transition:all 0.2s;text-align:center;user-select:none;background:#f8fafc;}
+        .subject-pill:hover{border-color:#10b981;color:#065f46;background:#f0fdf4;}
+        .subject-pill.selected{border-color:#10b981;background:#ecfdf5;color:#065f46;font-weight:700;}
+
+        /* SUBMIT BTN */
+        .submit-btn{width:100%;padding:18px;background:#10b981;color:white;border:none;border-radius:18px;font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.25s cubic-bezier(0.34,1.2,0.64,1);display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 8px 28px rgba(16,185,129,0.35);margin-top:8px;}
+        .submit-btn:hover{background:#059669;transform:translateY(-2px);box-shadow:0 16px 40px rgba(16,185,129,0.45);}
+        .submit-btn:active{transform:translateY(0);}
+        .submit-btn.loading{opacity:0.7;pointer-events:none;}
+        .submit-btn.success{background:#059669;}
+
+        /* MAP */
+        .map-shell{border-radius:32px;overflow:hidden;position:relative;height:420px;box-shadow:0 20px 60px rgba(0,0,0,0.1);}
+        .map-shell iframe{width:100%;height:100%;border:none;}
+        .map-card{position:absolute;bottom:24px;left:24px;background:white;border-radius:24px;padding:22px 26px;box-shadow:0 20px 50px rgba(0,0,0,0.15);max-width:280px;}
+        .map-card h4{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:#0a0f0a;margin-bottom:6px;}
+        .map-card p{font-size:0.82rem;color:#64748b;line-height:1.5;margin-bottom:14px;}
+        .map-dir{display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;font-weight:700;color:#10b981;text-decoration:none;transition:gap 0.2s;}
+        .map-dir:hover{gap:10px;}
+
+        /* FAQ */
+        .faq-title{font-family:'Syne',sans-serif;font-size:2.4rem;font-weight:800;color:#0a0f0a;letter-spacing:-1px;margin-bottom:10px;}
+        .faq-item{border-radius:20px;overflow:hidden;border:1.5px solid #f1f5f9;background:white;margin-bottom:12px;transition:border-color 0.2s,box-shadow 0.2s;}
+        .faq-item.open{border-color:#10b981;box-shadow:0 8px 30px rgba(16,185,129,0.1);}
+        .faq-trigger{width:100%;padding:22px 24px;background:none;border:none;display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:700;color:#111827;text-align:left;}
+        .faq-chev{width:32px;height:32px;min-width:32px;background:#f8fafc;border-radius:10px;display:flex;align-items:center;justify-content:center;transition:all 0.3s;}
+        .faq-chev i{width:16px;height:16px;color:#64748b;transition:transform 0.3s;}
+        .faq-item.open .faq-chev{background:#d1fae5;}
+        .faq-item.open .faq-chev i{transform:rotate(180deg);color:#059669;}
+        .faq-body{max-height:0;overflow:hidden;transition:max-height 0.38s cubic-bezier(0.22,1,0.36,1);}
+        .faq-item.open .faq-body{max-height:300px;}
+        .faq-body-inner{padding:0 24px 22px;font-size:0.875rem;color:#64748b;line-height:1.7;}
+
+        /* RESPONSIVE */
+        @media(max-width:1024px){
+            .form-shell{grid-template-columns:1fr;}
+            .form-left{padding:48px 36px;}
+            .form-right{padding:48px 36px;}
+            .channel-grid{grid-template-columns:1fr 1fr;}
         }
-
-
-        /* ===== BRAND LOGO ===== */
-
-.brand-logo-text{
-
-    font-size:1.55rem;
-
-    font-weight:500;
-
-    letter-spacing:-0.5px;
-
-    color:#111827;
-
-    font-family:
-    "Poppins",
-    "Nunito",
-    "Quicksand",
-    sans-serif;
-
-    line-height:1;
-
-    text-decoration:none;
-}
-
-.brand-logo-text span{
-    color:#10b981;
-}
-
-@media(max-width:768px){
-
-    .brand-logo-text{
-        font-size:1.3rem;
-    }
-
-}
-        .bg-texture {
-            position: fixed;
-            inset: 0;
-            opacity: 0.12;
-            pointer-events: none;
-            z-index: 0;
-            background-image: url('https://www.transparenttextures.com/patterns/gray-floral.png');
-            background-repeat: repeat;
+        @media(max-width:768px){
+            .hero-title{letter-spacing:-1.5px;}
+            .stat-strip{flex-direction:column;}
+            .stat-item+.stat-item::before{top:0;left:10%;right:10%;width:auto;height:1px;bottom:auto;}
+            .channel-grid{grid-template-columns:1fr;}
+            .form-left{padding:36px 24px;}
+            .form-right{padding:36px 24px;}
+            .field-grid2{grid-template-columns:1fr;}
+            .map-shell{height:300px;}
         }
-        .bg-grid {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            background-image: 
-                linear-gradient(to right, rgba(16, 185, 129, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-        .contact-card {
-            transition: all 0.3s ease;
-        }
-        .contact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
-        }
-        .form-input {
-            transition: all 0.2s ease;
-        }
-        .form-input:focus {
-            border-color: #10b981;
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
-        }
-
-
-        
-        /* Dropdown */
-        .dropdown-wrap { position: relative; }
-        .dropdown-trigger { display: flex; align-items: center; gap: 4px; font-size: 0.875rem; font-weight: 500; color: #4b5563; cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; transition: color 0.2s; white-space: nowrap; }
-        .dropdown-trigger:hover { color: #111827; }
-        .dropdown-trigger.solar-active { color: #059669; }
-        .mega-drop { position: absolute; top: calc(100% + 2px); left: 50%; transform: translateX(-50%); width: 680px; background: #fff; border-radius: 24px; box-shadow: 0 25px 60px rgba(0,0,0,0.12); border: 1px solid #f0fdf4; padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; opacity: 0; visibility: hidden; transition: all 0.25s ease; pointer-events: none; }
-        .dropdown-wrap:hover .mega-drop { opacity: 1; visibility: visible; pointer-events: all; transform: translateX(-50%) translateY(0); }
-        .drop-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; border-radius: 16px; text-decoration: none; transition: background 0.2s; }
-        .drop-item:hover { background: #f0fdf4; }
-        .drop-icon { width: 44px; height: 44px; min-width: 44px; background: linear-gradient(135deg, #10b981, #34d399); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
-        .drop-icon svg { width: 22px; height: 22px; stroke: #fff; stroke-width: 2; fill: none; }
-        .drop-text p { font-weight: 700; font-size: 0.9rem; color: #111827; margin-bottom: 2px; }
-        .drop-text span { font-size: 0.78rem; color: #6b7280; }
     </style>
 </head>
-<body class="antialiased text-gray-900">
-    <div class="bg-texture"></div>
-    <div class="bg-grid"></div>
+<body class="antialiased">
 
-    <!-- Navbar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-<div class="flex-shrink-0 flex items-center gap-1">
+<!-- ===== NAVBAR — exact from original ===== -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
 
-<a href="index.html" class="flex items-center gap-2">
+            <div class="flex-shrink-0 flex items-center gap-1">
+                <a href="index.html" class="flex items-center gap-2">
+                    <img src="images/logo.png" alt="Logo" class="h-10 w-auto object-contain">
+                    <span class="brand-logo-text">Charge <span>Bees</span></span>
+                </a>
+            </div>
 
-    <img src="images/logo.png" alt="Logo" class="h-10 w-auto object-contain">
+            <div class="hidden md:flex items-center space-x-5">
+                <a href="index.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Home</a>
+                <a href="stationfinder.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Station Finder</a>
 
-    <span class="brand-logo-text">
-        Charge <span>Bees</span>
-    </span>
-
-</a>
-
-</div>
-                <div class="hidden md:flex items-center space-x-5">
-                    <a href="index.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Home</a>
-                    <a href="stationfinder.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Station Finder</a>
-                    
-                    <!-- Products Dropdown -->
-                    <div class="relative group">
-<button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
-
-    <a href="products.html" class="flex items-center gap-1">
-
-        EV Products
-
-        <i data-lucide="chevron-down" class="w-4 h-4"></i>
-
-    </a>
-
-</button>
-                        
-                        <!-- Mega Menu -->
-                        <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-white rounded-3xl shadow-2xl border border-gray-100 p-8 grid grid-cols-3 gap-8 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                            <!-- Hardware -->
-                            <div>
-                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
-                                    <i data-lucide="zap" class="w-5 h-5 text-emerald-600"></i> Hardware
-                                </h3>
-                                <a href="products.html#hardware" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                <!-- Products Dropdown -->
+                <div class="relative group">
+                    <button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
+                        <a href="products.html" class="flex items-center gap-1">
+                            EV Products
+                            <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                        </a>
+                    </button>
+                    <!-- Mega Menu -->
+                    <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-white rounded-3xl shadow-2xl border border-gray-100 p-8 grid grid-cols-3 gap-8 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                        <!-- Hardware -->
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                <i data-lucide="zap" class="w-5 h-5 text-emerald-600"></i> Hardware
+                            </h3>
+                            <a href="products.html#hardware" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                    <i data-lucide="battery-charging" class="w-6 h-6 text-emerald-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-900">All chargers</p>
+                                    <p class="text-xs text-gray-500">AC & DC Solutions</p>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Software -->
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                <i data-lucide="layout" class="w-5 h-5 text-emerald-600"></i> Software
+                            </h3>
+                            <div class="space-y-2">
+                                <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
                                     <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
-                                        <i data-lucide="battery-charging" class="w-6 h-6 text-emerald-600"></i>
+                                        <i data-lucide="cloud" class="w-6 h-6 text-emerald-600"></i>
                                     </div>
                                     <div>
-                                        <p class="font-bold text-gray-900">All chargers</p>
-                                        <p class="text-xs text-gray-500">AC & DC Solutions</p>
+                                        <div class="flex items-center gap-2">
+                                            <p class="font-bold text-gray-900">ChargeCloud</p>
+                                            <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
+                                        </div>
+                                        <p class="text-xs text-gray-500">CMS Platform</p>
+                                    </div>
+                                </a>
+                                <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                        <i data-lucide="smartphone" class="w-6 h-6 text-emerald-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-900">Chargebees App</p>
+                                        <p class="text-xs text-gray-500">User Experience</p>
                                     </div>
                                 </a>
                             </div>
-
-                            <!-- Software -->
-                            <div>
-                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
-                                    <i data-lucide="layout" class="w-5 h-5 text-emerald-600"></i> Software
-                                </h3>
-                                <div class="space-y-2">
-                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
-                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
-                                            <i data-lucide="cloud" class="w-6 h-6 text-emerald-600"></i>
+                        </div>
+                        <!-- Services -->
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                <i data-lucide="settings" class="w-5 h-5 text-emerald-600"></i> Services
+                            </h3>
+                            <div class="space-y-2">
+                                <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                        <i data-lucide="activity" class="w-6 h-6 text-emerald-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-900">Energy As A Service</p>
+                                        <p class="text-xs text-gray-500">Renewable Energy</p>
+                                    </div>
+                                </a>
+                                <a href="product.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                        <i data-lucide="battery-full" class="w-6 h-6 text-emerald-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-2">
+                                            <p class="font-bold text-gray-900">Battery As A Service</p>
+                                            <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
                                         </div>
-                                        <div>
-                                            <div class="flex items-center gap-2">
-                                                <p class="font-bold text-gray-900">ChargeCloud</p>
-                                                <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
-                                            </div>
-                                            <p class="text-xs text-gray-500">CMS Platform</p>
-                                        </div>
-                                    </a>
-                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
-                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
-                                            <i data-lucide="smartphone" class="w-6 h-6 text-emerald-600"></i>
-                                        </div>
-                                        <div>
-                                            <p class="font-bold text-gray-900">Chargebees App</p>
-                                            <p class="text-xs text-gray-500">User Experience</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Services -->
-                            <div>
-                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
-                                    <i data-lucide="settings" class="w-5 h-5 text-emerald-600"></i> Services
-                                </h3>
-                                <div class="space-y-2">
-                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
-                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
-                                            <i data-lucide="activity" class="w-6 h-6 text-emerald-600"></i>
-                                        </div>
-                                        <div>
-                                            <p class="font-bold text-gray-900">Energy As A Service</p>
-                                            <p class="text-xs text-gray-500">Renewable Energy</p>
-                                        </div>
-                                    </a>
-                                    <a href="product.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
-                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
-                                            <i data-lucide="battery-full" class="w-6 h-6 text-emerald-600"></i>
-                                        </div>
-                                        <div>
-                                            <div class="flex items-center gap-2">
-                                                <p class="font-bold text-gray-900">Battery As A Service</p>
-                                                <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
-                                            </div>
-                                            <p class="text-xs text-gray-500">Swapping Solutions</p>
-                                        </div>
-                                    </a>
-                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
-                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
-                                            <i data-lucide="credit-card" class="w-6 h-6 text-emerald-600"></i>
-                                        </div>
-                                        <div>
-                                            <p class="font-bold text-gray-900">RFID Card</p>
-                                            <p class="text-xs text-gray-500">Seamless Payments</p>
-                                        </div>
-                                    </a>
-                                </div>
+                                        <p class="text-xs text-gray-500">Swapping Solutions</p>
+                                    </div>
+                                </a>
+                                <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all group/item">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover/item:bg-white transition-colors">
+                                        <i data-lucide="credit-card" class="w-6 h-6 text-emerald-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-900">RFID Card</p>
+                                        <p class="text-xs text-gray-500">Seamless Payments</p>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
+                </div>
+
                 <!-- Solar Products Dropdown -->
                 <div class="dropdown-wrap" style="position:relative;">
-<button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
-
-    <a href="solar_products.html" class="flex items-center gap-1">Solar Products
-        <i data-lucide="chevron-down" class="w-4 h-4"></i>
-    </a>
-
-</button>
+                    <button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
+                        <a href="solar_products.html" class="flex items-center gap-1">Solar Products
+                            <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                        </a>
+                    </button>
                     <div class="mega-drop" style="z-index:100;">
                         <a href="solar_products.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                            </div>
+                            <div class="drop-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
                             <div class="drop-text"><p>Our Solar Solutions</p><span>For all your energy needs</span></div>
                         </a>
                         <a href="residential.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                            </div>
+                            <div class="drop-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
                             <div class="drop-text"><p>Residential Solar Rooftops</p><span>For homes & apartments</span></div>
                         </a>
                         <a href="commercial.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                            </div>
+                            <div class="drop-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div>
                             <div class="drop-text"><p>Commercial Solar Rooftops</p><span>For offices & retail</span></div>
                         </a>
                         <a href="industrial.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg>
-                            </div>
+                            <div class="drop-icon"><svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg></div>
                             <div class="drop-text"><p>Industrial Solar Rooftops</p><span>For factories & warehouses</span></div>
                         </a>
                         <a href="ground.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-                            </div>
+                            <div class="drop-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div>
                             <div class="drop-text"><p>Ground Mounted Solar System</p><span>Large scale solar farms</span></div>
                         </a>
                     </div>
                 </div>
 
-                    <a href="partners.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Partners</a>
-                    <a href="media-center.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Media Center</a>
-                    <a href="careers.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Careers</a>
-                </div>
-                <div class="flex items-center gap-4">
-                     <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://play.google.com/store/games%3Fhl%3Den_IN&ved=2ahUKEwjP48zKm5WUAxVrTGwGHTWhBIAQFnoECB8QAQ&sqi=2&usg=AOvVaw1xFWwUV1XhFXXR_Z_npZ2_" class="hidden md:block bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700">
-                        Download App
-                    </a>
-                </div>
-                <div class="flex items-center gap-4">
-                     <a href="contact.html" class="hidden md:block bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700">
-                        Contact Us
-                    </a>
-                </div>
-                    <!-- Mobile Menu Button -->
-<!-- Mobile Menu Button -->
-<button
-    id="menu-btn"
-    class="md:hidden flex items-center justify-center w-11 h-11 rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm shadow-sm hover:bg-emerald-50 hover:border-emerald-200 transition-all duration-300"
->
-    <i data-lucide="menu" class="w-6 h-6 text-gray-900"></i>
-</button>
+                <a href="partners.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Partners</a>
+                <a href="media-center.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Media Center</a>
+                <a href="careers.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Careers</a>
             </div>
-        </div>
-    </nav>
 
-    <!-- Mobile Menu -->
+            <div class="flex items-center gap-4">
+                <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://play.google.com/store/games%3Fhl%3Den_IN&ved=2ahUKEwjP48zKm5WUAxVrTGwGHTWhBIAQFnoECB8QAQ&sqi=2&usg=AOvVaw1xFWwUV1XhFXXR_Z_npZ2_" class="hidden md:block bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700">
+                    Download App
+                </a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="contact.html" class="hidden md:block bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700">
+                    Contact Us
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden flex items-center justify-center w-11 h-11 rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm shadow-sm hover:bg-emerald-50 hover:border-emerald-200 transition-all duration-300">
+                <i data-lucide="menu" class="w-6 h-6 text-gray-900"></i>
+            </button>
+        </div>
+    </div>
+</nav>
+
 <!-- Mobile Menu -->
 <div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-white border-t border-gray-100 shadow-xl z-40">
-
     <div class="p-6 space-y-5">
+        <a href="index.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Home</a>
+        <a href="stationfinder.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Station Finder</a>
+        <a href="products.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">EV Products</a>
+        <a href="solar_products.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Solar Products</a>
+        <a href="partners.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Partners</a>
+        <a href="media-center.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Media Center</a>
+        <a href="careers.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Careers</a>
+        <a href="contact.html" class="block text-base font-semibold text-emerald-600">Contact Us</a>
+    </div>
+</div>
 
-        <a href="index.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Home
-        </a>
+<!-- ===== MAIN ===== -->
+<main class="pt-20">
 
-        <a href="stationfinder.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Station Finder
-        </a>
+    <!-- HERO -->
+    <section style="padding:120px 24px 80px;position:relative;overflow:hidden;">
+        <div class="hero-blob" style="top:-100px;left:-120px;"></div>
+        <div class="hero-blob" style="bottom:-60px;right:-80px;opacity:0.6;animation-delay:-5s;"></div>
+        <div class="max-w-5xl mx-auto text-center" style="position:relative;z-index:2;">
+            <div class="hero-badge anim-1"><span class="dot"></span> Get In Touch</div>
+            <h1 class="hero-title anim-2">
+                Let's Start a<br><span class="accent">Conversation</span>
+            </h1>
+            <p class="anim-3" style="font-size:1.1rem;color:#64748b;max-width:580px;margin:24px auto 0;line-height:1.7;">
+                Have questions about our charging network, or technical support? Our team is here to help you power up.
+            </p>
+        </div>
+    </section>
 
-        <a href="products.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            EV Products
-        </a>
-
-        <a href="solar_products.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Solar Products
-        </a>
-
-        <a href="partners.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Partners
-        </a>
-
-        <a href="media-center.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Media Center
-        </a>
-
-        <a href="careers.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Careers
-        </a>
-
-        <a href="contact.html"
-           class="block text-base font-semibold text-emerald-600">
-            Contact Us
-        </a>
-
+    <!-- STAT STRIP -->
+    <div style="padding:0 24px;margin-bottom:80px;" class="anim-4">
+        <div class="stat-strip">
+            <div class="stat-item"><div class="stat-num">482+</div><div class="stat-lbl">Charging Hubs</div></div>
+            <div class="stat-item"><div class="stat-num">2,541</div><div class="stat-lbl">Live Connections</div></div>
+            <div class="stat-item"><div class="stat-num">&lt;24h</div><div class="stat-lbl">Response Time</div></div>
+            <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-lbl">Support</div></div>
+        </div>
     </div>
 
-</div>
-
-    <main class="relative z-10 pt-20">
-        <!-- Hero Section -->
-        <section class="py-24 px-4 overflow-hidden relative">
-            <div class="max-w-7xl mx-auto text-center relative z-10">
-                <span class="inline-block px-4 py-1.5 bg-emerald-50 text-emerald-600 rounded-full text-sm font-bold tracking-wide mb-6 animate-fade-in">GET IN TOUCH</span>
-                <h1 class="text-5xl md:text-7xl font-black tracking-tighter mb-8 animate-fade-in" style="animation-delay: 0.1s;">
-                    Let's Start a <span class="text-emerald-600">Conversation</span>
-                </h1>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed animate-fade-in" style="animation-delay: 0.2s;">
-                    Have questions about our charging network, or technical support? Our team is here to help you power up.
-                </p>
+    <!-- CHANNEL CARDS -->
+    <div style="max-width:1080px;margin:0 auto 80px;padding:0 24px;">
+        <div class="channel-grid">
+            <div class="channel-card">
+                <div class="channel-icon-wrap" style="background:#d1fae5;">
+                    <i data-lucide="mail" style="width:24px;height:24px;color:#059669;"></i>
+                </div>
+                <div class="channel-label" style="color:#059669;">Email</div>
+                <div class="channel-title">Email Us</div>
+                <div class="channel-desc">Our friendly team is here to help with any question you have.</div>
+                <a href="mailto:db@chargebees.com" class="channel-link" style="color:#10b981;">
+                    db@chargebees.com <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+                </a>
             </div>
-            
-            <!-- Decorative Elements -->
-            <div class="absolute top-1/2 left-0 w-64 h-64 bg-emerald-100 rounded-full blur-3xl -z-10 opacity-50"></div>
-            <div class="absolute bottom-0 right-0 w-96 h-96 bg-emerald-50 rounded-full blur-3xl -z-10 opacity-50"></div>
-        </section>
-
-        <!-- Contact Info Cards -->
-        <section class="py-12">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="contact-card p-8 bg-white rounded-[2.5rem] border border-gray-100 shadow-sm flex flex-col items-center text-center">
-                        <div class="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mb-6">
-                            <i data-lucide="mail" class="w-8 h-8 text-emerald-600"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Email Us</h3>
-                        <p class="text-gray-500 mb-4">Our friendly team is here to help.</p>
-                        <a href="mailto:db@chargebees.com" class="text-emerald-600 font-bold hover:underline">db@chargebees.com</a>
-                    </div>
-
-                    <div class="contact-card p-8 bg-white rounded-[2.5rem] border border-gray-100 shadow-sm flex flex-col items-center text-center">
-                        <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6">
-                            <i data-lucide="phone" class="w-8 h-8 text-blue-600"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Call Us</h3>
-                        <p class="text-gray-500 mb-4">Mon-Fri from 9am to 6pm.</p>
-                        <a href="tel:+917227025948" class="text-blue-600 font-bold hover:underline">+91 90000 40477</a>
-                    </div>
-
-                    <div class="contact-card p-8 bg-white rounded-[2.5rem] border border-gray-100 shadow-sm flex flex-col items-center text-center">
-                        <div class="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center mb-6">
-                            <i data-lucide="map-pin" class="w-8 h-8 text-amber-600"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Visit Us</h3>
-                        <p class="text-gray-500 mb-4">Come say hello at our office.</p>
-                        <p class="text-gray-900 font-medium"> IT Park, Visakhapatnam, Andhra Pradesh</p>
-                    </div>
+            <div class="channel-card">
+                <div class="channel-icon-wrap" style="background:#dbeafe;">
+                    <i data-lucide="phone" style="width:24px;height:24px;color:#2563eb;"></i>
                 </div>
+                <div class="channel-label" style="color:#2563eb;">Call</div>
+                <div class="channel-title">Call Us</div>
+                <div class="channel-desc">Mon–Fri from 9am to 6pm. We'd love to hear from you.</div>
+                <a href="tel:+919000040477" class="channel-link" style="color:#2563eb;">
+                    +91 90000 40477 <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+                </a>
             </div>
-        </section>
-
-        <!-- Contact Form & Map -->
-        <section class="py-24">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="bg-white rounded-[3rem] border border-gray-100 shadow-2xl overflow-hidden">
-                    <div class="grid lg:grid-cols-2">
-                        <!-- Form Side -->
-                        <div class="p-8 md:p-16">
-                            <h2 class="text-3xl font-black mb-8">Send us a Message</h2>
-                            <form id="contactForm" class="space-y-6">
-                                <div class="grid md:grid-cols-2 gap-6">
-                                    <div>
-                                        <label class="block text-sm font-bold text-gray-700 mb-2">First Name</label>
-                                        <input type="text" required placeholder="John" class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none form-input">
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-bold text-gray-700 mb-2">Last Name</label>
-                                        <input type="text" required placeholder="Doe" class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none form-input">
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-bold text-gray-700 mb-2">Email Address</label>
-                                    <input type="email" required placeholder="john@example.com" class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none form-input">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-bold text-gray-700 mb-2">Subject</label>
-                                    <select class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none form-input appearance-none">
-                                        <option>General Inquiry</option>
-                                        <option>Technical Support</option>
-                                        <option>Partnership</option>
-                                        <option>Other</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-bold text-gray-700 mb-2">Message</label>
-                                    <textarea required rows="4" placeholder="How can we help you?" class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none form-input resize-none"></textarea>
-                                </div>
-                                <button type="submit" class="w-full bg-emerald-600 text-white py-5 rounded-2xl font-bold text-lg hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-600/20 active:scale-[0.98]">
-                                    Send Message
-                                </button>
-                            </form>
-                        </div>
-
-                        <!-- Map Side -->
-                        <div class="relative min-h-[400px] bg-gray-100">
-                            <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.679834516345!2d73.1786!3d22.3072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDE4JzI1LjkiTiA3M8KwMTAnNDMuMCJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" 
-                                class="absolute inset-0 w-full h-full border-0" 
-                                allowfullscreen="" 
-                                loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade">
-                            </iframe>
-                            <!-- Overlay Card -->
-                              <!-- 
-                            <div class="absolute bottom-8 left-8 right-8 bg-white/90 backdrop-blur-md p-6 rounded-3xl border border-white/20 shadow-2xl">
-                                <h4 class="font-bold text-gray-900 mb-2">Our Headquarters</h4>
-                                <p class="text-sm text-gray-600 leading-relaxed">
-                                     
-                                </p>
-                                <div class="mt-4 flex items-center gap-4">
-                                    <a href="#" class="text-emerald-600 text-sm font-bold flex items-center gap-1">
-                                        Get Directions <i data-lucide="external-link" class="w-4 h-4"></i>
-                                    </a>
-                                </div>
-                            </div>
-                             -->
-                        </div>
-                    </div>
+            <div class="channel-card">
+                <div class="channel-icon-wrap" style="background:#fef3c7;">
+                    <i data-lucide="map-pin" style="width:24px;height:24px;color:#d97706;"></i>
                 </div>
-            </div>
-        </section>
-
-        <!-- FAQ Section -->
-        <section class="py-24 bg-gray-50/50">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-black tracking-tight mb-4">Common Questions</h2>
-                    <p class="text-gray-500">Quick answers to frequently asked questions.</p>
-                </div>
-
-                <div class="space-y-4">
-                    <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
-                        <h4 class="font-bold text-gray-900 mb-2">How long does it take to get a response?</h4>
-                        <p class="text-gray-600 text-sm">We typically respond to all inquiries within 24-48 business hours.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
-                        <h4 class="font-bold text-gray-900 mb-2">Do you offer 24/7 technical support?</h4>
-                        <p class="text-gray-600 text-sm">Yes, our technical support team is available 24/7 for station-related emergencies via our app.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <!-- Footer -->
-    <footer class="bg-gray-50 pt-24 pb-12 border-t border-gray-200 relative z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-4 gap-12 mb-20">
-                <div class="lg:col-span-1">
-                    <div class="mb-8">
-<div class="flex items-center gap-2">
-
-    <img
-        src="images/logo.png"
-        alt="ChargeBees Logo"
-        class="h-10 w-auto object-contain"
-    >
-
-    <span class="brand-logo-text">
-        Charge <span>Bees</span>
-    </span>
-
-</div>
-                    </div>
-                    <p class="text-gray-600 mb-8 leading-relaxed">
-                        Leading the charge towards a sustainable electric future with India's largest EV charging network.
-                    </p>
-<div class="flex gap-4">
-
-    <!-- Instagram -->
-    <a 
-        href="https://www.instagram.com/chargebees"
-        target="_blank"
-        class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300"
-    >
-        <img 
-            src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
-            alt="Instagram"
-            class="w-6 h-6"
-        >
-    </a>
-
-    <!-- Facebook -->
-    <a 
-        href="https://www.facebook.com/"
-        target="_blank"
-        class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300"
-    >
-        <img 
-            src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
-            alt="Facebook"
-            class="w-6 h-6"
-        >
-    </a>
-
-    <!-- WhatsApp -->
-    <a 
-        href="https://wa.me/919000040477"
-        target="_blank"
-        class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300"
-    >
-        <img 
-            src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
-            alt="WhatsApp"
-            class="w-6 h-6"
-        >
-    </a>
-
-    <!-- Mail -->
-    <a 
-        href="mailto:db@chargebees.com"
-        class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300"
-    >
-        <img 
-            src="https://cdn-icons-png.flaticon.com/512/732/732200.png"
-            alt="Mail"
-            class="w-6 h-6"
-        >
-    </a>
-
-</div>
-                </div>
-
-                <div>
-                    <h4 class="font-bold text-gray-900 mb-6">Company</h4>
-                    <ul class="space-y-4 text-gray-600">
-                        <li><a href="index.html#about" class="hover:text-emerald-600 transition-colors">About Us</a></li>
-                        <li><a href="partners.html#Partnerships" class="hover:text-emerald-600 transition-colors">Partnerships</a></li>
-                        <li><a href="media-center.html#media" class="hover:text-emerald-600 transition-colors">Media Center</a></li>
-                        <li><a href="careers.html#careers" class="hover:text-emerald-600 transition-colors">Careers</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="font-bold text-gray-900 mb-6">Solutions</h4>
-                    <ul class="space-y-4 text-gray-600">
-                        <li><a href="stationfinder.html" class="hover:text-emerald-600 transition-colors">Station Finder</a></li>
-                        <li><a href="products.html#services" class="hover:text-emerald-600 transition-colors">Services</a></li>
-                        <li><a href="products.html#software" class="hover:text-emerald-600 transition-colors">Mobile App</a></li>
-                        <li><a href="solar_products.html#residential" class="hover:text-emerald-600 transition-colors">Residential Solar</a></li>
-                        <li><a href="solar_products.html#commercial" class="hover:text-emerald-600 transition-colors">Commercial Solar</a></li>
-                        <li><a href="solar_products.html#industrial" class="hover:text-emerald-600 transition-colors">Industrial Solar</a></li>
-                        <li><a href="solar_products.html#ground" class="hover:text-emerald-600 transition-colors">Ground Mounted</a></li>                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="font-bold text-gray-900 mb-6">Contact</h4>
-                    <ul class="space-y-4 text-gray-600">
-                        <li class="flex items-center gap-2 group cursor-pointer">
-                            <span>db@chargebees.com</span>
-                            <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
-                        </li>
-                        <li>+91 90000 40477</li>
-                        <!--
-                        <li class="pt-4">
-                            <p class="font-semibold text-gray-900">Visakhapatnam HQ</p>
-                            <p class="text-sm">8th Floor, chargebees LTD,  IT Park, Visakhapatnam, Andhra Pradesh 530001</p>
-                        </li>
-                        -->
-                        <li class="pt-4">
-                            <!-- <p class="font-semibold text-gray-900">  </p> -->
-                            <!-- <p class="text-sm"> </p> -->
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-                <p>© 2026 Chargebees. All rights reserved.</p>
-                <div class="flex gap-8">
-                    <a href="terms.html#terms" class="hover:text-gray-900 transition-colors">Terms & Services</a>
-                    <a href="privacy.html" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
-                    
-                </div>
+                <div class="channel-label" style="color:#d97706;">Visit</div>
+                <div class="channel-title">Visit Us</div>
+                <div class="channel-desc">Come say hello at our headquarters in Hyderabad.</div>
+                <span class="channel-link" style="color:#d97706;cursor:default;">
+                    IT Park, Visakhapatnam, AP <i data-lucide="map-pin" style="width:16px;height:16px;"></i>
+                </span>
             </div>
         </div>
-    </footer>
+    </div>
 
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
+    <!-- FORM SECTION -->
+    <div style="max-width:1200px;margin:0 auto 80px;padding:0 24px;">
+        <div class="form-shell">
 
-        // Form Submission Handling
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = e.target.querySelector('button');
-            const originalText = btn.innerText;
-            
-            btn.innerText = 'Sending...';
-            btn.disabled = true;
-            
-            // Simulate API call
-            setTimeout(() => {
-                btn.innerText = 'Message Sent!';
-                btn.classList.remove('bg-emerald-600');
-                btn.classList.add('bg-emerald-500');
-                e.target.reset();
-                
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.classList.add('bg-emerald-600');
-                    btn.classList.remove('bg-emerald-500');
-                    btn.disabled = false;
-                }, 3000);
-            }, 1500);
+            <!-- Left dark info panel -->
+            <div class="form-left">
+                <div class="form-left-orbit"></div>
+                <div class="form-left-bg"></div>
+                <div style="position:relative;z-index:2;display:flex;flex-direction:column;height:100%;">
+                    <div class="hero-badge" style="background:rgba(16,185,129,0.15);color:#34d399;margin-bottom:24px;">
+                        <span class="dot" style="background:#10b981;"></span> Reach Out
+                    </div>
+                    <div class="form-left-title">Contact<br><span>Information</span></div>
+                    <div class="form-left-desc">Fill up the form and our team will get back to you within 24 hours.</div>
+
+                    <div class="info-row">
+                        <div class="info-icon"><i data-lucide="phone"></i></div>
+                        <div><div class="info-lbl">Phone</div><div class="info-val">+91 90000 40477</div></div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-icon"><i data-lucide="mail"></i></div>
+                        <div><div class="info-lbl">Email</div><div class="info-val">db@chargebees.com</div></div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-icon"><i data-lucide="map-pin"></i></div>
+                        <div><div class="info-lbl">Headquarters</div><div class="info-val"> Hyderabad,<br>Telangana 500008</div></div>
+                    </div>
+
+                    <div class="social-row">
+                        <a href="https://www.instagram.com/chargebees" target="_blank" class="social-btn">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+                        </a>
+                        <a href="https://www.facebook.com/" target="_blank" class="social-btn">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+                        </a>
+                        <a href="https://wa.me/919000040477" target="_blank" class="social-btn">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+                        </a>
+                        <a href="mailto:db@chargebees.com" class="social-btn">
+                            <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Mail">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right form panel -->
+            <div class="form-right">
+                <div class="form-right-title">Send us a Message</div>
+                <div class="form-right-sub">We'll get back to you within 24 business hours.</div>
+
+                <form id="contactForm" novalidate>
+                    <input type="hidden" name="solution" id="solutionInput" value="General Inquiry">
+                    <div class="field-grid2">
+                        <div>
+                            <label class="field-label">First Name</label>
+                            <input type="text" name="first_name" required placeholder="Harish" class="field-input">
+                        </div>
+                        <div>
+                            <label class="field-label">Last Name</label>
+                            <input type="text" name="last_name" required placeholder="Kumar" class="field-input">
+                        </div>
+                    </div>
+
+                    <div class="field-wrap">
+                        <label class="field-label">Email Address</label>
+                        <input type="email" name="email" required placeholder="you@example.com" class="field-input">
+                    </div>
+
+                    <div class="field-wrap">
+                        <label class="field-label">Phone (Optional)</label>
+                        <input type="tel" name="phone" placeholder="+91 98765 43210" class="field-input">
+                    </div>
+
+                    <div class="field-wrap">
+                        <label class="field-label">What's this about?</label>
+                        <div class="subject-grid">
+                            <div class="subject-pill selected" data-val="General Inquiry">General Inquiry</div>
+                            <div class="subject-pill" data-val="Technical Support">Technical Support</div>
+                            <div class="subject-pill" data-val="Partnership">Partnership</div>
+                            <div class="subject-pill" data-val="Other">Other</div>
+                        </div>
+                    </div>
+
+                    <div class="field-wrap">
+                        <label class="field-label">Message</label>
+                        <textarea name="message" required rows="4" placeholder="How can we help you?" class="field-textarea"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <i data-lucide="send" style="width:18px;height:18px;"></i>
+                        Send Message
+                    </button>
+                    <div id="contactSuccess"style="display:none;margin-top:15px;padding:12px;background:#d1fae5;color:#065f46;border-radius:10px;font-weight:600;text-align:center;">Thank you! Your message has been sent successfully.</div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAP -->
+    <div style="max-width:1200px;margin:0 auto 80px;padding:0 24px;">
+        <div class="map-shell">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.679834516345!2d73.1786!3d22.3072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDE4JzI1LjkiTiA3M8KwMTAnNDMuMCJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        <!--
+            <div class="map-card">
+                <h4>Our Headquarters</h4>
+                <p>Nanakramguda, Hyderabad, Telangana 500008</p>
+                <a href="#" class="map-dir">Get Directions <i data-lucide="external-link" style="width:14px;height:14px;"></i></a>
+            </div>
+        -->
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div style="max-width:800px;margin:0 auto 80px;padding:0 24px;">
+        <div style="text-align:center;margin-bottom:48px;">
+            <h2 class="faq-title">Common Questions</h2>
+            <p style="color:#64748b;font-size:0.95rem;">Quick answers to frequently asked questions.</p>
+        </div>
+        <div id="faqList">
+            <div class="faq-item open">
+                <button class="faq-trigger">How long does it take to get a response?<div class="faq-chev"><i data-lucide="chevron-down"></i></div></button>
+                <div class="faq-body"><div class="faq-body-inner">We typically respond to all inquiries within 24–48 business hours. For urgent issues, please call us directly.</div></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-trigger">Do you offer 24/7 technical support?<div class="faq-chev"><i data-lucide="chevron-down"></i></div></button>
+                <div class="faq-body"><div class="faq-body-inner">Yes, our technical support team is available 24/7 for station-related emergencies via our app.</div></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-trigger">How do I report a faulty charging station?<div class="faq-chev"><i data-lucide="chevron-down"></i></div></button>
+                <div class="faq-body"><div class="faq-body-inner">You can report a faulty station directly from the Chargebees app, or contact us via email or phone. Our team will resolve the issue within 4–6 hours.</div></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-trigger">Can I become a Chargebees charging partner?<div class="faq-chev"><i data-lucide="chevron-down"></i></div></button>
+                <div class="faq-body"><div class="faq-body-inner">Absolutely! We're always looking for host locations — malls, hotels, offices, and more. Reach out via the partnership inquiry form or visit our Partners page.</div></div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<!-- ===== FOOTER — exact from original ===== -->
+<footer class="bg-gray-50 pt-24 pb-12 border-t border-gray-200 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-4 gap-12 mb-20">
+            <div class="lg:col-span-1">
+                <div class="mb-8">
+                    <div class="flex items-center gap-2">
+                        <img src="images/logo.png" alt="ChargeBees Logo" class="h-10 w-auto object-contain">
+                        <span class="brand-logo-text">Charge <span>Bees</span></span>
+                    </div>
+                </div>
+                <p class="text-gray-600 mb-8 leading-relaxed">
+                    Leading the charge towards a sustainable electric future with India's largest EV charging network.
+                </p>
+                <div class="flex gap-4">
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/chargebees" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="w-6 h-6">
+                    </a>
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" class="w-6 h-6">
+                    </a>
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/919000040477" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="w-6 h-6">
+                    </a>
+                    <!-- Mail -->
+                    <a href="mailto:db@chargebees.com" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Mail" class="w-6 h-6">
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-gray-900 mb-6">Company</h4>
+                <ul class="space-y-4 text-gray-600">
+                    <li><a href="index.html#about" class="hover:text-emerald-600 transition-colors">About Us</a></li>
+                    <li><a href="partners.html#Partnerships" class="hover:text-emerald-600 transition-colors">Partnerships</a></li>
+                    <li><a href="media-center.html#media" class="hover:text-emerald-600 transition-colors">Media Center</a></li>
+                    <li><a href="careers.html#careers" class="hover:text-emerald-600 transition-colors">Careers</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-gray-900 mb-6">Solutions</h4>
+                <ul class="space-y-4 text-gray-600">
+                    <li><a href="stationfinder.html" class="hover:text-emerald-600 transition-colors">Station Finder</a></li>
+                    <li><a href="products.html#services" class="hover:text-emerald-600 transition-colors">Services</a></li>
+                    <li><a href="products.html#software" class="hover:text-emerald-600 transition-colors">Mobile App</a></li>
+                    <li><a href="solar_products.html#residential" class="hover:text-emerald-600 transition-colors">Residential Solar</a></li>
+                    <li><a href="solar_products.html#commercial" class="hover:text-emerald-600 transition-colors">Commercial Solar</a></li>
+                    <li><a href="solar_products.html#industrial" class="hover:text-emerald-600 transition-colors">Industrial Solar</a></li>
+                    <li><a href="solar_products.html#ground" class="hover:text-emerald-600 transition-colors">Ground Mounted</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-gray-900 mb-6">Contact</h4>
+                <ul class="space-y-4 text-gray-600">
+                    <li class="flex items-center gap-2 group cursor-pointer">
+                        <span>db@chargebees.com</span>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                    </li>
+                    <li>+91 90000 40477</li>
+                    <!--
+                    <li class="pt-4">
+                        <p class="font-semibold text-gray-900">Visakhapatnam HQ</p>
+                        <p class="text-sm">8th Floor, chargebees LTD,  IT Park, Visakhapatnam, Andhra Pradesh 530001</p>
+                    </li>
+                    -->
+                    <li class="pt-4">
+                        <p class="font-semibold text-gray-900">HYDERABAD</p>
+                        <p class="text-sm">Nanakramguda, Hyderabad, Telangana 500008</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+            <p>© 2026 Chargebees. All rights reserved.</p>
+            <div class="flex gap-8">
+                <a href="terms.html#terms" class="hover:text-gray-900 transition-colors">Terms & Services</a>
+                <a href="privacy.html" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    lucide.createIcons();
+
+    // Mobile menu — exact from original
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+        menuBtn.classList.toggle("active");
+    });
+
+    // Subject pill selector
+    document.querySelectorAll('.subject-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+            document.querySelectorAll('.subject-pill').forEach(p => p.classList.remove('selected'));
+            pill.classList.add('selected');
         });
-const menuBtn = document.getElementById("menu-btn");
-const mobileMenu = document.getElementById("mobile-menu");
+    });
 
-menuBtn.addEventListener("click", () => {
+    // FAQ accordion
+    document.querySelectorAll('.faq-trigger').forEach(trigger => {
+        trigger.addEventListener('click', () => {
+            const item = trigger.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        });
+    });
 
-    mobileMenu.classList.toggle("hidden");
 
-    // icon animation optional
-    menuBtn.classList.toggle("active");
+document.querySelectorAll('.subject-pill').forEach(pill => {
+
+pill.addEventListener('click', () => {
+
+document.querySelectorAll('.subject-pill').forEach(p =>
+p.classList.remove('selected'));
+
+pill.classList.add('selected');
+
+document.getElementById('solutionInput').value =
+pill.getAttribute('data-val');
+
 });
-    </script>
+
+});
+
+document.getElementById("contactForm").addEventListener("submit", async function(e){
+
+e.preventDefault();
+
+const formData = new FormData(this);
+
+try{
+
+await fetch("contact.php",{
+method:"POST",
+body:formData
+});
+
+document.getElementById("contactSuccess").style.display="block";
+
+this.reset();
+
+document.getElementById("solutionInput").value = "General Inquiry";
+
+setTimeout(()=>{
+document.getElementById("contactSuccess").style.display="none";
+},5000);
+
+}catch(error){
+
+alert("Failed to send message.");
+
+}
+
+});
+
+</script>
 </body>
 </html>

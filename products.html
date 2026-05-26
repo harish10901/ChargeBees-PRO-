@@ -4,152 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products | Chargebees</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-        <link rel="icon" type="image/png" href="images\favicon.png">
+    <link rel="icon" type="image/png" href="images/favicon.png">
     <style>
+        :root {
+            --emerald: #10b981;
+            --emerald-dark: #059669;
+            --emerald-light: #34d399;
+            --gray-900: #111827;
+        }
+
         body { font-family: 'Inter', sans-serif; background-color: #fdfbf7; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
+
+        /* ===== BRAND LOGO TEXT ===== */
+        .brand-logo-text {
+            font-size: 1.55rem;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            color: #111827;
+            font-family: "Poppins", "Nunito", "Quicksand", sans-serif;
+            line-height: 1;
+        }
+        .brand-logo-text span { color: #10b981; }
+        @media(max-width:768px) { .brand-logo-text { font-size: 1.3rem; } }
 
         /* Product Card Styles */
-        .product-card {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .product-card:hover {
-            transform: translateY(-10px);
-        }
+        .product-card { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .product-card:hover { transform: translateY(-10px); }
         .bg-grid {
             background-image: radial-gradient(circle at 2px 2px, rgba(16, 185, 129, 0.05) 1px, transparent 0);
             background-size: 40px 40px;
         }
-        
+
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
             100% { transform: translateY(0px); }
         }
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
+        .animate-float { animation: float 6s ease-in-out infinite; }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: white;
+            border-radius: 2.5rem;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalIn 0.3s ease-out;
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-
-
-
-        .product-card {
-    transition: all 0.3s ease;
-}
-
-.product-card:hover {
-    transform: translateY(-10px);
-}
-
-/* Modal Styles */
-
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-}
-
-.modal.active {
-    display: flex;
-}
-
-.modal-content {
-    background: white;
-    border-radius: 2.5rem;
-    max-width: 800px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-    animation: modalIn 0.3s ease-out;
-}
-
-@keyframes modalIn {
-
-    from {
-        opacity: 0;
-        transform: scale(0.95) translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
-}
-
-/* Floating Text Animation */
-
-.float-text {
-    animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-
-    0%,100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-
-/* ===== BRAND LOGO TEXT ===== */
-
-.brand-logo-text{
-
-    font-size: 1.55rem;
-
-    font-weight: 500;
-
-    letter-spacing: -0.5px;
-
-    color: #111827;
-
-    font-family:
-    "Poppins",
-    "Nunito",
-    "Quicksand",
-    sans-serif;
-
-    line-height: 1;
-}
-
-.brand-logo-text span{
-    color:#10b981;
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-    .brand-logo-text{
-        font-size:1.3rem;
-    }
-
-}
-
+        /* Floating Text Animation */
+        .float-text { animation: floatText 3s ease-in-out infinite; }
+        @keyframes floatText {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
 
         /* Dropdown */
         .dropdown-wrap { position: relative; }
-        .dropdown-trigger { display: flex; align-items: center; gap: 4px; font-size: 0.875rem; font-weight: 500; color: #4b5563; cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; transition: color 0.2s; white-space: nowrap; }
-        .dropdown-trigger:hover { color: #111827; }
-        .dropdown-trigger.solar-active { color: #059669; }
-        .mega-drop { position: absolute; top: calc(100% + 2px); left: 50%; transform: translateX(-50%); width: 680px; background: #fff; border-radius: 24px; box-shadow: 0 25px 60px rgba(0,0,0,0.12); border: 1px solid #f0fdf4; padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; opacity: 0; visibility: hidden; transition: all 0.25s ease; pointer-events: none; }
+        .mega-drop {
+            position: absolute; top: calc(100% + 2px); left: 50%; transform: translateX(-50%);
+            width: 680px; background: #fff; border-radius: 24px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.12); border: 1px solid #f0fdf4;
+            padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+            opacity: 0; visibility: hidden; transition: all 0.25s ease; pointer-events: none;
+        }
         .dropdown-wrap:hover .mega-drop { opacity: 1; visibility: visible; pointer-events: all; transform: translateX(-50%) translateY(0); }
         .drop-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; border-radius: 16px; text-decoration: none; transition: background 0.2s; }
         .drop-item:hover { background: #f0fdf4; }
@@ -157,41 +98,312 @@
         .drop-icon svg { width: 22px; height: 22px; stroke: #fff; stroke-width: 2; fill: none; }
         .drop-text p { font-weight: 700; font-size: 0.9rem; color: #111827; margin-bottom: 2px; }
         .drop-text span { font-size: 0.78rem; color: #6b7280; }
+
+        /* =============================================
+           CONTACT FORM SECTION — PREMIUM FLOATING UI
+        ============================================= */
+        .contact-section {
+            background: linear-gradient(135deg, #0f172a 0%, #064e3b 50%, #0f172a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(16,185,129,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(52,211,153,0.1) 0%, transparent 40%),
+                radial-gradient(circle at 60% 80%, rgba(16,185,129,0.08) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        .contact-grid-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(16,185,129,0.04) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(16,185,129,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        /* Floating orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        .orb-1 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(16,185,129,0.3), transparent);
+            top: -100px; left: -100px;
+            animation: orbFloat 8s ease-in-out infinite;
+        }
+        .orb-2 {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(52,211,153,0.2), transparent);
+            bottom: -50px; right: -50px;
+            animation: orbFloat 10s ease-in-out infinite reverse;
+        }
+        .orb-3 {
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(16,185,129,0.15), transparent);
+            top: 50%; right: 20%;
+            animation: orbFloat 6s ease-in-out infinite 2s;
+        }
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        /* Contact form card */
+        .contact-card {
+            background: rgba(255,255,255,0.04);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(16,185,129,0.2);
+            border-radius: 3rem;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 3rem;
+            background: linear-gradient(135deg, rgba(16,185,129,0.05), transparent, rgba(52,211,153,0.03));
+            pointer-events: none;
+        }
+        .contact-card:hover {
+            border-color: rgba(16,185,129,0.4);
+            box-shadow: 0 0 60px rgba(16,185,129,0.1);
+        }
+
+        /* Floating input labels */
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            width: 100%;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 1rem;
+            padding: 1.1rem 1.25rem 0.6rem;
+            color: white;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
+            -webkit-appearance: none;
+        }
+        .input-group input::placeholder,
+        .input-group textarea::placeholder {
+            color: transparent;
+        }
+        .input-group select option {
+            background: #1a2a2a;
+            color: white;
+        }
+        .input-group input:focus,
+        .input-group textarea:focus,
+        .input-group select:focus {
+            border-color: rgba(16,185,129,0.6);
+            background: rgba(16,185,129,0.06);
+            box-shadow: 0 0 0 3px rgba(16,185,129,0.08), 0 0 20px rgba(16,185,129,0.1);
+        }
+        .input-group label {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255,255,255,0.45);
+            font-size: 0.9rem;
+            pointer-events: none;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            background: transparent;
+        }
+        .input-group textarea ~ label {
+            top: 1.2rem;
+            transform: none;
+        }
+        .input-group input:focus ~ label,
+        .input-group input:not(:placeholder-shown) ~ label,
+        .input-group textarea:focus ~ label,
+        .input-group textarea:not(:placeholder-shown) ~ label,
+        .input-group select:focus ~ label,
+        .input-group.has-value label {
+            top: 0.45rem;
+            transform: translateY(0);
+            font-size: 0.7rem;
+            color: #34d399;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* Submit button glow effect */
+        .btn-glow {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #10b981, #34d399);
+            border: none;
+            border-radius: 1rem;
+            padding: 1.1rem 2rem;
+            color: white;
+            font-weight: 800;
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .btn-glow:hover { transform: translateY(-2px); box-shadow: 0 20px 40px rgba(16,185,129,0.4); }
+        .btn-glow:hover::before { opacity: 1; }
+        .btn-glow:active { transform: translateY(0); }
+
+        /* Ripple shimmer for button */
+        .btn-glow::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 40%;
+            height: 200%;
+            background: rgba(255,255,255,0.15);
+            transform: skewX(-20deg);
+            animation: shimmer 3s infinite 1s;
+        }
+        @keyframes shimmer {
+            0% { left: -60%; }
+            100% { left: 160%; }
+        }
+
+        /* Info cards on left side */
+        .info-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            animation: floatCard 5s ease-in-out infinite;
+        }
+        .info-card:nth-child(2) { animation-delay: -1.5s; }
+        .info-card:nth-child(3) { animation-delay: -3s; }
+        .info-card:hover { border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.06); }
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+
+        /* Success toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            font-weight: 700;
+            z-index: 9999;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 20px 40px rgba(16,185,129,0.3);
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+
+        /* Particle dots */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(16,185,129,0.5);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Input error state */
+        .input-group.error input,
+        .input-group.error textarea,
+        .input-group.error select {
+            border-color: rgba(239,68,68,0.6) !important;
+        }
+        .input-group .error-msg {
+            color: #f87171;
+            font-size: 0.72rem;
+            margin-top: 0.35rem;
+            display: none;
+            font-weight: 500;
+        }
+        .input-group.error .error-msg { display: block; }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .contact-card { padding: 2rem 1.5rem; border-radius: 2rem; }
+            .orb-1, .orb-2, .orb-3 { display: none; }
+        }
+
+        /* Spec card animation on scroll */
+        .spec-card { transition: all 0.5s ease; }
+        
+        /* Section reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
     </style>
 </head>
 <body class="antialiased text-gray-900">
 
-    <!-- Navbar (Exact copy from index.html/stationfinder.html) -->
+    <!-- ======= NAVBAR (UNCHANGED) ======= -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-<div class="flex-shrink-0 flex items-center gap-1">
-
-<a href="index.html" class="flex items-center gap-2">
-
-    <img src="images/logo.png" alt="Logo" class="h-10 w-auto object-contain">
-
-    <span class="brand-logo-text">
-        Charge <span>Bees</span>
-    </span>
-
-</a>
-
-</div>
+                <div class="flex-shrink-0 flex items-center gap-1">
+                    <a href="index.html" class="flex items-center gap-2">
+                        <img src="images/logo.png" alt="Logo" class="h-10 w-auto object-contain">
+                        <span class="brand-logo-text">Charge <span>Bees</span></span>
+                    </a>
+                </div>
                 
                 <div class="hidden md:flex items-center space-x-5">
                     <a href="index.html" class="text-sm font-medium text-gray-600 hover:text-emerald-600 transition-colors">Home</a>
                     <a href="stationfinder.html" class="text-sm font-medium text-gray-600 hover:text-emerald-600 transition-colors">Station Finder</a>
                     
-                    <!-- Products Dropdown -->
+                    <!-- EV Products Dropdown -->
                     <div class="relative group">
                         <button class="flex items-center gap-1 text-sm font-medium text-emerald-600 cursor-pointer py-8">
                             EV Products <i data-lucide="chevron-down" class="w-4 h-4"></i>
                         </button>
-                        
-                        <!-- Mega Menu -->
                         <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-white rounded-3xl shadow-2xl border border-gray-100 p-8 grid grid-cols-3 gap-8 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                            <!-- Hardware -->
                             <div>
                                 <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
                                     <i data-lucide="zap" class="w-5 h-5 text-emerald-600"></i> Hardware
@@ -206,8 +418,6 @@
                                     </div>
                                 </a>
                             </div>
-
-                            <!-- Software -->
                             <div>
                                 <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
                                     <i data-lucide="layout" class="w-5 h-5 text-emerald-600"></i> Software
@@ -236,8 +446,6 @@
                                     </a>
                                 </div>
                             </div>
-
-                            <!-- Services -->
                             <div>
                                 <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
                                     <i data-lucide="settings" class="w-5 h-5 text-emerald-600"></i> Services
@@ -277,122 +485,73 @@
                             </div>
                         </div>
                     </div>
-                <!-- Solar Products Dropdown -->
-                <div class="dropdown-wrap" style="position:relative;">
-<button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
 
-    <a href="solar_products.html" class="flex items-center gap-1">Solar Products
-        <i data-lucide="chevron-down" class="w-4 h-4"></i>
-    </a>
-
-</button>
-                    <div class="mega-drop" style="z-index:100;">
-                        <a href="solar_products.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                            </div>
-                            <div class="drop-text"><p>Our Solar Solutions</p><span>For all your energy needs</span></div>
-                        </a>
-                        <a href="residential.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                            </div>
-                            <div class="drop-text"><p>Residential Solar Rooftops</p><span>For homes & apartments</span></div>
-                        </a>
-                        <a href="commercial.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                            </div>
-                            <div class="drop-text"><p>Commercial Solar Rooftops</p><span>For offices & retail</span></div>
-                        </a>
-                        <a href="industrial.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg>
-                            </div>
-                            <div class="drop-text"><p>Industrial Solar Rooftops</p><span>For factories & warehouses</span></div>
-                        </a>
-                        <a href="ground.html" class="drop-item">
-                            <div class="drop-icon">
-                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-                            </div>
-                            <div class="drop-text"><p>Ground Mounted Solar System</p><span>Large scale solar farms</span></div>
-                        </a>
+                    <!-- Solar Products Dropdown -->
+                    <div class="dropdown-wrap" style="position:relative;">
+                        <button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
+                            <a href="solar_products.html" class="flex items-center gap-1">Solar Products
+                                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                            </a>
+                        </button>
+                        <div class="mega-drop" style="z-index:100;">
+                            <a href="solar_products.html" class="drop-item">
+                                <div class="drop-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                                <div class="drop-text"><p>Our Solar Solutions</p><span>For all your energy needs</span></div>
+                            </a>
+                            <a href="residential.html" class="drop-item">
+                                <div class="drop-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                                <div class="drop-text"><p>Residential Solar Rooftops</p><span>For homes & apartments</span></div>
+                            </a>
+                            <a href="commercial.html" class="drop-item">
+                                <div class="drop-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div>
+                                <div class="drop-text"><p>Commercial Solar Rooftops</p><span>For offices & retail</span></div>
+                            </a>
+                            <a href="industrial.html" class="drop-item">
+                                <div class="drop-icon"><svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg></div>
+                                <div class="drop-text"><p>Industrial Solar Rooftops</p><span>For factories & warehouses</span></div>
+                            </a>
+                            <a href="ground.html" class="drop-item">
+                                <div class="drop-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div>
+                                <div class="drop-text"><p>Ground Mounted Solar System</p><span>Large scale solar farms</span></div>
+                            </a>
+                        </div>
                     </div>
-                </div>
 
                     <a href="partners.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Partners</a>
                     <a href="media-center.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Media Center</a>
                     <a href="careers.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Careers</a>
                 </div>
-                <div class="flex items-center gap-4">
-                     <a href="https://play.google.com/store/apps" class="hidden md:block bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700 transition-all">
-                        Download App
-                    </a>
-                    <a href="contact.html" class="hidden md:block bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700 transition-all">
-                        Contact Us
-                    </a>
-                </div>
-                <!-- Mobile Menu Button -->
 
-                <button
-                    id="menu-btn"class="md:hidden flex items-center justify-center w-11 h-11 rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm shadow-sm hover:bg-emerald-50 hover:border-emerald-200 transition-all duration-300">
+                <div class="flex items-center gap-4">
+                    <a href="https://play.google.com/store/apps" class="hidden md:block bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700 transition-all">Download App</a>
+                    <a href="contact.html" class="hidden md:block bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700 transition-all">Contact Us</a>
+                </div>
+
+                <button id="menu-btn" class="md:hidden flex items-center justify-center w-11 h-11 rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm shadow-sm hover:bg-emerald-50 hover:border-emerald-200 transition-all duration-300">
                     <i data-lucide="menu" class="w-6 h-6 text-gray-900"></i>
                 </button>
             </div>
         </div>
     </nav>
 
-<!-- Mobile Menu -->
-<div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-white border-t border-gray-100 shadow-xl z-40">
-
-    <div class="p-6 space-y-5">
-
-        <a href="index.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Home
-        </a>
-
-        <a href="stationfinder.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Station Finder
-        </a>
-
-        <a href="products.html"
-           class="block text-base font-semibold text-emerald-600">
-            EV Products
-        </a>
-        <a href="solar_products.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Solar Products
-        </a>
-
-        <a href="partners.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-           Partners
-        </a>
-
-        <a href="media-center.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Media Center
-        </a>
-
-        <a href="careers.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Careers
-        </a>
-
-        <a href="contact.html"
-           class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">
-            Contact Us
-        </a>
-
+    <!-- ======= MOBILE MENU (UNCHANGED) ======= -->
+    <div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-white border-t border-gray-100 shadow-xl z-40">
+        <div class="p-6 space-y-5">
+            <a href="index.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Home</a>
+            <a href="stationfinder.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Station Finder</a>
+            <a href="products.html" class="block text-base font-semibold text-emerald-600">EV Products</a>
+            <a href="solar_products.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Solar Products</a>
+            <a href="partners.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Partners</a>
+            <a href="media-center.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Media Center</a>
+            <a href="careers.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Careers</a>
+            <a href="contact.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Contact Us</a>
+        </div>
     </div>
 
-</div>
-
-    <!-- Main Content -->
+    <!-- ======= MAIN CONTENT ======= -->
     <main class="pt-20">
-        <!-- Hero Section -->
+
+        <!-- Hero Section (UNCHANGED) -->
         <section class="relative py-32 overflow-hidden bg-white bg-grid">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="text-center max-w-4xl mx-auto">
@@ -408,17 +567,13 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Abstract Elements -->
             <div class="absolute -top-20 -left-20 w-96 h-96 bg-emerald-100 rounded-full blur-3xl opacity-30 animate-float"></div>
             <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-30 animate-float" style="animation-delay: -3s;"></div>
         </section>
 
-        <!-- Hardware Section -->
+        <!-- Hardware Section (UNCHANGED) -->
         <section id="hardware" class="py-32 bg-white relative overflow-hidden">
-            <!-- Decorative circle -->
             <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[600px] h-[600px] bg-emerald-50 rounded-full blur-3xl opacity-50 -z-10"></div>
-            
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
                     <div class="max-w-2xl">
@@ -426,12 +581,8 @@
                             <span class="w-12 h-[2px] bg-emerald-600 rounded-full"></span>
                             <span class="text-emerald-600 font-bold uppercase tracking-widest text-xs">The Infrastructure</span>
                         </div>
-                        <h2 class="text-5xl md:text-7xl font-black text-gray-900 tracking-tighter leading-none mb-6">
-                            Next-Gen <br>Hardware.
-                        </h2>
-                        <p class="text-lg text-gray-500 font-medium leading-relaxed">
-                            Engineered for durability, designed for speed. Our hardware line represents the absolute edge of power electronic engineering.
-                        </p>
+                        <h2 class="text-5xl md:text-7xl font-black text-gray-900 tracking-tighter leading-none mb-6">Next-Gen <br>Hardware.</h2>
+                        <p class="text-lg text-gray-500 font-medium leading-relaxed">Engineered for durability, designed for speed. Our hardware line represents the absolute edge of power electronic engineering.</p>
                     </div>
                     <div class="hidden md:flex gap-4">
                         <button class="w-14 h-14 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:border-emerald-600 hover:text-emerald-600 transition-all">
@@ -453,26 +604,17 @@
                                 </div>
                                 <span class="px-4 py-1 bg-gray-200 text-gray-600 rounded-full text-[10px] font-black uppercase tracking-widest group-hover:bg-emerald-50 group-hover:text-emerald-600 transition-colors">Residential</span>
                             </div>
-                            
                             <h3 class="text-3xl font-black text-gray-900 mb-4 tracking-tight">LiteCharge AC</h3>
                             <p class="text-gray-500 font-medium mb-12 flex-1">The perfect companion for your garage or workplace. Simple, smart, and ultra-reliable.</p>
-                            
                             <div class="space-y-4 mb-10 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">
-                                <div class="flex items-center gap-3 text-sm font-bold text-gray-700">
-                                    <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div>
-                                    Dynamic Load Balance
-                                </div>
-                                <div class="flex items-center gap-3 text-sm font-bold text-gray-700">
-                                    <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div>
-                                    22kW Peak Output
-                                </div>
+                                <div class="flex items-center gap-3 text-sm font-bold text-gray-700"><div class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div>Dynamic Load Balance</div>
+                                <div class="flex items-center gap-3 text-sm font-bold text-gray-700"><div class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div>22kW Peak Output</div>
                             </div>
-
                             <button class="w-full bg-white py-5 rounded-2xl font-black uppercase tracking-widest text-emerald-600 border border-emerald-100 hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-all duration-300">Detailed Specs</button>
                         </div>
                     </div>
 
-                    <!-- DC Card -->
+                    <!-- DC Card (Featured) -->
                     <div class="group relative bg-white p-2 rounded-[3.5rem] border border-emerald-100 hover:border-emerald-600 transition-all duration-500 shadow-[0_20px_50px_rgba(16,185,129,0.15)] scale-105 z-10">
                         <div class="bg-gray-900 rounded-[3rem] p-10 h-full flex flex-col">
                             <div class="flex justify-between items-start mb-12">
@@ -481,25 +623,13 @@
                                 </div>
                                 <span class="px-4 py-1 bg-emerald-600/20 text-emerald-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-emerald-500/20">The Standard</span>
                             </div>
-                            
                             <h3 class="text-3xl font-black text-white mb-4 tracking-tight">HyperFlow DC</h3>
                             <p class="text-gray-400 font-medium mb-12 flex-1">Industrial grade 120kW fast charging built for high-throughput commercial hubs and fuel courts.</p>
-                            
                             <div class="space-y-4 mb-10">
-                                <div class="flex items-center gap-3 text-sm font-bold text-emerald-400">
-                                    <i data-lucide="check-circle" class="w-4 h-4"></i>
-                                    Dual CCS2 Connector
-                                </div>
-                                <div class="flex items-center gap-3 text-sm font-bold text-emerald-400">
-                                    <i data-lucide="check-circle" class="w-4 h-4"></i>
-                                    15 min to 80% Range
-                                </div>
-                                <div class="flex items-center gap-3 text-sm font-bold text-emerald-400">
-                                    <i data-lucide="check-circle" class="w-4 h-4"></i>
-                                    OCPP 2.0.1 Ready
-                                </div>
+                                <div class="flex items-center gap-3 text-sm font-bold text-emerald-400"><i data-lucide="check-circle" class="w-4 h-4"></i>Dual CCS2 Connector</div>
+                                <div class="flex items-center gap-3 text-sm font-bold text-emerald-400"><i data-lucide="check-circle" class="w-4 h-4"></i>15 min to 80% Range</div>
+                                <div class="flex items-center gap-3 text-sm font-bold text-emerald-400"><i data-lucide="check-circle" class="w-4 h-4"></i>OCPP 2.0.1 Ready</div>
                             </div>
-
                             <button class="w-full bg-emerald-600 py-5 rounded-2xl font-black uppercase tracking-widest text-white shadow-xl shadow-emerald-600/30 hover:bg-emerald-500 transition-all duration-300">Configure Fleet</button>
                         </div>
                     </div>
@@ -513,27 +643,18 @@
                                 </div>
                                 <span class="px-4 py-1 bg-gray-200 text-gray-600 rounded-full text-[10px] font-black uppercase tracking-widest group-hover:bg-emerald-50 group-hover:text-emerald-600 transition-colors">Logistics</span>
                             </div>
-                            
                             <h3 class="text-3xl font-black text-gray-900 mb-4 tracking-tight">TitanGrid HPC</h3>
                             <p class="text-gray-500 font-medium mb-12 flex-1">Ultra-high power charging for heavy-duty electric trucks and long-haul logistics fleets.</p>
-                            
                             <div class="space-y-4 mb-10 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">
-                                <div class="flex items-center gap-3 text-sm font-bold text-gray-700">
-                                    <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div>
-                                    360kW Max Throughput
-                                </div>
-                                <div class="flex items-center gap-3 text-sm font-bold text-gray-700">
-                                    <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div>
-                                    Liquid Cooled System
-                                </div>
+                                <div class="flex items-center gap-3 text-sm font-bold text-gray-700"><div class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div>360kW Max Throughput</div>
+                                <div class="flex items-center gap-3 text-sm font-bold text-gray-700"><div class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div>Liquid Cooled System</div>
                             </div>
-
                             <button class="w-full bg-white py-5 rounded-2xl font-black uppercase tracking-widest text-emerald-600 border border-emerald-100 hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-all duration-300">Enterprise Quote</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Small Trust Bar -->
+                <!-- Trust Bar -->
                 <div class="mt-24 pt-12 border-t border-gray-100 flex flex-wrap justify-center gap-x-12 gap-y-8 items-center opacity-50 grayscale">
                     <div class="flex items-center gap-2 font-black text-gray-900"><i data-lucide="award" class="w-5 h-5 text-emerald-600"></i> ISO 9001</div>
                     <div class="flex items-center gap-2 font-black text-gray-900"><i data-lucide="shield" class="w-5 h-5 text-emerald-600"></i> ARAI CERTIFIED</div>
@@ -543,7 +664,175 @@
             </div>
         </section>
 
-        <!-- Software Section -->
+
+        <!-- =============================================
+             PREMIUM CONTACT FORM SECTION — NEW ADDITION
+        ============================================= -->
+        <section id="contact-station" class="contact-section py-32 relative">
+            <!-- Animated background elements -->
+            <div class="contact-grid-overlay"></div>
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+
+            <!-- Scattered particles -->
+            <div class="particle" style="top:15%;left:10%;animation:orbFloat 7s ease-in-out infinite;"></div>
+            <div class="particle" style="top:70%;left:85%;animation:orbFloat 5s ease-in-out infinite 1s;"></div>
+            <div class="particle" style="top:40%;left:5%;animation:orbFloat 9s ease-in-out infinite 2s;"></div>
+            <div class="particle" style="top:85%;left:40%;animation:orbFloat 6s ease-in-out infinite 0.5s;"></div>
+            <div class="particle" style="top:20%;left:75%;animation:orbFloat 8s ease-in-out infinite 3s;"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-16 items-start">
+
+                    <!-- Left: Info Panel -->
+                    <div class="reveal">
+                        <div class="mb-10">
+                            <span class="inline-block text-emerald-400 font-bold uppercase tracking-[0.2em] text-xs mb-5">Get In Touch</span>
+                            <h2 class="text-5xl md:text-6xl font-black text-white leading-[1.05] tracking-tighter mb-6">
+                                Let's Power<br>Your <span class="text-emerald-400">Station</span>
+                            </h2>
+                            <p class="text-gray-400 text-lg font-medium leading-relaxed max-w-md">
+                                Whether you're deploying a single charger or building India's next major charging hub — our team is ready to make it happen.
+                            </p>
+                        </div>
+
+                        <!-- Info cards with floating animation -->
+                        <div class="space-y-4 mb-12">
+                            <div class="info-card flex items-center gap-5">
+                                <div class="w-14 h-14 bg-emerald-500/20 rounded-2xl flex items-center justify-center shrink-0">
+                                    <i data-lucide="mail" class="w-6 h-6 text-emerald-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Email Us</p>
+                                    <p class="text-white font-semibold">db@chargebees.com</p>
+                                </div>
+                            </div>
+                            <div class="info-card flex items-center gap-5">
+                                <div class="w-14 h-14 bg-emerald-500/20 rounded-2xl flex items-center justify-center shrink-0">
+                                    <i data-lucide="phone" class="w-6 h-6 text-emerald-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Call Us</p>
+                                    <p class="text-white font-semibold">+91 90000 40477</p>
+                                </div>
+                            </div>
+                            <div class="info-card flex items-center gap-5">
+                                <div class="w-14 h-14 bg-emerald-500/20 rounded-2xl flex items-center justify-center shrink-0">
+                                    <i data-lucide="clock" class="w-6 h-6 text-emerald-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Response Time</p>
+                                    <p class="text-white font-semibold">Within 24 hours</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stats strip -->
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="text-center p-4 rounded-2xl bg-white/5 border border-white/10">
+                                <p class="text-3xl font-black text-emerald-400">500+</p>
+                                <p class="text-xs text-gray-500 font-medium mt-1">Stations Deployed</p>
+                            </div>
+                            <div class="text-center p-4 rounded-2xl bg-white/5 border border-white/10">
+                                <p class="text-3xl font-black text-emerald-400">50+</p>
+                                <p class="text-xs text-gray-500 font-medium mt-1">Cities Covered</p>
+                            </div>
+                            <div class="text-center p-4 rounded-2xl bg-white/5 border border-white/10">
+                                <p class="text-3xl font-black text-emerald-400">99.9%</p>
+                                <p class="text-xs text-gray-500 font-medium mt-1">Uptime SLA</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Contact Form -->
+                    <div class="reveal reveal-delay-2">
+                        <div class="contact-card">
+                            <div class="mb-8">
+                                <h3 class="text-2xl font-black text-white mb-2">Send us a message</h3>
+                                <p class="text-gray-500 text-sm">Fill in the details below and our team will reach out shortly.</p>
+                            </div>
+
+                            <form id="contactForm" action="contact.php" method="POST" novalidate>
+                                <!-- Name Row -->
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="input-group">
+                                        <input type="text" id="first_name" name="first_name" placeholder="First Name" autocomplete="given-name" required>
+                                        <label for="first_name">First Name</label>
+                                        <p class="error-msg">Required</p>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" id="last_name" name="last_name" placeholder="Last Name" autocomplete="family-name" required>
+                                        <label for="last_name">Last Name</label>
+                                        <p class="error-msg">Required</p>
+                                    </div>
+                                </div>
+
+                                <!-- Phone & Email -->
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="input-group">
+                                        <input type="tel" id="phone" name="phone" placeholder="Phone" autocomplete="tel" required>
+                                        <label for="phone">Phone Number</label>
+                                        <p class="error-msg">Valid number required</p>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="email" id="email" name="email" placeholder="Email" autocomplete="email" required>
+                                        <label for="email">Email Address</label>
+                                        <p class="error-msg">Valid email required</p>
+                                    </div>
+                                </div>
+
+                                <!-- Solution -->
+                                <div class="input-group has-value">
+                                    <select id="solution" name="solution" required>
+                                        <option value="" disabled selected></option>
+                                        <option value="AC Charger (Home/Office)">AC Charger — Home / Office</option>
+                                        <option value="DC Fast Charger (Commercial)">DC Fast Charger — Commercial</option>
+                                        <option value="Ultra-Fast HPC (Highway)">Ultra-Fast HPC — Highway</option>
+                                        <option value="Solar + EV Integration">Solar + EV Integration</option>
+                                        <option value="ChargeCloud CMS">ChargeCloud CMS</option>
+                                        <option value="Fleet Management">Fleet Management</option>
+                                        <option value="RFID Ecosystem">RFID Ecosystem</option>
+                                        <option value="Other">Other / General Enquiry</option>
+                                    </select>
+                                    <label for="solution">Solution of Interest</label>
+                                    <p class="error-msg">Please select a solution</p>
+                                </div>
+
+                                <!-- Message -->
+                                <div class="input-group">
+                                    <textarea id="message" name="message" rows="4" placeholder="Message" required style="padding-top:1.5rem;resize:none;"></textarea>
+                                    <label for="message">Your Message</label>
+                                    <p class="error-msg">Message is required</p>
+                                </div>
+
+                                <!-- Submit -->
+                                <button type="submit" class="btn-glow" id="submitBtn">
+                                    <span id="btnText" class="flex items-center justify-center gap-2">
+                                        <i data-lucide="send" class="w-4 h-4"></i>
+                                        Send Message
+                                    </span>
+                                    <span id="btnLoading" class="hidden flex items-center justify-center gap-2">
+                                        <svg class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                                        </svg>
+                                        Sending...
+                                    </span>
+                                </button>
+
+                                <p class="text-center text-xs text-gray-600 mt-4">
+                                    🔒 Your information is protected by our <a href="privacy.html" class="text-emerald-400 hover:underline">Privacy Policy</a>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Software Section (UNCHANGED) -->
         <section id="software" class="py-32 bg-white overflow-hidden">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid lg:grid-cols-2 gap-20 items-center">
@@ -554,13 +843,8 @@
                             </div>
                             <h2 class="text-3xl font-black tracking-tight uppercase">AI Software Suite</h2>
                         </div>
-                        <h3 class="text-5xl md:text-7xl font-black text-gray-900 mb-10 leading-[0.9] tracking-tighter">
-                            Control the <br><span class="text-blue-600">Power Cloud</span>
-                        </h3>
-                        <p class="text-xl text-gray-600 font-medium leading-relaxed mb-12">
-                            Manage your entire charging infrastructure from a single dashboard. Real-time analytics, automated billing, and predictive maintenance at your fingertips.
-                        </p>
-                        
+                        <h3 class="text-5xl md:text-7xl font-black text-gray-900 mb-10 leading-[0.9] tracking-tighter">Control the <br><span class="text-blue-600">Power Cloud</span></h3>
+                        <p class="text-xl text-gray-600 font-medium leading-relaxed mb-12">Manage your entire charging infrastructure from a single dashboard. Real-time analytics, automated billing, and predictive maintenance at your fingertips.</p>
                         <div class="space-y-6">
                             <div class="flex gap-6 p-6 bg-gray-50 rounded-3xl border border-gray-100 hover:border-blue-500 transition-all">
                                 <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center shrink-0">
@@ -582,11 +866,9 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="relative group flex justify-center items-center">
                         <div class="bg-gray-900 rounded-[3.5rem] p-3 shadow-2xl relative z-10 border-4 border-gray-800 max-w-[320px] w-full">
                             <div class="bg-white rounded-[2.5rem] overflow-hidden aspect-[9/19] relative">
-                                <!-- Mockup UI -->
                                 <div class="absolute inset-x-0 top-0 p-8 flex justify-between items-center text-white z-20">
                                     <i data-lucide="menu" class="w-6 h-6"></i>
                                     <div class="w-10 h-10 bg-emerald-600 rounded-full"></div>
@@ -621,129 +903,81 @@
             </div>
         </section>
 
-        <!-- Technical Comparison Section -->
+        <!-- Technical Specs Section (UNCHANGED) -->
         <section class="py-32 bg-gray-900 text-white overflow-hidden relative">
-            <div class="absolute inset-0 opacity-[0.03] pointer-events-none" 
-                 style="background-image: linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px); background-size: 40px 40px;">
-            </div>
-
+            <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px); background-size: 40px 40px;"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="text-center mb-20 animate-on-scroll">
+                <div class="text-center mb-20">
                     <span class="text-emerald-400 font-bold uppercase tracking-widest text-xs mb-4 inline-block">The Breakdown</span>
                     <h2 class="text-5xl font-black mb-6 tracking-tighter">Technical Specifications.</h2>
                     <div class="w-24 h-1 bg-emerald-500 mx-auto rounded-full"></div>
                 </div>
-                
                 <div class="grid lg:grid-cols-2 gap-8">
-                    <!-- AC Charging Card -->
                     <div class="spec-card p-10 bg-white/5 rounded-[3rem] border border-white/10 hover:bg-white/10 hover:border-emerald-500/50 transition-all duration-500 transform hover:-translate-y-2 group">
                         <h4 class="text-2xl font-bold text-emerald-400 mb-8 group-hover:text-white transition-colors">AC Charging (Home/Office)</h4>
                         <div class="grid grid-cols-2 gap-y-6 text-sm">
-                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Power Range</div>
-                            <div class="text-white font-medium">7.4kW - 22kW</div>
-                            
-                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Peak Efficiency</div>
-                            <div class="text-white font-medium">95%+</div>
-                            
-                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Thermal Management</div>
-                            <div class="text-white font-medium">Natural Convection</div>
-                            
-                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Connectivity</div>
-                            <div class="text-white font-medium">WiFi / LAN / Bluetooth</div>
+                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Power Range</div><div class="text-white font-medium">7.4kW - 22kW</div>
+                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Peak Efficiency</div><div class="text-white font-medium">95%+</div>
+                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Thermal Management</div><div class="text-white font-medium">Natural Convection</div>
+                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Connectivity</div><div class="text-white font-medium">WiFi / LAN / Bluetooth</div>
                         </div>
                     </div>
-
-                    <!-- DC Fast Card -->
                     <div class="spec-card p-10 bg-white/5 rounded-[3rem] border border-white/10 hover:bg-white/10 hover:border-emerald-500/50 transition-all duration-500 transform hover:-translate-y-2 group">
                         <h4 class="text-2xl font-bold text-emerald-400 mb-8 group-hover:text-white transition-colors">DC Fast Charging (Public)</h4>
                         <div class="grid grid-cols-2 gap-y-6 text-sm">
-                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Power Range</div>
-                            <div class="text-white font-medium">30kW - 60kW</div>
-                            
-                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Peak Efficiency</div>
-                            <div class="text-white font-medium">94%+</div>
-                            
-                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Thermal Management</div>
-                            <div class="text-white font-medium">Forced Air Cooling</div>
-                            
-                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Connectivity</div>
-                            <div class="text-white font-medium">OCPP 1.6J / 4G / RFID</div>
+                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Power Range</div><div class="text-white font-medium">30kW - 60kW</div>
+                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Peak Efficiency</div><div class="text-white font-medium">94%+</div>
+                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Thermal Management</div><div class="text-white font-medium">Forced Air Cooling</div>
+                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Connectivity</div><div class="text-white font-medium">OCPP 1.6J / 4G / RFID</div>
                         </div>
                     </div>
-
-                    <!-- Ultra Fast Card -->
                     <div class="spec-card p-10 bg-white/5 rounded-[3rem] border border-white/10 hover:bg-white/10 hover:border-emerald-500/50 transition-all duration-500 transform hover:-translate-y-2 group">
                         <h4 class="text-2xl font-bold text-emerald-400 mb-8 group-hover:text-white transition-colors">Ultra-Fast (Highway)</h4>
                         <div class="grid grid-cols-2 gap-y-6 text-sm">
-                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Power Range</div>
-                            <div class="text-white font-medium">120kW - 360kW</div>
-                            
-                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Peak Efficiency</div>
-                            <div class="text-white font-medium">98%+</div>
-                            
-                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Thermal Management</div>
-                            <div class="text-white font-medium">Liquid Cooling System</div>
-                            
-                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Connectivity</div>
-                            <div class="text-white font-medium">OCPP 2.0.1 / Fiber Optic</div>
+                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Power Range</div><div class="text-white font-medium">120kW - 360kW</div>
+                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Peak Efficiency</div><div class="text-white font-medium">98%+</div>
+                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Thermal Management</div><div class="text-white font-medium">Liquid Cooling System</div>
+                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Connectivity</div><div class="text-white font-medium">OCPP 2.0.1 / Fiber Optic</div>
                         </div>
                     </div>
-
-                    <!-- Micro-Grid Card -->
                     <div class="spec-card p-10 bg-white/5 rounded-[3rem] border border-white/10 hover:bg-white/10 hover:border-emerald-500/50 transition-all duration-500 transform hover:-translate-y-2 group">
                         <h4 class="text-2xl font-bold text-emerald-400 mb-8 group-hover:text-white transition-colors">Micro-Grid (Remote)</h4>
                         <div class="grid grid-cols-2 gap-y-6 text-sm">
-                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Power Range</div>
-                            <div class="text-white font-medium">Modular Scaling</div>
-                            
-                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Peak Efficiency</div>
-                            <div class="text-white font-medium">99%+ (Solar Coupled)</div>
-                            
-                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Thermal Management</div>
-                            <div class="text-white font-medium">Passive Heat Sink</div>
-                            
-                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Connectivity</div>
-                            <div class="text-white font-medium">Satellite / Mesh Network</div>
+                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Power Range</div><div class="text-white font-medium">Modular Scaling</div>
+                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Peak Efficiency</div><div class="text-white font-medium">99%+ (Solar Coupled)</div>
+                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Thermal Management</div><div class="text-white font-medium">Passive Heat Sink</div>
+                            <div class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Connectivity</div><div class="text-white font-medium">Satellite / Mesh Network</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Energy Services Section -->
+        <!-- Energy Services Section (UNCHANGED) -->
         <section id="services" class="py-32 bg-gray-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-20">
                     <h2 class="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter uppercase mb-6">Advanced Energy Services</h2>
                     <p class="text-xl text-gray-600 max-w-2xl mx-auto font-medium">Beyond charging, we manage the lifecycle of your energy needs.</p>
                 </div>
-
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm hover:border-emerald-600 transition-all">
-                        <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-6">
-                            <i data-lucide="sun" class="w-6 h-6"></i>
-                        </div>
+                        <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-6"><i data-lucide="sun" class="w-6 h-6"></i></div>
                         <h4 class="text-xl font-bold text-gray-900 mb-4 tracking-tight">Solar Integration</h4>
                         <p class="text-sm text-gray-500 leading-relaxed">Powering your stations with direct renewable energy harvesting.</p>
                     </div>
                     <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm hover:border-emerald-600 transition-all">
-                        <div class="w-12 h-12 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center mb-6">
-                            <i data-lucide="refresh-cw" class="w-6 h-6"></i>
-                        </div>
+                        <div class="w-12 h-12 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center mb-6"><i data-lucide="refresh-cw" class="w-6 h-6"></i></div>
                         <h4 class="text-xl font-bold text-gray-900 mb-4 tracking-tight">Battery Swapping</h4>
                         <p class="text-sm text-gray-500 leading-relaxed">Next-gen swapping solutions for 2W and 3W logistics fleets.</p>
                     </div>
                     <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm hover:border-emerald-600 transition-all">
-                        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6">
-                            <i data-lucide="shield-check" class="w-6 h-6"></i>
-                        </div>
+                        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6"><i data-lucide="shield-check" class="w-6 h-6"></i></div>
                         <h4 class="text-xl font-bold text-gray-900 mb-4 tracking-tight">24/7 Monitoring</h4>
                         <p class="text-sm text-gray-500 leading-relaxed">Remote NOC support to ensure 99.9% uptime for hardware.</p>
                     </div>
                     <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm hover:border-emerald-600 transition-all">
-                        <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center mb-6">
-                            <i data-lucide="credit-card" class="w-6 h-6"></i>
-                        </div>
+                        <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center mb-6"><i data-lucide="credit-card" class="w-6 h-6"></i></div>
                         <h4 class="text-xl font-bold text-gray-900 mb-4 tracking-tight">RFID Ecosystem</h4>
                         <p class="text-sm text-gray-500 leading-relaxed">Universal payment cards for seamless cross-network charging.</p>
                     </div>
@@ -751,7 +985,7 @@
             </div>
         </section>
 
-        <!-- CTA -->
+        <!-- CTA Section (UNCHANGED) -->
         <section class="py-24">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="bg-emerald-600 rounded-[4rem] p-12 md:p-24 text-center text-white shadow-2xl shadow-emerald-600/30">
@@ -765,17 +999,13 @@
             </div>
         </section>
 
-
-<!-- Services Section -->
-        <section id="services" class="py-24 bg-gray-900 text-white rounded-[4rem] mx-4 md:mx-8 mb-24">
+        <!-- Services Section (UNCHANGED) -->
+        <section class="py-24 bg-gray-900 text-white rounded-[4rem] mx-4 md:mx-8 mb-24">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-20">
                     <h2 class="text-4xl md:text-6xl font-bold mb-8 italic">Services that empower</h2>
-                    <p class="text-gray-400 text-xl max-w-2xl mx-auto">
-                        We go beyond charging. Our services are designed to make the transition to electric energy sustainable and effortless.
-                    </p>
+                    <p class="text-gray-400 text-xl max-w-2xl mx-auto">We go beyond charging. Our services are designed to make the transition to electric energy sustainable and effortless.</p>
                 </div>
-
                 <div class="grid md:grid-cols-3 gap-12">
                     <div class="text-center">
                         <div class="w-20 h-20 bg-emerald-600/20 rounded-3xl flex items-center justify-center text-emerald-500 mx-auto mb-8">
@@ -784,7 +1014,6 @@
                         <h3 class="text-2xl font-bold mb-4">Energy As A Service</h3>
                         <p class="text-gray-500">Harnessing solar and wind energy to power our stations, ensuring a truly green charging experience.</p>
                     </div>
-
                     <div class="text-center">
                         <div class="w-20 h-20 bg-emerald-600/20 rounded-3xl flex items-center justify-center text-emerald-500 mx-auto mb-8 relative">
                             <i data-lucide="battery-full" class="w-10 h-10"></i>
@@ -793,7 +1022,6 @@
                         <h3 class="text-2xl font-bold mb-4">Battery As A Service</h3>
                         <p class="text-gray-500">Revolutionary battery swapping solutions for 2-wheelers and 3-wheelers to eliminate range anxiety.</p>
                     </div>
-
                     <div onclick="openRFIDForm()" class="text-center cursor-pointer group">
                         <div class="w-20 h-20 bg-emerald-600/20 rounded-3xl flex items-center justify-center text-emerald-500 mx-auto mb-4 relative group-hover:bg-emerald-600 group-hover:text-white transition-all">
                             <i data-lucide="credit-card" class="w-10 h-10"></i>
@@ -807,21 +1035,21 @@
         </section>
 
 
-<!-- RFID Form Modal -->
+    </main>
+
+    <!-- ======= RFID Form Modal (UNCHANGED) ======= -->
     <div id="rfidModal" class="modal">
         <div class="modal-content p-8 md:p-12 max-w-4xl">
             <button onclick="closeModal('rfidModal')" class="absolute top-6 right-6 p-2 hover:bg-gray-100 rounded-full transition-colors">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
-            
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="hidden md:block">
-                    <img src="images\RFID1.png" alt="RFID Cards" class="w-full h-auto" referrerPolicy="no-referrer">
+                    <img src="images/RFID1.png" alt="RFID Cards" class="w-full h-auto" referrerPolicy="no-referrer">
                 </div>
                 <div>
                     <h2 class="text-4xl font-bold text-gray-900 mb-2">Get your FREE customized RFID card</h2>
                     <p class="text-gray-600 mb-8">Just Tap, Pay and Go! Say Hello to effortless EV charging!</p>
-                    
                     <form class="space-y-4">
                         <input type="text" placeholder="Name for the card?" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-emerald-600">
                         <div class="grid grid-cols-2 gap-4">
@@ -837,28 +1065,17 @@
                             <input type="text" placeholder="State" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-emerald-600">
                             <input type="text" placeholder="Pin Code" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-emerald-600">
                         </div>
-                        
                         <div class="space-y-2">
                             <p class="text-sm font-medium text-gray-700">Do you have ChargeBees Mobile App?</p>
                             <div class="flex gap-4">
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="hasApp" class="w-4 h-4 text-emerald-600">
-                                    <span class="text-sm">Yes</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="hasApp" class="w-4 h-4 text-emerald-600">
-                                    <span class="text-sm">No</span>
-                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="hasApp" class="w-4 h-4 text-emerald-600"><span class="text-sm">Yes</span></label>
+                                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="hasApp" class="w-4 h-4 text-emerald-600"><span class="text-sm">No</span></label>
                             </div>
                         </div>
-
                         <div class="flex items-start gap-2 pt-4">
                             <input type="checkbox" id="agree" class="mt-1 w-4 h-4 text-emerald-600 rounded">
-                            <label for="agree" class="text-xs text-gray-500">
-                                I agree to the use of my info for communication and support. <a href="#" class="text-emerald-600 underline">Privacy Policy</a>
-                            </label>
+                            <label for="agree" class="text-xs text-gray-500">I agree to the use of my info for communication and support. <a href="#" class="text-emerald-600 underline">Privacy Policy</a></label>
                         </div>
-
                         <button type="submit" class="w-full py-4 bg-gray-900 text-white font-bold rounded-2xl hover:bg-emerald-600 transition-all mt-4">Apply now</button>
                     </form>
                 </div>
@@ -866,87 +1083,39 @@
         </div>
     </div>
 
-    </main>
+    <!-- Success Toast -->
+    <div id="toast" class="toast">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        <span id="toastMsg">Message sent successfully!</span>
+    </div>
 
-    <!-- Footer (Exact copy from index.html/stationfinder.html) -->
+    <!-- ======= FOOTER (UNCHANGED) ======= -->
     <footer class="bg-gray-50 pt-24 pb-12 border-t border-gray-200 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-4 gap-12 mb-20">
                 <div class="lg:col-span-1">
                     <div class="mb-8">
-<div class="flex items-center gap-2">
-
-    <img
-        src="images/logo.png"
-        alt="ChargeBees Logo"
-        class="h-10 w-auto object-contain"
-    >
-
-    <span class="brand-logo-text">
-        Charge <span>Bees</span>
-    </span>
-
-</div>
+                        <div class="flex items-center gap-2">
+                            <img src="images/logo.png" alt="ChargeBees Logo" class="h-10 w-auto object-contain">
+                            <span class="brand-logo-text">Charge <span>Bees</span></span>
+                        </div>
                     </div>
-                    <p class="text-gray-600 mb-8 leading-relaxed">
-                        Leading the charge towards a sustainable electric future with India's largest EV charging network.
-                    </p>
-                  
-<div class="flex gap-4">
-
-    <!-- Instagram -->
-    <a 
-        href="https://www.instagram.com/chargebees"
-        target="_blank"
-        class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300"
-    >
-        <img 
-            src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
-            alt="Instagram"
-            class="w-6 h-6"
-        >
-    </a>
-
-    <!-- Facebook -->
-    <a 
-        href="https://www.facebook.com/share/1ESQNWy5Zs/"
-        target="_blank"
-        class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300"
-    >
-        <img 
-            src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
-            alt="Facebook"
-            class="w-6 h-6"
-        >
-    </a>
-
-    <!-- WhatsApp -->
-    <a 
-        href="https://wa.me/919000040477"
-        target="_blank"
-        class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300"
-    >
-        <img 
-            src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
-            alt="WhatsApp"
-            class="w-6 h-6"
-        >
-    </a>
-
-    <!-- Mail -->
-    <a 
-        href="mailto:db@chargebees.com"
-        class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300"
-    >
-        <img 
-            src="https://cdn-icons-png.flaticon.com/512/732/732200.png"
-            alt="Mail"
-            class="w-6 h-6"
-        >
-    </a>
-
-</div>                </div>
-
+                    <p class="text-gray-600 mb-8 leading-relaxed">Leading the charge towards a sustainable electric future with India's largest EV charging network.</p>
+                    <div class="flex gap-4">
+                        <a href="https://www.instagram.com/chargebees" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="w-6 h-6">
+                        </a>
+                        <a href="https://www.facebook.com/share/1ESQNWy5Zs/" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" class="w-6 h-6">
+                        </a>
+                        <a href="https://wa.me/919000040477" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="w-6 h-6">
+                        </a>
+                        <a href="mailto:db@chargebees.com" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                            <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Mail" class="w-6 h-6">
+                        </a>
+                    </div>
+                </div>
                 <div>
                     <h4 class="font-bold text-gray-900 mb-6">Company</h4>
                     <ul class="space-y-4 text-gray-600">
@@ -956,7 +1125,6 @@
                         <li><a href="careers.html" class="hover:text-emerald-600 transition-colors">Careers</a></li>
                     </ul>
                 </div>
-
                 <div>
                     <h4 class="font-bold text-gray-900 mb-6">Solutions</h4>
                     <ul class="space-y-4 text-gray-600">
@@ -966,9 +1134,9 @@
                         <li><a href="solar_products.html#residential" class="hover:text-emerald-600 transition-colors">Residential Solar</a></li>
                         <li><a href="solar_products.html#commercial" class="hover:text-emerald-600 transition-colors">Commercial Solar</a></li>
                         <li><a href="solar_products.html#industrial" class="hover:text-emerald-600 transition-colors">Industrial Solar</a></li>
-                        <li><a href="solar_products.html#ground" class="hover:text-emerald-600 transition-colors">Ground Mounted</a></li>                    </ul>
+                        <li><a href="solar_products.html#ground" class="hover:text-emerald-600 transition-colors">Ground Mounted</a></li>
+                    </ul>
                 </div>
-
                 <div>
                     <h4 class="font-bold text-gray-900 mb-6">Contact</h4>
                     <ul class="space-y-4 text-gray-600">
@@ -977,74 +1145,140 @@
                             <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
                         </li>
                         <li>+91 90000 40477</li>
-                    <!--
-                        <li class="pt-4">
-                            <p class="font-semibold text-gray-900">Visakhapatnam HQ</p>
-                            <p class="text-sm">8th Floor, chargebees LTD, IT Park, Visakhapatnam, Andhra Pradesh 530001</p>
-                        </li>
-                    -->
-                        <li class="pt-4">
-                            <!-- <p class="font-semibold text-gray-900">  </p> -->
-                            <!-- <p class="text-sm"> </p> -->
-                        </li>                       
                     </ul>
                 </div>
             </div>
-
             <div class="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
                 <p>© 2026 Chargebees. All rights reserved.</p>
                 <div class="flex gap-8">
-<a href="terms.html" class="hover:text-gray-900 transition-colors">Terms & Services</a>
-<a href="privacy.html" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
+                    <a href="terms.html" class="hover:text-gray-900 transition-colors">Terms & Services</a>
+                    <a href="privacy.html" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Initialize Lucide
+        // ===== Lucide Icons =====
         lucide.createIcons();
 
-        // Mobile Menu Logic
-const menuBtn = document.getElementById("menu-btn");
-const mobileMenu = document.getElementById("mobile-menu");
+        // ===== Mobile Menu =====
+        const menuBtn = document.getElementById("menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        menuBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
 
-menuBtn.addEventListener("click", () => {
-
-    mobileMenu.classList.toggle("hidden");
-
-    // icon animation optional
-    menuBtn.classList.toggle("active");
-});
-
-        // Smooth Scroll for local anchors
+        // ===== Smooth Scroll =====
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
             });
         });
 
+        // ===== RFID Modal =====
+        function openRFIDForm() {
+            document.getElementById('rfidModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        };
 
-function openRFIDForm() {
-    document.getElementById('rfidModal').classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
+        // ===== Toast =====
+        function showToast(msg, success = true) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = msg;
+            toast.style.background = success
+                ? 'linear-gradient(135deg,#10b981,#059669)'
+                : 'linear-gradient(135deg,#ef4444,#b91c1c)';
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 4000);
+        }
 
-function closeModal(id) {
-    document.getElementById(id).classList.remove('active');
-    document.body.style.overflow = 'auto';
-}
+        // ===== Floating label fix for select =====
+        const solutionSelect = document.getElementById('solution');
+        if (solutionSelect) {
+            solutionSelect.addEventListener('change', function() {
+                const group = this.closest('.input-group');
+                if (this.value) { group.classList.add('has-value'); }
+                else { group.classList.remove('has-value'); }
+            });
+        }
 
-// Close modals on outside click
-window.onclick = function(event) {
-    if (event.target.classList.contains('modal')) {
-        event.target.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
-}
+        // ===== Contact Form Submission =====
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                // Validate
+                let valid = true;
+                const fields = contactForm.querySelectorAll('[required]');
+                fields.forEach(field => {
+                    const group = field.closest('.input-group');
+                    group.classList.remove('error');
+                    if (!field.value.trim()) {
+                        group.classList.add('error');
+                        valid = false;
+                    }
+                    if (field.type === 'email' && field.value && !/\S+@\S+\.\S+/.test(field.value)) {
+                        group.classList.add('error');
+                        valid = false;
+                    }
+                });
+                if (!valid) return;
+
+                // Loading state
+                document.getElementById('btnText').classList.add('hidden');
+                document.getElementById('btnLoading').classList.remove('hidden');
+                document.getElementById('submitBtn').disabled = true;
+                lucide.createIcons(); // re-render inside button
+
+                try {
+                    const formData = new FormData(contactForm);
+                    const response = await fetch('contact.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        showToast('Message sent! We\'ll be in touch soon. ⚡');
+                        contactForm.reset();
+                        // Reset floating labels
+                        document.querySelector('.input-group.has-value')?.classList.remove('has-value');
+                    } else {
+                        showToast('Something went wrong. Please try again.', false);
+                    }
+                } catch (err) {
+                    showToast('Network error. Please try again.', false);
+                } finally {
+                    document.getElementById('btnText').classList.remove('hidden');
+                    document.getElementById('btnLoading').classList.add('hidden');
+                    document.getElementById('submitBtn').disabled = false;
+                    lucide.createIcons();
+                }
+            });
+        }
+
+        // ===== Scroll Reveal Animation =====
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
     </script>
 </body>
 </html>

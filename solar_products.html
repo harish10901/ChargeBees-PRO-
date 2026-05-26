@@ -725,44 +725,48 @@ nav{
             <!-- Right: Floating Contact Form -->
             <div>
                 <div class="contact-form-card">
+
+                    <form id="contactForm" action="contact.php" method="POST">
                     <div class="form-title">Get a Free Quote</div>
                     <div class="form-sub">Our solar experts will contact you within 24 hours</div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label>First Name</label>
-                            <input type="text" placeholder="Ravi">
+                            <input type="text" name="first_name" placeholder="Harish" required>
                         </div>
                         <div class="form-group">
                             <label>Last Name</label>
-                            <input type="text" placeholder="Kumar">
+                            <input type="text" name="last_name" placeholder="Kumar" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Phone Number</label>
-                        <input type="tel" placeholder="+91 90000 40477">
+                        <input type="tel" name="phone" placeholder="+91 90000 40477" required>
                     </div>
                     <div class="form-group">
                         <label>Email Address</label>
-                        <input type="email" placeholder="you@example.com">
+                        <input type="email" name="email" placeholder="you@example.com" required>
                     </div>
                     <div class="form-group">
                         <label>Solar Solution Type</label>
-                        <select>
+                        <select name="solution" required>
                             <option value="">Select a solution...</option>
                             <option>Residential Solar Rooftop</option>
                             <option>Commercial Solar Rooftop</option>
                             <option>Industrial Solar Rooftop</option>
                             <option>Ground Mounted Solar System</option>
+                            <option>Other</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Message (Optional)</label>
-                        <textarea placeholder="Tell us about your energy needs..."></textarea>
+                        <textarea name="message" placeholder="Tell us about your energy needs..."></textarea>
                     </div>
-                    <button class="form-submit" onclick="handleFormSubmit()">
+                    <button type="submit" class="form-submit">
                         ⚡ Get My Free Quote
                     </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -1279,15 +1283,15 @@ nav{
         }
 
         // Form submit handler
-        function handleFormSubmit() {
-            const btn = document.querySelector('.form-submit');
-            btn.innerText = '✓ Request Submitted!';
-            btn.style.background = 'linear-gradient(135deg, #059669, #047857)';
-            setTimeout(() => {
-                btn.innerText = '⚡ Get My Free Quote';
-                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-            }, 3000);
-        }
+//        function handleFormSubmit() {
+  //          const btn = document.querySelector('.form-submit');
+    //        btn.innerText = '✓ Request Submitted!';
+      //      btn.style.background = 'linear-gradient(135deg, #059669, #047857)';
+        //    setTimeout(() => {
+          //      btn.innerText = '⚡ Get My Free Quote';
+            //    btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+          //  }, 3000);
+       // }
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -1299,6 +1303,34 @@ nav{
         });
 
 
+
+document.getElementById("contactForm").addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    let form = this;
+    let formData = new FormData(form);
+
+    try {
+
+        let response = await fetch("contact.php", {
+            method: "POST",
+            body: formData
+        });
+
+        let result = await response.text();
+
+        alert("Thank you! Your message has been sent successfully.");
+
+        form.reset();
+
+    } catch (error) {
+
+        alert("Failed to send message. Please try again.");
+
+    }
+
+});
 
     </script>
 </body>
