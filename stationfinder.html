@@ -604,6 +604,45 @@
             .sidebar-search-desktop { display: none; }
         }
 
+        @media (max-width: 768px) {
+
+    /* Hide heading section on mobile only */
+    .sidebar-header .live-badge,
+    .sidebar-title,
+    .sidebar-subtitle {
+        display: none !important;
+    }
+
+    /* Hide stats cards on mobile only */
+    .stats-bar {
+        display: none !important;
+    }
+
+    /* Reduce top spacing after removing header */
+    .sidebar-header {
+        padding: 10px 20px 0 !important;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .sidebar-header .live-badge,
+    .sidebar-title,
+    .sidebar-subtitle,
+    .stats-bar {
+        display: none !important;
+    }
+
+    .sidebar-header {
+        padding: 5px 20px 0 !important;
+    }
+
+    .search-wrap {
+        margin-bottom: 10px !important;
+    }
+}
+
         @media (min-width: 769px) {
             .sidebar-handle { display: none; }
             .sidebar-search-mobile { display: none !important; }
@@ -665,6 +704,8 @@ nav{
     visibility:visible !important;
     pointer-events:auto !important;
 }
+
+
 
 
 
@@ -1122,6 +1163,15 @@ function renderStations() {
         `;
         list.appendChild(card);
 
+        card.addEventListener('click', () => {
+    flyToStation(s.lat, s.lng);
+
+    // mobile lo map kanipinchela sidebar minimize
+    if (window.innerWidth <= 768) {
+        sidebar.classList.remove('expanded');
+    }
+});
+
         // Map Marker
         const icon = L.divIcon({
             className: '',
@@ -1169,6 +1219,9 @@ function renderStations() {
 
     lucide.createIcons();
 }
+
+
+
 
 function flyToStation(lat, lng) {
     map.flyTo([lat, lng], 15, { duration: 1.2 });
