@@ -2,9 +2,11 @@
 // Set content type for JSON response
 header('Content-Type: application/json');
 
-// Enable error reporting for debugging (remove in production)
+// Enable error reporting for debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+ini_set('error_log', dirname(__FILE__) . '/error_log.txt');
 
 // Get form data from POST request
 $first_name = isset($_POST['first_name']) ? trim($_POST['first_name']) : '';
@@ -54,15 +56,60 @@ $email_body .= "Submitted on: " . date('Y-m-d H:i:s') . "\n";
 $email_body .= "Visitor IP: " . $_SERVER['REMOTE_ADDR'] . "\n";
 
 // Email headers
-$headers = "From: " . htmlspecialchars($email) . "\r\n";
+$headers = "From: db@chargebees.com\r\n";
 $headers .= "Reply-To: " . htmlspecialchars($email) . "\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
-// Send email to db@chargebees.com
-$mail_sent = mail($to, $subject, $email_body, $headers);
+// Try to send email via mail function with proper configuration
+$mail_sent = false;
+
+// Use mail() function with Return-Path header for Titan/GoDaddy
+if (function_exists('mail')) {
+    // For Titan/GoDaddy servers, use these headers
+    $full_headers = $headers;
+    $full_headers .= "Return-Path: db@chargebees.com\r\n";
+    $full_headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+    $full_headers .= "X-Priority: 3\r\n";
+    
+    // Send email with -f parameter for bounce handling
+    $mail_sent = mail($to, $subject, $email_body, $full_headers, '-fdb@chargebees.com');
+}
+
+// Fallback - Save to file if mail() fails
+if (!$mail_sent) {
+    $log_dir = dirname(__FILE__) . '/contact_submissions';
+    
+    // Create directory if it doesn't exist
+    if (!is_dir($log_dir)) {
+        @mkdir($log_dir, 0755, true);
+    }
+    
+    // Create a unique filename
+    $timestamp = date('Y-m-d_H-i-s');
+    $filename = $log_dir . '/contact_' . $timestamp . '_' . uniqid() . '.txt';
+    
+    // Save submission to file
+    $file_content = "Contact Form Submission\n";
+    $file_content .= "======================\n";
+    $file_content .= "Date: " . date('Y-m-d H:i:s') . "\n";
+    $file_content .= "IP: " . $_SERVER['REMOTE_ADDR'] . "\n";
+    $file_content .= "---\n";
+    $file_content .= "First Name: " . $first_name . "\n";
+    $file_content .= "Last Name: " . $last_name . "\n";
+    $file_content .= "Email: " . $email . "\n";
+    $file_content .= "Phone: " . ($phone ? $phone : 'Not provided') . "\n";
+    $file_content .= "Subject: " . $solution . "\n";
+    $file_content .= "---\n";
+    $file_content .= "Message:\n" . $message . "\n";
+    
+    $mail_sent = file_put_contents($filename, $file_content) !== false;
+    
+    // Log the failed mail attempt
+    error_log("Mail function failed for: " . $to . " | File saved: " . $filename);
+}
 
 if ($mail_sent) {
-    // Optional: Send confirmation email to user
+    // Send confirmation email to user
     $user_subject = "We received your message - ChargeBees";
     $user_body = "Hi " . htmlspecialchars($first_name) . ",\n\n";
     $user_body .= "Thank you for reaching out to ChargeBees!\n\n";
@@ -78,13 +125,18 @@ if ($mail_sent) {
     
     $user_headers = "From: db@chargebees.com\r\n";
     $user_headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+    $user_headers .= "Return-Path: db@chargebees.com\r\n";
     
-    mail($email, $user_subject, $user_body, $user_headers);
+    if (function_exists('mail')) {
+        @mail($email, $user_subject, $user_body, $user_headers, '-fdb@chargebees.com');
+    }
     
     http_response_code(200);
     echo json_encode(['success' => 'Message sent successfully']);
 } else {
+    error_log("Failed to send contact form: " . json_encode($_POST));
     http_response_code(500);
     echo json_encode(['error' => 'Failed to send message. Please try again later.']);
 }
 ?>
+
