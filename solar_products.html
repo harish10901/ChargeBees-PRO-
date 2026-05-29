@@ -1305,31 +1305,37 @@ nav{
 
 
 document.getElementById("contactForm").addEventListener("submit", async function(e) {
-
     e.preventDefault();
 
     let form = this;
     let formData = new FormData(form);
+    
+    // User response click kottaka processing anipinchadaniki batan text change logic
+    let submitBtn = form.querySelector('.form-submit');
+    let originalText = submitBtn.innerText;
+    submitBtn.innerText = "Processing...";
+    submitBtn.disabled = true;
 
     try {
-
         let response = await fetch("contact.php", {
             method: "POST",
             body: formData
         });
 
-        let result = await response.text();
-
-        alert("Thank you! Your message has been sent successfully.");
-
-        form.reset();
-
+        if (response.ok) {
+            alert("Thank you! Your message has been sent successfully.");
+            form.reset();
+        } else {
+            let errMsg = await response.text();
+            alert("Error: " + errMsg);
+        }
     } catch (error) {
-
-        alert("Failed to send message. Please try again.");
-
+        alert("Failed to send message. Please check internet connection.");
+    } finally {
+        // Form trigger click button automatic ga restore avthundi
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
     }
-
 });
 
     </script>
