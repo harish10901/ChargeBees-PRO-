@@ -726,7 +726,8 @@ nav{
             <div>
                 <div class="contact-form-card">
 
-                    <form id="contactForm" action="contact.php" method="POST">
+                    <form id="solarForm" action="contact.php" method="POST">
+                        <input type="hidden" name="form_type" value="solar">
                     <div class="form-title">Get a Free Quote</div>
                     <div class="form-sub">Our solar experts will contact you within 24 hours</div>
 
@@ -766,6 +767,7 @@ nav{
                     <button type="submit" class="form-submit">
                         ⚡ Get My Free Quote
                     </button>
+                    <div id="solarSuccess" style="display:none;margin-top:15px;padding:12px;background:#d1fae5;color:#065f46;border-radius:10px;font-weight:600;text-align:center;" data-success-msg>Thank you! Your inquiry has been received. We'll contact you within 24 hours.</div>
                     </form>
                 </div>
             </div>
@@ -1339,5 +1341,6 @@ document.getElementById("contactForm").addEventListener("submit", async function
 });
 
     </script>
+    <script src="form-handler.js"></script>
 </body>
 </html>

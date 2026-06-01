@@ -365,6 +365,7 @@ footer{background:#f9fafb;padding-top:80px;padding-bottom:40px;border-top:1px so
         <div><div class="form-title">Commercial Solar Quote</div></div>
       </div>
       <form id="commercialForm" action="contact.php" method="POST">
+      <input type="hidden" name="form_type" value="commercial">
       <div class="frow">
         <div class="fg"><label>First Name</label><input type="text" name="first_name" placeholder="Harish" required></div>
         <div class="fg"><label>Last Name</label><input type="text" name="last_name" placeholder="Kumar" required></div>
@@ -382,8 +383,8 @@ footer{background:#f9fafb;padding-top:80px;padding-bottom:40px;border-top:1px so
       </div>
       <div class="fg"><label>Message</label><textarea name="message" placeholder="Tell us about your rooftop area and energy needs..."></textarea></div>
       <button type="submit" class="form-btn">🏢 Get Commercial Solar Quote</button>
-      <div id="successMessage" style="display:none;margin-top:15px;padding:12px;background:#d1fae5;color:#065f46;border-radius:10px;font-weight:600;text-align:center;">
-        Thank you! Your message has been sent successfully.
+      <div id="commercialSuccess" style="display:none;margin-top:15px;padding:12px;background:#d1fae5;color:#065f46;border-radius:10px;font-weight:600;text-align:center;" data-success-msg>
+        Thank you! Your inquiry has been received. Our solar expert will contact you shortly with a custom solution.
       </div>
     </form>
     </div>
@@ -570,5 +571,6 @@ alert("Failed to send enquiry.");
 
 });
 </script>
+<script src="form-handler.js"></script>
 </body>
 </html>

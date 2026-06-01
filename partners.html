@@ -763,7 +763,8 @@ input:focus {
 
 </div>
                         <div class="p-12 lg:p-20">
-                            <form id="partnerForm" class="space-y-6">
+                            <form id="partnerForm" class="space-y-6" action="contact.php" method="POST">
+                                <input type="hidden" name="form_type" value="partner">
                                 <div class="grid md:grid-cols-2 gap-6">
                                     <div>
                                         <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
@@ -796,8 +797,8 @@ input:focus {
                                     Submit Application
                                     <i data-lucide="send" class="w-5 h-5"></i>
                                 </button>
-                                <div id="partnerSuccess" style="display:none;margin-top:15px;padding:12px;background:#d1fae5;color:#065f46;border-radius:10px;font-weight:600;text-align:center;">
-                                    Thank you! Your message has been sent successfully.
+                                <div id="partnerSuccess" style="display:none;margin-top:15px;padding:12px;background:#d1fae5;color:#065f46;border-radius:10px;font-weight:600;text-align:center;" data-success-msg>
+                                    Thank you! Your partnership inquiry has been received. We'll review your application and contact you shortly.
                                 </div>
                             </form>
                         </div>
@@ -1134,5 +1135,6 @@ alert("Failed to send enquiry.");
 
 });
     </script>
+    <script src="form-handler.js"></script>
 </body>
 </html>

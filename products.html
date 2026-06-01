@@ -754,6 +754,7 @@
                             </div>
 
                             <form id="contactForm" action="contact.php" method="POST" novalidate>
+                                <input type="hidden" name="form_type" value="general">
                                 <!-- Name Row -->
                                 <div class="grid grid-cols-2 gap-4">
                                     <div class="input-group">
@@ -824,6 +825,7 @@
                                 <p class="text-center text-xs text-gray-600 mt-4">
                                     🔒 Your information is protected by our <a href="privacy.html" class="text-emerald-400 hover:underline">Privacy Policy</a>
                                 </p>
+                                <div id="contactSuccess" style="display:none;margin-top:15px;padding:12px;background:#d1fae5;color:#065f46;border-radius:10px;font-weight:600;text-align:center;" data-success-msg>Thank you! Your inquiry has been received. We'll contact you soon.</div>
                             </form>
                         </div>
                     </div>
@@ -1280,5 +1282,6 @@
         }, { threshold: 0.1 });
         revealElements.forEach(el => revealObserver.observe(el));
     </script>
+    <script src="form-handler.js"></script>
 </body>
 </html>

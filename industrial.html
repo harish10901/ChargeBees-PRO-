@@ -369,6 +369,7 @@ footer{background:#f9fafb;padding-top:80px;padding-bottom:40px;border-top:1px so
       <div class="fc-icon"><svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg></div>
       <div class="form-title">Industrial Solar Quote</div>
       <form id="industrialForm" action="contact.php" method="POST">
+      <input type="hidden" name="form_type" value="industrial">
       <div class="frow">
         <div class="fg"><label>Contact Name</label><input type="text" name="contact_name" placeholder="Harish Kumar" required></div>
         <div class="fg"><label>Designation</label><input type="text" name="designation" placeholder="IT Manager" required></div>
@@ -386,8 +387,8 @@ footer{background:#f9fafb;padding-top:80px;padding-bottom:40px;border-top:1px so
       </div>
       <div class="fg"><label>Rooftop / Land Area Available (sq ft)</label><input type="text" placeholder="e.g. 50,000 sq ft"></div>
       <button type="submit" class="form-btn">⚙️ Request Industrial Assessment</button>
-      <div id="successMessage" style="display:none;margin-top:15px;padding:12px;background:#d1fae5;color:#065f46;border-radius:10px;font-weight:600;text-align:center;">
-        Thank you! Your message has been sent successfully.
+      <div id="industrialSuccess" style="display:none;margin-top:15px;padding:12px;background:#d1fae5;color:#065f46;border-radius:10px;font-weight:600;text-align:center;" data-success-msg>
+        Thank you! Your inquiry has been received. Our industrial solar team will contact you within 24 hours.
       </div>
     </form>
     </div>
@@ -581,5 +582,6 @@ alert("Failed to send enquiry.");
 
 
 </script>
+<script src="form-handler.js"></script>
 </body>
 </html>
