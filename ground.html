@@ -375,19 +375,19 @@ footer{background:#f9fafb;padding-top:80px;padding-bottom:40px;border-top:1px so
       <input type="hidden" name="form_type" value="ground">
       <div class="frow">
         <div class="fg"><label>Name</label><input type="text" name="first_name" placeholder="Harish" required></div>
-        <div class="fg"><label>Organisation</label><input type="text" name="organisation" placeholder="Reddy Power Ltd." required></div>
+        <div class="fg"><label>Organisation</label><input type="text" name="company" placeholder="Reddy Power Ltd." required></div>
       </div>
       <div class="fg"><label>Phone Number</label><input type="tel" name="phone" placeholder="+91 90000 40477" required></div>
       <div class="fg"><label>Email Address</label><input type="email" name="email" placeholder="you@example.com" required></div>
       <div class="frow">
-        <div class="fg"><label>Land Available (Acres)</label><input type="text" name="land_area" placeholder="e.g. 50 acres" required></div>
+        <div class="fg"><label>Land Available (Acres)</label><input type="text" name="land_area" placeholder="e.g. 50 acres"></div>
         <div class="fg"><label>Target Capacity</label>
-          <select name="solution" required><option>Select...</option><option>1 – 5 MW</option><option>5 – 20 MW</option><option>20 – 50 MW</option><option>50 – 100 MW</option><option>100 MW+</option></select>
+          <select name="target_capacity" required><option>Select...</option><option>1 – 5 MW</option><option>5 – 20 MW</option><option>20 – 50 MW</option><option>50 – 100 MW</option><option>100 MW+</option></select>
         </div>
       </div>
-      <div class="fg"><label>Location / State</label><input type="text" placeholder="e.g. Rajasthan, Gujarat, Telangana"></div>
+      <div class="fg"><label>Location / State</label><input type="text" name="location" placeholder="e.g. Rajasthan, Gujarat, Telangana"></div>
       <div class="fg"><label>Project Type</label>
-        <select><option>Select type...</option><option>Captive Solar (Self Use)</option><option>Third-Party Sale / IPP</option><option>Group Captive</option><option>PSA (Power Sale Agreement)</option><option>Government / PSU Project</option><option>Other</option></select>
+        <select name="project_type"><option>Select type...</option><option>Captive Solar (Self Use)</option><option>Third-Party Sale / IPP</option><option>Group Captive</option><option>PSA (Power Sale Agreement)</option><option>Government / PSU Project</option><option>Other</option></select>
       </div>
       <div class="fg"><label>Message / Special Requirements</label><textarea name="message" placeholder="Tell us about your land, grid availability, power offtake plans..."></textarea></div>
       <button type="submit" class="form-btn">🌅 Submit Project Enquiry</button>

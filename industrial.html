@@ -371,21 +371,21 @@ footer{background:#f9fafb;padding-top:80px;padding-bottom:40px;border-top:1px so
       <form id="industrialForm" action="contact.php" method="POST">
       <input type="hidden" name="form_type" value="industrial">
       <div class="frow">
-        <div class="fg"><label>Contact Name</label><input type="text" name="contact_name" placeholder="Harish Kumar" required></div>
-        <div class="fg"><label>Designation</label><input type="text" name="designation" placeholder="IT Manager" required></div>
+        <div class="fg"><label>Contact Name</label><input type="text" name="first_name" placeholder="Harish Kumar" required></div>
+        <div class="fg"><label>Designation</label><input type="text" name="last_name" placeholder="IT Manager" required></div>
       </div>
-      <div class="fg"><label>Company / Plant Name</label><input type="text" name="company_name" placeholder="Verma Industries Ltd." required></div>
+      <div class="fg"><label>Company / Plant Name</label><input type="text" name="company" placeholder="Verma Industries Ltd." required></div>
       <div class="fg"><label>Phone Number</label><input type="tel" name="phone" placeholder="+91 90000 40477" required></div>
-      <div class="fg"><label>Business Email</label><input type="email" name="business_email" placeholder="you@example.com" required></div>
+      <div class="fg"><label>Business Email</label><input type="email" name="email" placeholder="you@example.com" required></div>
       <div class="frow">
         <div class="fg"><label>Industry Type</label>
-          <select name="solution" required><option>Select industry...</option><option>Manufacturing</option><option>Textile / Garments</option><option>Pharmaceuticals</option><option>Food Processing</option><option>Auto / Engineering</option><option>Chemicals</option><option>Cold Storage</option><option>Data Centre</option><option>Other</option></select>
+          <select name="industry_type" required><option>Select industry...</option><option>Manufacturing</option><option>Textile / Garments</option><option>Pharmaceuticals</option><option>Food Processing</option><option>Auto / Engineering</option><option>Chemicals</option><option>Cold Storage</option><option>Data Centre</option><option>Other</option></select>
         </div>
         <div class="fg"><label>Monthly Electricity Bill</label>
-          <select name="solution" required><option>Select range...</option><option>₹5 – ₹20 Lakhs</option><option>₹20 – ₹50 Lakhs</option><option>₹50 Lakhs – ₹1 Cr</option><option>Above ₹1 Crore</option></select>
+          <select name="monthly_bill" required><option>Select range...</option><option>₹5 – ₹20 Lakhs</option><option>₹20 – ₹50 Lakhs</option><option>₹50 Lakhs – ₹1 Cr</option><option>Above ₹1 Crore</option></select>
         </div>
       </div>
-      <div class="fg"><label>Rooftop / Land Area Available (sq ft)</label><input type="text" placeholder="e.g. 50,000 sq ft"></div>
+      <div class="fg"><label>Rooftop / Land Area Available (sq ft)</label><input type="text" name="location" placeholder="e.g. 50,000 sq ft"></div>
       <button type="submit" class="form-btn">⚙️ Request Industrial Assessment</button>
       <div id="industrialSuccess" style="display:none;margin-top:15px;padding:12px;background:#d1fae5;color:#065f46;border-radius:10px;font-weight:600;text-align:center;" data-success-msg>
         Thank you! Your inquiry has been received. Our industrial solar team will contact you within 24 hours.

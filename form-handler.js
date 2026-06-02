@@ -1,4 +1,4 @@
-// ChargeBees Universal Form Handler
+// ChargeBees Universal Form Handler...
 // Use this on all pages with contact/inquiry forms
 
 function initializeFormHandler(formId, formType = 'general') {
