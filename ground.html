@@ -371,7 +371,7 @@ footer{background:#f9fafb;padding-top:80px;padding-bottom:40px;border-top:1px so
         <div class="fc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></div>
         <div><div class="form-title">Solar Farm Enquiry</div></div>
       </div>
-      <form id="groundForm" action="contact.php" method="POST">
+      <form id="groundForm" action="contact.php" method="POST" novalidate>
       <input type="hidden" name="form_type" value="ground">
       <div class="frow">
         <div class="fg"><label>Name</label><input type="text" name="first_name" placeholder="Harish" required></div>
@@ -387,9 +387,9 @@ footer{background:#f9fafb;padding-top:80px;padding-bottom:40px;border-top:1px so
       </div>
       <div class="fg"><label>Location / State</label><input type="text" name="location" placeholder="e.g. Rajasthan, Gujarat, Telangana"></div>
       <div class="fg"><label>Project Type</label>
-        <select name="project_type"><option>Select type...</option><option>Captive Solar (Self Use)</option><option>Third-Party Sale / IPP</option><option>Group Captive</option><option>PSA (Power Sale Agreement)</option><option>Government / PSU Project</option><option>Other</option></select>
+        <select name="project_type" required><option>Select type...</option><option>Captive Solar (Self Use)</option><option>Third-Party Sale / IPP</option><option>Group Captive</option><option>PSA (Power Sale Agreement)</option><option>Government / PSU Project</option><option>Other</option></select>
       </div>
-      <div class="fg"><label>Message / Special Requirements</label><textarea name="message" placeholder="Tell us about your land, grid availability, power offtake plans..."></textarea></div>
+      <div class="fg"><label>Message / Special Requirements</label><textarea name="message" placeholder="Tell us about your land, grid availability, power offtake plans..." required></textarea></div>
       <button type="submit" class="form-btn">🌅 Submit Project Enquiry</button>
       <div id="groundSuccess" style="display:none;margin-top:15px;padding:12px;background:#d1fae5;color:#065f46;border-radius:10px;font-weight:600;text-align:center;" data-success-msg>
         Thank you! Your ground-mounted solar project inquiry has been received. We'll be in touch within 48 hours.

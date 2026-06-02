@@ -377,7 +377,7 @@ footer{background:#f9fafb;padding-top:80px;padding-bottom:40px;border-top:1px so
         <div class="form-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
         <div><div class="form-title">Residential Solar Quote</div></div>
       </div>
-      <form id="residentialForm" action="contact.php" method="POST">
+      <form id="residentialForm" action="contact.php" method="POST" novalidate>
       <input type="hidden" name="form_type" value="residential">
       <div class="frow">
         <div class="fg"><label>First Name</label><input type="text" name="first_name" placeholder="Harish" required></div>
@@ -396,7 +396,7 @@ footer{background:#f9fafb;padding-top:80px;padding-bottom:40px;border-top:1px so
           <option>Above ₹10,000</option>
         </select>
       </div>
-      <div class="fg"><label>Message (Optional)</label><textarea name="message" placeholder="Tell us about your roof / home setup."></textarea></div>
+      <div class="fg"><label>Message</label><textarea name="message" placeholder="Tell us about your roof / home setup." required></textarea></div>
       <button type="submit" class="form-btn">🏠 Get My Free Residential Quote</button>
       <div id="residentialSuccess" style="display:none;margin-top:15px;padding:12px;background:#d1fae5;color:#065f46;border-radius:10px;font-weight:600;text-align:center;" data-success-msg>
         Thank you! Your inquiry has been received. We'll contact you soon with a free residential quote.

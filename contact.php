@@ -21,11 +21,23 @@ $message = isset($_POST['message']) ? trim($_POST['message']) : '';
 $company = isset($_POST['company']) ? trim($_POST['company']) : '';
 $location = isset($_POST['location']) ? trim($_POST['location']) : '';
 
+// Log all received data for debugging
+error_log("[" . date('Y-m-d H:i:s') . "] FORM SUBMISSION RECEIVED");
+error_log("POST Data: " . json_encode($_POST));
+error_log("First Name: $first_name | Email: $email | Message Length: " . strlen($message));
+
 // Validate required fields
-if (empty($first_name) || empty($email) || empty($message)) {
+if (empty($first_name) || empty($email)) {
     http_response_code(400);
-    echo json_encode(['error' => 'Please fill in all required fields']);
+    error_log("VALIDATION FAILED: Missing first_name or email");
+    echo json_encode(['error' => 'Please fill in all required fields (Name and Email)']);
     exit;
+}
+
+// Message can be optional for some forms, but log if missing
+if (empty($message)) {
+    error_log("WARNING: Message is empty for form type: $form_type");
+    $message = "[No message provided]";
 }
 
 // Validate email format
@@ -97,20 +109,31 @@ $headers_str = implode("\r\n", $headers);
 // Send email
 $mail_sent = false;
 
+// Log email details before sending
+error_log("Attempting to send email to: $to");
+error_log("Subject: $subject");
+error_log("Email Body Length: " . strlen($email_body) . " characters");
+
 // Try to send email using mail() function
 if (function_exists('mail')) {
     $mail_sent = @mail($to, $subject, $email_body, $headers_str);
-    error_log("[" . date('Y-m-d H:i:s') . "] Mail sent to $to - Result: " . ($mail_sent ? "SUCCESS" : "FAILED") . " - Type: $form_type");
+    if ($mail_sent) {
+        error_log("[" . date('Y-m-d H:i:s') . "] Email sent SUCCESSFULLY to $to - Type: $form_type");
+    } else {
+        error_log("[" . date('Y-m-d H:i:s') . "] Email FAILED to send to $to - Type: $form_type - Reason: mail() returned false");
+    }
 } else {
     error_log("mail() function not available on server");
 }
 
 // Fallback - Save to file
 if (!$mail_sent) {
+    error_log("Falling back to file storage since email sending failed");
     $log_dir = dirname(__FILE__) . '/contact_submissions';
     
     if (!is_dir($log_dir)) {
         @mkdir($log_dir, 0755, true);
+        error_log("Created contact_submissions directory");
     }
     
     $timestamp = date('Y-m-d_H-i-s');
@@ -130,6 +153,8 @@ if (!$mail_sent) {
     if ($file_saved) {
         $mail_sent = true;
         error_log("Message saved to file: " . $filename);
+    } else {
+        error_log("CRITICAL: Could not save message to file: " . $filename);
     }
 }
 
@@ -156,13 +181,19 @@ if ($mail_sent) {
     $user_headers_str = implode("\r\n", $user_headers);
     
     if (function_exists('mail')) {
-        @mail($email, $user_subject, $user_body, $user_headers_str);
+        $user_email_sent = @mail($email, $user_subject, $user_body, $user_headers_str);
+        if ($user_email_sent) {
+            error_log("User confirmation email sent to: $email");
+        } else {
+            error_log("User confirmation email FAILED for: $email");
+        }
     }
     
     http_response_code(200);
+    error_log("[" . date('Y-m-d H:i:s') . "] FORM SUBMISSION SUCCESS - Type: $form_type - User: $email");
     echo json_encode(['success' => 'Message sent successfully']);
 } else {
-    error_log("Form submission failed - Type: $form_type - User: $email");
+    error_log("Form submission FAILED - Type: $form_type - User: $email");
     http_response_code(500);
     echo json_encode(['error' => 'Failed to send message. Please try again later.']);
 }

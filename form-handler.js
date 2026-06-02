@@ -13,12 +13,36 @@ function initializeFormHandler(formId, formType = 'general') {
         
         if (!submitBtn) return;
         
+        // Validate required fields
+        const first_name = form.querySelector('input[name="first_name"]')?.value.trim();
+        const email = form.querySelector('input[name="email"]')?.value.trim();
+        const message = form.querySelector('textarea[name="message"]')?.value.trim();
+        
+        if (!first_name) {
+            alert('Please enter your name');
+            return;
+        }
+        
+        if (!email) {
+            alert('Please enter your email address');
+            return;
+        }
+        
+        if (!message) {
+            alert('Please enter your message - this field is required');
+            return;
+        }
+        
         const formData = new FormData(this);
         
         // Add form type if not already present
         if (!formData.has('form_type')) {
             formData.append('form_type', formType);
         }
+        
+        // Debug: Log the form data being sent
+        console.log('Submitting form:', formType);
+        console.log('Form data entries:', Array.from(formData.entries()));
         
         // Show loading state
         const originalText = submitBtn.innerHTML;

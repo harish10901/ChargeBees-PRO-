@@ -726,7 +726,7 @@ nav{
             <div>
                 <div class="contact-form-card">
 
-                    <form id="solarForm" action="contact.php" method="POST">
+                    <form id="solarForm" action="contact.php" method="POST" novalidate>
                         <input type="hidden" name="form_type" value="solar">
                     <div class="form-title">Get a Free Quote</div>
                     <div class="form-sub">Our solar experts will contact you within 24 hours</div>
@@ -761,8 +761,8 @@ nav{
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Message (Optional)</label>
-                        <textarea name="message" placeholder="Tell us about your energy needs..."></textarea>
+                        <label>Message</label>
+                        <textarea name="message" placeholder="Tell us about your energy needs..." required></textarea>
                     </div>
                     <button type="submit" class="form-submit">
                         ⚡ Get My Free Quote
