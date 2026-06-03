@@ -1,35 +1,43 @@
 <?php
 /**
- * Email Configuration for ChargeBees Contact Form
- * For GoDaddy/Titan Email Hosting
+ * ChargeBees — Email Configuration
+ *
+ * HOW TO GET YOUR WEB3FORMS KEY (FREE, 5 minutes):
+ * ─────────────────────────────────────────────────
+ * 1. Go to https://web3forms.com
+ * 2. Enter:  db@chargebees.com
+ * 3. Check your inbox → click the confirmation link
+ * 4. Copy the Access Key you receive
+ * 5. Paste it in contact.php at:
+ *       define('WEB3FORMS_ACCESS_KEY', 'PASTE_HERE');
+ *
+ * That's it! Forms will start delivering to db@chargebees.com instantly.
+ * Free plan = 250 submissions/month. No credit card needed.
+ * ─────────────────────────────────────────────────
  */
 
-// SMTP Configuration (Optional - use if mail() function doesn't work)
-// Contact GoDaddy support for your specific SMTP settings
-define('USE_SMTP', false); // Set to true if you need to use SMTP instead of mail()
+// Destination email — all form submissions go here
+define('TO_EMAIL', 'db@chargebees.com');
+define('FROM_NAME', 'ChargeBees Website');
 
-// SMTP Settings for Titan/GoDaddy
-define('SMTP_HOST', 'smtp.titan.email'); // Or your GoDaddy SMTP server
-define('SMTP_PORT', 465); // 465 for SSL, 587 for TLS
-define('SMTP_USER', 'db@chargebees.com'); // Your email address
-define('SMTP_PASSWORD', 'your-password-here'); // Your email password
-define('SMTP_SECURE', 'ssl'); // 'ssl' or 'tls'
-
-// Email Settings
-define('FROM_EMAIL', 'db@chargebees.com');
-define('FROM_NAME', 'ChargeBees');
-define('REPLY_TO_EMAIL', 'db@chargebees.com');
+// Web3Forms key (set in contact.php directly)
+// Get it free at: https://web3forms.com
 
 /**
- * Note: If you want to enable SMTP:
- * 1. Set USE_SMTP to true
- * 2. Add your email credentials above
- * 3. Make sure PHPMailer library is available in the same directory
- * 
- * To get SMTP credentials:
- * - Log in to your GoDaddy cPanel
- * - Go to Email > Email Accounts
- * - Click on your email account
- * - Find Mail Server settings
+ * OPTIONAL SMTP (only if you want direct SMTP instead of Web3Forms)
+ * ─────────────────────────────────────────────────
+ * If your GoDaddy / Titan email supports SMTP:
+ *
+ * Host   : smtp.titan.email  (or smtp.secureserver.net for GoDaddy)
+ * Port   : 465 (SSL) or 587 (TLS)
+ * User   : db@chargebees.com
+ * Pass   : your email password
+ *
+ * To enable: install PHPMailer in same folder, then update contact.php
  */
+define('SMTP_HOST',     'smtp.titan.email');
+define('SMTP_PORT',     465);
+define('SMTP_USER',     'db@chargebees.com');
+define('SMTP_PASSWORD', 'your-password-here'); // Update if using SMTP
+define('SMTP_SECURE',   'ssl');
 ?>
