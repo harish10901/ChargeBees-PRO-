@@ -13,7 +13,7 @@ ini_set('error_log', dirname(__FILE__) . '/error_log.txt');
 
 // ─── SMTP CONFIG ──────────────────────────────────────────────────────────────
 $smtp_user     = 'chaargebee@gmail.com';
-$smtp_password = '$Vzdas070'; // replace with actual password or use environment variable for security
+$smtp_password = 'limy wdby liwa wdxb'; // replace with actual password or use environment variable for security
 $to_email      = 'chaargebee@gmail.com';
 $from_name     = 'ChargeBees Website';
 
@@ -156,9 +156,9 @@ if ($sent) {
             $mail_obj->clearReplyTos();
             $mail_obj->addAddress($email, $full_name);
             $mail_obj->Subject = 'We received your inquiry — ChargeBees';
-            $mail_obj->Body    = "Hi $first_name,\n\nThank you for contacting ChargeBees!\n\n"
+            $mail_obj->Body    = "Hi $first_name,\n\nThank you for contacting ChargeBee Energies Pvt Ltd!\n\n"
                 . "We received your " . strtolower($form_type) . " inquiry and will respond within 24 business hours.\n\n"
-                . "Direct Contact:\n  Phone: +91 90000 40477\n  Email: db@chargebees.com\n\n"
+                . "Direct Contact:\n  Phone: +91 90000 40477\n  Email: chaargebee@gmail.com \n db@chargebees.com\n\n"
                 . "Best regards,\nChargeBees Team\n";
             $mail_obj->send();
             error_log("Auto-reply sent to $email");
