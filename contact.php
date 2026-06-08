@@ -1,35 +1,27 @@
 <?php
-/**
- * ChargeBees Contact Form Handler
- * Uses Web3Forms API for guaranteed email delivery
- * No SMTP setup needed — works on any hosting (GoDaddy, shared, etc.)
- */
-
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 
-// Handle preflight
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit;
-}
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { http_response_code(200); exit; }
 
 error_reporting(E_ALL);
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 ini_set('error_log', dirname(__FILE__) . '/error_log.txt');
 
-// ─── CONFIG ───────────────────────────────────────────────────────────────────
-// Web3Forms — FREE service, emails go directly to db@chargebees.com
-// STEP: Go to https://web3forms.com → enter db@chargebees.com → get your Access Key
-// Paste that key below (one-time setup, takes 2 minutes)
-define('WEB3FORMS_ACCESS_KEY', 'YOUR_WEB3FORMS_ACCESS_KEY_HERE');
+// ─── SMTP CONFIG ──────────────────────────────────────────────────────────────
+$smtp_user     = 'chaargebee@gmail.com';
+$smtp_password = '$Vzdas070'; // replace with actual password or use environment variable for security
+$to_email      = 'chaargebee@gmail.com';
+$from_name     = 'ChargeBees Website';
 
-// Fallback: your own SMTP (optional, only if you want backup)
-define('TO_EMAIL', 'db@chargebees.com');
-define('FROM_NAME', 'ChargeBees Website');
+// Gmail SMTP
+$smtp_configs = [
+    ['host' => 'smtp.gmail.com', 'port' => 465, 'secure' => 'ssl'],
+    ['host' => 'smtp.gmail.com', 'port' => 587, 'secure' => 'tls'],
+];
 // ──────────────────────────────────────────────────────────────────────────────
 
 // Collect form data
@@ -40,26 +32,22 @@ $phone      = isset($_POST['phone'])      ? trim($_POST['phone'])      : '';
 $form_type  = isset($_POST['form_type'])  ? trim($_POST['form_type'])  : 'general';
 $message    = isset($_POST['message'])    ? trim($_POST['message'])    : '';
 $company    = isset($_POST['company'])    ? trim($_POST['company'])    : '';
-$location   = isset($_POST['location'])   ? trim($_POST['location'])   : '';
+$location   = isset($_POST['location'])  ? trim($_POST['location'])   : '';
 
 error_log("[" . date('Y-m-d H:i:s') . "] FORM RECEIVED — type: $form_type | email: $email");
 
 // Validate
 if (empty($first_name) || empty($email)) {
     http_response_code(400);
-    echo json_encode(['error' => 'Please fill in all required fields (Name and Email)']);
+    echo json_encode(['error' => 'Please fill in all required fields']);
     exit;
 }
-
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);
     echo json_encode(['error' => 'Invalid email address']);
     exit;
 }
-
-if (empty($message)) {
-    $message = '[No message provided]';
-}
+if (empty($message)) $message = '[No message provided]';
 
 // Subject map
 $subject_map = [
@@ -72,94 +60,87 @@ $subject_map = [
     'partner'     => 'Partnership Inquiry',
     'general'     => 'General Inquiry',
 ];
-$subject = isset($subject_map[$form_type]) ? $subject_map[$form_type] : 'General Inquiry';
-
-// Build message body
+$subject   = isset($subject_map[$form_type]) ? $subject_map[$form_type] : 'General Inquiry';
 $full_name = trim("$first_name $last_name");
+
+// Email body
 $body  = "New Form Submission — " . strtoupper($form_type) . "\n";
 $body .= str_repeat("=", 60) . "\n\n";
 $body .= "Name    : $full_name\n";
 $body .= "Email   : $email\n";
-if (!empty($phone))   $body .= "Phone   : $phone\n";
-if (!empty($company)) $body .= "Company : $company\n";
-if (!empty($location))$body .= "Location: $location\n";
+if (!empty($phone))    $body .= "Phone   : $phone\n";
+if (!empty($company))  $body .= "Company : $company\n";
+if (!empty($location)) $body .= "Location: $location\n";
 $body .= "Form    : " . ucfirst($form_type) . "\n";
 $body .= "Time    : " . date('Y-m-d H:i:s') . "\n";
 $body .= "IP      : " . $_SERVER['REMOTE_ADDR'] . "\n\n";
 $body .= str_repeat("=", 60) . "\n";
-$body .= "MESSAGE:\n";
-$body .= str_repeat("=", 60) . "\n";
+$body .= "MESSAGE:\n" . str_repeat("=", 60) . "\n";
 $body .= $message . "\n";
 $body .= str_repeat("=", 60) . "\n";
 
-// ─── METHOD 1: Web3Forms API (Recommended — free, reliable) ───────────────────
-$sent = false;
+// ─── PHPMailer ────────────────────────────────────────────────────────────────
+$sent      = false;
+$mail_obj  = null;
+$phpmailer_src = dirname(__FILE__) . '/PHPMailer/src/';
 
-if (defined('WEB3FORMS_ACCESS_KEY') && WEB3FORMS_ACCESS_KEY !== 'YOUR_WEB3FORMS_ACCESS_KEY_HERE') {
-    $post_data = [
-        'access_key'   => WEB3FORMS_ACCESS_KEY,
-        'subject'      => $subject,
-        'from_name'    => FROM_NAME,
-        'name'         => $full_name,
-        'email'        => $email,
-        'phone'        => $phone,
-        'company'      => $company,
-        'location'     => $location,
-        'form_type'    => ucfirst($form_type),
-        'message'      => $message,
-        'botcheck'     => '',
-    ];
+if (!file_exists($phpmailer_src . 'PHPMailer.php')) {
+    error_log("CRITICAL: PHPMailer not found at $phpmailer_src");
+} else {
+    require_once $phpmailer_src . 'PHPMailer.php';
+    require_once $phpmailer_src . 'SMTP.php';
+    require_once $phpmailer_src . 'Exception.php';
 
-    $ch = curl_init('https://api.web3forms.com/submit');
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post_data));
-    curl_setopt($ch, CURLOPT_TIMEOUT, 15);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+    foreach ($smtp_configs as $cfg) {
+        if ($sent) break;
+        error_log("Trying SMTP: {$cfg['host']}:{$cfg['port']} ({$cfg['secure']})");
+        try {
+            $mail = new PHPMailer\PHPMailer\PHPMailer(true);
+            $mail->isSMTP();
+            $mail->Host       = $cfg['host'];
+            $mail->SMTPAuth   = true;
+            $mail->Username   = $smtp_user;
+            $mail->Password   = $smtp_password;
+            $mail->SMTPSecure = ($cfg['secure'] === 'ssl')
+                ? PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS
+                : PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = $cfg['port'];
+            $mail->CharSet    = 'UTF-8';
+            $mail->Timeout    = 10;
 
-    $response     = curl_exec($ch);
-    $curl_error   = curl_error($ch);
-    $http_code    = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
+            $mail->setFrom($smtp_user, $from_name);
+            $mail->addAddress($to_email);
+            $mail->addReplyTo($email, $full_name);
+            $mail->Subject = $subject;
+            $mail->Body    = $body;
 
-    if ($curl_error) {
-        error_log("Web3Forms cURL error: $curl_error");
-    } else {
-        $result = json_decode($response, true);
-        if ($http_code === 200 && isset($result['success']) && $result['success'] === true) {
-            $sent = true;
-            error_log("Web3Forms SUCCESS — $form_type from $email");
-        } else {
-            error_log("Web3Forms FAILED — HTTP $http_code — " . $response);
+            $mail->send();
+            $sent     = true;
+            $mail_obj = $mail;
+            error_log("PHPMailer SUCCESS via {$cfg['host']}:{$cfg['port']}");
+        } catch (Exception $e) {
+            error_log("PHPMailer FAILED {$cfg['host']}:{$cfg['port']} — " . $mail->ErrorInfo);
         }
     }
 }
 
-// ─── METHOD 2: PHP mail() fallback ────────────────────────────────────────────
-if (!$sent) {
+// Fallback: mail()
+if (!$sent && function_exists('mail')) {
     error_log("Trying PHP mail() fallback...");
     $headers  = "MIME-Version: 1.0\r\n";
     $headers .= "Content-type: text/plain; charset=UTF-8\r\n";
-    $headers .= "From: " . FROM_NAME . " <" . TO_EMAIL . ">\r\n";
+    $headers .= "From: $from_name <$smtp_user>\r\n";
     $headers .= "Reply-To: $email\r\n";
-    $headers .= "Return-Path: " . TO_EMAIL . "\r\n";
-
-    if (function_exists('mail')) {
-        $sent = @mail(TO_EMAIL, $subject, $body, $headers);
-        error_log($sent ? "mail() SUCCESS" : "mail() FAILED");
-    }
+    $sent = @mail($to_email, $subject, $body, $headers);
+    error_log($sent ? "mail() SUCCESS" : "mail() FAILED");
 }
 
-// ─── METHOD 3: Save to file (last resort) ─────────────────────────────────────
+// Last resort: save to file
 if (!$sent) {
-    error_log("Saving to file as last resort...");
-    $log_dir = dirname(__FILE__) . '/contact_submissions';
-
+    $log_dir  = dirname(__FILE__) . '/contact_submissions';
     if (!is_dir($log_dir)) @mkdir($log_dir, 0755, true);
-
-    $filename  = $log_dir . '/' . preg_replace('/[^a-z0-9]/i', '_', $form_type);
-    $filename .= '_' . date('Y-m-d_H-i-s') . '_' . uniqid() . '.txt';
-
+    $filename = $log_dir . '/' . preg_replace('/[^a-z0-9]/i','_',$form_type)
+              . '_' . date('Y-m-d_H-i-s') . '_' . uniqid() . '.txt';
     if (@file_put_contents($filename, $body)) {
         $sent = true;
         error_log("Saved to file: $filename");
@@ -168,27 +149,23 @@ if (!$sent) {
 
 // ─── RESPONSE ─────────────────────────────────────────────────────────────────
 if ($sent) {
-    // Send auto-reply to user
-    if (function_exists('mail')) {
-        $reply_subject = "We received your inquiry — ChargeBees";
-        $reply_body    = "Hi $first_name,\n\n"
-            . "Thank you for contacting ChargeBees!\n\n"
-            . "We received your " . strtolower($form_type) . " inquiry and will respond within 24 business hours.\n\n"
-            . "Summary:\n"
-            . "  Type    : " . ucfirst($form_type) . "\n"
-            . "  Received: " . date('Y-m-d H:i:s') . "\n\n"
-            . "Direct Contact:\n"
-            . "  Phone: +91 90000 40477\n"
-            . "  Email: db@chargebees.com\n\n"
-            . "Best regards,\nChargeBees Team\n";
-
-        $reply_headers  = "MIME-Version: 1.0\r\n";
-        $reply_headers .= "Content-type: text/plain; charset=UTF-8\r\n";
-        $reply_headers .= "From: ChargeBees <" . TO_EMAIL . ">\r\n";
-
-        @mail($email, $reply_subject, $reply_body, $reply_headers);
+    // Auto-reply to user
+    if ($mail_obj !== null) {
+        try {
+            $mail_obj->clearAddresses();
+            $mail_obj->clearReplyTos();
+            $mail_obj->addAddress($email, $full_name);
+            $mail_obj->Subject = 'We received your inquiry — ChargeBees';
+            $mail_obj->Body    = "Hi $first_name,\n\nThank you for contacting ChargeBees!\n\n"
+                . "We received your " . strtolower($form_type) . " inquiry and will respond within 24 business hours.\n\n"
+                . "Direct Contact:\n  Phone: +91 90000 40477\n  Email: db@chargebees.com\n\n"
+                . "Best regards,\nChargeBees Team\n";
+            $mail_obj->send();
+            error_log("Auto-reply sent to $email");
+        } catch (Exception $e) {
+            error_log("Auto-reply failed: " . $mail_obj->ErrorInfo);
+        }
     }
-
     http_response_code(200);
     echo json_encode(['success' => 'Message sent successfully']);
 } else {
