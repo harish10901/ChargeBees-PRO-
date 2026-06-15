@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franchise - ChargeBees | Own a Charging Station</title>
+    <meta name="description" content="Join the ChargeBees franchise network and own an EV charging station. Excellent ROI, full corporate support.">
+
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           ROOT VARIABLES
+        ============================================ */
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-light: #34d399;
+            --dark: #0a1f1c;
+            --light: #fdfbf7;
+            --gray: #6b7280;
+            --gradient-1: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+            --gradient-2: linear-gradient(135deg, #00b894 0%, #00d7ab 100%);
+            --shadow-glow: 0 20px 60px rgba(16, 185, 129, 0.25);
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfbf7;
+            overflow-x: hidden;
+            color: #0f172a;
+        }
+
+        /* BACKGROUND */
+        .bg-texture {
+            position: fixed; inset: 0; opacity: 0.08;
+            pointer-events: none; z-index: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/gray-floral.png');
+            background-repeat: repeat;
+        }
+        .bg-grid {
+            position: fixed; inset: 0; pointer-events: none; z-index: 0;
+            background-image:
+                linear-gradient(to right, rgba(16, 185, 129, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16, 185, 129, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .floating-orb {
+            position: fixed; border-radius: 50%;
+            filter: blur(100px); opacity: 0.4;
+            pointer-events: none; z-index: 0;
+            animation: floatOrb 20s ease-in-out infinite;
+        }
+        .orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, #10b981, transparent); top: -10%; left: -10%; }
+        .orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, #06b6d4, transparent); bottom: 10%; right: -5%; animation-delay: -7s; }
+        @keyframes floatOrb {
+            0%, 100% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(60px,-40px) scale(1.1); }
+            66% { transform: translate(-40px,30px) scale(0.95); }
+        }
+
+        /* BRAND LOGO */
+        .brand-logo-text {
+            font-size: 1.55rem; font-weight: 500; letter-spacing: -0.5px; color: #111827;
+            font-family: "Poppins", "Nunito", "Quicksand", sans-serif; line-height: 1; text-decoration: none;
+        }
+        .brand-logo-text span { color: #10b981; }
+        @media(max-width:768px) { .brand-logo-text { font-size: 1.3rem; } }
+
+        /* DROPDOWN NAV */
+        .dropdown-wrap { position: relative; }
+        .mega-drop {
+            position: absolute; top: calc(100% + 2px); left: 50%;
+            transform: translateX(-50%) translateY(10px); width: 680px;
+            background: #fff; border-radius: 24px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.15); border: 1px solid #f0fdf4;
+            padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+            opacity: 0; visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none;
+        }
+        .dropdown-wrap:hover .mega-drop { opacity: 1; visibility: visible; pointer-events: all; transform: translateX(-50%) translateY(0); }
+        .drop-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; border-radius: 16px; text-decoration: none; transition: all 0.25s ease; }
+        .drop-item:hover { background: linear-gradient(135deg, #f0fdf4, #ecfdf5); transform: translateX(4px); }
+        .drop-icon { width: 44px; height: 44px; min-width: 44px; background: linear-gradient(135deg, #10b981, #34d399); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 16px rgba(16,185,129,0.25); }
+        .drop-icon svg { width: 22px; height: 22px; stroke: #fff; stroke-width: 2; fill: none; }
+        .drop-text p { font-weight: 700; font-size: 0.9rem; color: #111827; margin-bottom: 2px; }
+        .drop-text span { font-size: 0.78rem; color: #6b7280; }
+
+        /* SECTION HEADINGS */
+        .section-tag {
+            display: inline-block; padding: 6px 18px;
+            background: rgba(16,185,129,0.1); color: #059669;
+            border-radius: 50px; font-weight: 700; font-size: 12px;
+            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 18px;
+        }
+        .section-title-main {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+            font-weight: 800; color: #0f172a; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 20px;
+        }
+        .section-title-main .accent {
+            background: linear-gradient(135deg, #10b981, #06b6d4);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .section-divider {
+            width: 80px; height: 5px;
+            background: linear-gradient(135deg, #10b981, #34d399);
+            border-radius: 999px; margin: 0 auto 24px; position: relative; overflow: hidden;
+        }
+        .section-divider::after {
+            content: ""; position: absolute; inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            animation: shimmer 2.5s linear infinite;
+        }
+        @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #10b981, #059669); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #059669; }
+
+        /* ============================================
+           FRANCHISE HERO
+        ============================================ */
+        .franchise-hero {
+            position: relative;
+            min-height: 100vh;
+            margin-top: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a1f1c 0%, #0d3b2e 40%, #0a1f1c 100%);
+        }
+        .hero-grid-lines {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(16,185,129,0.07) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16,185,129,0.07) 1px, transparent 1px);
+            background-size: 80px 80px;
+            animation: gridPan 20s linear infinite;
+        }
+        @keyframes gridPan {
+            0% { background-position: 0 0; }
+            100% { background-position: 80px 80px; }
+        }
+        .hero-glow-1 {
+            position: absolute; width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(16,185,129,0.25), transparent 70%);
+            top: -10%; left: -10%; pointer-events: none;
+            animation: glowFloat 8s ease-in-out infinite;
+        }
+        .hero-glow-2 {
+            position: absolute; width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(6,182,212,0.2), transparent 70%);
+            bottom: -5%; right: 5%; pointer-events: none;
+            animation: glowFloat 10s ease-in-out infinite reverse;
+        }
+        @keyframes glowFloat {
+            0%, 100% { transform: translate(0,0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.1); }
+        }
+        .franchise-hero-inner {
+            position: relative; z-index: 2;
+            text-align: center; padding: 60px 24px;
+            max-width: 1100px;
+        }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 8px 20px;
+            background: rgba(16,185,129,0.15);
+            border: 1px solid rgba(16,185,129,0.4);
+            border-radius: 50px; color: #34d399;
+            font-size: 12px; font-weight: 700; letter-spacing: 3px;
+            text-transform: uppercase; margin-bottom: 32px;
+            animation: fadeInDown 1s ease-out;
+        }
+        .hero-eyebrow .pulse-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #10b981; box-shadow: 0 0 12px #10b981;
+            animation: pulseDot 2s ease-in-out infinite;
+        }
+        @keyframes pulseDot { 0%,100%{transform:scale(1);opacity:1;} 50%{transform:scale(1.5);opacity:0.5;} }
+        .franchise-hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 800; line-height: 0.95;
+            color: #fff; letter-spacing: -3px;
+            margin-bottom: 28px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        .franchise-hero-title .grad {
+            background: linear-gradient(135deg, #10b981, #34d399, #06b6d4);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .franchise-hero-sub {
+            font-size: clamp(1rem, 1.5vw, 1.3rem);
+            color: rgba(255,255,255,0.75);
+            max-width: 600px; margin: 0 auto 48px;
+            line-height: 1.8; animation: fadeInUp 1s ease-out 0.4s both;
+        }
+        .hero-cta-group {
+            display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+        .btn-primary-hero {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff; padding: 18px 40px; border-radius: 50px;
+            font-weight: 700; font-size: 16px;
+            display: inline-flex; align-items: center; gap: 10px;
+            text-decoration: none; box-shadow: 0 15px 40px rgba(16,185,129,0.45);
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden;
+        }
+        .btn-primary-hero:hover { transform: translateY(-4px); box-shadow: 0 22px 50px rgba(16,185,129,0.6); }
+        .btn-outline-hero {
+            background: transparent; color: #fff;
+            padding: 18px 40px; border-radius: 50px;
+            font-weight: 600; font-size: 16px;
+            border: 1.5px solid rgba(255,255,255,0.35);
+            display: inline-flex; align-items: center; gap: 10px;
+            text-decoration: none; backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+        .btn-outline-hero:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px); }
+        .hero-stats-row {
+            display: flex; justify-content: center; gap: 64px;
+            margin-top: 64px; flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+        .h-stat { text-align: center; }
+        .h-stat .num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem; font-weight: 800; color: #fff;
+            display: block; line-height: 1;
+        }
+        .h-stat .lbl { color: rgba(255,255,255,0.55); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
+        .scroll-line {
+            position: absolute; bottom: 32px; left: 50%;
+            transform: translateX(-50%); z-index: 2;
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+            color: rgba(255,255,255,0.4); font-size: 11px; letter-spacing: 2px;
+            animation: scrollBounce 2s ease-in-out infinite;
+        }
+        .scroll-line .ln { width: 1px; height: 40px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.5)); }
+        @keyframes scrollBounce { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(10px);} }
+
+        /* FLOATING NUMBERS */
+        .floating-number {
+            position: absolute; font-family: 'Space Grotesk', sans-serif;
+            font-weight: 800; color: rgba(16,185,129,0.08);
+            pointer-events: none; user-select: none; z-index: 1;
+            animation: floatNum 15s ease-in-out infinite;
+        }
+        .fn-1 { font-size: 200px; top: 5%; left: -2%; animation-delay: 0s; }
+        .fn-2 { font-size: 150px; bottom: 10%; right: -1%; animation-delay: -5s; }
+        @keyframes floatNum { 0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-25px) rotate(3deg);} }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ============================================
+           WHY FRANCHISE SECTION
+        ============================================ */
+        .why-section { padding: 120px 0; background: linear-gradient(180deg, #fdfbf7 0%, #f0fdf4 100%); position: relative; }
+        .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1200px; margin: 60px auto 0; padding: 0 24px; }
+        .why-card {
+            background: #fff; border-radius: 28px; padding: 44px 36px;
+            border: 1px solid #e8f5f0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+            position: relative; overflow: hidden;
+            opacity: 0; transform: translateY(40px);
+        }
+        .why-card.in-view { opacity: 1; transform: translateY(0); }
+        .why-card::before {
+            content: ""; position: absolute; top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: linear-gradient(90deg, #10b981, #06b6d4);
+            transform: scaleX(0); transform-origin: left;
+            transition: transform 0.4s;
+        }
+        .why-card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px rgba(16,185,129,0.15); }
+        .why-card:hover::before { transform: scaleX(1); }
+        .why-card-icon {
+            width: 64px; height: 64px; border-radius: 20px;
+            background: linear-gradient(135deg, #10b981, #34d399);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 28px; box-shadow: 0 12px 25px rgba(16,185,129,0.3);
+        }
+        .why-card-icon svg { width: 30px; height: 30px; stroke: #fff; stroke-width: 2; }
+        .why-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: #0f172a; margin-bottom: 14px; }
+        .why-card p { font-size: 15px; line-height: 1.75; color: #64748b; }
+        .why-card .why-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            margin-top: 20px; padding: 6px 14px;
+            background: rgba(16,185,129,0.1); color: #059669;
+            border-radius: 50px; font-size: 13px; font-weight: 600;
+        }
+        @media(max-width:900px) { .why-grid { grid-template-columns: 1fr; max-width: 520px; } }
+
+        /* ============================================
+           ROI CALCULATOR / INVESTMENT
+        ============================================ */
+        .investment-section { padding: 120px 0; background: #fff; }
+        .invest-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .invest-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 60px; }
+        .invest-left { }
+        .invest-tiers { display: flex; flex-direction: column; gap: 20px; }
+        .tier-card {
+            border: 2px solid #e5e7eb; border-radius: 24px; padding: 28px 32px;
+            cursor: pointer; transition: all 0.35s ease; position: relative; overflow: hidden;
+            opacity: 0; transform: translateX(-40px);
+        }
+        .tier-card.in-view { opacity: 1; transform: translateX(0); }
+        .tier-card.selected { border-color: #10b981; background: linear-gradient(135deg, #f0fdf4, #ecfdf5); }
+        .tier-card:hover { border-color: #10b981; transform: translateX(6px); }
+        .tier-badge { display: inline-block; padding: 4px 12px; border-radius: 50px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+        .tier-starter .tier-badge { background: rgba(16,185,129,0.12); color: #059669; }
+        .tier-pro .tier-badge { background: rgba(6,182,212,0.12); color: #0891b2; }
+        .tier-enterprise .tier-badge { background: rgba(139,92,246,0.12); color: #7c3aed; }
+        .tier-card h4 { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: #0f172a; margin-bottom: 6px; }
+        .tier-card .invest-amt { font-size: 28px; font-weight: 800; color: #10b981; }
+        .tier-card .invest-roi { font-size: 14px; color: #64748b; margin-top: 6px; }
+
+        .invest-right {
+            background: linear-gradient(135deg, #0a1f1c, #0d3b2e);
+            border-radius: 32px; padding: 52px 44px;
+            box-shadow: 0 30px 80px rgba(10,31,28,0.35);
+            opacity: 0; transform: translateX(40px);
+        }
+        .invest-right.in-view { opacity: 1; transform: translateX(0); }
+        .roi-label { font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #34d399; margin-bottom: 10px; }
+        .roi-value { font-family: 'Space Grotesk', sans-serif; font-size: 5rem; font-weight: 800; color: #fff; line-height: 1; margin-bottom: 6px; }
+        .roi-sub { color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 36px; }
+        .roi-bar { margin-bottom: 20px; }
+        .roi-bar-label { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px; color: rgba(255,255,255,0.7); }
+        .roi-bar-track { height: 8px; background: rgba(255,255,255,0.1); border-radius: 999px; overflow: hidden; }
+        .roi-bar-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #10b981, #34d399); width: 0; transition: width 1.5s ease 0.5s; }
+        .roi-note { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 24px; line-height: 1.6; }
+
+        @media(max-width:900px) { .invest-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+        /* ============================================
+           PROCESS STEPS
+        ============================================ */
+        .process-section { padding: 120px 0; background: linear-gradient(180deg, #f7f8fa 0%, #eff6ff 100%); }
+        .process-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 70px; position: relative; }
+        .process-steps::before {
+            content: ""; position: absolute;
+            top: 60px; left: 10%; right: 10%; height: 2px;
+            background: linear-gradient(90deg, #10b981, #06b6d4);
+            opacity: 0.25; z-index: 0;
+        }
+        .process-step {
+            position: relative; z-index: 1; text-align: center; padding: 0 20px;
+            opacity: 0; transform: translateY(30px);
+        }
+        .process-step.in-view { opacity: 1; transform: translateY(0); }
+        .step-circle {
+            width: 120px; height: 120px; border-radius: 50%;
+            background: #fff; border: 3px solid #e5e7eb;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 28px; position: relative;
+            transition: all 0.4s; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        .process-step:hover .step-circle {
+            border-color: #10b981;
+            box-shadow: 0 15px 40px rgba(16,185,129,0.2);
+            transform: scale(1.08);
+        }
+        .step-num {
+            position: absolute; top: -8px; right: -8px;
+            width: 28px; height: 28px; border-radius: 50%;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff; font-size: 12px; font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .step-icon { width: 48px; height: 48px; stroke: #10b981; stroke-width: 1.5; fill: none; }
+        .process-step h4 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 10px; }
+        .process-step p { font-size: 14px; line-height: 1.7; color: #64748b; }
+        @media(max-width:900px) {
+            .process-steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+            .process-steps::before { display: none; }
+        }
+        @media(max-width:560px) { .process-steps { grid-template-columns: 1fr; } }
+
+        /* ============================================
+           SUPPORT SECTION
+        ============================================ */
+        .support-section { padding: 120px 0; background: #fff; }
+        .support-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .support-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 60px; }
+        .support-image-wrap {
+            position: relative; border-radius: 32px; overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+            opacity: 0; transform: translateX(-40px);
+        }
+        .support-image-wrap.in-view { opacity: 1; transform: translateX(0); transition: all 1s ease; }
+        .support-image-wrap img { width: 100%; height: auto; display: block; }
+        .support-img-badge {
+            position: absolute; bottom: 24px; left: 24px;
+            background: rgba(16,185,129,0.95); backdrop-filter: blur(10px);
+            border-radius: 16px; padding: 16px 22px;
+            display: flex; align-items: center; gap: 14px; color: #fff;
+        }
+        .support-img-badge .badge-num { font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 800; }
+        .support-img-badge .badge-lbl { font-size: 13px; opacity: 0.9; }
+
+        .support-list { list-style: none; padding: 0; margin: 32px 0 0; display: flex; flex-direction: column; gap: 18px; }
+        .support-item {
+            display: flex; align-items: flex-start; gap: 18px;
+            padding: 20px 24px; border-radius: 18px;
+            border: 1px solid #e5e7eb; background: #fafafa;
+            transition: all 0.3s; cursor: default;
+            opacity: 0; transform: translateX(40px);
+        }
+        .support-item.in-view { opacity: 1; transform: translateX(0); }
+        .support-item:hover { border-color: #10b981; background: #f0fdf4; transform: translateX(6px); }
+        .s-icon { width: 44px; height: 44px; min-width: 44px; border-radius: 12px; background: linear-gradient(135deg, #10b981, #34d399); display: flex; align-items: center; justify-content: center; }
+        .s-icon svg { width: 22px; height: 22px; stroke: #fff; stroke-width: 2; }
+        .s-text h5 { font-weight: 700; color: #0f172a; font-size: 15px; margin-bottom: 4px; }
+        .s-text p { font-size: 13px; color: #64748b; line-height: 1.6; }
+        @media(max-width:900px) { .support-grid { grid-template-columns: 1fr; } }
+
+        /* ============================================
+           TESTIMONIALS / PARTNERS MARQUEE
+        ============================================ */
+        .testimonial-section { padding: 100px 0; background: linear-gradient(180deg, #fdfbf7, #f0fdf4); overflow: hidden; }
+        .testimonial-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+        .t-card {
+            background: #fff; border-radius: 24px; padding: 36px 32px;
+            border: 1px solid #e8f5f0; box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            transition: all 0.4s; position: relative;
+            opacity: 0; transform: translateY(30px);
+        }
+        .t-card.in-view { opacity: 1; transform: translateY(0); }
+        .t-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(16,185,129,0.12); }
+        .t-quote { font-size: 36px; color: #10b981; line-height: 1; margin-bottom: 16px; }
+        .t-text { font-size: 15px; line-height: 1.8; color: #475569; margin-bottom: 24px; font-style: italic; }
+        .t-author { display: flex; align-items: center; gap: 14px; }
+        .t-avatar {
+            width: 48px; height: 48px; border-radius: 50%;
+            background: linear-gradient(135deg, #10b981, #06b6d4);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-weight: 700; font-size: 18px; flex-shrink: 0;
+        }
+        .t-name { font-weight: 700; color: #0f172a; font-size: 14px; }
+        .t-city { font-size: 12px; color: #94a3b8; }
+        .t-stars { color: #f59e0b; font-size: 14px; margin-bottom: 4px; }
+        @media(max-width:900px) { .testimonial-grid { grid-template-columns: 1fr; max-width: 480px; margin: 60px auto 0; } }
+
+        /* ============================================
+           APPLY CTA SECTION
+        ============================================ */
+        .apply-section {
+            padding: 120px 24px;
+            background: linear-gradient(135deg, #0a1f1c 0%, #0d3b2e 50%, #0a1f1c 100%);
+            position: relative; overflow: hidden;
+        }
+        .apply-particles span {
+            position: absolute; display: block; border-radius: 50%;
+            background: rgba(16,185,129,0.1);
+            animation: pFloat 12s ease-in-out infinite;
+        }
+        .apply-particles span:nth-child(1){width:300px;height:300px;top:-80px;left:-80px;}
+        .apply-particles span:nth-child(2){width:200px;height:200px;bottom:20%;right:-60px;animation-delay:-4s;}
+        .apply-particles span:nth-child(3){width:100px;height:100px;top:40%;left:60%;animation-delay:-7s;}
+        @keyframes pFloat { 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-30px) scale(1.05);} }
+        .apply-inner { max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 2; }
+        .apply-inner h2 {
+            font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800; color: #fff; letter-spacing: -2px; margin-bottom: 20px;
+        }
+        .apply-inner h2 em { font-style: normal; background: linear-gradient(135deg, #10b981, #34d399, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .apply-inner p { font-size: 18px; color: rgba(255,255,255,0.65); max-width: 580px; margin: 0 auto 48px; line-height: 1.8; }
+        .apply-form-wrap {
+            background: rgba(255,255,255,0.06); backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.12); border-radius: 32px;
+            padding: 52px 44px; margin-top: 20px;
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group label { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.7); letter-spacing: 0.5px; }
+        .form-group input, .form-group select, .form-group textarea {
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 14px; padding: 14px 18px; color: #fff; font-size: 15px;
+            outline: none; transition: all 0.3s; font-family: 'Inter', sans-serif;
+        }
+        .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #10b981; background: rgba(16,185,129,0.1);
+        }
+        .form-group select option { background: #0a1f1c; color: #fff; }
+        .form-group textarea { min-height: 100px; resize: vertical; }
+        .form-submit {
+            width: 100%; padding: 18px; border-radius: 16px; border: none; cursor: pointer;
+            background: linear-gradient(135deg, #10b981, #059669); color: #fff;
+            font-size: 16px; font-weight: 700; display: flex; align-items: center;
+            justify-content: center; gap: 10px; font-family: 'Inter', sans-serif;
+            box-shadow: 0 15px 40px rgba(16,185,129,0.4); transition: all 0.3s; margin-top: 24px;
+        }
+        .form-submit:hover { transform: translateY(-3px); box-shadow: 0 22px 50px rgba(16,185,129,0.55); }
+        @media(max-width:700px) {
+            .form-row { grid-template-columns: 1fr; }
+            .apply-form-wrap { padding: 32px 24px; }
+        }
+
+        /* TRANSITION HELPER */
+        .transition-1s { transition: all 1s ease; }
+        .transition-1s-delay-1 { transition: all 1s ease 0.15s; }
+        .transition-1s-delay-2 { transition: all 1s ease 0.3s; }
+        .transition-1s-delay-3 { transition: all 1s ease 0.45s; }
+        .transition-1s-delay-4 { transition: all 1s ease 0.6s; }
+        .transition-1s-delay-5 { transition: all 1s ease 0.75s; }
+
+        /* HEADING ROAD ANIMATION */
+        .heading-road-animation {
+            position: relative; width: 420px; max-width: 90%; height: 24px; margin: 18px auto 0;
+        }
+        .road-line {
+            position: absolute; top: 20px; left: 30px; right: 30px;
+            height: 2px; background: linear-gradient(to right, #10b981, #34d399);
+            opacity: 0.4; border-radius: 50px;
+        }
+        .road-car {
+            position: absolute; left: 0; top: 9px; width: 18px; height: 18px;
+            stroke: #10b981; stroke-width: 2.5;
+            animation: carDrive 5s ease-in-out infinite;
+        }
+        .road-station { position: absolute; right: 0; top: 6px; }
+        .road-station svg { width: 20px; height: 20px; stroke: #10b981; stroke-width: 2.5; }
+        @keyframes carDrive { 0% { left: 0; } 80% { left: calc(100% - 35px); } 100% { left: calc(100% - 35px); } }
+    </style>
+</head>
+<body class="antialiased text-gray-900">
+
+    <div class="bg-texture"></div>
+    <div class="bg-grid"></div>
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+
+    <!-- ==================== NAVBAR (EXACT COPY) ==================== -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-1">
+                    <a href="index.html" class="flex items-center gap-2">
+                        <img src="images/logo.png" alt="Logo" class="h-10 w-auto object-contain">
+                        <span class="brand-logo-text">Charge <span>Bees</span></span>
+                    </a>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-5">
+                    <a href="index.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Home</a>
+                    <a href="stationfinder.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Station Finder</a>
+
+                    <!-- Products Dropdown -->
+                    <div class="relative group">
+                        <button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
+                            <a href="products.html" class="flex items-center gap-1">EV Products
+                                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                            </a>
+                        </button>
+                        <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-white rounded-3xl shadow-2xl border border-gray-100 p-8 grid grid-cols-3 gap-8 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <i data-lucide="zap" class="w-5 h-5 text-emerald-600"></i> Hardware
+                                </h3>
+                                <a href="products.html#hardware" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                                        <i data-lucide="battery-charging" class="w-6 h-6 text-emerald-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-900">All chargers</p>
+                                        <p class="text-xs text-gray-500">AC & DC Solutions</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <i data-lucide="layout" class="w-5 h-5 text-emerald-600"></i> Software
+                                </h3>
+                                <div class="space-y-2">
+                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                                            <i data-lucide="cloud" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <p class="font-bold text-gray-900">ChargeCloud</p>
+                                                <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500">CMS Platform</p>
+                                        </div>
+                                    </a>
+                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                                            <i data-lucide="smartphone" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">Chargebees App</p>
+                                            <p class="text-xs text-gray-500">User Experience</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <i data-lucide="settings" class="w-5 h-5 text-emerald-600"></i> Services
+                                </h3>
+                                <div class="space-y-2">
+                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                                            <i data-lucide="activity" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">Energy As A Service</p>
+                                            <p class="text-xs text-gray-500">Renewable Energy</p>
+                                        </div>
+                                    </a>
+                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                                            <i data-lucide="battery-full" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <p class="font-bold text-gray-900">Battery As A Service</p>
+                                                <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500">Swapping Solutions</p>
+                                        </div>
+                                    </a>
+                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                                            <i data-lucide="credit-card" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">RFID Card</p>
+                                            <p class="text-xs text-gray-500">Seamless Payments</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Solar Products Dropdown -->
+                    <div class="dropdown-wrap">
+                        <button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
+                            <a href="solar_products.html" class="flex items-center gap-1">Solar Products
+                                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                            </a>
+                        </button>
+                        <div class="mega-drop" style="z-index:100;">
+                            <a href="solar_products.html" class="drop-item">
+                                <div class="drop-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                </div>
+                                <div class="drop-text"><p>Our Solar Solutions</p><span>For all your energy needs</span></div>
+                            </a>
+                            <a href="residential.html" class="drop-item">
+                                <div class="drop-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                </div>
+                                <div class="drop-text"><p>Residential Solar Rooftops</p><span>For homes & apartments</span></div>
+                            </a>
+                            <a href="commercial.html" class="drop-item">
+                                <div class="drop-icon">
+                                    <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                                </div>
+                                <div class="drop-text"><p>Commercial Solar Rooftops</p><span>For offices & retail</span></div>
+                            </a>
+                            <a href="industrial.html" class="drop-item">
+                                <div class="drop-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg>
+                                </div>
+                                <div class="drop-text"><p>Industrial Solar Rooftops</p><span>For factories & warehouses</span></div>
+                            </a>
+                            <a href="ground.html" class="drop-item">
+                                <div class="drop-icon">
+                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/></svg>
+                                </div>
+                                <div class="drop-text"><p>Ground Mounted Solar System</p><span>Large scale solar farms</span></div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <a href="partners.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Partners</a>
+                    <a href="media-center.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Media Center</a>
+                    <a href="careers.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Careers</a>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <a href="https://play.google.com" class="hidden lg:block bg-emerald-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700 transition">Download App</a>
+                    <a href="contact.html" class="hidden md:block bg-emerald-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700 transition">Contact Us</a>
+                    <button id="menu-btn" class="md:hidden flex items-center justify-center w-11 h-11 rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm shadow-sm hover:bg-emerald-50 hover:border-emerald-200 transition-all duration-300">
+                        <i data-lucide="menu" class="w-6 h-6 text-gray-900"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-white border-t border-gray-100 shadow-xl z-40">
+        <div class="p-6 space-y-5">
+            <a href="index.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Home</a>
+            <a href="stationfinder.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Station Finder</a>
+            <a href="products.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">EV Products</a>
+            <a href="solar_products.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Solar Products</a>
+            <a href="partners.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Partners</a>
+            <a href="media-center.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Media Center</a>
+            <a href="careers.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Careers</a>
+            <a href="contact.html" class="block text-base font-semibold text-emerald-600 font-bold transition-colors">Contact Us</a>
+        </div>
+    </div>
+
+    <main class="relative z-10">
+
+        <!-- ==================== HERO ==================== -->
+        <section class="franchise-hero">
+            <div class="hero-grid-lines"></div>
+            <div class="hero-glow-1"></div>
+            <div class="hero-glow-2"></div>
+            <span class="floating-number fn-1">₹</span>
+            <span class="floating-number fn-2">%</span>
+
+            <div class="franchise-hero-inner">
+                <div class="hero-eyebrow">
+                    <span class="pulse-dot"></span>
+                    Franchise Opportunity 2025
+                </div>
+                <h1 class="franchise-hero-title">
+                    Own a<br>
+                    <span class="grad">ChargeBees</span><br>
+                    Station.
+                </h1>
+                <p class="franchise-hero-sub">
+                    Join India's fastest-growing EV charging network. Low investment, high returns, complete corporate support — be part of the green revolution.
+                </p>
+                <div class="hero-cta-group">
+                    <a href="#apply" class="btn-primary-hero">
+                        <i data-lucide="zap" style="width:20px;height:20px;stroke:#fff;stroke-width:2;fill:none;display:inline;"></i>
+                        Apply Now
+                    </a>
+                    <a href="#why-franchise" class="btn-outline-hero">
+                        <i data-lucide="play-circle" style="width:20px;height:20px;stroke:#fff;stroke-width:2;fill:none;display:inline;"></i>
+                        Learn More
+                    </a>
+                </div>
+
+                <div class="hero-stats-row">
+                    <div class="h-stat"><span class="num" data-count="500">0</span><span class="lbl">Stations</span></div>
+                    <div class="h-stat"><span class="num" data-count-k="50">0</span><span class="lbl">Users</span></div>
+                    <div class="h-stat"><span class="num" data-count="30">0</span><span class="lbl">% Avg ROI</span></div>
+                    <div class="h-stat"><span class="num" data-count="100">0</span><span class="lbl">Cities</span></div>
+                </div>
+            </div>
+
+            <div class="scroll-line">
+                <span>Scroll</span>
+                <div class="ln"></div>
+            </div>
+        </section>
+
+        <!-- ==================== WHY FRANCHISE ==================== -->
+        <section class="why-section" id="why-franchise">
+            <div style="max-width:1200px;margin:0 auto;padding:0 24px;text-align:center;">
+                <span class="section-tag">Why Partner With Us</span>
+                <h2 class="section-title-main">Why Choose a <span class="accent">ChargeBees Franchise?</span></h2>
+                <div class="heading-road-animation">
+                    <i data-lucide="car" class="road-car"></i>
+                    <div class="road-line"></div>
+                    <div class="road-station"><i data-lucide="fuel"></i></div>
+                </div>
+            </div>
+
+            <div class="why-grid">
+                <div class="why-card transition-1s">
+                    <div class="why-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <h3>Proven Business Model</h3>
+                    <p>Our franchise model is battle-tested across 100+ cities. You get a ready playbook — no guesswork, just growth.</p>
+                    <span class="why-badge">
+                        <svg style="width:14px;height:14px;stroke:#059669;stroke-width:2;fill:none;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                        100+ Active Franchisees
+                    </span>
+                </div>
+                <div class="why-card transition-1s-delay-1">
+                    <div class="why-card-icon">
+                        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <h3>Excellent ROI</h3>
+                    <p>Average franchise partners see 25–35% annual ROI. With EV adoption booming, charging demand is growing daily.</p>
+                    <span class="why-badge">
+                        <svg style="width:14px;height:14px;stroke:#059669;stroke-width:2;fill:none;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                        Avg 30% Annual ROI
+                    </span>
+                </div>
+                <div class="why-card transition-1s-delay-2">
+                    <div class="why-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <h3>Full Corporate Support</h3>
+                    <p>From installation to operations — training, marketing materials, technical support, and a dedicated account manager are all included.</p>
+                    <span class="why-badge">
+                        <svg style="width:14px;height:14px;stroke:#059669;stroke-width:2;fill:none;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                        24/7 Support Desk
+                    </span>
+                </div>
+                <div class="why-card transition-1s-delay-3">
+                    <div class="why-card-icon">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <h3>Smart Software Platform</h3>
+                    <p>Our ChargeCloud platform gives you real-time monitoring, revenue dashboards, and remote diagnostics — all from your phone.</p>
+                    <span class="why-badge">
+                        <svg style="width:14px;height:14px;stroke:#059669;stroke-width:2;fill:none;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                        Real-Time Dashboard
+                    </span>
+                </div>
+                <div class="why-card transition-1s-delay-4">
+                    <div class="why-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Brand Power</h3>
+                    <p>Ride on ChargeBees' growing brand recognition. We handle national marketing so your station attracts users from day one.</p>
+                    <span class="why-badge">
+                        <svg style="width:14px;height:14px;stroke:#059669;stroke-width:2;fill:none;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                        National Brand
+                    </span>
+                </div>
+                <div class="why-card transition-1s-delay-5">
+                    <div class="why-card-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+                    </div>
+                    <h3>Green Future</h3>
+                    <p>Be part of India's EV revolution. Every station you own contributes to a cleaner, greener tomorrow — and a profitable today.</p>
+                    <span class="why-badge">
+                        <svg style="width:14px;height:14px;stroke:#059669;stroke-width:2;fill:none;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                        Sustainable Impact
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== INVESTMENT TIERS ==================== -->
+        <section class="investment-section" id="investment">
+            <div class="invest-inner">
+                <div style="text-align:center;">
+                    <span class="section-tag">Investment Plans</span>
+                    <h2 class="section-title-main">Choose Your <span class="accent">Plan</span></h2>
+                    <div class="heading-road-animation">
+                        <i data-lucide="car" class="road-car"></i>
+                        <div class="road-line"></div>
+                        <div class="road-station"><i data-lucide="fuel"></i></div>
+                    </div>
+                </div>
+
+                <div class="invest-grid">
+                    <div class="invest-left">
+                        <div class="invest-tiers">
+                            <div class="tier-card tier-starter selected transition-1s" onclick="selectTier(this, 'starter')">
+                                <span class="tier-badge">Starter</span>
+                                <h4>Single Station</h4>
+                                
+                                <div class="invest-roi">1 AC Charger · Ideal for apartments &amp; offices</div>
+                            </div>
+                            <div class="tier-card tier-pro transition-1s-delay-1" onclick="selectTier(this, 'pro')">
+                                <span class="tier-badge">Pro</span>
+                                <h4>Multi-Station Hub</h4>
+                                <div class="invest-roi">2–4 Chargers (AC+DC) · Highways &amp; commercial zones</div>
+                            </div>
+                            <div class="tier-card tier-enterprise transition-1s-delay-2" onclick="selectTier(this, 'enterprise')">
+                                <span class="tier-badge">Enterprise</span>
+                                <h4>Charging Hub</h4>
+                                <div class="invest-roi">5+ Chargers · Full hub with solar integration</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="invest-right transition-1s-delay-1" id="roi-panel">
+                        <div class="roi-label">PROJECTED ROI</div>
+                        <div class="roi-value" id="roi-value">28%</div>
+                        <div class="roi-sub" id="roi-sub">Average annual return · Starter plan</div>
+
+                        <div class="roi-bar">
+                            <div class="roi-bar-label"><span>Monthly Revenue</span><span id="monthly-rev">₹45,000+</span></div>
+                            <div class="roi-bar-track"><div class="roi-bar-fill" id="bar-rev" style="width:60%;"></div></div>
+                        </div>
+                        <div class="roi-bar">
+                            <div class="roi-bar-label"><span>Payback Period</span><span id="payback">2.5 – 3 Years</span></div>
+                            <div class="roi-bar-track"><div class="roi-bar-fill" id="bar-pay" style="width:75%; background: linear-gradient(90deg,#06b6d4,#34d399);"></div></div>
+                        </div>
+                        <div class="roi-bar">
+                            <div class="roi-bar-label"><span>Uptime Guarantee</span><span>99.2%</span></div>
+                            <div class="roi-bar-track"><div class="roi-bar-fill" id="bar-up" style="width:99%; background: linear-gradient(90deg,#34d399,#10b981);"></div></div>
+                        </div>
+
+                        <div class="roi-note">* Projections based on average franchise performance. Actual returns may vary based on location, footfall, and energy tariffs.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== HOW IT WORKS ==================== -->
+        <section class="process-section" id="process">
+            <div class="process-inner">
+                <div style="text-align:center;">
+                    <span class="section-tag">The Process</span>
+                    <h2 class="section-title-main">How to Get <span class="accent">Started</span></h2>
+                    <p style="color:#64748b;max-width:560px;margin:16px auto 0;font-size:17px;line-height:1.8;">From inquiry to first charge — we make it simple. Here's how your journey begins.</p>
+                </div>
+
+                <div class="process-steps">
+                    <div class="process-step transition-1s">
+                        <div class="step-circle">
+                            <span class="step-num">01</span>
+                            <svg class="step-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        </div>
+                        <h4>Inquiry & Consultation</h4>
+                        <p>Fill the application form. Our team calls you within 24 hours to understand your goals and location.</p>
+                    </div>
+                    <div class="process-step transition-1s-delay-1">
+                        <div class="step-circle">
+                            <span class="step-num">02</span>
+                            <svg class="step-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        </div>
+                        <h4>Agreement & Onboarding</h4>
+                        <p>Sign the franchise agreement, complete KYC, and get access to the partner portal and training modules.</p>
+                    </div>
+                    <div class="process-step transition-1s-delay-2">
+                        <div class="step-circle">
+                            <span class="step-num">03</span>
+                            <svg class="step-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        </div>
+                        <h4>Site Survey & Installation</h4>
+                        <p>Our engineers visit, survey your site, and handle the end-to-end installation — typically done in 5–7 working days.</p>
+                    </div>
+                    <div class="process-step transition-1s-delay-3">
+                        <div class="step-circle">
+                            <span class="step-num">04</span>
+                            <svg class="step-icon" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                        </div>
+                        <h4>Go Live & Earn</h4>
+                        <p>Your station goes live on the ChargeBees app, users start charging, and your revenue starts flowing from day one.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SUPPORT & TRAINING ==================== -->
+        <section class="support-section" id="support">
+            <div class="support-inner">
+                <div style="text-align:center;">
+                    <span class="section-tag">What You Get</span>
+                    <h2 class="section-title-main">Complete <span class="accent">Partner Support</span></h2>
+                    <div class="heading-road-animation">
+                        <i data-lucide="car" class="road-car"></i>
+                        <div class="road-line"></div>
+                        <div class="road-station"><i data-lucide="fuel"></i></div>
+                    </div>
+                </div>
+
+                <div class="support-grid">
+                    <div class="support-image-wrap">
+                        <img src="images\station.jpeg" alt="Franchise Support" onerror="this.src='https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=600&auto=format&fit=crop'"/>
+                        <div class="support-img-badge">
+                            <div>
+                                <div class="badge-num">24/7</div>
+                                <div class="badge-lbl">Support Available</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p style="font-size:17px;line-height:1.85;color:#475569;margin-bottom:8px;">We don't just sell you a charger — we build your business. Every ChargeBees franchise partner gets comprehensive support that covers everything from training to technology.</p>
+
+                        <ul class="support-list">
+                            <li class="support-item transition-1s">
+                                <div class="s-icon"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:#fff;stroke-width:2;fill:none;"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+                                <div class="s-text"><h5>Technical Training</h5><p>2-day hands-on training for your team covering hardware operation, safety, and troubleshooting.</p></div>
+                            </li>
+                            <li class="support-item transition-1s-delay-1">
+                                <div class="s-icon"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:#fff;stroke-width:2;fill:none;"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+                                <div class="s-text"><h5>ChargeCloud Dashboard Access</h5><p>Real-time monitoring of energy usage, session history, revenue, and fault alerts — all in one app.</p></div>
+                            </li>
+                            <li class="support-item transition-1s-delay-2">
+                                <div class="s-icon"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:#fff;stroke-width:2;fill:none;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                                <div class="s-text"><h5>Site Branding & Signage</h5><p>We provide full branding kits — standees, banners, and installation-ready signage at no extra cost.</p></div>
+                            </li>
+                            <li class="support-item transition-1s-delay-3">
+                                <div class="s-icon"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:#fff;stroke-width:2;fill:none;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+                                <div class="s-text"><h5>Dedicated Partner Manager</h5><p>A single point of contact for all queries — business, technical, or operational — just a call away.</p></div>
+                            </li>
+                            <li class="support-item transition-1s-delay-4">
+                                <div class="s-icon"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:#fff;stroke-width:2;fill:none;"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+                                <div class="s-text"><h5>Monthly Revenue Reports</h5><p>Detailed income reports, session analytics, and growth insights delivered to your email every month.</p></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TESTIMONIALS ==================== -->
+        <section class="testimonial-section">
+            <div class="testimonial-inner">
+                <div style="text-align:center;">
+                    <span class="section-tag">Partner Stories</span>
+                    <h2 class="section-title-main">What Our <span class="accent">Franchisees Say</span></h2>
+                </div>
+
+                <div class="testimonial-grid">
+                    <div class="t-card transition-1s">
+                        <div class="t-quote">"</div>
+                        <div class="t-stars">★★★★★</div>
+                        <p class="t-text">I installed a ChargeBees station in my apartment complex parking. Within 6 months, I was earning ₹40,000+ monthly. The setup was seamless and the support team is always available.</p>
+                        <div class="t-author">
+                            <div class="t-avatar">R</div>
+                            <div><div class="t-name">Ravi Shankar</div><div class="t-city">Hyderabad, Telangana</div></div>
+                        </div>
+                    </div>
+                    <div class="t-card transition-1s-delay-1">
+                        <div class="t-quote">"</div>
+                        <div class="t-stars">★★★★★</div>
+                        <p class="t-text">As a petrol station owner, I was worried about the future. ChargeBees helped me add 4 EV chargers and now 30% of my revenue comes from EV charging. Best decision of 2024.</p>
+                        <div class="t-author">
+                            <div class="t-avatar">P</div>
+                            <div><div class="t-name">Priya Nair</div><div class="t-city">Bengaluru, Karnataka</div></div>
+                        </div>
+                    </div>
+                    <div class="t-card transition-1s-delay-2">
+                        <div class="t-quote">"</div>
+                        <div class="t-stars">★★★★★</div>
+                        <p class="t-text">The ChargeCloud dashboard is incredible. I monitor my 3 stations in real-time from anywhere. The ROI has been better than expected — highly recommend to any serious investor.</p>
+                        <div class="t-author">
+                            <div class="t-avatar">A</div>
+                            <div><div class="t-name">Akhil Mehta</div><div class="t-city">Pune, Maharashtra</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== APPLY FORM ==================== -->
+        <section class="apply-section" id="apply">
+            <div class="apply-particles" aria-hidden="true">
+                <span></span><span></span><span></span>
+            </div>
+            <div class="apply-inner">
+                <span class="section-tag" style="background:rgba(16,185,129,0.15);color:#34d399;">Apply Today</span>
+                <h2>Ready to <em>Own</em><br>Your Future?</h2>
+                <p>Fill in the form below and our franchise team will reach out within 24 hours to guide you through next steps.</p>
+
+                <div class="apply-form-wrap">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" placeholder="Your full name" id="f-name">
+                        </div>
+                        <div class="form-group">
+                            <label>Mobile Number *</label>
+                            <input type="tel" placeholder="+91 XXXXX XXXXX" id="f-phone">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" placeholder="you@example.com" id="f-email">
+                        </div>
+                        <div class="form-group">
+                            <label>City / Location *</label>
+                            <input type="text" placeholder="City where you want the station" id="f-city">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Investment Plan *</label>
+                            <select id="f-plan">
+                                <option value="">Select a plan</option>
+                                <option value="starter">Starter – Single Station</option>
+                                <option value="pro">Pro – Multi-Station Hub</option>
+                                <option value="enterprise">Enterprise – Charging Hub</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Property Type</label>
+                            <select id="f-property">
+                                <option value="">Select property type</option>
+                                <option>Apartment Complex</option>
+                                <option>Commercial Building</option>
+                                <option>Petrol Station / Land</option>
+                                <option>Mall / Shopping Center</option>
+                                <option>Highway Location</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Tell us about your location</label>
+                        <textarea placeholder="Describe your space — sq ft available, footfall, existing electrical setup, etc." id="f-msg"></textarea>
+                    </div>
+
+                    <button class="form-submit" onclick="submitForm()">
+                        <svg style="width:20px;height:20px;stroke:#fff;stroke-width:2;fill:none;" viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9z"/></svg>
+                        Submit My Application
+                    </button>
+                </div>
+
+                <p style="margin-top:24px;font-size:13px;color:rgba(255,255,255,0.35);text-align:center;">
+                    Or contact us directly at <a href="mailto:db@chargebees.com" style="color:#34d399;">db@chargebees.com</a> · +91 90000 40477
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER (EXACT COPY) ==================== -->
+    <footer class="bg-gray-50 pt-24 pb-12 border-t border-gray-200 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-4 gap-12 mb-20">
+                <div class="lg:col-span-1">
+                    <div class="mb-8">
+                        <div class="flex items-center gap-2">
+                            <img src="images/logo.png" alt="ChargeBees Logo" class="h-10 w-auto object-contain">
+                            <span class="brand-logo-text">Charge <span>Bees</span></span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Leading the charge towards a sustainable electric future with India's largest EV charging network.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="https://www.instagram.com/chargebees" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="w-6 h-6">
+                        </a>
+                        <a href="https://www.facebook.com/share/1ESQNWy5Zs/" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" class="w-6 h-6">
+                        </a>
+                        <a href="https://wa.me/919000040477" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="w-6 h-6">
+                        </a>
+                        <a href="mailto:db@chargebees.com" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                            <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Mail" class="w-6 h-6">
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-6">Company</h4>
+                    <ul class="space-y-4 text-gray-600">
+                        <li><a href="index.html#about" class="hover:text-emerald-600 transition-colors">About Us</a></li>
+                        <li><a href="partners.html#Partnerships" class="hover:text-emerald-600 transition-colors">Partnerships</a></li>
+                        <li><a href="media-center.html#media" class="hover:text-emerald-600 transition-colors">Media Center</a></li>
+                        <li><a href="careers.html#careers" class="hover:text-emerald-600 transition-colors">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-6">Solutions</h4>
+                    <ul class="space-y-4 text-gray-600">
+                        <li><a href="stationfinder.html" class="hover:text-emerald-600 transition-colors">Station Finder</a></li>
+                        <li><a href="products.html#services" class="hover:text-emerald-600 transition-colors">Services</a></li>
+                        <li><a href="products.html#software" class="hover:text-emerald-600 transition-colors">Mobile App</a></li>
+                        <li><a href="solar_products.html#residential" class="hover:text-emerald-600 transition-colors">Residential Solar</a></li>
+                        <li><a href="solar_products.html#commercial" class="hover:text-emerald-600 transition-colors">Commercial Solar</a></li>
+                        <li><a href="solar_products.html#industrial" class="hover:text-emerald-600 transition-colors">Industrial Solar</a></li>
+                        <li><a href="solar_products.html#ground" class="hover:text-emerald-600 transition-colors">Ground Mounted</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-6">Contact</h4>
+                    <ul class="space-y-4 text-gray-600">
+                        <li class="flex items-center gap-2 group cursor-pointer">
+                            <span>db@chargebees.com</span>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </li>
+                        <li>+91 90000 40477</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+                <p>© 2026 Chargebees. All rights reserved.</p>
+                <div class="flex gap-8">
+                    <a href="terms.html#terms" class="hover:text-gray-900 transition-colors">Terms & Services</a>
+                    <a href="privacy.html" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script>
+        lucide.createIcons();
+
+        // Mobile menu
+        const menuBtn = document.getElementById("menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        menuBtn.addEventListener("click", () => { mobileMenu.classList.toggle("hidden"); });
+
+        // Navbar scroll shadow
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('shadow-md', window.scrollY > 30);
+        });
+
+        // Intersection Observer for all animated elements
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.why-card, .tier-card, .invest-right, .process-step, .support-image-wrap, .support-item, .t-card').forEach(el => observer.observe(el));
+
+        // Hero counter animation
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelectorAll('[data-count]').forEach(el => {
+                    const target = parseInt(el.getAttribute('data-count'));
+                    let current = 0;
+                    const step = target / 80;
+                    const update = () => {
+                        current = Math.min(current + step, target);
+                        el.textContent = Math.floor(current) + '+';
+                        if (current < target) requestAnimationFrame(update);
+                        else el.textContent = target + '+';
+                    };
+                    update();
+                });
+                document.querySelectorAll('[data-count-k]').forEach(el => {
+                    const target = parseInt(el.getAttribute('data-count-k'));
+                    let current = 0;
+                    const step = target / 80;
+                    const update = () => {
+                        current = Math.min(current + step, target);
+                        el.textContent = Math.floor(current) + 'K+';
+                        if (current < target) requestAnimationFrame(update);
+                    };
+                    update();
+                });
+                // Animate ROI bars
+                document.querySelectorAll('.roi-bar-fill').forEach(bar => {
+                    const target = bar.style.width;
+                    bar.style.width = '0';
+                    setTimeout(() => { bar.style.width = target; bar.style.transition = 'width 1.5s ease'; }, 200);
+                });
+            }, 500);
+        });
+
+        // Tier selector
+        const tierData = {
+            starter: { roi: '28%', sub: 'Average annual return · Single Station', rev: '₹40,000+', payback: '2.5 – 3 Years', revBar: '60%' },
+            pro: { roi: '32%', sub: 'Average annual return · Multi-Station Hub', rev: '₹1.2L+', payback: '2 – 2.5 Years', revBar: '80%' },
+            enterprise: { roi: '38%', sub: 'Average annual return · Enterprise Hub', rev: '₹4L+', payback: '1.5 – 2 Years', revBar: '95%' }
+        };
+        function selectTier(el, tier) {
+            document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            const d = tierData[tier];
+            document.getElementById('roi-value').textContent = d.roi;
+            document.getElementById('roi-sub').textContent = d.sub;
+            document.getElementById('monthly-rev').textContent = d.rev;
+            document.getElementById('payback').textContent = d.payback;
+            const barRev = document.getElementById('bar-rev');
+            barRev.style.width = '0';
+            setTimeout(() => { barRev.style.width = d.revBar; }, 50);
+        }
+
+        // Form submit
+        function submitForm() {
+            const name = document.getElementById('f-name').value;
+            const phone = document.getElementById('f-phone').value;
+            const email = document.getElementById('f-email').value;
+            const city = document.getElementById('f-city').value;
+            const plan = document.getElementById('f-plan').value;
+            if (!name || !phone || !email || !city || !plan) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            const btn = document.querySelector('.form-submit');
+            btn.innerHTML = '<svg style="width:20px;height:20px;stroke:#fff;stroke-width:2;fill:none;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Application Submitted! We\'ll call you within 24 hours.';
+            btn.style.background = 'linear-gradient(135deg, #059669, #047857)';
+            btn.style.cursor = 'default';
+        }
+    </script>
+</body>
+</html>

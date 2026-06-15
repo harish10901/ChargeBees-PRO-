@@ -1512,7 +1512,7 @@
 
                     <div class="future-road-card">
                         <span class="future-road-year">Q1 2027</span>
-                        <h3>600kW HyperCharge</h3>
+                        <h3>240kW HyperCharge</h3>
                         <p>World class speeds for electric heavy-duty trucks.</p>
                     </div>
 
@@ -1727,59 +1727,443 @@
                             <p>Data-driven monitoring and control tools for station operators with real-time analytics.</p>
                         </div>
                     </div>
+                    <div class="offering-category">
+                    <div class="offering-header">
+                    <div class="offering-icon">
+                                <i data-lucide="handshake" class="w-5 h-5"></i>
+                           </div>
+                    <h3>Our Franchise</h3>
+                    </div>
+
+                    <div class="offering-description">
+                       <p>Our franchise program offers exceptional ROI and full-spectrum corporate support.</p>
+                   </div>
+
+                    <!-- Franchise Button -->
+                    <div class="offering-action">
+                        <a href="franchise.html" class="franchise-btn">
+                            Apply for Franchise
+                        </a>
+                    </div>
+                </div>
                 </div>
             </div>
         </section>
 
-        <!-- ==================== VIDEO GALLERY (NEW) ==================== -->
-        <section class="video-gallery-section">
-            <div class="video-gallery-container">
-                <div class="video-gallery-header">
-                    <span class="section-tag">Watch & Learn</span>
-                    <h2 class="section-title-main">Stories of <span class="accent">Change</span></h2>
-                    
-                    <p class="text-gray-600 max-w-2xl mx-auto mt-4">Explore how ChargeBees is transforming the EV landscape across India.</p>
+
+
+<!-- ============================================
+     BROCHURE SECTION CSS
+============================================ -->
+<style id="brochure-css-paste-inside-existing-style-tag">
+        .brochure-section {
+            position: relative;
+            padding: 120px 24px;
+            background: linear-gradient(135deg, #0a1f1c 0%, #0d2b27 50%, #0a1f1c 100%);
+            overflow: hidden;
+        }
+        .brochure-particles span {
+            position: absolute;
+            display: block;
+            border-radius: 50%;
+            background: rgba(16,185,129,0.15);
+            animation: bFloat 12s ease-in-out infinite;
+        }
+        .brochure-particles span:nth-child(1){width:300px;height:300px;top:-80px;left:-80px;animation-delay:0s;}
+        .brochure-particles span:nth-child(2){width:200px;height:200px;top:40%;right:-60px;animation-delay:-3s;}
+        .brochure-particles span:nth-child(3){width:150px;height:150px;bottom:-40px;left:30%;animation-delay:-6s;}
+        .brochure-particles span:nth-child(4){width:80px;height:80px;top:20%;left:40%;animation-delay:-2s;background:rgba(6,182,212,0.12);}
+        .brochure-particles span:nth-child(5){width:60px;height:60px;bottom:20%;right:20%;animation-delay:-8s;background:rgba(52,211,153,0.1);}
+        .brochure-particles span:nth-child(6){width:120px;height:120px;top:60%;left:10%;animation-delay:-4s;background:rgba(6,182,212,0.08);}
+        .brochure-particles span:nth-child(7){width:40px;height:40px;top:10%;right:30%;animation-delay:-1s;}
+        .brochure-particles span:nth-child(8){width:90px;height:90px;bottom:10%;left:60%;animation-delay:-9s;background:rgba(52,211,153,0.12);}
+        @keyframes bFloat {
+            0%,100%{transform:translateY(0) scale(1);}
+            50%{transform:translateY(-30px) scale(1.08);}
+        }
+        .brochure-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        .brochure-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #10b981;
+            margin-bottom: 24px;
+        }
+        .brochure-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.6rem, 4.5vw, 4.2rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            color: #fff;
+            margin-bottom: 24px;
+        }
+        .brochure-title em {
+            font-style: normal;
+            background: linear-gradient(135deg, #10b981, #34d399, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .brochure-desc {
+            font-size: 17px;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.65);
+            max-width: 460px;
+            margin-bottom: 32px;
+        }
+        .brochure-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 44px;
+        }
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 14px;
+            background: rgba(16,185,129,0.1);
+            border: 1px solid rgba(16,185,129,0.25);
+            border-radius: 50px;
+            color: #34d399;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .pill:hover {
+            background: rgba(16,185,129,0.2);
+            border-color: rgba(16,185,129,0.5);
+            transform: translateY(-2px);
+        }
+        .brochure-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 32px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 20px;
+            text-decoration: none;
+            box-shadow: 0 20px 50px rgba(16,185,129,0.4);
+            transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+            position: relative;
+            overflow: hidden;
+        }
+        .brochure-btn::before {
+            content:"";
+            position:absolute;
+            inset:0;
+            background:linear-gradient(135deg,#059669,#10b981);
+            opacity:0;
+            transition:opacity 0.3s;
+        }
+        .brochure-btn:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 28px 60px rgba(16,185,129,0.55), 0 0 0 8px rgba(16,185,129,0.1);
+        }
+        .brochure-btn:hover::before{opacity:1;}
+        .brochure-btn > *{position:relative;z-index:1;}
+        .brochure-btn-icon {
+            width: 48px; height: 48px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #fff;
+        }
+        .brochure-btn-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .brochure-btn-text strong {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.3px;
+        }
+        .brochure-btn-text small {
+            font-size: 12px;
+            color: rgba(255,255,255,0.7);
+            font-weight: 400;
+        }
+        .brochure-btn-arrow {
+            font-size: 20px;
+            color: rgba(255,255,255,0.8);
+            margin-left: 4px;
+            transition: transform 0.3s;
+        }
+        .brochure-btn:hover .brochure-btn-arrow{transform:translateX(4px);}
+        .brochure-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .book-wrapper {
+            position: relative;
+            width: 280px;
+            height: 360px;
+            perspective: 1200px;
+        }
+        .book {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateY(-25deg) rotateX(5deg);
+            animation: bookFloat 6s ease-in-out infinite;
+            filter: drop-shadow(0 40px 60px rgba(0,0,0,0.6));
+        }
+        @keyframes bookFloat {
+            0%,100%{transform:rotateY(-25deg) rotateX(5deg) translateY(0);}
+            50%{transform:rotateY(-20deg) rotateX(3deg) translateY(-16px);}
+        }
+        .book-front {
+            position: absolute;
+            width: 100%; height: 100%;
+            background: linear-gradient(160deg, #0e4d3a 0%, #073627 60%, #041f17 100%);
+            border-radius: 4px 12px 12px 4px;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 28px 24px;
+            overflow: hidden;
+        }
+        .book-front::before {
+            content:"";
+            position:absolute;
+            top:0;left:0;right:0;bottom:0;
+            background: repeating-linear-gradient(0deg,transparent,transparent 28px,rgba(255,255,255,0.025) 28px,rgba(255,255,255,0.025) 29px);
+            pointer-events:none;
+        }
+        .book-front::after {
+            content:"";
+            position:absolute;
+            top:0;left:0;
+            width:4px;height:100%;
+            background:linear-gradient(180deg,#10b981,#059669,#10b981);
+            border-radius:4px 0 0 4px;
+        }
+        .book-cover-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: auto;
+        }
+        .book-cover-top p {
+            font-size: 15px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.9);
+        }
+        .book-cover-mid { margin-bottom: 20px; }
+        .book-cover-mid h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+        .book-cover-mid span {
+            font-size: 12px;
+            color: rgba(255,255,255,0.45);
+            letter-spacing: 2px;
+        }
+        .book-cover-stripe {
+            height: 3px;
+            background: linear-gradient(90deg,#10b981,#06b6d4,#10b981);
+            background-size: 200% 100%;
+            border-radius: 999px;
+            margin-bottom: 16px;
+            animation: stripeShimmer 3s linear infinite;
+        }
+        @keyframes stripeShimmer{
+            0%{background-position:0% 50%;}
+            100%{background-position:200% 50%;}
+        }
+        .book-cover-bottom {
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.3);
+            text-transform: uppercase;
+        }
+        .book-spine {
+            position: absolute;
+            left: -20px; top: 2px;
+            width: 20px; height: calc(100% - 4px);
+            background: linear-gradient(180deg, #0a3628, #052318);
+            transform-origin: right;
+            transform: rotateY(-90deg);
+            border-radius: 4px 0 0 4px;
+        }
+        .book-back {
+            position: absolute;
+            width: 100%; height: 100%;
+            background: #052318;
+            border-radius: 4px 12px 12px 4px;
+            transform: translateZ(-8px);
+        }
+        .book-pages {
+            position: absolute;
+            right: -6px; top: 4px;
+            width: 6px; height: calc(100% - 8px);
+        }
+        .book-pages .page {
+            width: 100%; height: 33.33%;
+            background: linear-gradient(90deg, #e8e0d0, #f5f0e8);
+            border-right: 1px solid #d4cab8;
+        }
+        .chip {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #0f172a;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+            white-space: nowrap;
+        }
+        .chip-1{top:-16px;right:-20px;animation:chipFloat1 4s ease-in-out infinite;}
+        .chip-2{bottom:60px;right:-30px;animation:chipFloat2 5s ease-in-out infinite;}
+        .chip-3{bottom:-10px;left:10px;animation:chipFloat3 4.5s ease-in-out infinite;}
+        @keyframes chipFloat1{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+        @keyframes chipFloat2{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+        @keyframes chipFloat3{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+        @media(max-width:900px){
+            .brochure-inner{grid-template-columns:1fr;gap:60px;}
+            .brochure-right{padding-top:20px;}
+        }
+        @media(max-width:640px){
+            .brochure-section{padding:80px 20px;}
+            .brochure-title{font-size:2.4rem;}
+            .book-wrapper{width:220px;height:280px;}
+        }
+
+
+
+
+        .offering-action {
+    margin-top: 20px;
+}
+
+.franchise-btn {
+    display: inline-block;
+    background: #0ea86b;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.franchise-btn:hover {
+    background: #0b8a58;
+    transform: translateY(-2px);
+}
+</style>
+
+
+        <!-- ==================== BROCHURE SECTION ==================== -->
+        <section class="brochure-section" id="brochure">
+            <div class="brochure-particles" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span>
+            </div>
+            <div class="brochure-inner">
+                <!-- LEFT -->
+                <div class="brochure-left">
+                    <span class="brochure-eyebrow">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        Company Brochure
+                    </span>
+                    <h2 class="brochure-title">
+                        Everything about<br>
+                        <em>ChargeBees</em><br>
+                        in one place.
+                    </h2>
+                    <p class="brochure-desc">
+                        From our technology stack to our vision for a net-zero India — our brochure covers it all. Products, partnerships, roadmap and more.
+                    </p>
+                    <div class="brochure-pills">
+                        <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> EV Charging Products</span>
+                        <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Solar Solutions</span>
+                        <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Fleet &amp; Enterprise</span>
+                        <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 2027 Roadmap</span>
+                        <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Partnership Models</span>
+                    </div>
+                    <a href="ChargeBee-energies-Pvt-Ltd-brochure.pdf" download class="brochure-btn">
+                        <span class="brochure-btn-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        </span>
+                        <span class="brochure-btn-text">
+                            <strong>Download Brochure</strong>
+                            <small>PDF &middot; Free &middot; Instant</small>
+                        </span>
+                        <span class="brochure-btn-arrow">&rarr;</span>
+                    </a>
                 </div>
-
-                <div class="video-grid">
-                    <div class="video-card">
-                        <video muted loop playsinline preload="metadata" poster="images/hero-poster.webp"
-                               onmouseenter="this.play()" onmouseleave="this.pause(); this.currentTime=0;">
-                            <source src="videos/bg1video.mp4" type="video/mp4">
-                        </video>
-                        <div class="video-card-overlay">
-                            <h3 class="video-card-title">EV Revolution</h3>
-                            <p class="video-card-desc">Powering India's electric future</p>
+                <!-- RIGHT — 3D Book -->
+                <div class="brochure-right">
+                    <div class="book-wrapper">
+                        <div class="book">
+                            <div class="book-front">
+                                <div class="book-cover-top">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                                    <p>ChargeBees&reg;</p>
+                                </div>
+                                <div class="book-cover-mid">
+                                    <h3>Company<br>Brochure</h3>
+                                    <span>2025 &mdash; 2027</span>
+                                </div>
+                                <div class="book-cover-stripe"></div>
+                                <div class="book-cover-bottom">ChargeBee Energies Pvt Ltd</div>
+                            </div>
+                            <div class="book-spine"></div>
+                            <div class="book-back"></div>
+                            <div class="book-pages">
+                                <div class="page"></div>
+                                <div class="page"></div>
+                                <div class="page"></div>
+                            </div>
                         </div>
-                        <div class="video-play-btn"></div>
-                    </div>
-
-                    <div class="video-card">
-                        <video muted loop playsinline preload="metadata" poster="images/hero-poster.webp"
-                               onmouseenter="this.play()" onmouseleave="this.pause(); this.currentTime=0;">
-                            <source src="videos/bg1video.mp4" type="video/mp4">
-                        </video>
-                        <div class="video-card-overlay">
-                            <h3 class="video-card-title">Smart Charging</h3>
-                            <p class="video-card-desc">Technology meets sustainability</p>
+                        <div class="chip chip-1">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                            500+ Stations
                         </div>
-                        <div class="video-play-btn"></div>
-                    </div>
-
-                    <div class="video-card">
-                        <video muted loop playsinline preload="metadata" poster="images/hero-poster.webp"
-                               onmouseenter="this.play()" onmouseleave="this.pause(); this.currentTime=0;">
-                            <source src="videos/bg1video.mp4" type="video/mp4">
-                        </video>
-                        <div class="video-card-overlay">
-                            <h3 class="video-card-title">Green Future</h3>
-                            <p class="video-card-desc">Building a cleaner tomorrow</p>
+                        <div class="chip chip-2">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            Since 2022
                         </div>
-                        <div class="video-play-btn"></div>
+                        <div class="chip chip-3">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            ISO Certified
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+
 
         <!-- ==================== MOBILE APP CTA ==================== -->
         <section class="relative py-24 bg-[#f5f5f5] overflow-visible">
@@ -1855,7 +2239,7 @@
                         <a href="https://wa.me/919000040477" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
                             <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="w-6 h-6">
                         </a>
-                        <a href="mailto: chaargebee@gmail.com <br> db@chargebees.com  " class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                        <a href="mailto: db@chargebees.com    " class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
                             <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Mail" class="w-6 h-6">
                         </a>
                     </div>
@@ -1888,7 +2272,7 @@
                     <h4 class="font-bold text-gray-900 mb-6">Contact</h4>
                     <ul class="space-y-4 text-gray-600">
                         <li class="flex items-center gap-2 group cursor-pointer">
-                            <span> chaargebee@gmail.com <br> db@chargebees.com  </span>
+                            <span> db@chargebees.com    </span>
                             <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
                         </li>
                         <li>+91 90000 40477</li>
