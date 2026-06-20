@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Chargebees</title>
+    <meta name="description" content="Frequently asked questions about Chargebees EV charging stations, solar solutions, franchise opportunities and more.">
+
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           ROOT VARIABLES
+        ============================================ */
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-light: #34d399;
+            --dark: #0a1f1c;
+            --light: #fdfbf7;
+            --gray: #6b7280;
+            --gradient-1: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+            --gradient-2: linear-gradient(135deg, #00b894 0%, #00d7ab 100%);
+            --shadow-glow: 0 20px 60px rgba(16, 185, 129, 0.25);
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfbf7;
+            overflow-x: hidden;
+            color: #0f172a;
+        }
+
+        .bg-texture {
+            position: fixed;
+            inset: 0;
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/gray-floral.png');
+            background-repeat: repeat;
+        }
+
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image:
+                linear-gradient(to right, rgba(16, 185, 129, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16, 185, 129, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .floating-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatOrb 20s ease-in-out infinite;
+        }
+        .orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, #10b981, transparent); top: -10%; left: -10%; }
+        .orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, #06b6d4, transparent); bottom: 10%; right: -5%; animation-delay: -7s; }
+        @keyframes floatOrb {
+            0%, 100% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(60px,-40px) scale(1.1); }
+            66% { transform: translate(-40px,30px) scale(0.95); }
+        }
+
+        /* ============================================
+           BRAND LOGO
+        ============================================ */
+        .brand-logo-text{
+            font-size:1.55rem;
+            font-weight:500;
+            letter-spacing:-0.5px;
+            color:#111827;
+            font-family: "Poppins", "Nunito", "Quicksand", sans-serif;
+            line-height:1;
+            text-decoration:none;
+        }
+        .brand-logo-text span{ color:#10b981; }
+        @media(max-width:768px){ .brand-logo-text{ font-size:1.3rem; } }
+
+        /* ============================================
+           DROPDOWN NAV
+        ============================================ */
+        .dropdown-wrap { position: relative; }
+        .mega-drop {
+            position: absolute;
+            top: calc(100% + 2px);
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            width: 680px;
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.15);
+            border: 1px solid #f0fdf4;
+            padding: 28px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+        .dropdown-wrap:hover .mega-drop {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all;
+            transform: translateX(-50%) translateY(0);
+        }
+        .drop-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 16px;
+            border-radius: 16px;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+        .drop-item:hover { background: linear-gradient(135deg, #f0fdf4, #ecfdf5); transform: translateX(4px); }
+        .drop-icon {
+            width: 44px; height: 44px; min-width: 44px;
+            background: linear-gradient(135deg, #10b981, #34d399);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 8px 16px rgba(16,185,129,0.25);
+        }
+        .drop-icon svg { width: 22px; height: 22px; stroke: #fff; stroke-width: 2; fill: none; }
+        .drop-text p { font-weight: 700; font-size: 0.9rem; color: #111827; margin-bottom: 2px; }
+        .drop-text span { font-size: 0.78rem; color: #6b7280; }
+
+        /* ============================================
+           SECTION HEADINGS (shared w/ site)
+        ============================================ */
+        .section-tag {
+            display: inline-block;
+            padding: 6px 18px;
+            background: rgba(16,185,129,0.1);
+            color: #059669;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+        .section-title-main {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        .section-title-main .accent {
+            background: linear-gradient(135deg, #10b981, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .heading-road-animation {
+            position: relative;
+            width: 420px;
+            max-width: 90%;
+            height: 24px;
+            margin: 18px auto 0;
+        }
+        .road-line { position: absolute; top: 20px; left: 30px; right: 30px; height: 2px; background: linear-gradient(to right, #10b981, #34d399); opacity: 0.4; border-radius: 50px; }
+        .road-car { position: absolute; left: 0; top: 9px; width: 18px; height: 18px; stroke: #10b981; stroke-width: 2.5; animation: carDrive 5s ease-in-out infinite; }
+        .road-station { position: absolute; right: 0; top: 6px; }
+        .road-station svg { width: 20px; height: 20px; stroke: #10b981; stroke-width: 2.5; }
+        @keyframes carDrive { 0% { left: 0; } 80% { left: calc(100% - 35px); } 100% { left: calc(100% - 35px); } }
+        @media(max-width:768px) {
+            .heading-road-animation { width: 260px; height: 20px; }
+            .road-line { top: 16px; left: 22px; right: 22px; }
+            .road-car { top: 6px; width: 14px; height: 14px; }
+            .road-station svg { width: 16px; height: 16px; }
+        }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.6; } }
+
+        /* ============================================
+           UTIL
+        ============================================ */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #10b981, #059669); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #059669; }
+
+        /* ============================================================
+           FAQ PAGE — UNIQUE STYLES
+        ============================================================ */
+
+        /* ---- HERO ---- */
+        .faq-hero {
+            position: relative;
+            margin-top: 80px;
+            padding: 100px 24px 90px;
+            background: linear-gradient(160deg, #0a1f1c 0%, #0d2b27 55%, #073627 100%);
+            overflow: hidden;
+            text-align: center;
+        }
+        .faq-hero-glow {
+            position: absolute;
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(16,185,129,0.25), transparent 65%);
+            top: -250px; left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+            animation: glowPulse 6s ease-in-out infinite;
+        }
+        @keyframes glowPulse { 0%,100% { opacity: 0.6; transform: translateX(-50%) scale(1); } 50% { opacity: 1; transform: translateX(-50%) scale(1.08); } }
+
+        .faq-hero-dots {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+            background-size: 26px 26px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .faq-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 50px;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 26px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInDown 0.9s ease-out;
+        }
+        .faq-hero-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: #10b981; box-shadow: 0 0 10px #10b981; animation: pulse 2s ease-in-out infinite; }
+
+        .faq-hero-title {
+            position: relative;
+            z-index: 2;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.4rem, 6vw, 4.6rem);
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -2px;
+            line-height: 1.08;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.9s ease-out 0.15s both;
+        }
+        .faq-hero-title .accent-text {
+            background: linear-gradient(135deg, #10b981, #34d399, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .faq-hero-sub {
+            position: relative; z-index: 2;
+            color: rgba(255,255,255,0.7);
+            font-size: clamp(1rem, 1.4vw, 1.2rem);
+            max-width: 620px;
+            margin: 0 auto 44px;
+            line-height: 1.7;
+            animation: fadeInUp 0.9s ease-out 0.3s both;
+        }
+
+        /* search box */
+        .faq-search-wrap {
+            position: relative;
+            z-index: 2;
+            max-width: 560px;
+            margin: 0 auto;
+            animation: fadeInUp 0.9s ease-out 0.45s both;
+        }
+        .faq-search-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.08);
+            border: 1.5px solid rgba(255,255,255,0.18);
+            border-radius: 50px;
+            padding: 8px 8px 8px 24px;
+            backdrop-filter: blur(20px);
+            transition: all 0.35s ease;
+        }
+        .faq-search-box:focus-within {
+            border-color: #10b981;
+            background: rgba(255,255,255,0.12);
+            box-shadow: 0 0 0 6px rgba(16,185,129,0.12);
+        }
+        .faq-search-box svg { stroke: rgba(255,255,255,0.55); flex-shrink: 0; width: 20px; height: 20px; }
+        .faq-search-box input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            padding: 12px 0;
+        }
+        .faq-search-box input::placeholder { color: rgba(255,255,255,0.4); }
+        .faq-search-clear-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 38px; height: 38px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.7);
+            transition: all 0.25s ease;
+        }
+        .faq-search-clear-btn.show { opacity: 1; visibility: visible; transform: scale(1); }
+        .faq-search-clear-btn svg { width: 16px; height: 16px; stroke: #fff; }
+
+        .faq-quick-tags {
+            position: relative; z-index: 2;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 22px;
+            animation: fadeInUp 0.9s ease-out 0.55s both;
+        }
+        .faq-quick-tag {
+            font-size: 12.5px;
+            color: rgba(255,255,255,0.65);
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 6px 14px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .faq-quick-tag:hover { background: rgba(16,185,129,0.18); border-color: rgba(16,185,129,0.4); color: #fff; transform: translateY(-2px); }
+
+        /* ---- CATEGORY TABS ---- */
+        .faq-tabs-section {
+            position: sticky;
+            top: 80px;
+            z-index: 30;
+            background: rgba(253,251,247,0.92);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid #eee;
+        }
+        .faq-tabs-wrap {
+            max-width: 1100px;
+            margin: auto;
+            padding: 18px 24px;
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+        }
+        .faq-tabs-wrap::-webkit-scrollbar { display: none; }
+        .faq-tab {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #475569;
+            background: #fff;
+            border: 1.5px solid #e5e7eb;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+            white-space: nowrap;
+        }
+        .faq-tab svg { width: 16px; height: 16px; stroke-width: 2.2; }
+        .faq-tab:hover { border-color: #10b981; color: #059669; transform: translateY(-2px); }
+        .faq-tab.active {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-color: transparent;
+            color: #fff;
+            box-shadow: 0 10px 24px rgba(16,185,129,0.3);
+        }
+        .faq-tab .count {
+            background: rgba(0,0,0,0.08);
+            border-radius: 50px;
+            font-size: 11px;
+            padding: 1px 8px;
+            font-weight: 700;
+        }
+        .faq-tab.active .count { background: rgba(255,255,255,0.25); }
+
+        /* ---- FAQ LIST ---- */
+        .faq-body-section {
+            padding: 70px 24px 110px;
+            background: linear-gradient(180deg, #fdfbf7 0%, #f7faf8 100%);
+            position: relative;
+        }
+        .faq-body-wrap { max-width: 900px; margin: auto; }
+
+        .faq-cat-block { margin-bottom: 56px; }
+        .faq-cat-heading {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+        .faq-cat-icon {
+            width: 46px; height: 46px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #10b981, #06b6d4);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 10px 24px rgba(16,185,129,0.25);
+            flex-shrink: 0;
+        }
+        .faq-cat-icon svg { width: 22px; height: 22px; stroke: #fff; stroke-width: 2.2; }
+        .faq-cat-heading h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .faq-item {
+            background: #fff;
+            border: 1px solid #e8eee9;
+            border-radius: 20px;
+            margin-bottom: 14px;
+            overflow: hidden;
+            transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+            opacity: 0;
+            transform: translateY(24px);
+        }
+        .faq-item.in-view { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.35s ease, box-shadow 0.35s ease; }
+        .faq-item:hover { box-shadow: 0 12px 30px rgba(15,23,42,0.06); }
+        .faq-item.open { border-color: #10b981; box-shadow: 0 18px 40px rgba(16,185,129,0.13); }
+        .faq-item.hidden-by-filter { display: none; }
+
+        .faq-q {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 22px 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            font-family: 'Inter', sans-serif;
+        }
+        .faq-q-text { font-size: 16.5px; font-weight: 600; color: #0f172a; line-height: 1.5; }
+        .faq-item.open .faq-q-text { color: #059669; }
+        .faq-q-icon {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: #f0fdf4;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .faq-item.open .faq-q-icon { background: linear-gradient(135deg, #10b981, #059669); transform: rotate(180deg); }
+        .faq-q-icon svg { width: 16px; height: 16px; stroke: #10b981; stroke-width: 2.5; transition: stroke 0.3s; }
+        .faq-item.open .faq-q-icon svg { stroke: #fff; }
+
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1);
+        }
+        .faq-a-inner { padding: 0 24px 24px; }
+        .faq-a-inner p { font-size: 15.5px; line-height: 1.8; color: #5a6b65; }
+
+        .faq-no-results {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .faq-no-results.show { display: block; }
+        .faq-no-results svg { width: 56px; height: 56px; stroke: #c9d6d2; margin: 0 auto 18px; }
+        .faq-no-results h4 { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: #334155; margin-bottom: 8px; }
+        .faq-no-results p { color: #64748b; font-size: 15px; }
+
+        /* ---- STILL HAVE QUESTIONS CTA ---- */
+        .faq-cta-section { padding: 0 24px 110px; }
+        .faq-cta-card {
+            max-width: 1100px;
+            margin: auto;
+            background: linear-gradient(135deg, #0a1f1c 0%, #0d2b27 60%, #073627 100%);
+            border-radius: 36px;
+            padding: 64px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .faq-cta-card::before {
+            content: "";
+            position: absolute;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(16,185,129,0.25), transparent 70%);
+            top: -150px; right: -100px;
+            pointer-events: none;
+        }
+        .faq-cta-left { position: relative; z-index: 2; }
+        .faq-cta-left h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+        .faq-cta-left p { color: rgba(255,255,255,0.65); font-size: 16px; max-width: 460px; line-height: 1.7; }
+        .faq-cta-actions { position: relative; z-index: 2; display: flex; gap: 14px; flex-wrap: wrap; }
+        .faq-cta-btn-primary {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            box-shadow: 0 12px 30px rgba(16,185,129,0.4);
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+            white-space: nowrap;
+        }
+        .faq-cta-btn-primary:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(16,185,129,0.5); }
+        .faq-cta-btn-secondary {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .faq-cta-btn-secondary:hover { background: rgba(255,255,255,0.15); transform: translateY(-3px); }
+
+        @media(max-width:900px) {
+            .faq-cta-card { flex-direction: column; text-align: center; padding: 48px 28px; }
+            .faq-cta-actions { justify-content: center; }
+        }
+        @media(max-width:640px) {
+            .faq-hero { padding: 80px 20px 70px; }
+            .faq-tabs-section { top: 0; }
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-900">
+
+    <div class="bg-texture"></div>
+    <div class="bg-grid"></div>
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-1">
+                    <a href="index.html" class="flex items-center gap-2">
+                        <img src="images/logo.png" alt="Logo" class="h-10 w-auto object-contain">
+                        <span class="brand-logo-text">Charge <span>Bees</span></span>
+                    </a>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-5">
+                    <a href="index.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Home</a>
+                    <a href="stationfinder.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Station Finder</a>
+
+                    <!-- Products Dropdown -->
+                    <div class="relative group">
+                        <button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
+                            <a href="products.html" class="flex items-center gap-1">EV Products
+                                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                            </a>
+                        </button>
+                        <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-white rounded-3xl shadow-2xl border border-gray-100 p-8 grid grid-cols-3 gap-8 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <i data-lucide="zap" class="w-5 h-5 text-emerald-600"></i> Hardware
+                                </h3>
+                                <a href="products.html#hardware" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all">
+                                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                                        <i data-lucide="battery-charging" class="w-6 h-6 text-emerald-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-900">All chargers</p>
+                                        <p class="text-xs text-gray-500">AC & DC Solutions</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <i data-lucide="layout" class="w-5 h-5 text-emerald-600"></i> Software
+                                </h3>
+                                <div class="space-y-2">
+                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                                            <i data-lucide="cloud" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <p class="font-bold text-gray-900">ChargeCloud</p>
+                                                <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500">CMS Platform</p>
+                                        </div>
+                                    </a>
+                                    <a href="products.html#software" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                                            <i data-lucide="smartphone" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">Chargebees App</p>
+                                            <p class="text-xs text-gray-500">User Experience</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <i data-lucide="settings" class="w-5 h-5 text-emerald-600"></i> Services
+                                </h3>
+                                <div class="space-y-2">
+                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                                            <i data-lucide="activity" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">Energy As A Service</p>
+                                            <p class="text-xs text-gray-500">Renewable Energy</p>
+                                        </div>
+                                    </a>
+                                    <a href="product.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                                            <i data-lucide="battery-full" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <p class="font-bold text-gray-900">Battery As A Service</p>
+                                                <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase">Soon</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500">Swapping Solutions</p>
+                                        </div>
+                                    </a>
+                                    <a href="products.html#services" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-emerald-50 transition-all">
+                                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                                            <i data-lucide="credit-card" class="w-6 h-6 text-emerald-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">RFID Card</p>
+                                            <p class="text-xs text-gray-500">Seamless Payments</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Solar Products Dropdown -->
+                    <div class="dropdown-wrap">
+                        <button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer py-8">
+                            <a href="solar_products.html" class="flex items-center gap-1">Solar Products
+                                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                            </a>
+                        </button>
+                        <div class="mega-drop" style="z-index:100;">
+                            <a href="solar_products.html" class="drop-item">
+                                <div class="drop-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                </div>
+                                <div class="drop-text"><p>Our Solar Solutions</p><span>For all your energy needs</span></div>
+                            </a>
+                            <a href="residential.html" class="drop-item">
+                                <div class="drop-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                </div>
+                                <div class="drop-text"><p>Residential Solar Rooftops</p><span>For homes & apartments</span></div>
+                            </a>
+                            <a href="commercial.html" class="drop-item">
+                                <div class="drop-icon">
+                                    <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                                </div>
+                                <div class="drop-text"><p>Commercial Solar Rooftops</p><span>For offices & retail</span></div>
+                            </a>
+                            <a href="industrial.html" class="drop-item">
+                                <div class="drop-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M2 20V8l8-4 8 4v12"/><path d="M12 4v16"/><path d="M2 20h20"/></svg>
+                                </div>
+                                <div class="drop-text"><p>Industrial Solar Rooftops</p><span>For factories & warehouses</span></div>
+                            </a>
+                            <a href="ground.html" class="drop-item">
+                                <div class="drop-icon">
+                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/></svg>
+                                </div>
+                                <div class="drop-text"><p>Ground Mounted Solar System</p><span>Large scale solar farms</span></div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <a href="partners.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Partners</a>
+                    <a href="media-center.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Media Center</a>
+                    <a href="careers.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Careers</a>
+                    <a href="contact.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Contact Us</a>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <a href="franchise.html" class="hidden lg:block bg-emerald-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700 transition">Looking For Franchise</a>
+                    <button id="menu-btn" class="md:hidden flex items-center justify-center w-11 h-11 rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm shadow-sm hover:bg-emerald-50 hover:border-emerald-200 transition-all duration-300">
+                        <i data-lucide="menu" class="w-6 h-6 text-gray-900"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-white border-t border-gray-100 shadow-xl z-40">
+        <div class="p-6 space-y-5">
+            <a href="index.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Home</a>
+            <a href="stationfinder.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Station Finder</a>
+            <a href="products.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">EV Products</a>
+            <a href="solar_products.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Solar Products</a>
+            <a href="partners.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Partners</a>
+            <a href="media-center.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Media Center</a>
+            <a href="careers.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Careers</a>
+            <a href="contact.html" class="block text-base font-semibold text-gray-700 hover:text-emerald-600 transition-colors">Contact Us</a>
+        </div>
+    </div>
+
+    <main class="relative z-10">
+
+        <!-- ==================== FAQ HERO ==================== -->
+        <section class="faq-hero">
+            <div class="faq-hero-glow"></div>
+            <div class="faq-hero-dots"></div>
+
+            <div class="faq-hero-badge">
+                <span class="dot"></span>
+                HELP CENTER
+            </div>
+            <h1 class="faq-hero-title">
+                Questions? <span class="accent-text">We've got answers.</span>
+            </h1>
+            <p class="faq-hero-sub">
+                Everything you need to know about charging your EV, going solar, and partnering with Chargebees — all in one place.
+            </p>
+
+            <div class="faq-search-wrap">
+                <div class="faq-search-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="faqSearchInput" placeholder="Search for a question, e.g. &quot;RFID card&quot;">
+                    <button class="faq-search-clear-btn" id="faqSearchClear" aria-label="Clear search">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="faq-quick-tags">
+                <span class="faq-quick-tag" data-query="RFID">RFID Card</span>
+                <span class="faq-quick-tag" data-query="franchise">Franchise ROI</span>
+                <span class="faq-quick-tag" data-query="solar">Solar Subsidy</span>
+                <span class="faq-quick-tag" data-query="app">Chargebees App</span>
+                <span class="faq-quick-tag" data-query="payment">Payments</span>
+            </div>
+        </section>
+
+        <!-- ==================== CATEGORY TABS ==================== -->
+        <section class="faq-tabs-section">
+            <div class="faq-tabs-wrap" id="faqTabsWrap">
+                <button class="faq-tab active" data-cat="all">
+                    <i data-lucide="layout-grid"></i> All Questions
+                </button>
+                <button class="faq-tab" data-cat="general">
+                    <i data-lucide="info"></i> General
+                </button>
+                <button class="faq-tab" data-cat="charging">
+                    <i data-lucide="battery-charging"></i> EV Charging
+                </button>
+                <button class="faq-tab" data-cat="solar">
+                    <i data-lucide="sun"></i> Solar Solutions
+                </button>
+                <button class="faq-tab" data-cat="franchise">
+                    <i data-lucide="handshake"></i> Franchise
+                </button>
+                <button class="faq-tab" data-cat="account">
+                    <i data-lucide="credit-card"></i> Billing & App
+                </button>
+            </div>
+        </section>
+
+        <!-- ==================== FAQ LIST ==================== -->
+        <section class="faq-body-section">
+            <div class="faq-body-wrap" id="faqBodyWrap">
+
+                <!-- GENERAL -->
+                <div class="faq-cat-block" data-cat-block="general">
+                    <div class="faq-cat-heading">
+                        <div class="faq-cat-icon"><i data-lucide="info"></i></div>
+                        <h3>General</h3>
+                    </div>
+
+                    <div class="faq-item" data-cat="general">
+                        <button class="faq-q">
+                            <span class="faq-q-text">What is Chargebees?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>Chargebees is an EV ecosystem brand based in Hyderabad, building India's charging infrastructure through smart hardware, software and renewable energy. We connect drivers, fleets, station operators, and technology partners on one integrated platform.</p></div></div>
+                    </div>
+
+                    <div class="faq-item" data-cat="general">
+                        <button class="faq-q">
+                            <span class="faq-q-text">Which cities does Chargebees currently operate in?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>We currently power 500+ charging stations across 100+ cities in India, with new locations being added every week. Use our Station Finder to check live availability near you.</p></div></div>
+                    </div>
+
+                    <div class="faq-item" data-cat="general">
+                        <button class="faq-q">
+                            <span class="faq-q-text">How can I get in touch with the Chargebees team?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>You can reach us at db@chargebees.com, call +91 90000 40477, or message us on WhatsApp. You can also fill out the form on our Contact page and our team will respond within 24 hours.</p></div></div>
+                    </div>
+                </div>
+
+                <!-- EV CHARGING -->
+                <div class="faq-cat-block" data-cat-block="charging">
+                    <div class="faq-cat-heading">
+                        <div class="faq-cat-icon"><i data-lucide="battery-charging"></i></div>
+                        <h3>EV Charging</h3>
+                    </div>
+
+                    <div class="faq-item" data-cat="charging">
+                        <button class="faq-q">
+                            <span class="faq-q-text">How do I find the nearest Chargebees charging station?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>Open the Station Finder page or the Chargebees app, allow location access, and you'll see all nearby stations with real-time slot availability, connector type, and pricing.</p></div></div>
+                    </div>
+
+                    <div class="faq-item" data-cat="charging">
+                        <button class="faq-q">
+                            <span class="faq-q-text">What types of chargers does Chargebees offer?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>We offer both AC and DC fast charging solutions, ranging from 7.4kW home/workplace chargers up to 150kW public fast chargers, with 240kW HyperCharge stations rolling out for heavy-duty vehicles in 2027.</p></div></div>
+                    </div>
+
+                    <div class="faq-item" data-cat="charging">
+                        <button class="faq-q">
+                            <span class="faq-q-text">How does the RFID card work?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>Your Chargebees RFID card lets you tap and start charging instantly at any network station without opening the app. It's linked to your wallet, so the session is billed automatically once charging ends.</p></div></div>
+                    </div>
+
+                    <div class="faq-item" data-cat="charging">
+                        <button class="faq-q">
+                            <span class="faq-q-text">Are Chargebees chargers compatible with all EV brands?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>Yes. Our chargers are OCPP-compliant and support all major connector standards, so vehicles from Tata, MG, Hyundai, Mahindra, Kia, Ather, Tesla and more can charge seamlessly on our network.</p></div></div>
+                    </div>
+
+                    <div class="faq-item" data-cat="charging">
+                        <button class="faq-q">
+                            <span class="faq-q-text">Do you offer charging solutions for commercial fleets?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>Yes, our Fleet Services offer optimized charging plans, dedicated infrastructure, and a real-time analytics dashboard built specifically for commercial EV fleet operators.</p></div></div>
+                    </div>
+                </div>
+
+                <!-- SOLAR -->
+                <div class="faq-cat-block" data-cat-block="solar">
+                    <div class="faq-cat-heading">
+                        <div class="faq-cat-icon"><i data-lucide="sun"></i></div>
+                        <h3>Solar Solutions</h3>
+                    </div>
+
+                    <div class="faq-item" data-cat="solar">
+                        <button class="faq-q">
+                            <span class="faq-q-text">What solar solutions does Chargebees provide?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>We design and install residential, commercial, industrial, and ground-mounted solar systems — from rooftop panels for homes to large-scale solar farms for factories and warehouses.</p></div></div>
+                    </div>
+
+                    <div class="faq-item" data-cat="solar">
+                        <button class="faq-q">
+                            <span class="faq-q-text">Can I get government subsidy on a residential solar rooftop?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>Yes, residential rooftop installations may be eligible for central and state subsidies under current renewable energy schemes. Our solar team will help you check eligibility and handle the paperwork.</p></div></div>
+                    </div>
+
+                    <div class="faq-item" data-cat="solar">
+                        <button class="faq-q">
+                            <span class="faq-q-text">How long does a typical solar installation take?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>A standard residential rooftop installation is typically completed within 7–10 days after site survey and approval. Commercial and industrial projects depend on scale and are scoped individually.</p></div></div>
+                    </div>
+
+                    <div class="faq-item" data-cat="solar">
+                        <button class="faq-q">
+                            <span class="faq-q-text">Does Chargebees offer Energy-as-a-Service for solar?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>Yes, our Energy As A Service offering lets businesses access renewable power without large upfront capital — we install, operate, and maintain the system while you pay for the energy used.</p></div></div>
+                    </div>
+                </div>
+
+                <!-- FRANCHISE -->
+                <div class="faq-cat-block" data-cat-block="franchise">
+                    <div class="faq-cat-heading">
+                        <div class="faq-cat-icon"><i data-lucide="handshake"></i></div>
+                        <h3>Franchise & Partnership</h3>
+                    </div>
+
+                    <div class="faq-item" data-cat="franchise">
+                        <button class="faq-q">
+                            <span class="faq-q-text">How do I apply for a Chargebees franchise?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>Head to our Franchise page, choose an investment tier that fits your budget, and submit the application form. Our partnerships team will reach out within 2–3 business days to walk you through the next steps.</p></div></div>
+                    </div>
+
+                    <div class="faq-item" data-cat="franchise">
+                        <button class="faq-q">
+                            <span class="faq-q-text">What kind of ROI can franchise partners expect?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>ROI varies by investment tier, location, and station utilization. Our Franchise page includes a live ROI calculator so you can estimate returns based on your chosen tier and city before applying.</p></div></div>
+                    </div>
+
+                    <div class="faq-item" data-cat="franchise">
+                        <button class="faq-q">
+                            <span class="faq-q-text">What support does Chargebees provide to franchise partners?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>Partners receive full-spectrum support — site selection guidance, hardware installation, software onboarding, marketing assets, and ongoing operational training from our corporate team.</p></div></div>
+                    </div>
+
+                    <div class="faq-item" data-cat="franchise">
+                        <button class="faq-q">
+                            <span class="faq-q-text">Can I become a technology or automotive partner instead of a franchise?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>Absolutely. We work with automotive, technology, and energy partners on joint innovation, integration, and infrastructure initiatives. Visit our Partners page or write to db@chargebees.com to start a conversation.</p></div></div>
+                    </div>
+                </div>
+
+                <!-- BILLING & APP -->
+                <div class="faq-cat-block" data-cat-block="account">
+                    <div class="faq-cat-heading">
+                        <div class="faq-cat-icon"><i data-lucide="credit-card"></i></div>
+                        <h3>Billing & App</h3>
+                    </div>
+
+                    <div class="faq-item" data-cat="account">
+                        <button class="faq-q">
+                            <span class="faq-q-text">What payment methods are accepted on the Chargebees app?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>You can pay using UPI, debit/credit cards, net banking, or your prepaid Chargebees wallet. Wallet payments are the fastest way to start a charging session instantly.</p></div></div>
+                    </div>
+
+                    <div class="faq-item" data-cat="account">
+                        <button class="faq-q">
+                            <span class="faq-q-text">Is the Chargebees app available on both Android and iOS?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>Yes, the Chargebees app is available on both the App Store and Google Play. It lets you locate stations, start/stop sessions, track charging history, and manage your wallet on the go.</p></div></div>
+                    </div>
+
+                    <div class="faq-item" data-cat="account">
+                        <button class="faq-q">
+                            <span class="faq-q-text">How do I get an invoice for a charging session?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>Every completed session automatically generates a digital invoice under the "History" tab in the Chargebees app, which you can download or have emailed to you instantly.</p></div></div>
+                    </div>
+
+                    <div class="faq-item" data-cat="account">
+                        <button class="faq-q">
+                            <span class="faq-q-text">What if a station shows occupied but isn't actually in use?</span>
+                            <span class="faq-q-icon"><i data-lucide="plus"></i></span>
+                        </button>
+                        <div class="faq-a"><div class="faq-a-inner"><p>Tap "Report an issue" on that station in the app, or call our support line at +91 90000 40477. Our team monitors station status in real time and resolves discrepancies quickly.</p></div></div>
+                    </div>
+                </div>
+
+                <!-- NO RESULTS STATE -->
+                <div class="faq-no-results" id="faqNoResults">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                    <h4>No matching questions</h4>
+                    <p>Try a different keyword, or reach out to our team directly below.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== STILL HAVE QUESTIONS CTA ==================== -->
+        <section class="faq-cta-section">
+            <div class="faq-cta-card">
+                <div class="faq-cta-left">
+                    <h3>Still have questions?</h3>
+                    <p>Our support team is here to help with anything from station issues to franchise enquiries.</p>
+                </div>
+                <div class="faq-cta-actions">
+                    <a href="contact.html" class="faq-cta-btn-primary">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        Contact Support
+                    </a>
+                    <a href="https://wa.me/919000040477" target="_blank" class="faq-cta-btn-secondary">
+                        <i data-lucide="phone" class="w-4 h-4"></i>
+                        WhatsApp Us
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-gray-50 pt-24 pb-12 border-t border-gray-200 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-4 gap-12 mb-20">
+                <div class="lg:col-span-1">
+                    <div class="mb-8">
+                        <div class="flex items-center gap-2">
+                            <img src="images/logo.png" alt="ChargeBees Logo" class="h-10 w-auto object-contain">
+                            <span class="brand-logo-text">Charge <span>Bees</span></span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Leading the charge towards a sustainable electric future with India's largest EV charging network.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="https://www.instagram.com/chargebees" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="w-6 h-6">
+                        </a>
+                        <a href="https://www.facebook.com/share/1ESQNWy5Zs/" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" class="w-6 h-6">
+                        </a>
+                        <a href="https://wa.me/919000040477" target="_blank" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="w-6 h-6">
+                        </a>
+                        <a href="mailto: db@chargebees.com    " class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300">
+                            <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Mail" class="w-6 h-6">
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-6">Company</h4>
+                    <ul class="space-y-4 text-gray-600">
+                        <li><a href="index.html#about" class="hover:text-emerald-600 transition-colors">About Us</a></li>
+                        <li><a href="partners.html#Partnerships" class="hover:text-emerald-600 transition-colors">Partnerships</a></li>
+                        <li><a href="media-center.html#media" class="hover:text-emerald-600 transition-colors">Media Center</a></li>
+                        <li><a href="careers.html#careers" class="hover:text-emerald-600 transition-colors">Careers</a></li>
+                        <li><a href="franchise.html" class="hover:text-emerald-600 transition-colors">Our Franchise</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                   <h4 class="font-bold text-gray-900 mb-6">Solutions</h4>
+                    <ul class="space-y-4 text-gray-600">
+                        <li><a href="stationfinder.html" class="hover:text-emerald-600 transition-colors">Station Finder</a></li>
+                        <li><a href="products.html#services" class="hover:text-emerald-600 transition-colors">Services</a></li>
+                        <li><a href="products.html#software" class="hover:text-emerald-600 transition-colors">Mobile App</a></li>
+                        <li><a href="solar_products.html#residential" class="hover:text-emerald-600 transition-colors">Residential Solar</a></li>
+                        <li><a href="solar_products.html#commercial" class="hover:text-emerald-600 transition-colors">Commercial Solar</a></li>
+                        <li><a href="solar_products.html#industrial" class="hover:text-emerald-600 transition-colors">Industrial Solar</a></li>
+                        <li><a href="solar_products.html#ground" class="hover:text-emerald-600 transition-colors">Ground Mounted</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-6">Contact</h4>
+                    <ul class="space-y-4 text-gray-600">
+                        <li class="flex items-center gap-2 group cursor-pointer">
+                            <span> db@chargebees.com    </span>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </li>
+                        <li>+91 90000 40477</li>
+                        <li class="pt-4">
+                            <!-- <p class="font-semibold text-gray-900">  </p> -->
+                            <!-- <p class="text-sm"> </p> -->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+                <p>© 2026 Chargebees. All rights reserved.</p>
+                <div class="flex gap-8">
+                    <a href="terms.html#terms" class="hover:text-gray-900 transition-colors">Terms & Services</a>
+                    <a href="privacy.html" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
+                    <a href="FAQ.html" class="hover:text-gray-900 transition-colors">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mobile menu toggle
+        const menuBtn = document.getElementById("menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        menuBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+            menuBtn.classList.toggle("active");
+        });
+
+        // Navbar scroll shadow
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 30) nav.classList.add('shadow-md');
+            else nav.classList.remove('shadow-md');
+        });
+
+        /* ============================================
+           FAQ ACCORDION
+        ============================================ */
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const q = item.querySelector('.faq-q');
+            const a = item.querySelector('.faq-a');
+            q.addEventListener('click', () => {
+                const isOpen = item.classList.contains('open');
+
+                // close all others within the same category block for an accordion feel,
+                // but allow multiple open across different blocks
+                const block = item.closest('.faq-cat-block');
+                block.querySelectorAll('.faq-item.open').forEach(openItem => {
+                    if (openItem !== item) {
+                        openItem.classList.remove('open');
+                        openItem.querySelector('.faq-a').style.maxHeight = null;
+                    }
+                });
+
+                if (isOpen) {
+                    item.classList.remove('open');
+                    a.style.maxHeight = null;
+                } else {
+                    item.classList.add('open');
+                    a.style.maxHeight = a.scrollHeight + 'px';
+                }
+            });
+        });
+
+        /* ============================================
+           SCROLL REVEAL FOR FAQ ITEMS
+        ============================================ */
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        faqItems.forEach((item, i) => {
+            item.style.transitionDelay = (i % 6) * 0.05 + 's';
+            revealObserver.observe(item);
+        });
+
+        /* ============================================
+           CATEGORY TABS FILTER
+        ============================================ */
+        const tabs = document.querySelectorAll('.faq-tab');
+        const catBlocks = document.querySelectorAll('.faq-cat-block');
+        const noResults = document.getElementById('faqNoResults');
+
+        function applyCategoryFilter(cat) {
+            catBlocks.forEach(block => {
+                if (cat === 'all' || block.dataset.catBlock === cat) {
+                    block.style.display = '';
+                } else {
+                    block.style.display = 'none';
+                }
+            });
+        }
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                applyCategoryFilter(tab.dataset.cat);
+                // reset search when switching tabs
+                searchInput.value = '';
+                searchClear.classList.remove('show');
+                filterBySearch('');
+            });
+        });
+
+        /* ============================================
+           SEARCH FILTER
+        ============================================ */
+        const searchInput = document.getElementById('faqSearchInput');
+        const searchClear = document.getElementById('faqSearchClear');
+
+        function filterBySearch(query) {
+            const q = query.trim().toLowerCase();
+            let anyVisible = false;
+
+            catBlocks.forEach(block => {
+                let blockHasVisible = false;
+                block.querySelectorAll('.faq-item').forEach(item => {
+                    const text = item.querySelector('.faq-q-text').textContent.toLowerCase() +
+                                 ' ' + item.querySelector('.faq-a-inner p').textContent.toLowerCase();
+                    const matches = q === '' || text.includes(q);
+                    item.classList.toggle('hidden-by-filter', !matches);
+                    if (matches) { blockHasVisible = true; anyVisible = true; }
+                });
+                // only hide whole block visibility based on search, category filter handled separately
+                if (q !== '') {
+                    block.style.display = blockHasVisible ? '' : 'none';
+                }
+            });
+
+            if (q === '') {
+                // restore category-based visibility
+                const activeTab = document.querySelector('.faq-tab.active');
+                applyCategoryFilter(activeTab ? activeTab.dataset.cat : 'all');
+            }
+
+            noResults.classList.toggle('show', q !== '' && !anyVisible);
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const val = e.target.value;
+            searchClear.classList.toggle('show', val.length > 0);
+            filterBySearch(val);
+        });
+
+        searchClear.addEventListener('click', () => {
+            searchInput.value = '';
+            searchClear.classList.remove('show');
+            filterBySearch('');
+            searchInput.focus();
+        });
+
+        // Quick tag clicks
+        document.querySelectorAll('.faq-quick-tag').forEach(tag => {
+            tag.addEventListener('click', () => {
+                const query = tag.dataset.query;
+                searchInput.value = query;
+                searchClear.classList.add('show');
+                // also reset tabs to "all" so search spans every category
+                tabs.forEach(t => t.classList.remove('active'));
+                document.querySelector('.faq-tab[data-cat="all"]').classList.add('active');
+                filterBySearch(query);
+                document.getElementById('faqBodyWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
