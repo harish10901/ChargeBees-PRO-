@@ -1179,6 +1179,220 @@
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover { background: #059669; }
+
+        /* ============================================
+           CITY BANNER CAROUSEL (NEW)
+        ============================================ */
+        .city-banner-section {
+            position: relative;
+            width: 100%;
+            margin-top: 80px;
+            aspect-ratio: 1919 / 369;
+            max-height: 369px;
+            overflow: hidden;
+            background: #0a1f1c;
+        }
+        .city-banner-track {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .city-banner-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transform: translateX(100%);
+            transition: transform 0.9s cubic-bezier(0.65, 0, 0.35, 1);
+            z-index: 1;
+        }
+        .city-banner-slide.active {
+            transform: translateX(0);
+            z-index: 2;
+        }
+        .city-banner-slide.prev-slide {
+            transform: translateX(-100%);
+            z-index: 2;
+        }
+        .city-banner-slide::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10,31,28,0.15) 0%, rgba(10,31,28,0.05) 40%, rgba(10,31,28,0.55) 100%);
+        }
+        .city-banner-caption {
+            position: absolute;
+            left: 5%;
+            bottom: 34px;
+            z-index: 3;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: clamp(18px, 2.4vw, 34px);
+            letter-spacing: -0.5px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+        }
+        .city-banner-slide.active .city-banner-caption { opacity: 1; transform: translateY(0); }
+        .city-banner-caption span {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #34d399;
+            margin-bottom: 6px;
+        }
+        .city-banner-dots {
+            position: absolute;
+            bottom: 22px;
+            right: 5%;
+            z-index: 4;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .city-banner-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            border: none;
+            padding: 0;
+            transition: all 0.35s ease;
+        }
+        .city-banner-dot.active {
+            width: 28px;
+            border-radius: 6px;
+            background: #10b981;
+        }
+        .city-banner-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 4;
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            opacity: 0;
+        }
+        .city-banner-section:hover .city-banner-nav { opacity: 1; }
+        .city-banner-nav:hover { background: #10b981; border-color: #10b981; }
+        .city-banner-nav.prev { left: 24px; }
+        .city-banner-nav.next { right: 24px; }
+        .city-banner-nav svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2.5; }
+        @media(max-width:768px) {
+            .city-banner-section { aspect-ratio: 16/9; max-height: none; }
+            .city-banner-nav { width: 36px; height: 36px; }
+            .city-banner-dots { right: 16px; bottom: 16px; }
+            .city-banner-caption { left: 20px; bottom: 20px; }
+        }
+
+        /* ============================================
+           HERO 3D BRAND SEAL (NEW)
+        ============================================ */
+        .hero-brand-seal {
+            position: absolute;
+            right: 6%;
+            bottom: 14%;
+            z-index: 2;
+            width: 260px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            perspective: 1000px;
+            pointer-events: none;
+        }
+        .hero-brand-seal .seal-3d {
+            width: 132px;
+            height: 132px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: sealSpin 10s linear infinite;
+        }
+        .hero-brand-seal .seal-face {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backface-visibility: hidden;
+            background: radial-gradient(circle at 32% 28%, rgba(52,211,153,0.35), rgba(10,31,28,0.85) 70%);
+            border: 1.5px solid rgba(52,211,153,0.55);
+            box-shadow: 0 0 40px rgba(16,185,129,0.35), inset 0 0 25px rgba(16,185,129,0.25);
+        }
+        .hero-brand-seal .seal-face img {
+            width: 68%;
+            height: 68%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 14px rgba(0,0,0,0.5));
+        }
+        .hero-brand-seal .seal-face.seal-back {
+            transform: rotateY(180deg);
+        }
+        @keyframes sealSpin {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+        .hero-brand-seal .seal-ring {
+            position: absolute;
+            inset: -14px;
+            border-radius: 50%;
+            border: 1px dashed rgba(52,211,153,0.4);
+            animation: sealRing 14s linear infinite;
+        }
+        @keyframes sealRing {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .hero-brand-seal .seal-text {
+            margin-top: 18px;
+            text-align: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 13.5px;
+            letter-spacing: 2.5px;
+            color: #fff;
+            text-shadow: 0 6px 18px rgba(0,0,0,0.55);
+            line-height: 1.6;
+            animation: sealTextGlow 3.2s ease-in-out infinite;
+        }
+        .hero-brand-seal .seal-text .accent-line {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: #34d399;
+            margin-top: 3px;
+        }
+        @keyframes sealTextGlow {
+            0%, 100% { text-shadow: 0 6px 18px rgba(0,0,0,0.55), 0 0 0 rgba(16,185,129,0); }
+            50% { text-shadow: 0 6px 18px rgba(0,0,0,0.55), 0 0 22px rgba(16,185,129,0.55); }
+        }
+        @media(max-width:1100px) {
+            .hero-brand-seal { right: 4%; width: 190px; }
+            .hero-brand-seal .seal-3d { width: 96px; height: 96px; }
+            .hero-brand-seal .seal-text { font-size: 11px; letter-spacing: 1.8px; margin-top: 14px; }
+            .hero-brand-seal .seal-text .accent-line { font-size: 9px; letter-spacing: 2px; }
+        }
+        @media(max-width:768px) {
+            .hero-brand-seal { display: none; }
+        }
     </style>
 </head>
 <body class="antialiased text-gray-900">
@@ -1366,12 +1580,62 @@
 
     <main class="relative z-10">
 
+        <!-- ==================== CITY BANNER CAROUSEL ==================== -->
+        <section class="city-banner-section" id="city-banner">
+            <div class="city-banner-track" id="cityBannerTrack">
+                <div class="city-banner-slide active" style="background-image:url('images\\hyderabad.jpeg')">
+                    <div class="city-banner-caption"><span>Now Live</span>Hyderabad</div>
+                </div>
+                <div class="city-banner-slide" style="background-image:url('images\\vijayawada.jpeg')">
+                    <div class="city-banner-caption"><span>Now Live</span>Vijayawada</div>
+                </div>
+                <div class="city-banner-slide" style="background-image:url('images\\kadapa.jpeg')">
+                    <div class="city-banner-caption"><span>Now Live</span>Kadapa</div>
+                </div>
+                <div class="city-banner-slide" style="background-image:url('images\\karnool.jpeg')">
+                    <div class="city-banner-caption"><span>Now Live</span>Karnool</div>
+                </div>
+                <div class="city-banner-slide" style="background-image:url('images\\srisailam.jpeg')">
+                    <div class="city-banner-caption"><span>Now Live</span>Srisailam</div>
+                </div>
+                <div class="city-banner-slide" style="background-image:url('images\\piduguralla.jpeg')">
+                    <div class="city-banner-caption"><span>Now Live</span>Piduguralla</div>
+                </div>
+            </div>
+
+            <button class="city-banner-nav prev" id="cityBannerPrev" aria-label="Previous banner">
+                <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="city-banner-nav next" id="cityBannerNext" aria-label="Next banner">
+                <svg viewBox="0 0 24 24" fill="none"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+
+            <div class="city-banner-dots" id="cityBannerDots"></div>
+        </section>
+        
+
         <!-- ==================== HERO VIDEO ==================== -->
-        <section class="hero-section">
+        <section class="hero-section" style="margin-top:0;">
             <video id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="images/hero-poster.webp">
                 <source src="videos/bg1video.mp4" type="video/mp4">
             </video>
             <div class="hero-overlay"></div>
+
+            <div class="hero-brand-seal">
+                <div class="seal-ring"></div>
+                <div class="seal-3d">
+                    <div class="seal-face seal-front">
+                        <img src="images/logo.png" alt="ChargeBee Energies logo">
+                    </div>
+                    <div class="seal-face seal-back">
+                        <img src="images/logo.png" alt="ChargeBee Energies logo">
+                    </div>
+                </div>
+                <div class="seal-text">
+                    CHARGEBEE ENERGIES
+                    <span class="accent-line">PRIVATE LIMITED</span>
+                </div>
+            </div>
 
             <div class="hero-content">
                 <div class="hero-badge">
@@ -2393,6 +2657,79 @@
                 nav.classList.remove('shadow-md');
             }
         });
+
+        // ==================== CITY BANNER CAROUSEL (LEFT SLIDE) ====================
+        (function () {
+            const track = document.getElementById('cityBannerTrack');
+            const dotsWrap = document.getElementById('cityBannerDots');
+            const prevBtn = document.getElementById('cityBannerPrev');
+            const nextBtn = document.getElementById('cityBannerNext');
+            if (!track) return;
+
+            const slides = Array.from(track.querySelectorAll('.city-banner-slide'));
+            let current = 0;
+            let timer = null;
+            const AUTOPLAY_MS = 4200;
+
+            // build dots
+            slides.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'city-banner-dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', 'Go to banner ' + (i + 1));
+                dot.addEventListener('click', () => goTo(i));
+                dotsWrap.appendChild(dot);
+            });
+            const dots = Array.from(dotsWrap.querySelectorAll('.city-banner-dot'));
+
+            // goTo(index) always slides the new slide in from the RIGHT
+            // and pushes the current one OUT to the LEFT.
+            function goTo(index) {
+                const nextIndex = (index + slides.length) % slides.length;
+                if (nextIndex === current) return;
+
+                const outgoing = slides[current];
+                const incoming = slides[nextIndex];
+
+                // Prep incoming slide off-screen to the right, no transition yet
+                incoming.style.transition = 'none';
+                incoming.classList.remove('prev-slide');
+                incoming.style.transform = 'translateX(100%)';
+                // force reflow so the browser registers the starting position
+                void incoming.offsetWidth;
+
+                // Re-enable transition and animate both slides to the left
+                incoming.style.transition = '';
+                outgoing.classList.remove('active');
+                outgoing.classList.add('prev-slide');
+
+                incoming.classList.add('active');
+                incoming.style.transform = '';
+
+                dots[current].classList.remove('active');
+                dots[nextIndex].classList.add('active');
+                current = nextIndex;
+            }
+
+            function next() { goTo(current + 1); }
+            function prev() { goTo(current - 1); }
+
+            function startAutoplay() {
+                stopAutoplay();
+                timer = setInterval(next, AUTOPLAY_MS);
+            }
+            function stopAutoplay() {
+                if (timer) clearInterval(timer);
+            }
+
+            nextBtn.addEventListener('click', () => { next(); startAutoplay(); });
+            prevBtn.addEventListener('click', () => { prev(); startAutoplay(); });
+
+            const section = document.getElementById('city-banner');
+            section.addEventListener('mouseenter', stopAutoplay);
+            section.addEventListener('mouseleave', startAutoplay);
+
+            startAutoplay();
+        })();
     </script>
 </body>
 </html>
