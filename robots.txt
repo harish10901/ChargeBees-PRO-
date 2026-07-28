@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://chargebees.com/sitemap.xml
